@@ -1,0 +1,3 @@
+welcome_page:
+    path:    /welcome
+    defaults: { _controller: CryptoConseilsBlogBundle:Blog:index }

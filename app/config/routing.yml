@@ -1,3 +1,3 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+crypto_conseils_blog:
+    resource: "@CryptoConseilsBlogBundle/Resources/config/routing.yml"
+    prefix:   /
