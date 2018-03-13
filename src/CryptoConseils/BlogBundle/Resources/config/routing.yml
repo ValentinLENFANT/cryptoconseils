@@ -9,17 +9,17 @@ cryptoconseils_blog_view:
         id: \d{1,} # Regular expression to find an id of integer type
 
 cryptoconseils_blog_add:
-    path:    /blog/add
+    path:    /blog/articles/add
     defaults: { _controller: CryptoConseilsBlogBundle:Blog:add }
 
 cryptoconseils_blog_edit:
-    path:    /blog/edit/{id}
+    path:    /blog/articles/edit/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Blog:edit }
     requirements:
         id: \d{1,}
 
 cryptoconseils_blog_delete:
-    path:    /blog/delete/{id}
+    path:    /blog/articles/delete/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Blog:delete }
     requirements:
         id: \d{1,}

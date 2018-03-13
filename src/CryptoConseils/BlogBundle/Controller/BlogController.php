@@ -9,35 +9,45 @@
 namespace CryptoConseils\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BlogController extends Controller
 {
-    public function indexAction()
+    public function indexAction($page)
     {
-        $content = $this->get('templating')->render('CryptoConseilsBlogBundle:Blog:index.html.twig', array('nom' => 'Valentin'));
-        return new Response($content);
+        if($page <1) {
+           throw new NotFoundHttpException('La page ' .$page. ' est inexistante');
+        }
+
+        return $this->render('CryptoConseilsBlogBundle:Blog:index.html.twig');
     }
 
     public function viewAction($id)
     {
-        $url = $this->get('router')->generate('cryptoconseils_blog_view', array('id' => $id), UrlGeneratorInterface::ABSOLUTE_URL);
-        return new Response("Affichage de l'article d'id : " .$id. " d'URL " .$url);
+        return $this->render('CryptoConseilsBlogBundle:Blog:view.html.twig', array('id' => $id));
     }
 
-    public function addAction()
+    public function addAction(Request $request)
     {
-        //todo
+        if($request->isMethod('POST')) {
+            $request->getSession()->getFlashBag()->add('notice', 'Article crée');
+            return $this->redirectToRoute('cryptoconseils_blog_view', array('id' => 1));
+        }
+        return $this->render('CryptoConseilsBlogBundle:Blog:add.html.twig');
     }
 
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
-        //todo
+        if($request->isMethod('POST')) {
+            $request->getSession()->getFlashBag()->add('notice', 'Article modifié');
+            return $this->redirectToRoute('cryptoconseils_blog_view', array('id' => 5));
+        }
+        return $this->render('CryptoConseilsBlogBundle:Blog:edit.html.twig');
     }
 
     public function deleteAction($id)
     {
-        //todo
+        return $this->render('CryptoConseilsBlogBundle:Blog:delete.html.twig');
     }
 }
