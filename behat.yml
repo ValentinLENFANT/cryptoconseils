@@ -1,0 +1,13 @@
+# behat.yml
+default:
+  # ...
+  extensions:
+    Behat\MinkExtension:
+      base_url:  'https://fr.wikipedia.org/wiki/Bitcoin'
+      sessions:
+        default:
+          goutte: ~
+  suites:
+    my_suite:
+      contexts:
+        - FeatureContext
