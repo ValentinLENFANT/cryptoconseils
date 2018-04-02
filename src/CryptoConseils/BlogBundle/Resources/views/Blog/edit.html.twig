@@ -1,0 +1,27 @@
+{# src/CryptoConseils/BlogBundle/Resources/views/Blog/edit.html.twig #}
+
+{% extends "CryptoConseilsBlogBundle::layout.html.twig" %}
+
+{% block title %}
+    Modifier un article - {{ parent() }}
+{% endblock %}
+
+{% block cryptoconseilsblog_body %}
+
+    <h2>Modifier un article</h2>
+
+    {{ include("CryptoConseilsBlogBundle:Blog:form.html.twig") }}
+
+    <p>
+        Vous éditez un article déjà existant, merci de ne pas changer
+        l'esprit général de l'article déjà publié.
+    </p>
+
+    <p>
+        <a href="{{ path('cryptoconseils_blog_view', {'id': article.id}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour à l'article
+        </a>
+    </p>
+
+{% endblock %}

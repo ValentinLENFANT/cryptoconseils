@@ -1,13 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Bienvenue sur la homepage de CryptoConseils.fr !</title>
-</head>
-<body>
-<h1>Bienvenue {{ nom }} !</h1>
+{# src/CryptoConseils/BlogBundle/Resources/views/Blog/index.html.twig #}
 
-<p>
-    Le site est en cours de développement
-</p>
-</body>
-</html>
+{% extends "CryptoConseilsBlogBundle::layout.html.twig" %}
+
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
+
+{% block cryptoconseilsblog_body %}
+
+    <h2>Liste des articles</h2>
+
+    <ul>
+        {% for advert in listAdverts %}
+            <li>
+                <a href="{{ path('cryptoconseils_blog_view', {'id': advert.id}) }}">
+                    {{ advert.title }}
+                </a>
+                par {{ advert.author }},
+                le {{ advert.date|date('d/m/Y') }}
+            </li>
+        {% else %}
+            <li>Pas (encore !) d'articles</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

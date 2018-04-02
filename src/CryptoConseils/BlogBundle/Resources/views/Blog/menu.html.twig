@@ -1,0 +1,11 @@
+{# src/CryptoConseils/BlogBundle/Resources/views/Blog/menu.html.twig #}
+
+<ul class="nav nav-pills nav-stacked">
+    {% for article in listArticles %}
+        <li>
+            <a href="{{ path('cryptoconseils_blog_view', {'id': article.id}) }}">
+                {{ article.title }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,26 @@
+{# src/CryptoConseils/BlogBundle/Resources/views/Blog/add.html.twig #}
+
+{% extends "CryptoConseilsBlogBundle::layout.html.twig" %}
+
+{% block title %}
+    Ajouter un nouvel article - {{ parent() }}
+{% endblock %}
+
+{% block cryptoconseilsblog_body %}
+
+    <h2>Ajouter un article</h2>
+
+    {{ include("CryptoConseilsBlogBundle:Blog:form.html.twig") }}
+
+    <p>
+        Commencez à rédiger dès maintenant.
+    </p>
+
+    <p>
+        <a href="{{ path('cryptoconseils_blog_home') }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour à la page d'acceuil
+        </a>
+    </p>
+
+{% endblock %}
