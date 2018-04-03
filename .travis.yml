@@ -1,0 +1,12 @@
+language: php
+php:
+  - '7.1'
+
+before_script:
+    - travis_retry composer self-update
+
+script:
+    - php src/CryptoConseils/BlogBundle/Resources/views/Blog/index.html.twig
+
+notifications:
+    email: valentin.lenfant@hotmail.com
