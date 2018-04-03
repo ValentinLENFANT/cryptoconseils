@@ -8,5 +8,10 @@ before_script:
 script:
     - php src/CryptoConseils/BlogBundle/Resources/views/Blog/index.html.twig
 
+deploy:
+    provider: heroku
+    api_key: f40a8b67-f15f-4319-8ca6-4615cc221a77
+    app: cryptoconseils
+
 notifications:
     email: valentin.lenfant@hotmail.com
