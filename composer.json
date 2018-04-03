@@ -33,6 +33,10 @@
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
+        "behat/behat": "^3.4",
+        "behat/mink": "^1.7",
+        "behat/mink-extension": "^2.3",
+        "behat/mink-goutte-driver": "^1.2",
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0"
     },
