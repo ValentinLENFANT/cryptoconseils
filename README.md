@@ -1,6 +1,21 @@
 # CryptoConseils.fr
 This is the official repository for the website https://www.cryptoconseils.fr/
 
+#Project Initialization
+1) Clone the repository on your computer by executing : <br>
+`git clone https://github.com/ValentinLENFANT/cryptoconseils.git` --> HTTPS <br>
+OR <br>
+`git clone git@github.com:ValentinLENFANT/cryptoconseils.git` --> SSH <br>
+
+2) Open a command line terminal and execute : <br>
+`composer update`
+
+3) Start your local server
+
+4) Go to the following URL : 
+[localhost/cryptoconseils/web/app_dev.php/blog](localhost/cryptoconseils/web/app_dev.php/blog)
+
+
 #Useful commands
 
 * To create a new bundle:
