@@ -6,7 +6,7 @@ before_script:
     - travis_retry composer self-update
 
 script:
-    - php src/CryptoConseils/BlogBundle/Resources/views/Blog/index.html.twig
+    - php src/CryptoConseils/BlogBundle/Resources/views/layout.html.twig
 
 deploy:
     provider: heroku
