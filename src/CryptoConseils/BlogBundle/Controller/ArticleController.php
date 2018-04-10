@@ -12,11 +12,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class BlogController extends Controller
+class ArticleController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('CryptoConseilsBlogBundle:Blog:index.html.twig', array('listAdverts' => array()));
+        return $this->render('CryptoConseilsBlogBundle:Article:index.html.twig', array('listArticles' => array()));
     }
 
     public function viewAction($id)
@@ -29,7 +29,7 @@ class BlogController extends Controller
             'date' => new \Datetime()
         );
 
-        return $this->render('CryptoConseilsBlogBundle:Blog:view.html.twig', array(
+        return $this->render('CryptoConseilsBlogBundle:Article:view.html.twig', array(
             'article' => $article
         ));
     }
@@ -40,7 +40,7 @@ class BlogController extends Controller
             $request->getSession()->getFlashBag()->add('notice', 'Article crée');
             return $this->redirectToRoute('cryptoconseils_blog_view', array('id' => 1));
         }
-        return $this->render('CryptoConseilsBlogBundle:Blog:add.html.twig');
+        return $this->render('CryptoConseilsBlogBundle:Article:add.html.twig');
     }
 
     public function editAction($id, Request $request)
@@ -57,14 +57,14 @@ class BlogController extends Controller
             'date' => new \Datetime()
         );
 
-        return $this->render('CryptoConseilsBlogBundle:Blog:edit.html.twig', array(
+        return $this->render('CryptoConseilsBlogBundle:Article:edit.html.twig', array(
             'article' => $article
         ));
     }
 
     public function deleteAction($id)
     {
-        return $this->render('CryptoConseilsBlogBundle:Blog:delete.html.twig');
+        return $this->render('CryptoConseilsBlogBundle:Article:delete.html.twig');
     }
 
     public function menuAction($limit)
@@ -75,7 +75,7 @@ class BlogController extends Controller
             array('id' => 9, 'title' => 'Quel avenir pour les crypto-monnaies ?')
         );
 
-        return $this->render('CryptoConseilsBlogBundle:Blog:menu.html.twig', array(
+        return $this->render('CryptoConseilsBlogBundle:Article:menu.html.twig', array(
             'listArticles' => $listArticles
         ));
     }

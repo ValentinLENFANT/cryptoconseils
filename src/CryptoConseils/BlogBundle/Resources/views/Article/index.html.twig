@@ -1,4 +1,4 @@
-{# src/CryptoConseils/BlogBundle/Resources/views/Blog/index.html.twig #}
+{# src/CryptoConseils/BlogBundle/Resources/views/Article/index.html.twig #}
 
 {% extends "CryptoConseilsBlogBundle::layout.html.twig" %}
 
@@ -11,13 +11,13 @@
     <h2>Liste des articles</h2>
 
     <ul>
-        {% for advert in listAdverts %}
+        {% for article in listArticles %}
             <li>
-                <a href="{{ path('cryptoconseils_blog_view', {'id': advert.id}) }}">
-                    {{ advert.title }}
+                <a href="{{ path('cryptoconseils_blog_view', {'id': article.id}) }}">
+                    {{ article.title }}
                 </a>
-                par {{ advert.author }},
-                le {{ advert.date|date('d/m/Y') }}
+                par {{ article.author }},
+                le {{ article.date|date('d/m/Y') }}
             </li>
         {% else %}
             <li>De nombreux articles à venir !</li>

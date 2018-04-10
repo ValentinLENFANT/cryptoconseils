@@ -40,7 +40,7 @@
             </ul>
 
             <h4>Derniers articles publiés</h4>
-            {{ render(controller("CryptoConseilsBlogBundle:Blog:menu", {'limit': 3})) }}
+            {{ render(controller("CryptoConseilsBlogBundle:Article:menu", {'limit': 3})) }}
         </div>
         <div id="content" class="col-md-9">
             {% block body %}

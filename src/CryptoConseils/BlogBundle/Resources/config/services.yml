@@ -1,4 +1,3 @@
 services:
-#    crypto_conseils_blog.example:
-#        class: CryptoConseils\BlogBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    cryptoconseils_blog.antispam:
+        class: CryptoConseils\BlogBundle\Antispam\CryptoConseilsAntispam
