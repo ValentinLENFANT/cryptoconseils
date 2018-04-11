@@ -26,5 +26,11 @@ OR <br>
 `php bin/console cache:clear --env=prod`
 * To update dependencies:
 `php composer.phar update`
-* To launch behat test
+* To launch behat test:
 `vendor/bin/behat`
+* To generate a new entity:
+`php bin/console doctrine:generate:entity`
+* To update an entity:
+`php bin/console doctrine:generate:entities appnameBundlename:Entityname`
+* To update the database via the schema:
+`php bin/console doctrine:schema:update --force`

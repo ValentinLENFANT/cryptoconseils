@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use CryptoConseils\BlogBundle\Entity\Article;
+use CryptoConseils\BlogBundle\Entity\Image;
 
 class ArticleController extends Controller
 {
@@ -38,9 +39,15 @@ class ArticleController extends Controller
     {
         // Création de l'entité
         $article = new Article();
-        $article->setTitle('Est-ce que le Bitcoin est toujours roi ?');
+        $article->setTitle("Des signes de reprises pour le Bitcoin");
         $article->setAuthor('Valentin');
-        $article->setContent('Le Bitcoin a vu sa dominance passer de 90% à 45%, soit une diminution de 50%. Est-il toujours le roi des crypto-monnaies ?');
+        $article->setContent('La tendance globale redevient positive sur le marché.');
+
+        $image = new Image();
+        $image->setUrl("https://image.noelshack.com/fichiers/2018/15/3/1523455498-arton1230.png");
+        $image->setAlt("Banière Bitcoin");
+
+        $article->setImage($image);
 
         // Récupération de l'EntityManager
         $em = $this->getDoctrine()->getManager();

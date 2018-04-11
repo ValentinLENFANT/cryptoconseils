@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Article
 {
+    /**
+     * @ORM\OneToOne(targetEntity="CryptoConseils\BlogBundle\Entity\Image", cascade={"persist"})
+     */
+    private $image;
 
     public function __construct()
     {
@@ -188,5 +192,29 @@ class Article
     public function getPublished()
     {
         return $this->published;
+    }
+
+    /**
+     * Set image.
+     *
+     * @param \CryptoConseils\BlogBundle\Entity\Image|null $image
+     *
+     * @return Article
+     */
+    public function setImage(\CryptoConseils\BlogBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image.
+     *
+     * @return \CryptoConseils\BlogBundle\Entity\Image|null
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
