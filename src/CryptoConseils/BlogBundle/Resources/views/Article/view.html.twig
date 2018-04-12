@@ -18,6 +18,14 @@
         {{ article.content }}
     </div>
 
+    <div class="comments">
+        <ul>
+            {% for comment in listComments %}
+                <li>Publié par {{ comment.author }} le {{ comment.date|date('d/m/Y à H:i') }} <br> {{ comment.content }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
     <p>
         <a href="{{ path('cryptoconseils_blog_home') }}" class="btn btn-default">
             <i class="glyphicon glyphicon-chevron-left"></i>

@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use CryptoConseils\BlogBundle\Entity\Article;
 use CryptoConseils\BlogBundle\Entity\Image;
+use CryptoConseils\BlogBundle\Entity\Comment;
 
 class ArticleController extends Controller
 {
@@ -23,29 +24,43 @@ class ArticleController extends Controller
 
     public function viewAction($id)
     {
-        $repository = $this->getDoctrine()->getManager()->getRepository('CryptoConseilsBlogBundle:Article');
-        $article = $repository->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $article = $em->getRepository("CryptoConseilsBlogBundle:Article")->find($id);
 
         if (null === $article) {
             throw new NotFoundHttpException("L'article d'id" .$id. "n'existe pas");
         }
 
+        $listComments = $em->getRepository('CryptoConseilsBlogBundle:Comment')->findBy(array('article' => $article));
+
         return $this->render('CryptoConseilsBlogBundle:Article:view.html.twig', array(
-            'article' => $article
+            'article' => $article,
+            'listComments' => $listComments
         ));
     }
 
     public function addAction(Request $request)
     {
-        // Création de l'entité
+        // Création de l'entité Article
         $article = new Article();
-        $article->setTitle("Des signes de reprises pour le Bitcoin");
+        $article->setTitle("Le Bitcoin a soudainement augmenté de $1000 ! Pourquoi ?");
         $article->setAuthor('Valentin');
-        $article->setContent('La tendance globale redevient positive sur le marché.');
+        $article->setContent('On suppose que des contrats à termes ont été liquidés.');
 
         $image = new Image();
         $image->setUrl("https://image.noelshack.com/fichiers/2018/15/3/1523455498-arton1230.png");
         $image->setAlt("Banière Bitcoin");
+
+        $comment1 = new comment();
+        $comment1->setAuthor('Satoshi Nakamoto');
+        $comment1->setContent("J'ai crée le Bitcoin !");
+
+        $comment2 = new comment();
+        $comment2->setAuthor('Vitalik Butterin');
+        $comment2->setContent("J'ai crée l'Ethereum !");
+
+        $comment1->setArticle($article);
+        $comment2->setArticle($article);
 
         $article->setImage($image);
 
@@ -53,6 +68,8 @@ class ArticleController extends Controller
         $em = $this->getDoctrine()->getManager();
         // On persiste l'entité
         $em->persist($article);
+        $em->persist($comment1);
+        $em->persist($comment2);
         // Flush des persistence précédentes
         $em->flush();
 

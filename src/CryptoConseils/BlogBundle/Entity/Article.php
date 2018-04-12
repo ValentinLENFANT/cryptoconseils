@@ -2,6 +2,7 @@
 
 namespace CryptoConseils\BlogBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,10 +17,20 @@ class Article
      * @ORM\OneToOne(targetEntity="CryptoConseils\BlogBundle\Entity\Image", cascade={"persist"})
      */
     private $image;
+    /**
+     * @ORM\ManyToMany(targetEntity="CryptoConseils\BlogBundle\Entity\Category", cascade={"persist"})
+     */
+    private $categories;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CryptoConseils\BlogBundle\Entity\Comment", mappedBy="article")
+     */
+    private $comments;
 
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->categories = new ArrayCollection();
     }
 
     /**
@@ -216,5 +227,79 @@ class Article
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add category.
+     *
+     * @param \CryptoConseils\BlogBundle\Entity\Category $category
+     *
+     * @return Article
+     */
+    public function addCategory(\CryptoConseils\BlogBundle\Entity\Category $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category.
+     *
+     * @param \CryptoConseils\BlogBundle\Entity\Category $category
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeCategory(\CryptoConseils\BlogBundle\Entity\Category $category)
+    {
+        return $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * Add comment.
+     *
+     * @param \CryptoConseils\BlogBundle\Entity\Comment $comment
+     *
+     * @return Article
+     */
+    public function addComment(\CryptoConseils\BlogBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        $comment->setArticle($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove comment.
+     *
+     * @param \CryptoConseils\BlogBundle\Entity\Comment $comment
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeComment(\CryptoConseils\BlogBundle\Entity\Comment $comment)
+    {
+        return $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
