@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="article")
  * @ORM\Entity(repositoryClass="CryptoConseils\BlogBundle\Repository\ArticleRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Article
 {
@@ -74,6 +75,11 @@ class Article
      * @ORM\Column(name="published", type="boolean")
      */
     private $published = true;
+
+    /**
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     /**
      * Get id.
@@ -263,5 +269,48 @@ class Article
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Add comment.
+     *
+     * @param \CryptoConseils\BlogBundle\Entity\Comment $comment
+     *
+     * @return Article
+     */
+    public function addComment(\CryptoConseils\BlogBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        $comment->setArticle($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove comment.
+     *
+     * @param \CryptoConseils\BlogBundle\Entity\Comment $comment
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeComment(\CryptoConseils\BlogBundle\Entity\Comment $comment)
+    {
+        return $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    public function updateDate()
+    {
+        $this->setUpdatedAt(new \DateTime());
     }
 }

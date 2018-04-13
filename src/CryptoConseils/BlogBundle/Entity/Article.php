@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="article")
  * @ORM\Entity(repositoryClass="CryptoConseils\BlogBundle\Repository\ArticleRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Article
 {
@@ -74,6 +75,11 @@ class Article
      * @ORM\Column(name="published", type="boolean")
      */
     private $published = true;
+
+    /**
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     /**
      * Get id.
@@ -301,5 +307,37 @@ class Article
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateDate()
+    {
+        $this->setUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * Set updatedAt.
+     *
+     * @param \DateTime|null $updatedAt
+     *
+     * @return Article
+     */
+    public function setUpdatedAt($updatedAt = null)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt.
+     *
+     * @return \DateTime|null
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }
