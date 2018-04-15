@@ -13,10 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Comment
 {
     /**
-     * @ORM\ManyToOne(targetEntity="CryptoConseils\BlogBundle\Entity\Article")
+     * @ORM\ManyToOne(targetEntity="CryptoConseils\BlogBundle\Entity\Article", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $advert;
+    private $article;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
 
     /**
      * @var int
@@ -44,7 +49,7 @@ class Comment
     /**
      * @var datetime_immutable
      *
-     * @ORM\Column(name="date", type="datetime_immutable")
+     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
@@ -129,5 +134,29 @@ class Comment
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set advert.
+     *
+     * @param \CryptoConseils\BlogBundle\Entity\Article $advert
+     *
+     * @return Comment
+     */
+    public function setArticle(\CryptoConseils\BlogBundle\Entity\Article $article)
+    {
+        $this->article = $article;
+
+        return $this;
+    }
+
+    /**
+     * Get advert.
+     *
+     * @return \CryptoConseils\BlogBundle\Entity\Article
+     */
+    public function getArticle()
+    {
+        return $this->article;
     }
 }

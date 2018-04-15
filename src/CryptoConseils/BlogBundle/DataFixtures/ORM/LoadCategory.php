@@ -14,11 +14,11 @@ class LoadCategory implements FixtureInterface
     {
         // Liste des noms de catégorie à ajouter
         $names = array(
-            'Crypto-monnaie',
             'Bitcoin',
+            'Crypto-monnaies',
+            'Tendance baissière',
             'Ethereum',
-            'Altcoins',
-            'News'
+            'Bear market'
         );
 
         foreach ($names as $name) {

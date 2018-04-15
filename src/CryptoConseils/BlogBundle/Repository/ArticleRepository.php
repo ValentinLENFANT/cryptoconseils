@@ -2,6 +2,10 @@
 
 namespace CryptoConseils\BlogBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * ArticleRepository
  *
@@ -10,4 +14,16 @@ namespace CryptoConseils\BlogBundle\Repository;
  */
 class ArticleRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getArticles($page, $nbPerPage)
+    {
+        $query = $this->createQueryBuilder('a')
+            ->leftJoin('a.image', 'i')
+            ->addSelect('i')
+            ->leftJoin('a.categories', 'c')
+            ->addSelect('c')->orderBy('a.date', 'DESC')
+            ->getQuery();
+        $query->setFirstResult(($page-1)* $nbPerPage)->setMaxResults($nbPerPage);
+
+        return new Paginator($query, true);
+    }
 }
