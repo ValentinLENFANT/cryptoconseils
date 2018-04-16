@@ -4,23 +4,25 @@
 namespace CryptoConseils\BlogBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use CryptoConseils\BlogBundle\Entity\Article;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\VarDumper\Cloner\Data;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-class LoadArticle implements FixtureInterface
+class LoadArticle extends AbstractFixture implements OrderedFixtureInterface
 {
     // Dans l'argument de la méthode load, l'objet $manager est l'EntityManager
     public function load(ObjectManager $manager)
     {
         // Liste des noms de catégorie à ajouter
         $images_id = array(
-            null,
-            null,
-            null,
-            null,
-            null
+            $this->getReference('image0'),
+            $this->getReference('image1'),
+            $this->getReference('image2'),
+            $this->getReference('image3'),
+            $this->getReference('image4')
         );
 
         $titles = array(
@@ -61,5 +63,10 @@ class LoadArticle implements FixtureInterface
 
         // On déclenche l'enregistrement de toutes les catégories
         $manager->flush();
+    }
+
+    public function getOrder()
+    {
+        return 3;
     }
 }

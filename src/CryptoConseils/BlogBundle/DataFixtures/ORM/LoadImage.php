@@ -4,10 +4,14 @@
 namespace CryptoConseils\BlogBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\VarDumper\Cloner\Data;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use CryptoConseils\BlogBundle\Entity\Image;
 
-class LoadImage implements FixtureInterface
+class LoadImage extends AbstractFixture implements OrderedFixtureInterface
 {
     // Dans l'argument de la méthode load, l'objet $manager est l'EntityManager
     public function load(ObjectManager $manager)
@@ -34,6 +38,7 @@ class LoadImage implements FixtureInterface
             $image = new Image();
             $image->setUrl($urls[$i]);
             $image->setAlt($alts[$i]);
+            $this->addReference('image'.$i, $image);
 
             // On la persiste
             $manager->persist($image);
@@ -41,5 +46,10 @@ class LoadImage implements FixtureInterface
 
         // On déclenche l'enregistrement de toutes les catégories
         $manager->flush();
+    }
+
+    public function getOrder()
+    {
+        return 1;
     }
 }

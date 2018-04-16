@@ -19,14 +19,14 @@ use CryptoConseils\BlogBundle\Entity\Comment;
 
 class ArticleController extends Controller
 {
-    public function indexAction($page = 1)
+    public function indexAction($page)
     {
         if ($page < 1) {
             throw new NotFoundHttpException("Page " .$page. " inexistante.");
         }
 
         //Nombre d'articles par page
-        $nbPerPage = 5;
+        $nbPerPage = 3;
 
         $listArticles = $this->getDoctrine()->getManager()->getRepository('CryptoConseilsBlogBundle:Article')->getArticles($page, $nbPerPage);
 
@@ -109,7 +109,6 @@ class ArticleController extends Controller
 //        }
 //
 //        return $this->render('CryptoConseilsBlogBundle:Article:add.html.twig');
-        echo "Coucou";
 
     }
 
@@ -180,6 +179,6 @@ class ArticleController extends Controller
         );
 
         return $this->render('CryptoConseilsBlogBundle:Article:menu.html.twig', array(
-            'listArticles', $listArticles));
+            'listArticles' => $listArticles));
     }
 }

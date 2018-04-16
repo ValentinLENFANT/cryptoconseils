@@ -1,6 +1,10 @@
 cryptoconseils_blog_home:
-    path:    /blog
-    defaults: { _controller: CryptoConseilsBlogBundle:Article:index }
+    path:    /blog/{page}
+    defaults:
+        _controller: CryptoConseilsBlogBundle:Article:index
+        page: 1
+    requirements:
+        page: \d*
 
 cryptoconseils_blog_view:
     path:    /blog/articles/{id}
