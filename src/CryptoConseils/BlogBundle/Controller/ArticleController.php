@@ -11,11 +11,8 @@ namespace CryptoConseils\BlogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use CryptoConseils\BlogBundle\Antispam\CryptoConseilsAntispam;
 use CryptoConseils\BlogBundle\Entity\Article;
-use CryptoConseils\BlogBundle\Entity\Image;
-use CryptoConseils\BlogBundle\Entity\Category;
-use CryptoConseils\BlogBundle\Entity\Comment;
+use CryptoConseils\BlogBundle\Form\ArticleType;
 
 class ArticleController extends Controller
 {
@@ -62,54 +59,24 @@ class ArticleController extends Controller
 
     public function addAction(Request $request)
     {
-        // Création de l'entité Article
-//        $article = new Article();
-//        $article->setTitle("Forte hausse du Bitcoin ces derniers jours !");
-//        $article->setAuthor('Valentin');
-//        $article->setContent('Le Bitcoin a été déclaré halal.');
-//
-//        $image = new Image();
-//        $image->setUrl("https://image.noelshack.com/fichiers/2018/15/3/1523455498-arton1230.png");
-//        $image->setAlt("Banière Bitcoin");
-//
-//        $comment1 = new comment();
-//        $comment1->setAuthor('Satoshi Nakamoto');
-//        $comment1->setContent("J'ai crée le Bitcoin !");
-//
-//        $comment2 = new comment();
-//        $comment2->setAuthor('Vitalik Butterin');
-//        $comment2->setContent("J'ai crée l'Ethereum !");
-//
-//        $comment1->setArticle($article);
-//        $comment2->setArticle($article);
-//
-//        $article->setImage($image);
-//
-//        // Récupération de l'EntityManager
-//        $em = $this->getDoctrine()->getManager();
-//        // On persiste l'entité
-//        $em->persist($article);
-//        $em->persist($comment1);
-//        $em->persist($comment2);
-//        // Flush des persistence précédentes
-//        $em->flush();
-//
-//
-//        if ($request->isMethod('POST')) {
-//            $request->getSession()->getFlashBag()->add('notice', 'Article crée');
-//            return $this->redirectToRoute('cryptoconseils_blog_view', array($article => getId()));
-//        }
-//        return $this->render('CryptoConseilsBlogBundle:Article:add.html.twig', array('article' => $article));
+        $article = new Article();
 
-//        $em = $this->getDoctrine()->getManager();
-//
-//        if($request->isMethod('POST')) {
-//            $request->getSession()->getFlashBag()->add('notice', 'Article créé !');
-//            return $this->redirectToRoute('cryptoconseils_blog_view', array('id' => $article->getId()));
-//        }
-//
-//        return $this->render('CryptoConseilsBlogBundle:Article:add.html.twig');
+        // Création du form builder
+        //$form = $this->get('form.factory')->create(ArticleType::class, $article);
+        $form = $this->createForm(ArticleType::class, $article);
 
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($article);
+                $em->flush();
+
+                $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée');
+
+                return $this->redirectToRoute('cryptoconseils_blog_view', array('id' => $article->getId()));
+            }
+
+        return $this->render('CryptoConseilsBlogBundle:Article:add.html.twig',
+            array('form' => $form->createView(),));
     }
 
     public function editAction($id, Request $request)
