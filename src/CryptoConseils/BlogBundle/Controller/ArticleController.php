@@ -93,7 +93,6 @@ class ArticleController extends Controller
         }
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
             $request->getSession()->getFlashBag()->add('notice', 'Article modifié');
@@ -106,7 +105,7 @@ class ArticleController extends Controller
 
     }
 
-    public function deleteAction($id)
+    public function deleteAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -116,13 +115,20 @@ class ArticleController extends Controller
             throw new NotFoundHttpException("L'article d'id " . $id . " n'existe pas.");
         }
 
-        foreach ($article->getCategories() as $category) {
-            $article->removeCategory($category);
+        $form = $this->get('form.factory')->create();
+        if($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em->remove($article);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('info', "L'annonce a bien été supprimée.");
+
+            return $this->redirectToRoute('cryptoconseils_blog_home');
         }
 
-        $em->flush();
-
-        return $this->render('CryptoConseilsBlogBundle:Article:delete.html.twig');
+        return $this->render('CryptoConseilsBlogBundle:Article:delete.html.twig', array(
+            'article' => $article,
+            'form' => $form->createView(),
+        ));
     }
 
     public function menuAction($limit)
