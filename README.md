@@ -34,3 +34,5 @@ OR <br>
 `php bin/console doctrine:generate:entities appnameBundlename:Entityname`
 * To update the database via the schema:
 `php bin/console doctrine:schema:update --force`
+* To load the fixtures:
+`php bin/console doctrine:fixtures:load`

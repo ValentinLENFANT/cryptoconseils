@@ -16,7 +16,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Article
 {
     /**
-     * @ORM\OneToOne(targetEntity="CryptoConseils\BlogBundle\Entity\Image", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="CryptoConseils\BlogBundle\Entity\Image", cascade={"persist", "remove"})
      */
     private $image;
     /**

@@ -8,6 +8,7 @@
 
 namespace CryptoConseils\BlogBundle\Controller;
 
+use CryptoConseils\BlogBundle\Form\EditArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -19,7 +20,7 @@ class ArticleController extends Controller
     public function indexAction($page)
     {
         if ($page < 1) {
-            throw new NotFoundHttpException("Page " .$page. " inexistante.");
+            throw new NotFoundHttpException("Page " . $page . " inexistante.");
         }
 
         //Nombre d'articles par page
@@ -30,7 +31,7 @@ class ArticleController extends Controller
         $nbPages = ceil(count($listArticles) / $nbPerPage);
 
         if ($page > $nbPages) {
-            throw $this->createNotFoundException("La page " .$page. " n'existe pas.");
+            throw $this->createNotFoundException("La page " . $page . " n'existe pas.");
         }
 
         return $this->render('CryptoConseilsBlogBundle:Article:index.html.twig', array(
@@ -46,7 +47,7 @@ class ArticleController extends Controller
         $article = $em->getRepository("CryptoConseilsBlogBundle:Article")->find($id);
 
         if (null === $article) {
-            throw new NotFoundHttpException("L'article d'id" .$id. "n'existe pas");
+            throw new NotFoundHttpException("L'article d'id" . $id . "n'existe pas");
         }
 
         $listComments = $em->getRepository('CryptoConseilsBlogBundle:Comment')->findBy(array('article' => $article));
@@ -66,52 +67,42 @@ class ArticleController extends Controller
         $form = $this->createForm(ArticleType::class, $article);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($article);
-                $em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($article);
+            $em->flush();
 
-                $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée');
+            $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée');
 
-                return $this->redirectToRoute('cryptoconseils_blog_view', array('id' => $article->getId()));
-            }
+            return $this->redirectToRoute('cryptoconseils_blog_view', array('id' => $article->getId()));
+        }
 
         return $this->render('CryptoConseilsBlogBundle:Article:add.html.twig',
-            array('form' => $form->createView(),));
+            array('form' => $form->createView()));
     }
 
     public function editAction($id, Request $request)
     {
-//        if ($request->isMethod('POST')) {
-//            $request->getSession()->getFlashBag()->add('notice', 'Article modifié');
-//            return $this->redirectToRoute('cryptoconseils_blog_view', array('id' => 5));
-//        }
-//        $article = array(
-//            'title' => 'Est-ce que le Bitcoin est toujours roi ?',
-//            'id' => $id,
-//            'author' => 'Valentin LENFANT',
-//            'content' => 'Le Bitcoin a vu sa dominance passer de 90% à 45%, soit une diminution de 50%. Est-il toujours le roi des crypto-monnaies ?',
-//            'date' => new \Datetime()
-//        );
-//
-//        return $this->render('CryptoConseilsBlogBundle:Article:edit.html.twig', array(
-//            'article' => $article
-//        ));
-
         $em = $this->getDoctrine()->getManager();
 
         $article = $em->getRepository('CryptoConseilsBlogBundle:Article')->find($id);
 
+        $form = $this->createForm(EditArticleType::class, $article);
+
         if (null === $article) {
-            throw new NotFoundHttpException("L'article d'id " .$id. " n'existe pas.");
+            throw new NotFoundHttpException("L'article d'id " . $id . " n'existe pas.");
         }
 
-        if($request->isMethod('POST')) {
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($article);
+            $em->flush();
             $request->getSession()->getFlashBag()->add('notice', 'Article modifié');
 
             return $this->redirectToRoute('cryptoconseils_blog_view', array('id' => $article->getId()));
         }
 
-        return $this->render('CryptoConseilsBlogBundle:Article:edit.html.twig', array('article' => $article));
+        return $this->render('CryptoConseilsBlogBundle:Article:edit.html.twig',
+            array('article' => $article, 'form' => $form->createView()));
 
     }
 
@@ -122,7 +113,7 @@ class ArticleController extends Controller
         $article = $em->getRepository('CryptoConseilsBlogBundle:Article')->find($id);
 
         if (null === $article) {
-            throw new NotFoundHttpException("L'article d'id " .$id. " n'existe pas.");
+            throw new NotFoundHttpException("L'article d'id " . $id . " n'existe pas.");
         }
 
         foreach ($article->getCategories() as $category) {

@@ -18,11 +18,11 @@ class LoadImage extends AbstractFixture implements OrderedFixtureInterface
     {
         // Liste des noms de catégorie à ajouter
         $urls = array(
-            'https://image.noelshack.com/fichiers/2018/15/3/1523455498-arton1230.png',
-            'https://image.noelshack.com/fichiers/2018/15/7/1523801975-1-bnxhrv0vqcqjqpze6escsq.jpeg',
-            'https://image.noelshack.com/fichiers/2018/15/7/1523801975-downtrend.png',
-            'https://image.noelshack.com/fichiers/2018/15/7/1523801975-ethereum-1024x1024.jpg',
-            'https://image.noelshack.com/fichiers/2018/15/7/1523801975-hauerbearmarket-20607638.jpeg'
+            'jpg',
+            'jpeg',
+            'jpg',
+            'png',
+            'jpg'
         );
 
         $alts = array(
