@@ -10,10 +10,12 @@ namespace CryptoConseils\BlogBundle\Controller;
 
 use CryptoConseils\BlogBundle\Form\EditArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use CryptoConseils\BlogBundle\Entity\Article;
 use CryptoConseils\BlogBundle\Form\ArticleType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class ArticleController extends Controller
 {
@@ -58,8 +60,16 @@ class ArticleController extends Controller
         ));
     }
 
+    /**
+     * @Security("has_role('ROLE_AUTEUR')")
+     */
     public function addAction(Request $request)
     {
+        //Si l'on n'avait pas utilisé l'annontation au-dessus il aurait fallu mettre ces lignes de code
+//        if (!$this->get('security.authorization_checker')->isGranted('ROLE_AUTEUR')) {
+//            throw new AccessDeniedException('Accès limité aux auteurs.');
+//        }
+
         $article = new Article();
 
         // Création du form builder

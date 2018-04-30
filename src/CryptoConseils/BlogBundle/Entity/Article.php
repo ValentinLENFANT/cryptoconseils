@@ -5,6 +5,9 @@ namespace CryptoConseils\BlogBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use CryptoConseils\BlogBundle\Validator\Antiflood;
 
 /**
  * Article
@@ -12,23 +15,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="article")
  * @ORM\Entity(repositoryClass="CryptoConseils\BlogBundle\Repository\ArticleRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields="title", message="Une annonce existe déjà avec ce titre.")
  */
 class Article
 {
-    /**
-     * @ORM\OneToOne(targetEntity="CryptoConseils\BlogBundle\Entity\Image", cascade={"persist", "remove"})
-     */
-    private $image;
-    /**
-     * @ORM\ManyToMany(targetEntity="CryptoConseils\BlogBundle\Entity\Category", cascade={"persist"})
-     */
-    private $categories;
-
-    /**
-     * @ORM\OneToMany(targetEntity="CryptoConseils\BlogBundle\Entity\Comment", mappedBy="article")
-     */
-    private $comments;
-
     public function __construct()
     {
         $this->date = new \DateTime();
@@ -48,13 +38,30 @@ class Article
      * @var string
      *
      * @ORM\Column(name="Title", type="string", length=255, unique=true)
+     * @Assert\Length(min=10)
      */
     private $title;
+
+    /**
+     * @ORM\OneToOne(targetEntity="CryptoConseils\BlogBundle\Entity\Image", cascade={"persist", "remove"})
+     * @Assert\Valid()
+     */
+    private $image;
+    /**
+     * @ORM\ManyToMany(targetEntity="CryptoConseils\BlogBundle\Entity\Category", cascade={"persist"})
+     */
+    private $categories;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CryptoConseils\BlogBundle\Entity\Comment", mappedBy="article")
+     */
+    private $comments;
 
     /**
      * @var string
      *
      * @ORM\Column(name="Author", type="string", length=255)
+     * @Assert\Length(min=2)
      */
     private $author;
 
@@ -62,6 +69,8 @@ class Article
      * @var string
      *
      * @ORM\Column(name="Content", type="text")
+     * @Assert\NotBlank()
+     * @Antiflood()
      */
     private $content;
 
@@ -69,6 +78,7 @@ class Article
      * @var datetime_immutable
      *
      * @ORM\Column(name="Date", type="datetime")
+     * @Assert\DateTime()
      */
     private $date;
 

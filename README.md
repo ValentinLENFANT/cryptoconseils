@@ -15,7 +15,6 @@ OR <br>
 4) Go to the following URL : 
 [localhost/cryptoconseils/web/app_dev.php/blog](localhost/cryptoconseils/web/app_dev.php/blog)
 
-
 #Useful commands
 
 * To create a new bundle:
