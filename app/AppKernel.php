@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new CryptoConseils\BlogBundle\CryptoConseilsBlogBundle(),
             new CryptoConseils\UserBundle\CryptoConseilsUserBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
