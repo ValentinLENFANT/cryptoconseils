@@ -2,11 +2,18 @@ language: php
 php:
   - '7.1'
 
-before_script:
+services:
+  - mysql
+
+before_install:
     - travis_retry composer self-update
-    - composer install --dev
-    - php bin/console doctrine:schema:update --force
-    - php bin/console doctrine:fixtures:load
+
+install:
+    - composer install
+    - cp app/config/parameters.yml.dist app/config/parameters.yml
+    - php bin/console doctrine:database:create --env=test
+    - php bin/console doctrine:schema:create --env=test
+    - php bin/console doctrine:fixtures:load -n --env=test
 
 script:
     - php src/CryptoConseils/BlogBundle/Resources/views/layout.html.twig
