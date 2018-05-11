@@ -4,8 +4,7 @@ php:
 
 before_script:
     - travis_retry composer self-update
-    - php bin/console cache:clear --env=prod
-    - composer udate
+    - composer update
     - php bin/console doctrine:schema:update --force
     - php bin/console doctrine:fixtures:load
 
