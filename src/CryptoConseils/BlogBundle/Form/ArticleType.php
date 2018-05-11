@@ -16,6 +16,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use CryptoConseils\BlogBundle\Repository\CategoryRepository;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 class ArticleType extends AbstractType
 {
@@ -27,7 +28,7 @@ class ArticleType extends AbstractType
         $builder
             ->add('date', DateTimeType::class)
             ->add('title', TextType::class)
-            ->add('content', TextareaType::class)
+            ->add('content', CKEditorType::class, array('config_name' => 'basic_config'))
             ->add('author', TextType::class)
             // Bloc commenté pour mettre en évidence l'existence d'une méthode alternative permettant d'ajouter des nouvelles catégories plutôt que de
             // récupérer les existantes

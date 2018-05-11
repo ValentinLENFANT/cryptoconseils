@@ -15,7 +15,7 @@
     <i>Par {{ article.author }}, le {{ article.date|date('d/m/Y') }}</i>
 
     <div class="well">
-        {{ article.content }}
+        {{ article.content | raw }}
     </div>
 
     <div class="comments">

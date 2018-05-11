@@ -12,6 +12,11 @@ class CryptoConseilsAntispam
 
     public function isSpamArticle($text)
     {
-        return strlen($text) <50;
+        return strlen($text) < 50;
+    }
+
+    public function isSpam($text)
+    {
+        return strlen($text) < 2;
     }
 }
