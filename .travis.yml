@@ -4,6 +4,7 @@ php:
 
 before_script:
     - travis_retry composer self-update
+    - composer update
 
 script:
     - php src/CryptoConseils/BlogBundle/Resources/views/layout.html.twig
@@ -15,3 +16,7 @@ deploy:
 
 notifications:
     email: valentin.lenfant@hotmail.com
+
+doctrine:
+    dbal:
+        url: "%env(DATABASE_URL)%"
