@@ -20,3 +20,14 @@ monolog:
         console:
             type: console
             process_psr_3_messages: false
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: CryptoConseils\UserBundle\Entity\User
+    from_email:
+        address: "valentin.lenfant@hotmail.com"
+        sender_name: "valentin.lenfant@hotmail.com"
+    registration:
+        form:
+            type: AppBundle\Form\RegistrationType
