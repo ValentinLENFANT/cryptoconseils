@@ -6,11 +6,11 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
 
 framework:
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -86,3 +86,18 @@ fos_user:
     registration:
         form:
             type: AppBundle\Form\RegistrationType
+
+ivory_ck_editor:
+    configs:
+      full_config:
+        jquery: true
+        height: '900px'
+        language: fr
+        filebrowserBrowserRoute: elfinder
+        filebrowserBrowseRouteParameters: []
+        extraPlugins: 'lineutils,widget,dialog,codesnippet,widgetselection'
+      basic_config:
+        jquery: true
+        height: '250px'
+        language: fr
+        toolbar: basic
