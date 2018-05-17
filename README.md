@@ -7,21 +7,23 @@ This is the official repository for the website https://www.cryptoconseils.fr/
 OR <br>
 `git clone git@github.com:ValentinLENFANT/cryptoconseils.git` --> SSH <br>
 
-2) Open a command line terminal and execute : <br>
+2) Copy the parameters.yml.dist's content into parameters.yml
+
+3) Open a command line terminal and execute : <br>
 `composer update`
 
-3) At the same time, create the database named : <br> 
+4) At the same time, create the database named : <br>
 `cryptoconseils`
 
-4) After that, create the tables thanks to : <br>
+5) After that, create the tables thanks to : <br>
 `php bin/console doctrine:schema:update --force`
 
-5) Launch the following command to populate the tables : <br>
+6) Launch the following command to populate the tables : <br>
 `php bin/console doctrine:fixtures:load`
 
-6) Start your local server
+7) Start your local server
 
-7) Go to the following URL : 
+8) Go to the following URL :
 [localhost/cryptoconseils/web/app_dev.php/blog](localhost/cryptoconseils/web/app_dev.php/blog)
 
 #Useful commands
