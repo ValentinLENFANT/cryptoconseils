@@ -54,6 +54,6 @@ Puis ont définit notre scénario
 
 Pour connaitre les différentes actions que l'ont peut faire dans une scénario
 
-`bin/behat -dl --lang=en`
+`vendor/bin/behat -dl --lang=en`
 
 Pour créer une action personnalisé, il faut se rendre dans le fichier **FeatureContext.php**
