@@ -1,0 +1,44 @@
+{# src/CryptoConseils/BlogBundle/Resources/view/Article/view.html.twig #}
+
+{% extends "CryptoConseilsBlogBundle::layout.html.twig" %}
+
+{% block title %}
+    Lecture d'un article - {{ parent() }}
+{% endblock %}
+
+{% block cryptoconseilsblog_body %}
+
+    {% if article.image is not null %}
+        <img height="20%" width="20%" src="{{ asset(article.image.webPath) }}" alt="{{ article.image.alt }}">
+    {% endif %}
+    <h2>{{ article.title }}</h2>
+    <i>Par {{ article.author }}, le {{ article.date|date('d/m/Y') }}</i>
+
+    <div class="well">
+        {{ article.content | raw }}
+    </div>
+
+    <div class="comments">
+        <ul>
+            {% for comment in listComments %}
+                <li>Publié par {{ comment.author }} le {{ comment.date|date('d/m/Y à H:i') }} <br> {{ comment.content }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <p>
+        <a href="{{ path('cryptoconseils_blog_home') }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour à la liste
+        </a>
+        <a href="{{ path('cryptoconseils_blog_edit', {'id': article.id}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-edit"></i>
+            Modifier l'article
+        </a>
+        <a href="{{ path('cryptoconseils_blog_delete', {'id': article.id}) }}" class="btn btn-danger">
+            <i class="glyphicon glyphicon-trash"></i>
+            Supprimer l'article
+        </a>
+    </p>
+
+{% endblock %}

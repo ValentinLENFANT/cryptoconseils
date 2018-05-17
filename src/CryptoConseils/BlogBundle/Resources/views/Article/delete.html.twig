@@ -1,0 +1,25 @@
+{# src/CryptoConseils/BlogBundle/Resources/views/Article/delete.html.twig #}
+
+{% extends "CryptoConseilsBlogBundle::layout.html.twig" %}
+
+{% block title %}
+    Supprimer un article - {{ parent() }}
+{% endblock %}
+
+{% block cryptoconseilsblog_body %}
+
+    <h2>Supprimer un article</h2>
+
+    <p>
+        Etes-vous certain de vouloir supprimer l'article "{{ article.title }}" ?
+    </p>
+
+    <form action="{{ path('cryptoconseils_blog_delete', {'id': article.id}) }}" method="post">
+        <a href="{{ path('cryptoconseils_blog_view', {'id': article.id}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour à l'annonce
+        </a>
+        <input type="submit" value="Supprimer" class="btn btn-danger"/>
+        {{ form_rest(form) }}
+    </form>
+{% endblock %}

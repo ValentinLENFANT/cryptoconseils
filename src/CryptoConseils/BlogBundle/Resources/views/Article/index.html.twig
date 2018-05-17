@@ -1,0 +1,35 @@
+{# src/CryptoConseils/BlogBundle/Resources/views/Article/index.html.twig #}
+
+{% extends "CryptoConseilsBlogBundle::layout.html.twig" %}
+
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
+
+{% block cryptoconseilsblog_body %}
+
+    <h2>Liste des articles</h2>
+
+    <ul>
+        {% for article in listArticles %}
+        <li>
+            <a href="{{ path('cryptoconseils_blog_view', {'id': article.id}) }}">
+                {{ article.title }}
+            </a>
+            par {{ article.author }}
+            le {{ article.date|date('d/m/Y') }}
+        </li>
+        {% else %}
+        <li>Pas (encore !) d'annonces</li>
+        {% endfor %}
+    </ul>
+
+    <ul class="pagination">
+        {% for p in range(1, nbPages) %}
+            <li{% if p == page %} class="active" {% endif %}>
+                <a href="{{ path('cryptoconseils_blog_home', {'page': p}) }}">{{ p }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

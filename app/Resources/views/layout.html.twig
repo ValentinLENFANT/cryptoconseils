@@ -1,0 +1,67 @@
+{# app/Resources/views/layout.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}CryptoConseils{% endblock %}</title>
+
+    {% block stylesheets %}
+        {# On charge le CSS de bootstrap depuis le site directement #}
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    {% endblock %}
+</head>
+
+<body>
+<div class="container">
+    <div id="header" class="jumbotron">
+        <h1>Bienvenue sur CryptoConseils.fr</h1>
+        <p>
+            CryptoConseils.Fr est le spécialiste N°1  français du coaching personnalisé sur le trading des crypto-monnaies.
+            Nous vous proposons des stratégies adaptées à vos ambitions et qui correspondent à vos ressources.
+            Nous sommes là pour vous guider et vous aider à réussir dans le monde du trading des crypto-monnaies grâce à nos experts.
+        </p>
+        <p>
+            <a class="btn btn-primary btn-lg"
+               href="">
+                Devenez membre de CryptoConseils »
+            </a>
+        </p>
+    </div>
+
+    <div class="row">
+        <div id="menu" class="col-md-3">
+            <h3>Les annonces</h3>
+            <ul class="nav nav-pills nav-stacked">
+                <li><a href="{{ path('cryptoconseils_blog_home') }}">Accueil</a></li>
+                {% if is_granted('ROLE_AUTEUR') %}
+                    <li><a href="{{ path('cryptoconseils_blog_add') }}">Ecrire un nouvel article</a></li>
+                {% endif %}
+            </ul>
+
+            <h4>Derniers articles publiés</h4>
+            {{ render(controller("CryptoConseilsBlogBundle:Article:menu", {'limit': 3})) }}
+        </div>
+        <div id="content" class="col-md-9">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <hr>
+
+    <footer>
+        <p>CryptoConseils © {{ 'now'|date('Y') }}.</p>
+    </footer>
+</div>
+
+{% block javascripts %}
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+{% endblock %}
+
+</body>
+</html>

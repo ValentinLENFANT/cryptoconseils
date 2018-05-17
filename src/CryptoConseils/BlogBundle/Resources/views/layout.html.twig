@@ -1,0 +1,36 @@
+{# src/CryptoConseils/BlogBundle/Resources/views/layout.html.twig #}
+
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+    Articles - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        Connecté en tant que {{ app.user.username }}
+        -
+        <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+    {% else %}
+        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+    {% endif %}
+
+    {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
+    <h1>Articles</h1>
+
+    <hr>
+
+    {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+    {% block cryptoconseilsblog_body %}
+    {% endblock %}
+
+    <div align="right">
+        <iframe
+                width="350"
+                height="430"
+                src="https://console.dialogflow.com/api-client/demo/embedded/0c01453f-f45c-49e5-b8ac-55654e05cb72">
+        </iframe>
+    </div>
+
+{% endblock %}

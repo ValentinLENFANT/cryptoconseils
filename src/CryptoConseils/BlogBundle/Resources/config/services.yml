@@ -1,4 +1,15 @@
 services:
-#    crypto_conseils_blog.example:
-#        class: CryptoConseils\BlogBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    cryptoconseils_blog.antispam:
+        class: CryptoConseils\BlogBundle\Antispam\CryptoConseilsAntispam
+
+    cryptoconseils.blog.twig.antispam_extension:
+        class: CryptoConseils\BlogBundle\Twig\AntispamExtension
+        arguments:
+         - "@cryptoconseils_blog.antispam"
+        tags:
+         - { name: twig.extension }
+
+#    cryptoconseils_blog.form.ckeditor:
+#        class: CryptoConseils\BlogBundle\Form\CkeditorType
+#        tags:
+#         - { name: form.type, alias: ckeditor }
