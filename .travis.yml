@@ -2,8 +2,15 @@ language: php
 php:
   - '7.1'
 
-before_script:
+before_install:
     - travis_retry composer self-update
+
+install:
+    - composer install
+    - cp app/config/parameters.yml.dist app/config/parameters.yml
+    - php bin/console doctrine:database:create --env=test
+    - php bin/console doctrine:schema:create --env=test
+    - php bin/console doctrine:fixtures:load -n --env=test
 
 script:
     - php src/CryptoConseils/BlogBundle/Resources/views/layout.html.twig
@@ -15,3 +22,8 @@ deploy:
 
 notifications:
     email: valentin.lenfant@hotmail.com
+
+doctrine:
+    dbal:
+        url: "%env(DATABASE_URL)%"
+        driver: "%env(DATABASE_DRIVER%"
