@@ -87,6 +87,22 @@ fos_user:
         form:
             type: AppBundle\Form\RegistrationType
 
+
+fos_rest:
+    body_converter:
+        enabled: true
+    view:
+        formats: { json: true, xml: false, rss: false }
+    serializer:
+        serialize_null: true
+
+
+
+sensio_framework_extra:
+    view: { annotations: false }
+
+
+
 ivory_ck_editor:
     configs:
       full_config:

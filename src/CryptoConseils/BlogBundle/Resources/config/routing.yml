@@ -1,29 +1,78 @@
+######### Articles REST routes #########
+
 cryptoconseils_blog_home:
-    path:    /blog/{page}
+    path:    /blog/articles/
     defaults:
         _controller: CryptoConseilsBlogBundle:Article:index
         page: 1
     requirements:
         page: \d*
 
-cryptoconseils_blog_view:
+cryptoconseils_blog_show:
     path:    /blog/articles/{id}
-    defaults: { _controller: CryptoConseilsBlogBundle:Article:view }
+    defaults: { _controller: CryptoConseilsBlogBundle:Article:show }
+    methods:    [GET]
     requirements:
         id: \d{1,} # Regular expression to find an id of integer type
 
-cryptoconseils_blog_add:
-    path:    /blog/articles/add
-    defaults: { _controller: CryptoConseilsBlogBundle:Article:add }
 
 cryptoconseils_blog_edit:
-    path:    /blog/articles/edit/{id}
+    path:    /blog/articles/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Article:edit }
+    methods:    [PUT]
     requirements:
         id: \d{1,}
 
+
 cryptoconseils_blog_delete:
-    path:    /blog/articles/delete/{id}
+    path:    /blog/articles/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Article:delete }
+    methods:    [DELETE]
+    requirements:
+        id: \d{1,}
+
+
+cryptoconseils_blog_new:
+    path:    /blog/articles/new/
+    defaults: { _controller: CryptoConseilsBlogBundle:Article:new }
+    methods:    [POST]
+
+
+
+######### Categories REST routes #########
+
+cryptoconseils_blog_categories:
+    path:    /blog/categories/
+    defaults: { _controller: CryptoConseilsBlogBundle:Category:index }
+    methods:    [GET]
+
+
+cryptoconseils_blog_category_show:
+    path:    /blog/categories/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Category:show }
+    methods:    [GET]
+    requirements:
+        id: \d{1,} # Regular expression to find an id of integer type
+
+
+cryptoconseils_blog_category_new:
+    path:    /blog/categories/new/
+    defaults: { _controller: CryptoConseilsBlogBundle:Category:new }
+    methods:    [POST]
+
+
+
+cryptoconseils_blog_category_edit:
+    path:    /blog/categories/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Category:edit }
+    methods:    [PUT]
+    requirements:
+        id: \d{1,}
+
+
+cryptoconseils_blog_category_delete:
+    path:    /blog/categories/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Category:delete }
+    methods:    [DELETE]
     requirements:
         id: \d{1,}
