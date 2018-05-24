@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Analyses et Calls - CryptoConseils</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <!-- Template CSS Files -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/select2.min.css">
+    <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/skins/orange.css">
+
+    <!-- Template JS Files -->
+    <script src="js/modernizr.js"></script>
+
+</head>
+
+<body class="blog grid-no-sidebar">
+    <!-- SVG Preloader Starts -->
+    <div id="preloader">
+        <div id="preloader-content">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="150px" height="150px" viewBox="100 100 400 400" xml:space="preserve">
+                <filter id="dropshadow" height="130%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+                <feOffset dx="0" dy="0" result="offsetblur"/>
+                <feFlood flood-color="red"/>
+                <feComposite in2="offsetblur" operator="in"/>
+                <feMerge>
+                <feMergeNode/>
+                <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+                </filter>          
+                <path class="path" fill="#000000" d="M446.089,261.45c6.135-41.001-25.084-63.033-67.769-77.735l13.844-55.532l-33.801-8.424l-13.48,54.068
+                    c-8.896-2.217-18.015-4.304-27.091-6.371l13.568-54.429l-33.776-8.424l-13.861,55.521c-7.354-1.676-14.575-3.328-21.587-5.073
+                    l0.034-0.171l-46.617-11.64l-8.993,36.102c0,0,25.08,5.746,24.549,6.105c13.689,3.42,16.159,12.478,15.75,19.658L208.93,357.23
+                    c-1.675,4.158-5.925,10.401-15.494,8.031c0.338,0.485-24.579-6.134-24.579-6.134l-9.631,40.468l36.843,9.188
+                    c8.178,2.051,16.209,4.19,24.098,6.217l-13.978,56.17l33.764,8.424l13.852-55.571c9.235,2.499,18.186,4.813,26.948,6.995
+                    l-13.802,55.309l33.801,8.424l13.994-56.061c57.648,10.902,100.998,6.502,119.237-45.627c14.705-41.979-0.731-66.193-31.06-81.984
+                    C425.008,305.984,441.655,291.455,446.089,261.45z M368.859,369.754c-10.455,41.983-81.128,19.285-104.052,13.589l18.562-74.404
+                    C306.28,314.65,379.774,325.975,368.859,369.754z M379.302,260.846c-9.527,38.187-68.358,18.781-87.442,14.023l16.828-67.489
+                    C327.767,212.14,389.234,221.02,379.302,260.846z"/>       
+            </svg>
+        </div>
+    </div>
+    <!-- SVG Preloader Ends -->
+  <!-- Wrapper Starts -->
+    <div class="wrapper">
+        <!-- Header Starts -->
+        <header class="header">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo Starts -->
+                    <div class="main-logo col-xs-12 col-md-2 col-md-2 col-lg-2 hidden-xs">
+                        <a href="index.html">
+							<img class="img-responsive" src="images/logo.png" alt="logo">
+						</a>
+                    </div>
+                    <!-- Logo Ends -->
+                    <!-- Statistics Starts -->
+                    <div class="col-md-6 col-lg-6">
+                        <ul class="unstyled bitcoin-stats text-center">
+                            <li>
+                                <h6>9,450 USD</h6><span>Dernier trade</span></li>
+                            <li>
+                                <h6>+5.26%</h6><span>Prix en 24H </span></li>
+                            <li>
+                                <h6>14.154 BTC</h6><span>Volume 24H </span></li>
+                            <li>
+                                <h6>2,231,775</h6><span>Traders actifs</span></li>
+                            <li>
+                                <div class="btcwdgt-price" data-bw-theme="light" data-bw-cur="usd"></div>
+                                <span>Prix actuel du Bitcoin</span>
+							</li>
+                        </ul>
+                    </div>
+                    <!-- Statistics Ends -->
+                    <!-- User Sign In/Sign Up Starts -->
+                    <div class="col-md-4 col-lg-4">
+                        <ul class="unstyled user">
+                            <li class="sign-in"><a href="connexion.html" class="btn btn-primary"><i class="fa fa-user"></i> Connexion</a></li>
+                            <li class="sign-up"><a href="inscription.html" class="btn btn-primary"><i class="fa fa-user-plus"></i> Inscription</a></li>
+                        </ul>
+                    </div>
+                    <!-- User Sign In/Sign Up Ends -->
+                </div>
+            </div>
+            <!-- Navigation Menu Starts -->
+            <nav class="site-navigation navigation" id="site-navigation">
+                <div class="container">
+                    <div class="site-nav-inner">
+                        <!-- Logo For ONLY Mobile display Starts -->
+                        <a class="logo-mobile" href="index.html">
+							<img class="img-responsive" src="images/logo.png" alt="">
+						</a>
+                        <!-- Logo For ONLY Mobile display Ends -->
+                        <!-- Toggle Icon for Mobile Starts -->
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+                        <!-- Toggle Icon for Mobile Ends -->
+                        <div class="collapse navbar-collapse navbar-responsive-collapse">
+                            <!-- Main Menu Starts -->
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="index.html">Accueil</a></li>
+                                <li><a href="analyses-calls.html">Analyses & calls</a></li>
+                                <li><a href="airdrops.html">Airdrops</a></li>
+                                <li><a href="premium.html">Accès Prémium</a></li>
+                                <li><a href="about.html">Team</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <!-- Search Icon Starts -->
+                                <li class="search"><button class="fa fa-search"></button></li>
+                                <!-- Search Icon Ends -->
+                            </ul>
+                            <!-- Main Menu Ends -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Search Input Starts -->
+                <div class="site-search">
+                    <div class="container">
+                        <input type="text" placeholder="type your keyword and hit enter ...">
+                        <span class="close">×</span>
+                    </div>
+                </div>
+                <!-- Search Input Ends -->
+            </nav>
+            <!-- Navigation Menu Ends -->
+        </header>
+        <!-- Header Ends -->
+		<!-- Banner Area Starts -->
+		<section class="banner-area">
+			<div class="banner-overlay">
+				<div class="banner-text text-center">
+					<div class="container">
+						<!-- Section Title Starts -->
+						<div class="row text-center">
+							<div class="col-xs-12">
+								<!-- Title Starts -->
+								<h2 class="title-head">Analyses & <span> Calls</span></h2>
+								<!-- Title Ends -->
+								<hr>
+								<!-- Breadcrumb Starts -->
+								<ul class="breadcrumb">
+									<li><a href="index.html"> Accueil</a></li>
+									<li>Analyses & Calls</li>
+								</ul>
+								<!-- Breadcrumb Ends -->
+							</div>
+						</div>
+						<!-- Section Title Ends -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Banner Area Ends -->
+		<!-- Section Content Starts -->
+        <section class="container blog-page">
+			<div class="row">
+				<div class="content col-xs-12 col-md-12">
+					<!-- Article Starts -->
+					<article class="col-md-6">
+						<a href="blog-post.html"><h4>[Analyse] Verge - XVG</h4></a>
+						<!-- Figure Starts -->
+						<figure>
+							<a href="blog-post.html">
+								<img class="img-responsive" src="images/blog/blog-post-1.jpg" alt="">
+							</a>
+						</figure>
+						<!-- Figure Ends -->
+						<!-- Excerpt Starts -->
+						<p class="excerpt">Après son partenariat avec Petit Bâteau, les investisseurs de Verge semblent encore dubitatif sur l'avenir de la monnaie. ...</p>
+						<!-- Excerpt Ends -->
+						<a href="blog-post.html" class="btn btn-primary btn-readmore">
+							Lire plus
+						</a>
+						<!-- Meta Starts -->
+						<div class="meta">
+							<span><i class="fa fa-user"></i> <a href="#">Aurelien BERANGER</a></span>
+							<span><i class="fa fa-calendar"></i> 18 Avril 2018</span>
+							<span><i class="fa fa-commenting"></i> <a href="blog-post.html">18 commentaires</a></span>
+							<span><i class="fa fa-tags"></i> analyse, verge, xvg, partenariat</span>
+							<span><i class="fa fa-link"></i> <a href="blog-post.html">permalink</a></span>
+						</div>
+						<!-- Meta Ends -->
+					</article>
+					<!-- Article Ends -->
+					<!-- Article Starts -->
+					<article class="col-md-6">
+						<a href="blog-post.html"><h4>[Call] Verge - XVG</h4></a>
+						<!-- Figure Starts -->
+						<figure>
+							<a href="blog-post.html">
+								<img class="img-responsive" src="images/blog/blog-post-2.jpg" alt="">
+							</a>
+						</figure>
+						<!-- Figure Ends -->
+						<!-- Excerpt Starts -->
+						<p class="excerpt">Un gros partenariat sera annoncé d'ici 24h, c'est le moment de monter dans le train juste avant l'annonce ...</p>
+						<!-- Excerpt Ends -->
+						<a href="blog-post.html" class="btn btn-primary btn-readmore">
+							Lire plus
+						</a>
+						<!-- Meta Starts -->
+						<div class="meta">
+							<span><i class="fa fa-user"></i> <a href="#">Aurélien BERANGER</a></span>
+							<span><i class="fa fa-calendar"></i> 16 Avril 2018</span>
+							<span><i class="fa fa-commenting"></i> <a href="blog-post.html">29 commentaires</a></span>
+							<span><i class="fa fa-tags"></i> calls, verge, xvg, partenariat</span>
+							<span><i class="fa fa-link"></i> <a href="blog-post.html">permalink</a></span>
+						</div>
+						<!-- Meta Ends -->
+					</article>
+					<!-- Article Ends -->
+					<!-- Article Starts -->
+					<article class="col-md-6">
+						<a href="blog-post.html"><h4>[Analyse] Bitcoin - BTC</h4></a>
+						<!-- Figure Starts -->
+						<figure>
+							<a href="blog-post.html">
+								<img class="img-responsive" src="images/blog/blog-post-3.jpg" alt="">
+							</a>
+						</figure>
+						<!-- Figure Ends -->
+						<!-- Excerpt Starts -->
+						<p class="excerpt">Un investissement massif a eu lieu dans la journée juste après la déclariation des émirats arabes à propos des ...</p>
+						<!-- Excerpt Ends -->
+						<a href="blog-post.html" class="btn btn-primary btn-readmore">
+							Lire plus
+						</a>
+						<!-- Meta Starts -->
+						<div class="meta">
+							<span><i class="fa fa-user"></i> <a href="#">Valentin LENFANT</a></span>
+							<span><i class="fa fa-calendar"></i> 8 Avril 2018</span>
+							<span><i class="fa fa-commenting"></i> <a href="blog-post.html">29 commentaires</a></span>
+							<span><i class="fa fa-tags"></i> analyse, bitcoin, btc, investissement</span>
+							<span><i class="fa fa-link"></i> <a href="blog-post.html">permalink</a></span>
+						</div>
+						<!-- Meta Ends -->
+					</article>
+					<!-- Article Ends -->
+					<!-- Article Starts -->
+					<article class="col-md-6">
+						<a href="blog-post.html"><h4>[Call] Monero - XMR</h4></a>
+						<!-- Figure Starts -->
+						<figure>
+							<a href="blog-post.html">
+								<img class="img-responsive" src="images/blog/blog-post-4.jpg" alt="">
+							</a>
+						</figure>
+						<!-- Figure Ends -->
+						<!-- Excerpt Starts -->
+						<p class="excerpt">Grosse vente massif du Monero qui a chuté de 40% alors même que le prix du Bitcoin remonte et par la même occasion le marché...</p>
+						<!-- Excerpt Ends -->
+						<a href="blog-post.html" class="btn btn-primary btn-readmore">
+							Lire plus
+						</a>
+						<!-- Meta Starts -->
+						<div class="meta">
+							<span><i class="fa fa-user"></i> <a href="#">Guillaume JEAN</a></span>
+							<span><i class="fa fa-calendar"></i> 11 Octobre 2018</span>
+							<span><i class="fa fa-commenting"></i> <a href="blog-post.html">29 commentaires</a></span>
+							<span><i class="fa fa-tags"></i> call, monero, mining, oversold</span>
+							<span><i class="fa fa-link"></i> <a href="blog-post.html">permalink</a></span>
+						</div>
+						<!-- Meta Ends -->
+					</article>
+					<!-- Article Ends -->
+					<nav class="col-xs-12 text-center" aria-label="Page navigation">
+					  <ul class="pagination">
+						<li>
+						  <a href="#" aria-label="Previous">
+							<span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
+						  </a>
+						</li>
+						<li><a href="#">1</a></li>
+						<li class="active"><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li>
+						  <a href="#" aria-label="Next">
+							<span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
+						  </a>
+						</li>
+					  </ul>
+					</nav>
+				</div>
+			</div>
+		</section>
+		<!-- Section Content Ends -->
+        <!-- Call To Action Section Starts -->
+        <section class="call-action-all">
+			<div class="call-action-all-overlay">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<!-- Call To Action Text Starts -->
+							<div class="action-text">
+								<h2>Commencez dès maintenant à trader<h2>
+								<p class="lead">Créer un compte gratuitement !</p>
+							</div>
+							<!-- Call To Action Text Ends -->
+							<!-- Call To Action Button Starts -->
+							<p class="action-btn"><a class="btn btn-primary" href="inscription.html">S'enregistrer</a></p>
+							<!-- Call To Action Button Ends -->
+						</div>
+					</div>
+				</div>
+			</div>
+        </section>
+        <!-- Call To Action Section Ends -->
+       <!-- Footer Starts -->
+        <footer class="footer">
+            <!-- Footer Top Area Starts -->
+            <div class="top-footer">
+                <div class="container">
+                    <div class="row">
+                        <!-- Footer Widget Starts -->
+                        <div class="col-sm-4 col-md-2">
+                            <h4>CryptoConseils</h4>
+                            <div class="menu">
+                                <ul>
+                                    <li><a href="index.html">Accueil</a></li>
+                                    <li><a href="about.html">Team</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Footer Widget Ends -->
+                        <!-- Footer Widget Starts -->
+                        <div class="col-sm-4 col-md-2">
+                            <h4>Aide & Support</h4>
+                            <div class="menu">
+                                <ul>
+                                    <li><a href="faq.html">FAQ</a></li>
+                                    <li><a href="terms-of-services.html">Conditions & utilisations</a></li>
+                                    <li><a href="404.html">404</a></li>
+                                    <li><a href="inscription.html">Inscription</a></li>
+                                    <li><a href="connexion.html">Connexion</a></li>
+                                    <li><a href="coming-soon.html">Coming Soon</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Footer Widget Ends -->
+                        <!-- Footer Widget Starts -->
+                        <div class="col-sm-4 col-md-3">
+                            <h4>Contactez-nous</h4>
+                            <div class="contacts">
+                                <div>
+                                    <span>cryptoconseils@gmail.com</span>
+                                </div>
+                                <div>
+                                    <span>0637751315</span>
+                                </div>
+                                <div>
+                                    <span>Paris, France</span>
+                                </div>
+                                <div>
+                                    <span>7j/7 & 24h/24</span>
+                                </div>
+                            </div>
+							<!-- Social Media Profiles Starts -->
+                            <div class="social-footer">
+                                <ul>
+                                    <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+							<!-- Social Media Profiles Ends -->
+                        </div>
+                        <!-- Footer Widget Ends -->
+						<!-- Footer Widget Starts -->
+                        <div class="col-sm-12 col-md-5">
+							<!-- Facts Starts -->
+							<div class="facts-footer">
+								<div>
+									<h5>$198.76B</h5>
+									<span>Market cap</span>
+								</div>
+								<div>
+									<h5>243K</h5>
+									<span>Transactions journalières</span>
+								</div>
+								<div>
+									<h5>369K</h5>
+									<span>Comptes actifs</span>
+								</div>
+								<div>
+									<h5>127</h5>
+									<span>Pays supportés</span>
+								</div>
+							</div>
+							<!-- Facts Ends -->
+							<hr>
+							<!-- Supported Payment Cards Logo Starts -->
+							<div class="payment-logos">
+								<h4 class="payment-title">Méthodes de paiement supportées</h4>
+								<img src="images/icons/payment/american-express.png" alt="american-express">
+								<img src="images/icons/payment/mastercard.png" alt="mastercard">
+								<img src="images/icons/payment/visa.png" alt="visa">
+								<img src="images/icons/payment/paypal.png" alt="paypal">
+								<img class="last" src="images/icons/payment/maestro.png" alt="maestro">
+							</div>
+							<!-- Supported Payment Cards Logo Ends -->
+                        </div>
+                        <!-- Footer Widget Ends -->
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Top Area Ends -->
+            <!-- Footer Bottom Area Starts -->
+            <div class="bottom-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- Copyright Text Starts -->
+                            <p class="text-center">Copyright © 2018 CryptoConseils | <a href="https://www.esgi.fr/ecole-informatique.html" target="_blank">ESGI</a></p>
+                            <!-- Copyright Text Ends -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Bottom Area Ends -->
+		<!-- Back To Top Starts  -->
+        <a href="#" id="back-to-top" class="back-to-top fa fa-arrow-up"></a>
+		<!-- Back To Top Ends  -->
+		
+        <!-- Template JS Files -->
+        <script src="js/jquery-2.2.4.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/select2.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/custom.js"></script>
+
+    </div>
+    <!-- Wrapper Ends -->
+</body>
+
+</html>
