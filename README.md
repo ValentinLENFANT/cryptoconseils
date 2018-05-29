@@ -21,13 +21,21 @@ OR <br>
 6) Launch the following command to populate the tables : <br>
 `php bin/console doctrine:fixtures:load`
 
-7) Start your local server
+7) Install React dependencies
+`cd cryptoconseils-frontend && yarn install`
 
-8) Go to the following URL :
+8) Start your local server
+* Start Symfony server
+`php bin/console server:start`
+* Start React server
+`yarn start`
+
+9) Go to the following URL :
 [localhost/cryptoconseils/web/app_dev.php/blog](localhost/cryptoconseils/web/app_dev.php/blog)
 
-#Useful commands
+# Useful commands
 
+### Symfony  
 * To create a new bundle:
 `php bin/console generate:bundle`
 * Cache issue for dev:
@@ -36,8 +44,6 @@ OR <br>
 `php bin/console cache:clear --env=prod`
 * To update dependencies:
 `php composer.phar update`
-* To launch behat test:
-`vendor/bin/behat`
 * To generate a new entity:
 `php bin/console doctrine:generate:entity`
 * To update an entity:
@@ -46,3 +52,16 @@ OR <br>
 `php bin/console doctrine:schema:update --force`
 * To load the fixtures:
 `php bin/console doctrine:fixtures:load`
+
+## React
+> Exécute these command in cryptoconseils-frontend
+
+* To install React dependencies:
+`yarn install`
+* To start React:
+`yarn start`
+
+
+## Behat
+* To launch behat test:
+`vendor/bin/behat`
