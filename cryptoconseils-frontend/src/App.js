@@ -10,6 +10,11 @@ const Home = Loadable({
   loading: Loading,
 });
 
+const Login = Loadable({
+  loader: () => import('./Login/Login'),
+  loading: Loading,
+});
+
 const NotFound = Loadable({
   loader: () => import('./NotFound/NotFound'),
   loading: Loading,
@@ -21,6 +26,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={Home}/>
+          <Route exact path="/login" component={Login}/>
           <Route component={NotFound}/>
         </Switch>
       </Router>
