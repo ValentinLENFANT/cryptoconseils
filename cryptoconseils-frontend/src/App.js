@@ -11,7 +11,7 @@ const Home = Loadable({
 });
 
 const Login = Loadable({
-  loader: () => import('./Login/Login'),
+  loader: () => import('./SignInUp/SignIn'),
   loading: Loading,
 });
 
