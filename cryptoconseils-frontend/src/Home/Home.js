@@ -19,10 +19,10 @@ class UserAction extends Component {
         <div className="col-md-4 col-lg-4">
           <ul className="unstyled user">
             <li className="sign-in">
-              <a href="/login" className="btn btn-primary">
+              <a href="/signin" className="btn btn-primary">
                 <i className="fa fa-user"></i> Connexion</a></li>
             <li className="sign-up">
-              <a href="/login" className="btn btn-primary">
+              <a href="/signup" className="btn btn-primary">
               <i className="fa fa-user-plus"></i> Inscription</a></li>
           </ul>
         </div>
@@ -48,7 +48,7 @@ class BeginTrade extends Component {
                   {/* Call To Action Text Ends */}
                   {/* Call To Action Button Starts */}
                   <p className="action-btn">
-                    <a className="btn btn-primary" href="inscription.html">
+                    <a className="btn btn-primary" href="/signup">
                     S'enregistrer
                     </a>
                   </p>

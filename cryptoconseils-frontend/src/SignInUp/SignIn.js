@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Carousel from './Caroussel';
 
 class SignIn extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       showSignUp: false
     };
@@ -19,7 +19,7 @@ class SignIn extends Component {
   }
 
   formRender(){
-    if(this.state.showSignUp === true){
+    if(this.state.showSignUp || this.props.showSignUp){
       return this.SignUpForm();
     } else {
       return this.SignInForm();
@@ -51,7 +51,7 @@ class SignIn extends Component {
           <div className="form-group">
             <button className="btn btn-primary" type="submit">Connexion</button>
             <p className="text-center">Pas de compte ?
-              <a ref="#" onClick={this.changeForm}>inscription</a>
+              <a href="#" onClick={this.changeForm}> Inscription</a>
             </p>
           </div>
           {/*Submit Form Button Ends */}
@@ -91,7 +91,7 @@ class SignIn extends Component {
           <div className="form-group">
             <button className="btn btn-primary" type="submit">créer un compte</button>
             <p className="text-center">déjà un compte ?
-              <a href="#" onClick={this.changeForm}>Connexion</a>
+              <a href="#" onClick={this.changeForm}> Connexion</a>
             </p>
           </div>
           {/* Submit Form Button Ends */}

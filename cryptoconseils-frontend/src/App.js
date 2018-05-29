@@ -10,8 +10,13 @@ const Home = Loadable({
   loading: Loading,
 });
 
-const Login = Loadable({
+const SignIn = Loadable({
   loader: () => import('./SignInUp/SignIn'),
+  loading: Loading,
+});
+
+const SignUp = Loadable({
+  loader: () => import('./SignInUp/SignUp'),
   loading: Loading,
 });
 
@@ -26,7 +31,9 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route exact path="/login" component={Login}/>
+          <Route exact path="/signin" component={SignIn}/>
+          <Route exact path="/signup" component={SignUp}/>
+
           <Route component={NotFound}/>
         </Switch>
       </Router>
