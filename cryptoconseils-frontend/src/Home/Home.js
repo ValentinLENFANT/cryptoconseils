@@ -64,7 +64,7 @@ class BeginTrade extends Component {
 class Home extends Component {
   render() {
     return (
-      <div className="Home">
+      <div className="App">
       {/* Wrapper Starts */}
         <div className="wrapper">
           {/* Header Starts */}
