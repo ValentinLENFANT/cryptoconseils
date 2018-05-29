@@ -5,7 +5,7 @@ class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showSignUp: false
+      showSignUp: props.showSignUp,
     };
     this.changeForm = this.changeForm.bind(this);
   }
@@ -19,9 +19,10 @@ class SignIn extends Component {
   }
 
   formRender(){
-    if(this.state.showSignUp || this.props.showSignUp){
+    if(this.state.showSignUp){
       return this.SignUpForm();
-    } else {
+    }
+    else {
       return this.SignInForm();
     }
   }
