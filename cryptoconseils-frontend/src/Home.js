@@ -23,45 +23,47 @@ class Navigation extends Component {
   render() {
     return(
       <div className="Statistics">
-        <div className="container">
-          <div className="site-nav-inner">
-            {/* Logo For ONLY Mobile display Starts */}
-            <a className="logo-mobile" href="index.html">
-              <img className="img-responsive" src="images/logo.png" alt=""/>
-            </a>
-            {/* Logo For ONLY Mobile display Ends */}
-            {/* Toggle Icon for Mobile Starts */}
-            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            {/* Toggle Icon for Mobile Ends */}
-            <div className="collapse navbar-collapse navbar-responsive-collapse">
-              {/* Main Menu Starts */}
-              <ul className="nav navbar-nav">
-                <li className="active"><a href="index.html">Accueil</a></li>
-                <li><a href="analyses-calls.html">Analyses & calls</a></li>
-                <li><a href="airdrops.html">Airdrops</a></li>
-                <li><a href="premium.html">Accès Prémium</a></li>
-                <li><a href="about.html">Team</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                {/* Search Icon Starts */}
-                <li className="search"><button className="fa fa-search"></button></li>
-                {/* Search Icon Ends */}
-              </ul>
-              {/* Main Menu Ends */}
+        <nav className="site-navigation navigation" id="site-navigation">
+          <div className="container">
+            <div className="site-nav-inner">
+              {/* Logo For ONLY Mobile display Starts */}
+              <a className="logo-mobile" href="index.html">
+                <img className="img-responsive" src="images/logo.png" alt=""/>
+              </a>
+              {/* Logo For ONLY Mobile display Ends */}
+              {/* Toggle Icon for Mobile Starts */}
+              <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span className="sr-only">Toggle navigation</span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
+              {/* Toggle Icon for Mobile Ends */}
+              <div className="collapse navbar-collapse navbar-responsive-collapse">
+                {/* Main Menu Starts */}
+                <ul className="nav navbar-nav">
+                  <li className="active"><a href="index.html">Accueil</a></li>
+                  <li><a href="analyses-calls.html">Analyses & calls</a></li>
+                  <li><a href="airdrops.html">Airdrops</a></li>
+                  <li><a href="premium.html">Accès Prémium</a></li>
+                  <li><a href="about.html">Team</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                  {/* Search Icon Starts */}
+                  <li className="search"><button className="fa fa-search"></button></li>
+                  {/* Search Icon Ends */}
+                </ul>
+                {/* Main Menu Ends */}
+              </div>
             </div>
           </div>
-        </div>
-        {/* Search Input Starts */}
-        <div className="site-search">
-          <div className="container">
-            <input type="text" placeholder="type your keyword and hit enter ..."/>
-            <span className="close">×</span>
+          {/* Search Input Starts */}
+          <div className="site-search">
+            <div className="container">
+              <input type="text" placeholder="type your keyword and hit enter ..."/>
+              <span className="close">×</span>
+            </div>
           </div>
-        </div>
+        </nav>
         {/* Search Input Ends */}
       </div>
     );
@@ -80,6 +82,115 @@ class UserAction extends Component {
               <i className="fa fa-user-plus"></i> Inscription</a></li>
           </ul>
         </div>
+      </div>
+    );
+  }
+}
+
+class Carousel extends Component {
+  render() {
+    return(
+      <div className="Carousel">
+        <div id="main-slide" className="carousel slide carousel-fade" data-ride="carousel">
+          {/* Indicators Starts */}
+          <ol className="carousel-indicators visible-lg visible-md">
+            <li data-target="#main-slide" data-slide-to="0" className="active"></li>
+            <li data-target="#main-slide" data-slide-to="1"></li>
+            <li data-target="#main-slide" data-slide-to="2"></li>
+          </ol>
+          {/* Indicators Ends */}
+          {/* Carousel Inner Starts */}
+          <div className="carousel-inner">
+            {/* Carousel Item Starts */}
+            <div className="item active bg-parallax item-1">
+              <div className="slider-content">
+                <div className="container">
+                  <div className="slider-text text-center">
+                    <h3 className="slide-title"><span>Analyses</span> et <span>Conseils</span><br/> pour optimiser vos gains</h3>
+                    <p>
+                      <a href="about.html" className="slider btn btn-primary">En savoir plus</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Carousel Item Ends */}
+            {/* Carousel Item Starts */}
+            <div className="item bg-parallax item-2">
+              <div className="slider-content">
+                <div className="col-md-12">
+                  <div className="container">
+                    <div className="slider-text text-center">
+                      <h3 className="slide-title">Suivez nos <span>Experts</span> Traders <br/> de classNamee <span>Mondiale</span> </h3>
+                      <p>
+                        <a href="pricing.html" className="slider btn btn-primary">Nos offres</a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Carousel Item Ends */}
+          </div>
+          {/* Carousel Inner Ends */}
+          {/* Carousel Controlers Starts */}
+          <a className="left carousel-control" href="index.html#main-slide" data-slide="prev">
+            <span><i className="fa fa-angle-left"></i></span>
+          </a>
+          <a className="right carousel-control" href="index.html#main-slide" data-slide="next">
+            <span><i className="fa fa-angle-right"></i></span>
+          </a>
+          {/* Carousel Controlers Ends */}
+        </div>
+      </div>
+    );
+  }
+}
+
+class Articles extends Component {
+  render() {
+    return(
+      <div className="Articles">
+        <section className="blog">
+          <div className="container">
+            {/* Section Title Starts */}
+            <div className="row text-center">
+              <h2 className="title-head">Dernières <span>Actualités</span></h2>
+              <div className="title-head-subtitle">
+                <p>Découvrez les dernières actualités cryptos à la une !</p>
+              </div>
+            </div>
+            {/* Section Title Ends */}
+            {/* Section Content Starts */}
+            <div className="row latest-posts-content">
+              {/* Article Starts */}
+              <div className="col-sm-4 col-md-4 col-xs-12">
+                <div className="latest-post">
+                  {/* Featured Image Starts */}
+                  <a href="blog-post.html"><img className="img-responsive" src="images/blog/blog-post-small-1.jpg" alt="img"/></a>
+                  {/* Featured Image Ends */}
+                  {/* Article Content Starts */}
+                  <div className="post-body">
+                    <h4 className="post-title">
+                      <a href="blog-post.html">L'impact des crypto-monnaies sur le systême financier mondiale</a>
+                    </h4>
+                    <div className="post-text">
+                      <p>incididunt ut labore et dolore magna aliqua. Ut enim aminim veniam, quis nostrud... ...</p>
+                    </div>
+                  </div>
+                  <div className="post-date">
+                    <span>01</span>
+                    <span>JAN</span>
+                  </div>
+                  <a href="blog-post.html" className="btn btn-primary">Lire plus</a>
+                  {/* Article Content Ends */}
+                </div>
+              </div>
+              {/* Article Ends */}
+            </div>
+            {/* Section Content Ends */}
+          </div>
+        </section>
       </div>
     );
   }
@@ -110,201 +221,65 @@ class Home extends Component {
             </div>
           </div>
           {/* Navigation Menu Starts */}
-          <nav className="site-navigation navigation" id="site-navigation">
             <Navigation />
-          </nav>
           {/* Navigation Menu Ends */}
         </div>
       {/* Header Ends */}
-                {/* Slider Starts */}
-                <div id="main-slide" className="carousel slide carousel-fade" data-ride="carousel">
-                  {/* Indicators Starts */}
-                  <ol className="carousel-indicators visible-lg visible-md">
-                    <li data-target="#main-slide" data-slide-to="0" className="active"></li>
-                    <li data-target="#main-slide" data-slide-to="1"></li>
-                    <li data-target="#main-slide" data-slide-to="2"></li>
-                  </ol>
-                  {/* Indicators Ends */}
-                  {/* Carousel Inner Starts */}
-                  <div className="carousel-inner">
-                    {/* Carousel Item Starts */}
-                    <div className="item active bg-parallax item-1">
-                      <div className="slider-content">
-                        <div className="container">
-                          <div className="slider-text text-center">
-                            <h3 className="slide-title"><span>Analyses</span> et <span>Conseils</span><br/> pour optimiser vos gains</h3>
-                            <p>
-                              <a href="about.html" className="slider btn btn-primary">En savoir plus</a>
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    {/* Carousel Item Ends */}
-                    {/* Carousel Item Starts */}
-                    <div className="item bg-parallax item-2">
-                      <div className="slider-content">
-                        <div className="col-md-12">
-                          <div className="container">
-                            <div className="slider-text text-center">
-                              <h3 className="slide-title">Suivez nos <span>Experts</span> Traders <br/> de classNamee <span>Mondiale</span> </h3>
-                              <p>
-                                <a href="pricing.html" className="slider btn btn-primary">Nos offres</a>
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    {/* Carousel Item Ends */}
-                  </div>
-                  {/* Carousel Inner Ends */}
-                  {/* Carousel Controlers Starts */}
-                  <a className="left carousel-control" href="index.html#main-slide" data-slide="prev">
-                    <span><i className="fa fa-angle-left"></i></span>
-                  </a>
-                  <a className="right carousel-control" href="index.html#main-slide" data-slide="next">
-                    <span><i className="fa fa-angle-right"></i></span>
-                  </a>
-                  {/* Carousel Controlers Ends */}
-                </div>
-                {/* Slider Ends */}
 
-                {/* Blog Section Starts */}
-                <section className="blog">
-                  <div className="container">
-                    {/* Section Title Starts */}
-                    <div className="row text-center">
-                      <h2 className="title-head">Dernières <span>Actualités</span></h2>
-                      <div className="title-head-subtitle">
-                        <p>Découvrez les dernières actualités cryptos à la une !</p>
-                      </div>
-                    </div>
-                    {/* Section Title Ends */}
-                    {/* Section Content Starts */}
-                    <div className="row latest-posts-content">
-                      {/* Article Starts */}
-                      <div className="col-sm-4 col-md-4 col-xs-12">
-                        <div className="latest-post">
-                          {/* Featured Image Starts */}
-                          <a href="blog-post.html"><img className="img-responsive" src="images/blog/blog-post-small-1.jpg" alt="img"/></a>
-                          {/* Featured Image Ends */}
-                          {/* Article Content Starts */}
-                          <div className="post-body">
-                            <h4 className="post-title">
-                              <a href="blog-post.html">L'impact des crypto-monnaies sur le systême financier mondiale</a>
-                            </h4>
-                            <div className="post-text">
-                              <p>incididunt ut labore et dolore magna aliqua. Ut enim aminim veniam, quis nostrud... ...</p>
-                            </div>
-                          </div>
-                          <div className="post-date">
-                            <span>01</span>
-                            <span>JAN</span>
-                          </div>
-                          <a href="blog-post.html" className="btn btn-primary">Lire plus</a>
-                          {/* Article Content Ends */}
-                        </div>
-                      </div>
-                      {/* Article Ends */}
-                      {/* Article Starts */}
-                      <div className="col-sm-4 col-md-4 col-xs-12">
-                        <div className="latest-post">
-                          {/* Featured Image Starts */}
-                          <a href="blog-post.html"><img className="img-responsive" src="images/blog/blog-post-small-2.jpg" alt="img"/></a>
-                          {/* Featured Image Ends */}
-                          {/* Article Content Starts */}
-                          <div className="post-body">
-                            <h4 className="post-title">
-                              <a href="blog-post.html">Crypto-monnaies - le profil des utilisateurs se dessine</a>
-                            </h4>
-                            <div className="post-text">
-                              <p>incididunt ut labore et dolore magna aliqua. Ut enim aminim veniam, quis nostrud...</p>
-                            </div>
-                          </div>
-                          <div className="post-date">
-                            <span>17</span>
-                            <span>MAR</span>
-                          </div>
-                          <a href="blog-post.html" className="btn btn-primary">Lire plus</a>
-                          {/* Article Content Ends */}
-                        </div>
-                      </div>
-                      {/* Article Ends */}
-                      {/* Article Start */}
-                      <div className="col-sm-4 col-md-4 col-xs-12">
-                        <div className="latest-post">
-                          {/* Featured Image Starts */}
-                          <a href="blog-post.html"><img className="img-responsive" src="images/blog/blog-post-small-3.jpg" alt="img"/></a>
-                          {/* Featured Image Ends */}
-                          {/* Article Content Starts */}
-                          <div className="post-body">
-                            <h4 className="post-title">
-                              <a href="blog-post.html">Stratégie d'Investissement. Avantages et inconvénients</a>
-                            </h4>
-                            <div className="post-text">
-                              <p>incididunt ut labore et dolore magna aliqua. Ut enim aminim veniam, quis nostrud...</p>
-                            </div>
-                          </div>
-                          <div className="post-date">
-                            <span>25</span>
-                            <span>FEV</span>
-                          </div>
-                          <a href="blog-post.html" className="btn btn-primary">Lire plus</a>
-                          {/* Article Content Ends */}
-                        </div>
-                      </div>
-                    </div>
-                    {/* Section Content Ends */}
-                  </div>
-                </section>
-                {/* Blog Section Ends */}
-                {/* About Section Starts */}
-                <section className="about-us">
-                  <div className="container">
-                    {/* Section Title Starts */}
-                    <div className="row text-center">
-                      <h2 className="title-head">Qui <span>sommes-nous ?</span></h2>
-                      <div className="title-head-subtitle">
-                        <p>Un site de conseils et de coaching personnalisé dans le trading de crypto-monnaies</p>
-                      </div>
-                    </div>
-                    {/* Section Title Ends */}
-                    {/* Section Content Starts */}
-                    <div className="row about-content">
-                      {/* Image Starts */}
-                      <div className="col-sm-12 col-md-5 col-lg-6 text-center">
-                        <img className="img-responsive img-about-us" src="images/about-us.png" alt="about us"/>
-                      </div>
-                      {/* Image Ends */}
-                      {/* Content Starts */}
-                      <div className="col-sm-12 col-md-7 col-lg-6">
-                        <h3 className="title-about">CryptoConseils</h3>
-                        <p className="about-text">Une place pour tous ceux qui souhaitent optimiser leurs investissements ou approfondir leur connaissances. Vous pouvez aussi acheter du Bitcoin directement depuis notre plateforme avec votre carte de crédit. Rejoignez les 13.300 utilisateurs satisfaits d'utiliser nos services au quotidien</p>
-                        <ul className="nav nav-tabs">
-                          <li className="active"><a data-toggle="tab" href="#menu1">Notre objectif</a></li>
-                          <li><a data-toggle="tab" href="#menu2">Nos avantages</a></li>
-                          <li><a data-toggle="tab" href="#menu3">Notre garantie</a></li>
-                        </ul>
-                        <div className="tab-content">
-                          <div id="menu1" className="tab-pane fade in active">
-                            <p>Le Bitcoin et les crypto-monnaies sont des protocols basés sur la Blockchain, ce qui permet entre autre de transférer des données financières de façon ultra-sécurisées sans partie tierce.</p>
-                          </div>
-                          <div id="menu2" className="tab-pane fade">
-                            <p>Nous proposons une plateforme vous permettant de mieux appréhender le monde des crypto-monnaies en suivant nos conseils de trading et pour un cout bien inférieur à la conccurence.</p>
-                          </div>
-                          <div id="menu3" className="tab-pane fade">
-                            <p>Nous garantissons à tous nos investisseurs une grande sécurité sur leur investissement</p>
-                          </div>
-                        </div>
-                        <a className="btn btn-primary" href="about.html">En savoir plus</a>
-                      </div>
-                      {/* Content Ends */}
-                    </div>
-                    {/* Section Content Ends */}
-                  </div>
-                </section>
-                {/* About Section Ends */}
+      {/* Slider Starts */}
+        <Carousel />
+      {/* Slider Ends */}
+
+      {/* Blog Section Starts */}
+        <Articles />
+      {/* Blog Section Ends */}
+
+      {/* About Section Starts */}
+      <section className="about-us">
+        <div className="container">
+          {/* Section Title Starts */}
+          <div className="row text-center">
+            <h2 className="title-head">Qui <span>sommes-nous ?</span></h2>
+            <div className="title-head-subtitle">
+              <p>Un site de conseils et de coaching personnalisé dans le trading de crypto-monnaies</p>
+            </div>
+          </div>
+          {/* Section Title Ends */}
+          {/* Section Content Starts */}
+          <div className="row about-content">
+            {/* Image Starts */}
+            <div className="col-sm-12 col-md-5 col-lg-6 text-center">
+              <img className="img-responsive img-about-us" src="images/about-us.png" alt="about us"/>
+            </div>
+            {/* Image Ends */}
+            {/* Content Starts */}
+            <div className="col-sm-12 col-md-7 col-lg-6">
+              <h3 className="title-about">CryptoConseils</h3>
+              <p className="about-text">Une place pour tous ceux qui souhaitent optimiser leurs investissements ou approfondir leur connaissances. Vous pouvez aussi acheter du Bitcoin directement depuis notre plateforme avec votre carte de crédit. Rejoignez les 13.300 utilisateurs satisfaits d'utiliser nos services au quotidien</p>
+              <ul className="nav nav-tabs">
+                <li className="active"><a data-toggle="tab" href="#menu1">Notre objectif</a></li>
+                <li><a data-toggle="tab" href="#menu2">Nos avantages</a></li>
+                <li><a data-toggle="tab" href="#menu3">Notre garantie</a></li>
+              </ul>
+              <div className="tab-content">
+                <div id="menu1" className="tab-pane fade in active">
+                  <p>Le Bitcoin et les crypto-monnaies sont des protocols basés sur la Blockchain, ce qui permet entre autre de transférer des données financières de façon ultra-sécurisées sans partie tierce.</p>
+                </div>
+                <div id="menu2" className="tab-pane fade">
+                  <p>Nous proposons une plateforme vous permettant de mieux appréhender le monde des crypto-monnaies en suivant nos conseils de trading et pour un cout bien inférieur à la conccurence.</p>
+                </div>
+                <div id="menu3" className="tab-pane fade">
+                  <p>Nous garantissons à tous nos investisseurs une grande sécurité sur leur investissement</p>
+                </div>
+              </div>
+              <a className="btn btn-primary" href="about.html">En savoir plus</a>
+            </div>
+            {/* Content Ends */}
+          </div>
+          {/* Section Content Ends */}
+        </div>
+      </section>
+      {/* About Section Ends */}
                 {/* Features and Video Section Starts */}
                 <section className="image-block">
                   <div className="container-fluid">
