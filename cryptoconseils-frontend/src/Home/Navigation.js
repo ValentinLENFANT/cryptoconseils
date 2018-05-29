@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LogoMobile from '../Logo/LogoMobile';
 class Navigation extends Component {
   render() {
     return(
@@ -7,9 +8,7 @@ class Navigation extends Component {
           <div className="container">
             <div className="site-nav-inner">
               {/* Logo For ONLY Mobile display Starts */}
-              <a className="logo-mobile" href="index.html">
-                <img className="img-responsive" src="images/logo.png" alt=""/>
-              </a>
+                <LogoMobile />
               {/* Logo For ONLY Mobile display Ends */}
               {/* Toggle Icon for Mobile Starts */}
               <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

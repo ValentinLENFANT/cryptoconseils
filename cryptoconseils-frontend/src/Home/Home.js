@@ -11,6 +11,7 @@ import Team from './Team';
 import Quote from './Quote';
 import BitcoinChart from './BitcoinChart';
 import Footer from './Footer';
+import Logo from '../Logo/Logo'
 
 class UserAction extends Component {
   render() {
@@ -74,11 +75,7 @@ class Home extends Component {
             <div className="container">
               <div className="row">
                 {/* Logo Starts */}
-                <div className="main-logo col-xs-12 col-md-2 col-md-2 col-lg-2 hidden-xs">
-                  <a href="index.html">
-                    <img className="img-responsive" src="images/logo.png" alt="logo"/>
-                  </a>
-                </div>
+                  <Logo />
                 {/* Logo Ends */}
                 {/* Statistics Starts */}
                   <Statistics />
