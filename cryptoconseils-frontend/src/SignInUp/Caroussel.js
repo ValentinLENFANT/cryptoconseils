@@ -5,23 +5,23 @@ class Carousel extends Component {
     return (
       <div className="Carousel">
         {/*Logo Starts */}
-        <a class="logo" href="index.html">
-          <img class="img-responsive" src="images/logo.png" alt="logo"/>
+        <a className="logo" href="index.html">
+          <img className="img-responsive" src="images/logo.png" alt="logo"/>
         </a>
         {/*Logo Ends */}
         {/*Slider Starts */}
-        <div id="carousel-testimonials" class="carousel slide carousel-fade" data-ride="carousel">
+        <div id="carousel-testimonials" className="carousel slide carousel-fade" data-ride="carousel">
           {/*Indicators Starts */}
-          <ol class="carousel-indicators">
-            <li data-target="#carousel-testimonials" data-slide-to="0" class="active"></li>
+          <ol className="carousel-indicators">
+            <li data-target="#carousel-testimonials" data-slide-to="0" className="active"></li>
             <li data-target="#carousel-testimonials" data-slide-to="1"></li>
             <li data-target="#carousel-testimonials" data-slide-to="2"></li>
           </ol>
           {/*Indicators Ends */}
           {/*Carousel Inner Starts */}
-          <div class="carousel-inner">
+          <div className="carousel-inner">
             {/*Carousel Item Starts */}
-            <div class="item active item-1">
+            <div className="item active item-1">
               <div>
                 <blockquote>
                   <p>Enfin un site francophone qui m'a appris à gérer mes investissements et diversifier mon patrimoine</p>
@@ -31,7 +31,7 @@ class Carousel extends Component {
             </div>
             {/*Carousel Item Ends */}
             {/*Carousel Item Starts */}
-            <div class="item item-2">
+            <div className="item item-2">
               <div>
                 <blockquote>
                   <p>Le prix du Bitcoin a doublé en seulement 1 semaine ! Excellent support l'équipe du site est toujours là pour vous guider!</p>
@@ -41,7 +41,7 @@ class Carousel extends Component {
             </div>
             {/*Carousel Item Ends */}
             {/*Carousel Item Starts */}
-            <div class="item item-3">
+            <div className="item item-3">
               <div>
                 <blockquote>
                   <p>Ma famille et moi voulons remercier le site CryptoConseils pour tout le temps passé à nous guider. Les choses se passent très bien en ce moment, continuez comme ça ! Je recommande !</p>

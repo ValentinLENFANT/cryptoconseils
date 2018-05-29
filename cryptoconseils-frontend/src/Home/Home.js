@@ -19,10 +19,10 @@ class UserAction extends Component {
         <div className="col-md-4 col-lg-4">
           <ul className="unstyled user">
             <li className="sign-in">
-              <a href="/signin" className="btn btn-primary">
+              <a href="/login" className="btn btn-primary">
                 <i className="fa fa-user"></i> Connexion</a></li>
             <li className="sign-up">
-              <a href="inscription.html" className="btn btn-primary">
+              <a href="/login" className="btn btn-primary">
               <i className="fa fa-user-plus"></i> Inscription</a></li>
           </ul>
         </div>
