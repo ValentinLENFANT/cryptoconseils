@@ -26,9 +26,9 @@ OR <br>
 
 8) Start your local server
 * Start Symfony server
-`php bin/console server:start`
+`php bin/console server:start` and go to [http://127.0.0.1:8000](http://127.0.0.1:8000)
 * Start React server
-`yarn start`
+`yarn start`and go to [http://127.0.0.1:3000](http://127.0.0.1:3000)
 
 9) Go to the following URL :
 [localhost/cryptoconseils/web/app_dev.php/blog](localhost/cryptoconseils/web/app_dev.php/blog)
