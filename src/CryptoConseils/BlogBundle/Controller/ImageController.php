@@ -8,14 +8,15 @@
 
 namespace CryptoConseils\BlogBundle\Controller;
 
-use CryptoConseils\BlogBundle\Form\EditCategoryType;
+
+use CryptoConseils\BlogBundle\Form\EditImageType;
 use Symfony\Component\HttpFoundation\Request;
-use CryptoConseils\BlogBundle\Entity\Category;
+use CryptoConseils\BlogBundle\Entity\Image;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 
-class CategoryController extends FOSRestController
+class ImageController extends FOSRestController
 {
 
 
@@ -40,10 +41,10 @@ class CategoryController extends FOSRestController
 
     /////////////// FONCTIONS CRUD DE L'API REST ///////////////
 
-    public function indexAction() // [GET] /blog/categories
+    public function indexAction() // [GET] /blog/images
     {
-        $categories = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Category')->findAll();
-        $data = $this->get('jms_serializer')->serialize($categories, 'json');
+        $images = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Image')->findAll();
+        $data = $this->get('jms_serializer')->serialize($images, 'json');
 
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');
@@ -51,7 +52,9 @@ class CategoryController extends FOSRestController
         return $response;
     }
 
-    public function showAction(Category $id) // [GET] /blog/categories/8
+
+
+    public function showAction(Image $id) // [GET] /blog/images/8
     {
         $data = $this->get('jms_serializer')->serialize($id, 'json');
 
@@ -62,14 +65,15 @@ class CategoryController extends FOSRestController
     }
 
 
-    public function newAction(Request $request) // [POST] /blog/categories/new
+
+    public function newAction(Request $request) // [POST] /blog/images/new
     {
         $data = $request->getContent();
-        $article = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Category', 'json');
+        $image = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Image', 'json');
 
 
         // Analyse si les conditions sur les champs sont respectées //
-        $errors = $this->get('validator')->validate($article);
+        $errors = $this->get('validator')->validate($image);
 
         if (count($errors)) {
             return new Response($errors, 400);
@@ -78,31 +82,32 @@ class CategoryController extends FOSRestController
 
 
         $em = $this->getDoctrine()->getManager();
-        $em->persist($article);
+        $em->persist($image);
         $em->flush();
 
         return new JsonResponse(json_decode($data), 200);
     }
 
 
-    public function editAction($id, Request $request) // [PUT] /blog/categories/8
-    {
-        $category = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Category')->find($id);
 
-        if (null === $category) {
-            return new Response("Category not found", 404);
+    public function editAction($id, Request $request) // [PUT] /blog/images/8
+    {
+        $image = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Image')->find($id);
+
+        if (null === $image) {
+            return new Response("Image not found", 404);
         }
 
         $data = json_decode($request->getContent(), true);
-        $form = $this->createForm(EditCategoryType::class, $category);
+        $form = $this->createForm(EditImageType::class, $image);
         $form->submit($data);
 
 
         // Analyse si les conditions sur les champs sont respectées //
         $data_errors = $request->getContent();
-        $category_errors = $this->get('jms_serializer')->deserialize($data_errors, 'CryptoConseils\BlogBundle\Entity\Category', 'json');
+        $image_errors = $this->get('jms_serializer')->deserialize($data_errors, 'CryptoConseils\BlogBundle\Entity\Image', 'json');
 
-        $errors = $this->get('validator')->validate($category_errors);
+        $errors = $this->get('validator')->validate($image_errors);
 
         if (count($errors)) {
             return new Response($errors, 400);
@@ -111,25 +116,27 @@ class CategoryController extends FOSRestController
 
 
         $em = $this->getDoctrine()->getManager();
-        $em->persist($category);
+        $em->persist($image);
         $em->flush();
 
         return new JsonResponse($data, 200);
     }
 
-    public function deleteAction($id) // [DELETE] /blog/categories/8
-    {
-        $category = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Category')->find($id);
 
-        if (null === $category) {
-            return new JsonResponse("Article not found", 404);
+    public function deleteAction($id) // [DELETE] /blog/images/8
+    {
+        $image = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Image')->find($id);
+
+        if (null === $image) {
+            return new JsonResponse("Image not found", 404);
         }
 
         $em = $this->getDoctrine()->getManager();
-        $em->remove($category);
+        $em->remove($image);
         $em->flush();
 
         return new JsonResponse("The delete was successful.", 200);
     }
+
 
 }

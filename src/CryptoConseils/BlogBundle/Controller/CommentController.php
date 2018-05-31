@@ -8,14 +8,14 @@
 
 namespace CryptoConseils\BlogBundle\Controller;
 
-use CryptoConseils\BlogBundle\Form\EditCategoryType;
+use CryptoConseils\BlogBundle\Form\EditCommentType;
 use Symfony\Component\HttpFoundation\Request;
-use CryptoConseils\BlogBundle\Entity\Category;
+use CryptoConseils\BlogBundle\Entity\Comment;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 
-class CategoryController extends FOSRestController
+class CommentController extends FOSRestController
 {
 
 
@@ -36,14 +36,12 @@ class CategoryController extends FOSRestController
 
 
 
-
-
     /////////////// FONCTIONS CRUD DE L'API REST ///////////////
 
-    public function indexAction() // [GET] /blog/categories
+    public function indexAction() // [GET] /blog/comments
     {
-        $categories = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Category')->findAll();
-        $data = $this->get('jms_serializer')->serialize($categories, 'json');
+        $comments = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Comment')->findAll();
+        $data = $this->get('jms_serializer')->serialize($comments, 'json');
 
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');
@@ -51,7 +49,7 @@ class CategoryController extends FOSRestController
         return $response;
     }
 
-    public function showAction(Category $id) // [GET] /blog/categories/8
+    public function showAction(Comment $id) // [GET] /blog/comments/8
     {
         $data = $this->get('jms_serializer')->serialize($id, 'json');
 
@@ -62,14 +60,22 @@ class CategoryController extends FOSRestController
     }
 
 
-    public function newAction(Request $request) // [POST] /blog/categories/new
+    public function newAction(Request $request) // [POST] /blog/comments/new
     {
+        $em = $this->getDoctrine()->getManager();
+
         $data = $request->getContent();
-        $article = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Category', 'json');
+
+
+        $comment = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Comment', 'json');
+
+        $article = $em->getRepository("CryptoConseilsBlogBundle:Article")->find($comment->getArticleId());
+
+        $comment->setArticle($article);
 
 
         // Analyse si les conditions sur les champs sont respectées //
-        $errors = $this->get('validator')->validate($article);
+        $errors = $this->get('validator')->validate($comment);
 
         if (count($errors)) {
             return new Response($errors, 400);
@@ -77,30 +83,31 @@ class CategoryController extends FOSRestController
         // Fin d'analyse //
 
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($article);
+        $em->persist($comment);
+
         $em->flush();
 
         return new JsonResponse(json_decode($data), 200);
+
     }
 
 
-    public function editAction($id, Request $request) // [PUT] /blog/categories/8
+    public function editAction($id, Request $request) // [PUT] /blog/comments/8
     {
-        $category = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Category')->find($id);
+        $comment = $this->getDoctrine()->getRepository("CryptoConseilsBlogBundle:Comment")->find($id);
 
-        if (null === $category) {
-            return new Response("Category not found", 404);
+        if (null === $comment) {
+            return new Response("Comment not found", 404);
         }
 
         $data = json_decode($request->getContent(), true);
-        $form = $this->createForm(EditCategoryType::class, $category);
+        $form = $this->createForm(EditCommentType::class, $comment);
         $form->submit($data);
 
 
         // Analyse si les conditions sur les champs sont respectées //
         $data_errors = $request->getContent();
-        $category_errors = $this->get('jms_serializer')->deserialize($data_errors, 'CryptoConseils\BlogBundle\Entity\Category', 'json');
+        $category_errors = $this->get('jms_serializer')->deserialize($data_errors, 'CryptoConseils\BlogBundle\Entity\Comment', 'json');
 
         $errors = $this->get('validator')->validate($category_errors);
 
@@ -111,22 +118,23 @@ class CategoryController extends FOSRestController
 
 
         $em = $this->getDoctrine()->getManager();
-        $em->persist($category);
+        $em->persist($comment);
         $em->flush();
 
         return new JsonResponse($data, 200);
     }
 
-    public function deleteAction($id) // [DELETE] /blog/categories/8
-    {
-        $category = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Category')->find($id);
 
-        if (null === $category) {
-            return new JsonResponse("Article not found", 404);
+    public function deleteAction($id) // [DELETE] /blog/comments/8
+    {
+        $comment = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Comment')->find($id);
+
+        if (null === $comment) {
+            return new JsonResponse("Comment not found", 404);
         }
 
         $em = $this->getDoctrine()->getManager();
-        $em->remove($category);
+        $em->remove($comment);
         $em->flush();
 
         return new JsonResponse("The delete was successful.", 200);

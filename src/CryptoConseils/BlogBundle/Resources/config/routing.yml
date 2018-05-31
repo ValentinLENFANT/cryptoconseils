@@ -76,3 +76,79 @@ cryptoconseils_blog_category_delete:
     methods:    [DELETE]
     requirements:
         id: \d{1,}
+
+
+
+######### Comments REST routes #########
+
+cryptoconseils_blog_comments:
+    path:    /blog/comments/
+    defaults: { _controller: CryptoConseilsBlogBundle:Comment:index }
+    methods:    [GET]
+
+
+cryptoconseils_blog_comment_show:
+    path:    /blog/comments/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Comment:show }
+    methods:    [GET]
+    requirements:
+        id: \d{1,} # Regular expression to find an id of integer type
+
+
+cryptoconseils_blog_comment_new:
+    path:    /blog/comments/new/
+    defaults: { _controller: CryptoConseilsBlogBundle:Comment:new }
+    methods:    [POST]
+
+
+cryptoconseils_blog_comment_edit:
+    path:    /blog/comments/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Comment:edit }
+    methods:    [PUT]
+    requirements:
+        id: \d{1,}
+
+
+cryptoconseils_blog_comment_delete:
+    path:    /blog/comments/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Comment:delete }
+    methods:    [DELETE]
+    requirements:
+        id: \d{1,}
+
+
+######### Images REST routes #########
+
+cryptoconseils_blog_images:
+    path:    /blog/images/
+    defaults: { _controller: CryptoConseilsBlogBundle:Image:index }
+    methods:    [GET]
+
+
+cryptoconseils_blog_image_show:
+    path:    /blog/images/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Image:show }
+    methods:    [GET]
+    requirements:
+        id: \d{1,} # Regular expression to find an id of integer type
+
+
+cryptoconseils_blog_image_new:
+    path:    /blog/images/new/
+    defaults: { _controller: CryptoConseilsBlogBundle:Image:new }
+    methods:    [POST]
+
+
+cryptoconseils_blog_image_edit:
+    path:    /blog/images/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Image:edit }
+    methods:    [PUT]
+    requirements:
+        id: \d{1,}
+
+cryptoconseils_blog_image_delete:
+    path:    /blog/images/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Image:delete }
+    methods:    [DELETE]
+    requirements:
+        id: \d{1,}

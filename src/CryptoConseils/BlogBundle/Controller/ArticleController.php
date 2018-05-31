@@ -9,16 +9,10 @@
 namespace CryptoConseils\BlogBundle\Controller;
 
 use CryptoConseils\BlogBundle\Form\EditArticleType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use CryptoConseils\BlogBundle\Entity\Article;
-use CryptoConseils\BlogBundle\Form\ArticleType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\FOSRestController;
-use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\HttpFoundation\Response;
 
 class ArticleController extends FOSRestController
