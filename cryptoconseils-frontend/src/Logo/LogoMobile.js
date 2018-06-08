@@ -4,8 +4,8 @@ class LogoMobile extends Component {
   render() {
     return(
       <div className="LogoMobile">
-        <a class="logo-mobile" href="index.html">
-          <img class="img-responsive" src="images/logo.png" alt="logo"/>
+        <a className="logo-mobile" href="index.html">
+          <img className="img-responsive" src="images/logo.png" alt="logo"/>
           </a>
       </div>
     );

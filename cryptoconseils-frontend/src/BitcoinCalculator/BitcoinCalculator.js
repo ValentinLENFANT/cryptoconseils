@@ -17,7 +17,7 @@ class BitcoinCalculator extends Component {
               <div className="col-md-12 text-center">
                 <form className="bitcoin-calculator" id="bitcoin-calculator">
                   {/* Input #1 Starts */}
-                  <input className="form-input" name="btc-calculator-value" value="1"/>
+                  <input className="form-input" name="btc-calculator-value" defaultValue="1"/>
                   {/* Input #1 Ends */}
                   <div className="form-info"><i className="fa fa-bitcoin"></i></div>
                   <div className="form-equal">=</div>
@@ -26,7 +26,7 @@ class BitcoinCalculator extends Component {
                   {/* Input/Result Ends */}
                   {/* Select Currency Starts */}
                   <div className="form-wrap">
-                    <select id="currency-select" className="form-input select-currency select-primary" name="btc-calculator-currency" data-dropdown-className="select-primary-dropdown"></select>
+                    <select id="currency-select" className="form-input select-currency select-primary" name="btc-calculator-currency" data-dropdown-class="select-primary-dropdown"></select>
                   </div>
                   {/* Select Currency Ends */}
                 </form>

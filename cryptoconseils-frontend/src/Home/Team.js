@@ -28,13 +28,13 @@ class Team extends Component {
                     <p>Ingénieur Blockchain</p>
                     <ul className="list list-inline social">
                       <li>
-                        <a href="#" className="fa fa-facebook"></a>
+                        <a href="" className="fa fa-facebook"></a>
                       </li>
                       <li>
-                        <a href="#" className="fa fa-twitter"></a>
+                        <a href="" className="fa fa-twitter"></a>
                       </li>
                       <li>
-                        <a href="#" className="fa fa-google-plus"></a>
+                        <a href="" className="fa fa-google-plus"></a>
                       </li>
                     </ul>
                   </div>
@@ -54,13 +54,13 @@ class Team extends Component {
                     <p>Consultant expert en crypto-monnaies</p>
                     <ul className="list list-inline social">
                       <li>
-                        <a href="#" className="fa fa-facebook"></a>
+                        <a href="" className="fa fa-facebook"></a>
                       </li>
                       <li>
-                        <a href="#" className="fa fa-twitter"></a>
+                        <a href="" className="fa fa-twitter"></a>
                       </li>
                       <li>
-                        <a href="#" className="fa fa-google-plus"></a>
+                        <a href="" className="fa fa-google-plus"></a>
                       </li>
                     </ul>
                   </div>
@@ -81,13 +81,13 @@ class Team extends Component {
                     <p>Crypto Analyste</p>
                     <ul className="list list-inline social">
                       <li>
-                        <a href="#" className="fa fa-facebook"></a>
+                        <a href="" className="fa fa-facebook"></a>
                       </li>
                       <li>
-                        <a href="#" className="fa fa-twitter"></a>
+                        <a href="" className="fa fa-twitter"></a>
                       </li>
                       <li>
-                        <a href="#" className="fa fa-google-plus"></a>
+                        <a href="" className="fa fa-google-plus"></a>
                       </li>
                     </ul>
                   </div>
@@ -107,13 +107,13 @@ class Team extends Component {
                     <p>Expert Trader</p>
                     <ul className="list list-inline social">
                       <li>
-                        <a href="#" className="fa fa-facebook"></a>
+                        <a href="" className="fa fa-facebook"></a>
                       </li>
                       <li>
-                        <a href="#" className="fa fa-twitter"></a>
+                        <a href="" className="fa fa-twitter"></a>
                       </li>
                       <li>
-                        <a href="#" className="fa fa-google-plus"></a>
+                        <a href="" className="fa fa-google-plus"></a>
                       </li>
                     </ul>
                   </div>
