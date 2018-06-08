@@ -1,6 +1,30 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Articles extends Component {
+
+  constructor() {
+    super();
+    this.state = {articles: []};
+  }
+  componentDidMount() {
+   this.getAllArticles();
+ }
+  getAllArticles() {
+    axios.get('http://127.0.0.1:8000/blog/articles')
+    .then(response => {
+      console.log(response.data);
+      this.setState({
+        articles: response.data
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
+
+
+
   render() {
     return(
       <div className="Articles">
@@ -17,28 +41,34 @@ class Articles extends Component {
             {/* Section Content Starts */}
             <div className="row latest-posts-content">
               {/* Article Starts */}
-              <div className="col-sm-4 col-md-4 col-xs-12">
-                <div className="latest-post">
-                  {/* Featured Image Starts */}
-                  <a href="blog-post.html"><img className="img-responsive" src="images/blog/blog-post-small-1.jpg" alt="img"/></a>
-                  {/* Featured Image Ends */}
-                  {/* Article Content Starts */}
-                  <div className="post-body">
-                    <h4 className="post-title">
-                      <a href="blog-post.html">L'impact des crypto-monnaies sur le systême financier mondiale</a>
-                    </h4>
-                    <div className="post-text">
-                      <p>incididunt ut labore et dolore magna aliqua. Ut enim aminim veniam, quis nostrud... ...</p>
+              {/* slice(0,3) pour limiter à trois articles */}
+              {this.state.articles.slice(0,3).map(article =>
+                <div className="col-sm-4 col-md-4 col-xs-12">
+                  <div className="latest-post">
+                    {/* Featured Image Starts */}
+                    <a href="blog-post.html">
+                      <img className="img-responsive" src="images/blog/blog-post-small-1.jpg" alt="img"/>
+                    </a>
+                    {/* Featured Image Ends */}
+                    {/* Article Content Starts */}
+                    <div className="post-body">
+                      <h4 className="post-title">
+                        <a href="blog-post.html">{article.title}</a>
+                      </h4>
+                      <div className="post-text">
+                        <p>{article.content}</p>
+                      </div>
                     </div>
+                    <div className="post-date">
+                      <span>01</span>
+                      <span>JAN</span>
+                    </div>
+                    <a href="blog-post.html" className="btn btn-primary">Lire plus</a>
+                    {/* Article Content Ends */}
                   </div>
-                  <div className="post-date">
-                    <span>01</span>
-                    <span>JAN</span>
-                  </div>
-                  <a href="blog-post.html" className="btn btn-primary">Lire plus</a>
-                  {/* Article Content Ends */}
                 </div>
-              </div>
+
+              )}
               {/* Article Ends */}
             </div>
             {/* Section Content Ends */}
