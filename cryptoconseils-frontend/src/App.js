@@ -25,6 +25,16 @@ const NotFound = Loadable({
   loading: Loading,
 });
 
+const BitcoinCalculator = Loadable({
+  loader: () => import('./BitcoinCalculator/BitcoinCalculator'),
+  loading: Loading,
+});
+
+const Faq = Loadable({
+  loader: () => import('./Faq/Faq'),
+  loading: Loading,
+});
+
 class App extends Component {
   render() {
     return (
@@ -33,7 +43,8 @@ class App extends Component {
           <Route exact path="/" component={Home}/>
           <Route exact path="/signin" component={SignIn}/>
           <Route exact path="/signup" component={SignUp}/>
-
+          <Route exact path="/convertisseur" component={BitcoinCalculator}/>
+          <Route exact path="/faq" component={Faq}/>
           <Route component={NotFound}/>
         </Switch>
       </Router>

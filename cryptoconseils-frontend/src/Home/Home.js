@@ -6,7 +6,7 @@ import About from './About';
 import Articles from './Articles';
 import Features from './Features';
 import Price from './Price';
-import BitcoinCalculator from './BitcoinCalculator';
+import BitcoinCalculator from '../BitcoinCalculator/BitcoinCalculator';
 import Team from './Team';
 import Quote from './Quote';
 import BitcoinChart from './BitcoinChart';
