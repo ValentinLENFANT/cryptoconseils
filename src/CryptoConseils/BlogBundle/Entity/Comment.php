@@ -1,14 +1,16 @@
 <?php
-
 namespace CryptoConseils\BlogBundle\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
-
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 /**
  * Comment
  *
  * @ORM\Table(name="comment")
  * @ORM\Entity(repositoryClass="CryptoConseils\BlogBundle\Repository\CommentRepository")
+ *
+ *
+ * @ExclusionPolicy("all")
  */
 class Comment
 {
@@ -23,33 +25,65 @@ class Comment
         $this->date = new \DateTime();
     }
 
+
     /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     *
+     *
+     * @Expose
      */
     private $id;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="article_id", type="integer")
+     *
+     *
+     * @Expose
+     */
+    private $article_id;
+
 
     /**
      * @var string
      *
      * @ORM\Column(name="author", type="string", length=255)
+     *
+     *
+     *
+     * @Expose
      */
     private $author;
+
 
     /**
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     *
+     *
+     *
+     * @Expose
      */
     private $content;
+
 
     /**
      * @var datetime_immutable
      *
      * @ORM\Column(name="date", type="datetime")
+     *
+     *
+     *
+     *
+     * @Expose
      */
     private $date;
 
@@ -63,7 +97,27 @@ class Comment
     {
         return $this->id;
     }
-
+    /**
+     * Set article_id.
+     *
+     * @param int $article_id
+     *
+     * @return Comment
+     */
+    public function setArticleId($article_id)
+    {
+        $this->article_id = $article_id;
+        return $this;
+    }
+    /**
+     * Get article_id.
+     *
+     * @return int
+     */
+    public function getArticleId()
+    {
+        return $this->article_id;
+    }
     /**
      * Set author.
      *
@@ -74,10 +128,8 @@ class Comment
     public function setAuthor($author)
     {
         $this->author = $author;
-
         return $this;
     }
-
     /**
      * Get author.
      *
@@ -87,7 +139,6 @@ class Comment
     {
         return $this->author;
     }
-
     /**
      * Set content.
      *
@@ -98,10 +149,8 @@ class Comment
     public function setContent($content)
     {
         $this->content = $content;
-
         return $this;
     }
-
     /**
      * Get content.
      *
@@ -111,7 +160,6 @@ class Comment
     {
         return $this->content;
     }
-
     /**
      * Set date.
      *
@@ -122,10 +170,8 @@ class Comment
     public function setDate($date)
     {
         $this->date = $date;
-
         return $this;
     }
-
     /**
      * Get date.
      *
@@ -135,7 +181,6 @@ class Comment
     {
         return $this->date;
     }
-
     /**
      * Set advert.
      *
@@ -146,10 +191,8 @@ class Comment
     public function setArticle(\CryptoConseils\BlogBundle\Entity\Article $article)
     {
         $this->article = $article;
-
         return $this;
     }
-
     /**
      * Get advert.
      *
@@ -159,4 +202,5 @@ class Comment
     {
         return $this->article;
     }
+
 }

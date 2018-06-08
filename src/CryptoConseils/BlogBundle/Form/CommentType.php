@@ -4,12 +4,12 @@ namespace CryptoConseils\BlogBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpFoundation\Tests\StringableObject;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
-class ImageType extends AbstractType
+class CommentType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -17,15 +17,16 @@ class ImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('url', TextType::class)
-            ->add('alt', TextType::class);
+            ->add('author', TextType::class)
+            ->add('content', CKEditorType::class, array('config_name' => 'basic_config'));
+
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CryptoConseils\BlogBundle\Entity\Image'
+            'data_class' => 'CryptoConseils\BlogBundle\Entity\Comment'
         ));
     }
 
@@ -34,7 +35,7 @@ class ImageType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'cryptoconseils_blogbundle_image';
+        return 'cryptoconseils_blogbundle_comment';
     }
 
 

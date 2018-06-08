@@ -19,8 +19,9 @@ use CryptoConseils\BlogBundle\Validator\Antiflood;
  */
 class Article
 {
-    public function __construct()
+    public function __construct($id)
     {
+        $this->id = $id;
         $this->date = new \DateTime();
         $this->categories = new ArrayCollection();
     }
@@ -52,10 +53,17 @@ class Article
      */
     private $categories;
 
+
+
+
     /**
      * @ORM\OneToMany(targetEntity="CryptoConseils\BlogBundle\Entity\Comment", mappedBy="article")
      */
     private $comments;
+
+
+
+
 
     /**
      * @var string
