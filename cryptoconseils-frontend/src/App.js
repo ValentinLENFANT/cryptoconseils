@@ -35,6 +35,11 @@ const Faq = Loadable({
   loading: Loading,
 });
 
+const Articles = Loadable({
+  loader: () => import('./Articles/Articles'),
+  loading: Loading,
+});
+
 class App extends Component {
   render() {
     return (
@@ -45,6 +50,7 @@ class App extends Component {
           <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/convertisseur" component={BitcoinCalculator}/>
           <Route exact path="/faq" component={Faq}/>
+          <Route exact path="/articles/" component={Articles}/>
           <Route component={NotFound}/>
         </Switch>
       </Router>
