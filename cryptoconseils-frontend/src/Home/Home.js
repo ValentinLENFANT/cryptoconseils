@@ -10,7 +10,6 @@ import BitcoinCalculator from './BitcoinCalculator';
 import Team from './Team';
 import Quote from './Quote';
 import BitcoinChart from './BitcoinChart';
-import Footer from './Footer';
 import Logo from '../Logo/Logo'
 
 class UserAction extends Component {
@@ -138,10 +137,6 @@ class Home extends Component {
           {/* Call To Action Section Starts */}
             <BeginTrade />
           {/* Call To Action Section Ends */}
-
-          {/* Footer Starts */}
-            <Footer />
-          {/* Footer Ends */}
         {/* Wrapper Ends */}
         </div>
       </div>
