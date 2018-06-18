@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import './App.css';
 
-const Loading = () => <div>Loading...</div>;
+const Loading = () => <div>Loading...</div> ;
 
 const Home = Loadable({
   loader: () => import('./Home/Home'),
@@ -35,8 +35,8 @@ const Faq = Loadable({
   loading: Loading,
 });
 
-const Articles = Loadable({
-  loader: () => import('./Articles/Articles'),
+const Article = Loadable({
+  loader: () => import('./Article/Article'),
   loading: Loading,
 });
 
@@ -50,7 +50,7 @@ class App extends Component {
           <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/convertisseur" component={BitcoinCalculator}/>
           <Route exact path="/faq" component={Faq}/>
-          <Route exact path="/articles/" component={Articles}/>
+          <Route path="/article/:id" component={Article}/>
           <Route component={NotFound}/>
         </Switch>
       </Router>
