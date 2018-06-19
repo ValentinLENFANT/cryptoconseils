@@ -8,6 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use CryptoConseils\BlogBundle\Validator\Antiflood;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * Article
@@ -19,9 +20,8 @@ use CryptoConseils\BlogBundle\Validator\Antiflood;
  */
 class Article
 {
-    public function __construct($id)
+    public function __construct()
     {
-        $this->id = $id;
         $this->date = new \DateTime();
         $this->categories = new ArrayCollection();
     }
@@ -48,6 +48,17 @@ class Article
      * @Assert\Valid()
      */
     private $image;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="image_id", type="integer")
+     *
+     *
+     * @Expose
+     */
+    private $image_id;
+
     /**
      * @ORM\ManyToMany(targetEntity="CryptoConseils\BlogBundle\Entity\Category", cascade={"persist"})
      */
@@ -128,6 +139,29 @@ class Article
         $this->title = $title;
 
         return $this;
+    }
+
+    /**
+     * Set image_id.
+     *
+     * @param int $image_id
+     *
+     * @return Article
+     */
+    public function setImageId($image_id)
+    {
+        $this->image_id = $image_id;
+        return $this;
+    }
+
+    /**
+     * Get article_id.
+     *
+     * @return int
+     */
+    public function getImageId()
+    {
+        return $this->image_id;
     }
 
     /**

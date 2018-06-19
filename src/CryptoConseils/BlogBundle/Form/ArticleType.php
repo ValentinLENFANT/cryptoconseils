@@ -26,10 +26,9 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date', DateTimeType::class)
             ->add('title', TextType::class)
+            ->add('image_id', TextType::class)
             ->add('content', CKEditorType::class, array('config_name' => 'basic_config'))
-            ->add('author', TextType::class)
             // Bloc commenté pour mettre en évidence l'existence d'une méthode alternative permettant d'ajouter des nouvelles catégories plutôt que de
             // récupérer les existantes
 //            ->add('categories', CollectionType::class, array(
@@ -37,11 +36,6 @@ class ArticleType extends AbstractType
 //                'allow_add' => true,
 //                'allow_delete' => true
 //            ))
-            ->add('categories', EntityType::class, array(
-                'class' => 'CryptoConseilsBlogBundle:Category',
-                'choice_label' => 'name',
-                'multiple' => true,
-            ))
             ->add('save', SubmitType::class);
 
         // Bloc permettant d'ajouter ou de supprimer le champs Published au sein du formulaire en fonction du type d'action : CREATE ou EDIT

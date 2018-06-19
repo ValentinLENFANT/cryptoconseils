@@ -17,8 +17,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CommentController extends FOSRestController
 {
-
-
     public function menuAction($limit)
     {
         $em = $this->getDoctrine()->getManager();
@@ -35,24 +33,22 @@ class CommentController extends FOSRestController
     }
 
 
-
     /////////////// FONCTIONS CRUD DE L'API REST ///////////////
 
-    public function indexAction() // [GET] /blog/comments
+    public function indexAction() // [GET] /comments
     {
         $comments = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Comment')->findAll();
         $data = $this->get('jms_serializer')->serialize($comments, 'json');
-
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
     }
 
-    public function showAction(Comment $id) // [GET] /blog/comments/8
+
+    public function showAction(Comment $id) // [GET] /comments/8
     {
         $data = $this->get('jms_serializer')->serialize($id, 'json');
-
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');
 
@@ -60,39 +56,39 @@ class CommentController extends FOSRestController
     }
 
 
-    public function newAction(Request $request) // [POST] /blog/comments/new
+    public function newAction(Request $request) // [POST] /comments/new
     {
-        $em = $this->getDoctrine()->getManager();
+        if (null === $currentUserUsername = $this->getUser()) {
+            return new Response("Access_denied, you need to log in", 403);
+        }else{
+            $currentUserUsername = $currentUserUsername->getUsername();
 
-        $data = $request->getContent();
+            $em = $this->getDoctrine()->getManager();
+            $data = $request->getContent();
 
+            $comment = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Comment', 'json');
+            $article = $em->getRepository("CryptoConseilsBlogBundle:Article")->find($comment->getArticleId());
 
-        $comment = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Comment', 'json');
+            $comment->setArticle($article);
+            $comment->setAuthor($currentUserUsername);
+            $comment->setDate(new \DateTime('now'));
 
-        $article = $em->getRepository("CryptoConseilsBlogBundle:Article")->find($comment->getArticleId());
+            // Analyse si les conditions sur les champs sont respectées //
+            $errors = $this->get('validator')->validate($comment);
+            if (count($errors)) {
+                return new Response($errors, 400);
+            }
+            // Fin d'analyse //
 
-        $comment->setArticle($article);
-
-
-        // Analyse si les conditions sur les champs sont respectées //
-        $errors = $this->get('validator')->validate($comment);
-
-        if (count($errors)) {
-            return new Response($errors, 400);
+            $em->persist($comment);
+            $em->flush();
+            $comment = $this->get('jms_serializer')->serialize($comment, 'json');
+            return new JsonResponse(json_decode($comment), 200);
         }
-        // Fin d'analyse //
-
-
-        $em->persist($comment);
-
-        $em->flush();
-
-        return new JsonResponse(json_decode($data), 200);
-
     }
 
 
-    public function editAction($id, Request $request) // [PUT] /blog/comments/8
+    public function editAction($id, Request $request) // [PUT] /comments/8 (ROLE_ADMIN ONLY AND USER HIMSELF)
     {
         $comment = $this->getDoctrine()->getRepository("CryptoConseilsBlogBundle:Comment")->find($id);
 
@@ -100,44 +96,85 @@ class CommentController extends FOSRestController
             return new Response("Comment not found", 404);
         }
 
-        $data = json_decode($request->getContent(), true);
-        $form = $this->createForm(EditCommentType::class, $comment);
-        $form->submit($data);
+        $commentUsername = $comment->getAuthor();
 
 
-        // Analyse si les conditions sur les champs sont respectées //
-        $data_errors = $request->getContent();
-        $category_errors = $this->get('jms_serializer')->deserialize($data_errors, 'CryptoConseils\BlogBundle\Entity\Comment', 'json');
+        // If user is not admin
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
 
-        $errors = $this->get('validator')->validate($category_errors);
+            if (null === $currentUserUsername = $this->getUser()) {
+                return new Response("Access_denied, you need to log in", 403);
+            }else{
+                if ($currentUserUsername->getUsername() === $commentUsername){
+                    $data = json_decode($request->getContent(), true);
+                    $form = $this->createForm(EditCommentType::class, $comment);
+                    $form->submit($data);
 
-        if (count($errors)) {
-            return new Response($errors, 400);
+
+                    // Analyse si les conditions sur les champs sont respectées //
+                    $data_errors = $request->getContent();
+                    $category_errors = $this->get('jms_serializer')->deserialize($data_errors, 'CryptoConseils\BlogBundle\Entity\Comment', 'json');
+                    $errors = $this->get('validator')->validate($category_errors);
+                    if (count($errors)) {
+                        return new Response($errors, 400);
+                    } // Fin d'analyse //
+
+
+                    $comment->setAuthor($commentUsername);
+                    $comment->setDate(new \DateTime('now'));
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($comment);
+                    $em->flush();
+                    $comment = $this->get('jms_serializer')->serialize($comment, 'json');
+                    return new JsonResponse(json_decode($comment), 200);
+                }else{
+                    return new Response("Access_denied, this comment was not post by you", 403);
+                }
+            }
+        }else{
+            $data = json_decode($request->getContent(), true);
+            $form = $this->createForm(EditCommentType::class, $comment);
+            $form->submit($data);
+
+
+            // Analyse si les conditions sur les champs sont respectées //
+            $data_errors = $request->getContent();
+            $category_errors = $this->get('jms_serializer')->deserialize($data_errors, 'CryptoConseils\BlogBundle\Entity\Comment', 'json');
+            $errors = $this->get('validator')->validate($category_errors);
+            if (count($errors)) {
+                return new Response($errors, 400);
+            } // Fin d'analyse //
+
+            $comment->setDate(new \DateTime('now'));
+            $comment->setAuthor($commentUsername);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+            $comment = $this->get('jms_serializer')->serialize($comment, 'json');
+            return new JsonResponse(json_decode($comment), 200);
         }
-        // Fin d'analyse //
-
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($comment);
-        $em->flush();
-
-        return new JsonResponse($data, 200);
     }
 
 
-    public function deleteAction($id) // [DELETE] /blog/comments/8
+    public function deleteAction($id) // [DELETE] /comments/8 (ROLE_ADMIN ONLY)
     {
-        $comment = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Comment')->find($id);
+        // If user is not admin
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            return new JsonResponse("Access_denied, ADMIN authentication required", 403);
+        }else{
+            $comment = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Comment')->find($id);
 
-        if (null === $comment) {
-            return new JsonResponse("Comment not found", 404);
+            if (null === $comment) {
+                return new JsonResponse("Comment not found", 404);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($comment);
+            $em->flush();
+
+            return new JsonResponse("The delete was successful.", 200);
         }
-
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($comment);
-        $em->flush();
-
-        return new JsonResponse("The delete was successful.", 200);
     }
-
 }
