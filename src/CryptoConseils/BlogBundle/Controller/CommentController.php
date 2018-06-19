@@ -59,7 +59,7 @@ class CommentController extends FOSRestController
     public function newAction(Request $request) // [POST] /comments/new
     {
         if (null === $currentUserUsername = $this->getUser()) {
-            return new Response("Access_denied, you need to log in", 403);
+            return new JsonResponse(array('error' => 'Access denied! You need to login before comment'), 403);
         }else{
             $currentUserUsername = $currentUserUsername->getUsername();
 
@@ -93,7 +93,7 @@ class CommentController extends FOSRestController
         $comment = $this->getDoctrine()->getRepository("CryptoConseilsBlogBundle:Comment")->find($id);
 
         if (null === $comment) {
-            return new Response("Comment not found", 404);
+            return new JsonResponse(array('error' => 'Comment not found'), 404);
         }
 
         $commentUsername = $comment->getAuthor();
@@ -103,7 +103,7 @@ class CommentController extends FOSRestController
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
 
             if (null === $currentUserUsername = $this->getUser()) {
-                return new Response("Access_denied, you need to log in", 403);
+                return new JsonResponse(array('error' => 'Access denied! You need to login'), 403);
             }else{
                 if ($currentUserUsername->getUsername() === $commentUsername){
                     $data = json_decode($request->getContent(), true);
@@ -129,7 +129,7 @@ class CommentController extends FOSRestController
                     $comment = $this->get('jms_serializer')->serialize($comment, 'json');
                     return new JsonResponse(json_decode($comment), 200);
                 }else{
-                    return new Response("Access_denied, this comment was not post by you", 403);
+                    return new JsonResponse(array('error' => 'Access denied! This comment is not yours'), 403);
                 }
             }
         }else{
@@ -142,6 +142,7 @@ class CommentController extends FOSRestController
             $data_errors = $request->getContent();
             $category_errors = $this->get('jms_serializer')->deserialize($data_errors, 'CryptoConseils\BlogBundle\Entity\Comment', 'json');
             $errors = $this->get('validator')->validate($category_errors);
+
             if (count($errors)) {
                 return new Response($errors, 400);
             } // Fin d'analyse //
@@ -167,14 +168,14 @@ class CommentController extends FOSRestController
             $comment = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Comment')->find($id);
 
             if (null === $comment) {
-                return new JsonResponse("Comment not found", 404);
+                return new JsonResponse(array('error' => 'Comment not found'), 404);
             }
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($comment);
             $em->flush();
 
-            return new JsonResponse("The delete was successful.", 200);
+            return new JsonResponse(array('success' => 'Comment deleted'), 200);
         }
     }
 }

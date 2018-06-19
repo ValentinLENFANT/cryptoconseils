@@ -63,7 +63,7 @@ class CategoryController extends FOSRestController
     {
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            return new JsonResponse("Access_denied, ADMIN authentication required", 403);
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
         }else{
             $data = $request->getContent();
             $category = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Category', 'json');
@@ -91,12 +91,12 @@ class CategoryController extends FOSRestController
     {
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            return new JsonResponse("Access_denied, ADMIN authentication required", 403);
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
         }else{
             $category = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Category')->find($id);
 
             if (null === $category) {
-                return new Response("Category not found", 404);
+                return new JsonResponse(array('error' => 'Category not found'), 404);
             }
 
             $data = json_decode($request->getContent(), true);
@@ -129,19 +129,19 @@ class CategoryController extends FOSRestController
     {
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            return new JsonResponse("Access_denied, ADMIN authentication required", 403);
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
         }else{
             $category = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Category')->find($id);
 
             if (null === $category) {
-                return new JsonResponse("Article not found", 404);
+                return new JsonResponse(array('error' => 'Category not found'), 404);
             }
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($category);
             $em->flush();
 
-            return new JsonResponse("The delete was successful.", 200);
+            return new JsonResponse(array('success' => 'Category deleted'), 200);
         }
     }
 

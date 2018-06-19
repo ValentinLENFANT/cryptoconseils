@@ -68,7 +68,7 @@ class ArticleController extends FOSRestController
     {
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            return new JsonResponse("Access_denied, ADMIN authentication required", 403);
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
         }else{
             $currentUserUsername = $this->getUser()->getUsername();
             $em = $this->getDoctrine()->getManager();
@@ -78,7 +78,7 @@ class ArticleController extends FOSRestController
 
             // If image_id is NULL
             if (null === $article->getImageId()){
-                return new JsonResponse("error: image_id required", 403);
+                return new JsonResponse(array('error' => 'image_id required'), 403);
             }else{
                 $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($article->getImageId());
                 $article->setImage($image);
@@ -118,13 +118,13 @@ class ArticleController extends FOSRestController
     {
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            return new JsonResponse("Access_denied, ADMIN authentication required", 403);
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
         }else{
             $em = $this->getDoctrine()->getManager();
             $article = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->find($id);
 
             if (null === $article) {
-                return new Response("Article not found", 404);
+                return new JsonResponse(array('error' => 'Article not found'), 404);
             }
 
             $username = $article->getAuthor();
@@ -174,19 +174,19 @@ class ArticleController extends FOSRestController
     {
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            return new JsonResponse("Access_denied, ADMIN authentication required", 403);
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
         }else{
             $article = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->find($id);
 
             if (null === $article) {
-                return new JsonResponse("Article not found", 404);
+                return new JsonResponse(array('error' => 'Article not found'), 404);
             }
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($article);
             $em->flush();
 
-            return new JsonResponse("The delete was successful.", 200);
+            return new JsonResponse(array('success' => 'Article deleted'), 200);
         }
     }
 }

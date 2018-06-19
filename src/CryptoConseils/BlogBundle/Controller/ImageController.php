@@ -62,7 +62,7 @@ class ImageController extends FOSRestController
     {
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            return new JsonResponse("Access_denied, ADMIN authentication required", 403);
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
         }else{
             $data = $request->getContent();
             $image = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Image', 'json');
@@ -91,12 +91,12 @@ class ImageController extends FOSRestController
     {
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            return new JsonResponse("Access_denied, ADMIN authentication required", 403);
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
         }else{
             $image = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Image')->find($id);
 
             if (null === $image) {
-                return new Response("Image not found", 404);
+                return new JsonResponse(array('error' => 'Image not found'), 404);
             }
 
             $data = json_decode($request->getContent(), true);
@@ -130,19 +130,19 @@ class ImageController extends FOSRestController
     {
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            return new JsonResponse("Access_denied, ADMIN authentication required", 403);
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
         }else{
             $image = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Image')->find($id);
 
             if (null === $image) {
-                return new JsonResponse("Image not found", 404);
+                return new JsonResponse(array('error' => 'Image not found'), 404);
             }
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($image);
             $em->flush();
 
-            return new JsonResponse("The delete was successful.", 200);
+            return new JsonResponse(array('success' => 'Image deleted'), 200);
         }
     }
 }

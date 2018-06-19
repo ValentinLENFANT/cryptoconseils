@@ -33,16 +33,16 @@ class LoadImage extends AbstractFixture implements OrderedFixtureInterface
             'BearMarket banner'
         );
 
-        for ($i=0; $i<count($urls); $i++) {
-            // On crée la catégorie
-            $image = new Image();
-            $image->setUrl($urls[$i]);
-            $image->setAlt($alts[$i]);
-            $this->addReference('image'.$i, $image);
+            for ($i=0; $i<count($urls); $i++) {
+                // On crée la catégorie
+                $image = new Image();
+                $image->setUrl($urls[$i]);
+                $image->setAlt($alts[$i]);
+                $this->addReference('image'.$i, $image);
 
-            // On la persiste
-            $manager->persist($image);
-        }
+                // On la persiste
+                $manager->persist($image);
+            }
 
         // On déclenche l'enregistrement de toutes les catégories
         $manager->flush();

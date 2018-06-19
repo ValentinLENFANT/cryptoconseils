@@ -23,7 +23,7 @@ class UserController extends FOSRestController
     {
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            return new JsonResponse("Access_denied, ADMIN authentication required", 403);
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
         }else{
             $users = $this->getDoctrine()->getRepository('CryptoConseilsUserBundle:User')->findAll();
             $data = $this->get('jms_serializer')->serialize($users, 'json');
@@ -41,7 +41,7 @@ class UserController extends FOSRestController
         $userId = $this->getDoctrine()->getRepository("CryptoConseilsUserBundle:User")->find($id)->getId();
 
         if (null === $currentUserId = $this->getUser()) {
-            return new Response("Access_denied, you need to log in", 403);
+            return new JsonResponse(array('error' => 'Access denied! You need to login'), 403);
         }
 
         $currentUserId = $currentUserId->getId();
@@ -58,7 +58,7 @@ class UserController extends FOSRestController
 
                 return $response;
             }else{
-                return new JsonResponse("Access_denied, this is not you", 403);
+                return new JsonResponse(array('error' => 'Access denied! This user is not you'), 403);
             }
         }else{
             $data = $this->get('jms_serializer')->serialize($id, 'json');
@@ -99,13 +99,13 @@ class UserController extends FOSRestController
         $users = $this->getDoctrine()->getRepository('CryptoConseilsUserBundle:User')->find($id);
 
         if (null === $users) {
-            return new Response("User not found", 404);
+            return new JsonResponse(array('error' => 'User not found'), 404);
         }
 
         $userId = $this->getDoctrine()->getRepository("CryptoConseilsUserBundle:User")->find($id)->getId();
 
         if (null === $currentUserId = $this->getUser()) {
-            return new Response("Access_denied, you need to log in", 403);
+            return new JsonResponse(array('error' => 'Access denied! You need to login'), 403);
         }
 
         $currentUserId = $currentUserId->getId();
@@ -138,7 +138,7 @@ class UserController extends FOSRestController
 
                 return new JsonResponse($data, 200);
             }else{
-                return new JsonResponse("Access_denied, this is not you", 403);
+                return new JsonResponse(array('error' => 'Access denied! This user is not you'), 403);
             }
         }else{
             $data = json_decode($request->getContent(), true);
@@ -171,19 +171,19 @@ class UserController extends FOSRestController
     {
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            return new JsonResponse("Access_denied, ADMIN authentication required", 403);
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
         }else{
             $users = $this->getDoctrine()->getRepository('CryptoConseilsUserBundle:User')->find($id);
 
             if (null === $users) {
-                return new JsonResponse("User not found", 404);
+                return new JsonResponse(array('error' => 'User not found'), 404);
             }
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($users);
             $em->flush();
 
-            return new JsonResponse("The delete was successful.", 200);
+            return new JsonResponse(array('success' => 'User deleted'), 200);
         }
     }
 }
