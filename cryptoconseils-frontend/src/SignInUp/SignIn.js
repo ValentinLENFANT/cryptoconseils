@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Carousel from './Caroussel';
 import axios from 'axios'
 
-
 class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showSignUp: props.showSignUp,
       username: '',
-      password: ''
+      password: '',
+      statusMsg: null,
     };
     this.changeForm = this.changeForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -42,29 +42,28 @@ class SignIn extends Component {
   handleSubmit(event) {
     event.preventDefault();
     console.log(this.state);
-    /*for(var item in this.state){
-      console.log(this.state[item]);
-    }*/
-    if(this.state.username !== '' && this.state.password != ''){
-      axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
-        grant_type: 'password',
-        username: this.state.username,
-        password: this.state.password,
-        client_id: process.env.REACT_APP_CLIENT_ID,
-        client_secret: process.env.REACT_APP_CLIENT_SECRET,
-      }).then(function (response) {
-        console.log(response.data);
-      }).catch(function (error) {
-        console.log(error);
-      });
-    }
+    axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
+      grant_type: 'password',
+      username: this.state.username,
+      password: this.state.password,
+      client_id: process.env.REACT_APP_CLIENT_ID,
+      client_secret: process.env.REACT_APP_CLIENT_SECRET,
+    }).then(response => {
+      this.setState({statusMsg: 'BIEN JOUÉ'})
+      console.log(response);
+    }).catch(error => {
+      this.setState({statusMsg: 'Username et/ou Mdp invalides'})
+      console.log(error);
+    });
   }
+  
   SignInForm() {
     return(
       <div className="SignInForm">
         {/*Section Title Starts */}
         <div className="row text-center">
           <h2 className="title-head hidden-xs"><span>Connexion</span></h2>
+          <h3>{this.state.statusMsg}</h3>
           <p className="info-form">Bénéficier d'informations détaillées et de nos services en vous connectant</p>
         </div>
         {/*Section Title Ends */}
@@ -125,22 +124,48 @@ class SignIn extends Component {
         <form>
           {/* Input Field Starts */}
           <div className="form-group">
-            <input className="form-control" name="name" id="name" placeholder="NOM" type="text" required/>
+            <input
+              className="form-control"
+              name="name"
+              id="name"
+              placeholder="NOM"
+              type="text"
+              onChange={this.handleChange}
+              required
+            />
           </div>
           {/* Input Field Ends */}
           {/* Input Field Starts */}
           <div className="form-group">
-            <input className="form-control" name="email" id="email" placeholder="EMAIL" type="email" required/>
+            <input
+              className="form-control"
+              name="email"
+              id="email"
+              placeholder="EMAIL"
+              type="email"
+              onChange={this.handleChange}
+              required
+            />
           </div>
           {/* Input Field Ends */}
           {/* Input Field Starts */}
           <div className="form-group">
-            <input className="form-control" name="password" id="password" placeholder="MOT DE PASSE" type="password" required/>
+            <input
+              className="form-control"
+              name="password"
+              id="password"
+              placeholder="MOT DE PASSE"
+              type="password"
+              onChange={this.handleChange}
+              required
+            />
           </div>
           {/* Input Field Ends */}
           {/* Submit Form Button Starts */}
           <div className="form-group">
-            <button className="btn btn-primary" type="submit">créer un compte</button>
+            <button className="btn btn-primary" type="submit">
+              créer un compte
+            </button>
             <p className="text-center">déjà un compte ?
               <a href="#" onClick={this.changeForm}> Connexion</a>
             </p>
