@@ -10,10 +10,13 @@ class Articles extends Component {
       newDate: null
     };
   }
+
+  // éxécuté à la fin
   componentDidMount() {
     this.getAllArticles();
   }
 
+  // TODO: a faire
   convertDate(date){
     this.setState({
       newDate: date
@@ -22,7 +25,7 @@ class Articles extends Component {
   }
 
   getAllArticles() {
-    axios.get('http://127.0.0.1:8000/articles/')
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/')
     .then(response => {
       console.log(response.data);
       this.setState({

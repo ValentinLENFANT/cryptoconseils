@@ -9,8 +9,9 @@ class Article extends Component {
     this.state = {article: []};
   }
 
+  // éxécuté à la fin
   componentDidMount() {
-    axios.get('http://127.0.0.1:8000/blog/articles/'+this.props.match.params.id)
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/'+this.props.match.params.id)
     .then(response => {
       this.setState({
         article: response.data
