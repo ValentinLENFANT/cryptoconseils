@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 class Banner extends Component {
 
@@ -24,7 +23,7 @@ class Banner extends Component {
                     {/* Title Ends */}
                     {/* Meta Starts */}
                     <div className="meta">
-                      <span><i className="fa fa-user"></i> <a href="#"> </a></span>
+                      <span><i className="fa fa-user"></i> <a href=""> </a></span>
                       <span className="date"><i className="fa fa-calendar"></i></span>
                       <span><i className="fa fa-commenting"></i> <a href="blog-post.html">29 commentaire</a></span>
                       <span><i className="fa fa-tags"></i></span>

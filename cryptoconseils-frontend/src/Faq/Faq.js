@@ -184,28 +184,28 @@ class Faq extends Component {
                       <h3 ClassName="widget-title">Tags populaires</h3>
                       <ul ClassName="unstyled clearfix">
                         <li>
-                          <a href="#">cryptomonnaie</a>
+                          <a href=''>cryptomonnaie</a>
                         </li>
                         <li>
-                          <a href="#">crypto</a>
+                          <a href=''>crypto</a>
                         </li>
                         <li>
-                          <a href="#">trading</a>
+                          <a href=''>trading</a>
                         </li>
                         <li>
-                          <a href="#">wallet</a>
+                          <a href=''>wallet</a>
                         </li>
                         <li>
-                          <a href="#">mining</a>
+                          <a href=''>mining</a>
                         </li>
                         <li>
-                          <a href="#">transaction</a>
+                          <a href=''>transaction</a>
                         </li>
                         <li>
-                          <a href="#">bitcoin</a>
+                          <a href=''>bitcoin</a>
                         </li>
                         <li>
-                          <a href="#">ethereum</a>
+                          <a href=''>ethereum</a>
                         </li>
                       </ul>
                     </div>
