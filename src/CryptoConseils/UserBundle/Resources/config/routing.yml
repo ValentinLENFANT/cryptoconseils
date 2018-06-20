@@ -1,0 +1,37 @@
+cryptoconseils_users_index:
+    path:    /users/
+    defaults:
+        _controller: CryptoConseilsUserBundle:User:index
+        page: 1
+    requirements:
+        page: \d*
+
+
+cryptoconseils_users_show:
+    path:    /users/{id}
+    defaults: { _controller: CryptoConseilsUserBundle:User:show }
+    methods:    [GET]
+    requirements:
+        id: \d{1,} # Regular expression to find an id of integer type
+
+
+cryptoconseils_users_edit:
+    path:    /users/{id}
+    defaults: { _controller: CryptoConseilsUserBundle:User:edit }
+    methods:    [PUT]
+    requirements:
+        id: \d{1,}
+
+
+cryptoconseils_users_delete:
+    path:    /users/{id}
+    defaults: { _controller: CryptoConseilsUserBundle:User:delete }
+    methods:    [DELETE]
+    requirements:
+        id: \d{1,}
+
+
+cryptoconseils_users_new:
+    path:    /users/new/
+    defaults: { _controller: CryptoConseilsUserBundle:User:new }
+    methods:    [POST]

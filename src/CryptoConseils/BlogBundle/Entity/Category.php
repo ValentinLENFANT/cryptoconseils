@@ -56,6 +56,7 @@ class Category
         return $this;
     }
 
+
     /**
      * Get name.
      *

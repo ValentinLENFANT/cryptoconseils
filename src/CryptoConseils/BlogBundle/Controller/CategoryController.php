@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
 class CategoryController extends FOSRestController
 {
 
-
     public function menuAction($limit)
     {
         $em = $this->getDoctrine()->getManager();
@@ -35,12 +34,9 @@ class CategoryController extends FOSRestController
     }
 
 
-
-
-
     /////////////// FONCTIONS CRUD DE L'API REST ///////////////
 
-    public function indexAction() // [GET] /blog/categories
+    public function indexAction() // [GET] /categories
     {
         $categories = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Category')->findAll();
         $data = $this->get('jms_serializer')->serialize($categories, 'json');
@@ -51,7 +47,8 @@ class CategoryController extends FOSRestController
         return $response;
     }
 
-    public function showAction(Category $id) // [GET] /blog/categories/8
+
+    public function showAction(Category $id) // [GET] /categories/8
     {
         $data = $this->get('jms_serializer')->serialize($id, 'json');
 
@@ -62,74 +59,90 @@ class CategoryController extends FOSRestController
     }
 
 
-    public function newAction(Request $request) // [POST] /blog/categories/new
+    public function newAction(Request $request) // [POST] /categories/new (ROLE_ADMIN ONLY)
     {
-        $data = $request->getContent();
-        $article = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Category', 'json');
+        // If user is not admin
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
+        }else{
+            $data = $request->getContent();
+            $category = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Category', 'json');
 
 
-        // Analyse si les conditions sur les champs sont respectées //
-        $errors = $this->get('validator')->validate($article);
+            // Analyse si les conditions sur les champs sont respectées //
+            $errors = $this->get('validator')->validate($category);
 
-        if (count($errors)) {
-            return new Response($errors, 400);
+            if (count($errors)) {
+                return new Response($errors, 400);
+            }
+            // Fin d'analyse //
+
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($category);
+            $em->flush();
+            $category = $this->get('jms_serializer')->serialize($category, 'json');
+            return new JsonResponse(json_decode($category), 200);
         }
-        // Fin d'analyse //
-
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($article);
-        $em->flush();
-
-        return new JsonResponse(json_decode($data), 200);
     }
 
 
-    public function editAction($id, Request $request) // [PUT] /blog/categories/8
+    public function editAction($id, Request $request) // [PUT] /categories/8 (ROLE_ADMIN ONLY)
     {
-        $category = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Category')->find($id);
+        // If user is not admin
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
+        }else{
+            $category = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Category')->find($id);
 
-        if (null === $category) {
-            return new Response("Category not found", 404);
+            if (null === $category) {
+                return new JsonResponse(array('error' => 'Category not found'), 404);
+            }
+
+            $data = json_decode($request->getContent(), true);
+            $form = $this->createForm(EditCategoryType::class, $category);
+            $form->submit($data);
+
+
+            // Analyse si les conditions sur les champs sont respectées //
+            $data_errors = $request->getContent();
+            $category_errors = $this->get('jms_serializer')->deserialize($data_errors, 'CryptoConseils\BlogBundle\Entity\Category', 'json');
+
+            $errors = $this->get('validator')->validate($category_errors);
+
+            if (count($errors)) {
+                return new Response($errors, 400);
+            }
+            // Fin d'analyse //
+
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($category);
+            $em->flush();
+
+            $category = $this->get('jms_serializer')->serialize($category, 'json');
+            return new JsonResponse(json_decode($category), 200);
         }
-
-        $data = json_decode($request->getContent(), true);
-        $form = $this->createForm(EditCategoryType::class, $category);
-        $form->submit($data);
-
-
-        // Analyse si les conditions sur les champs sont respectées //
-        $data_errors = $request->getContent();
-        $category_errors = $this->get('jms_serializer')->deserialize($data_errors, 'CryptoConseils\BlogBundle\Entity\Category', 'json');
-
-        $errors = $this->get('validator')->validate($category_errors);
-
-        if (count($errors)) {
-            return new Response($errors, 400);
-        }
-        // Fin d'analyse //
-
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($category);
-        $em->flush();
-
-        return new JsonResponse($data, 200);
     }
 
-    public function deleteAction($id) // [DELETE] /blog/categories/8
+    public function deleteAction($id) // [DELETE] /categories/8 (ROLE_ADMIN ONLY)
     {
-        $category = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Category')->find($id);
+        // If user is not admin
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
+        }else{
+            $category = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Category')->find($id);
 
-        if (null === $category) {
-            return new JsonResponse("Article not found", 404);
+            if (null === $category) {
+                return new JsonResponse(array('error' => 'Category not found'), 404);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($category);
+            $em->flush();
+
+            return new JsonResponse(array('success' => 'Category deleted'), 200);
         }
-
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($category);
-        $em->flush();
-
-        return new JsonResponse("The delete was successful.", 200);
     }
 
 }

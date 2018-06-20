@@ -85,7 +85,7 @@ fos_user:
         sender_name: "%mailer_user%"
     registration:
         form:
-            type: AppBundle\Form\RegistrationType
+            type: CryptoConseils\UserBundle\Form\RegistrationType
 
 
 fos_rest:
@@ -95,6 +95,17 @@ fos_rest:
         formats: { json: true, xml: false, rss: false }
     serializer:
         serialize_null: true
+
+
+
+fos_oauth_server:
+    db_driver:           orm
+    client_class:        CryptoConseils\UserBundle\Entity\Client
+    access_token_class:  CryptoConseils\UserBundle\Entity\AccessToken
+    refresh_token_class: CryptoConseils\UserBundle\Entity\RefreshToken
+    auth_code_class:     CryptoConseils\UserBundle\Entity\AuthCode
+    service:
+        user_provider: fos_user.user_provider.username
 
 
 

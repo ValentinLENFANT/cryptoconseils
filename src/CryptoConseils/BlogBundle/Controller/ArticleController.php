@@ -9,138 +9,19 @@
 namespace CryptoConseils\BlogBundle\Controller;
 
 use CryptoConseils\BlogBundle\Form\EditArticleType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use CryptoConseils\BlogBundle\Entity\Article;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\FOSRestController;
+use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\HttpFoundation\Response;
 
 class ArticleController extends FOSRestController
 {
-
-
-   /* public function indexAction($page)
-    {
-        if ($page < 1) {
-            throw new NotFoundHttpException("Page " . $page . " inexistante.");
-        }
-
-        //Nombre d'articles par page
-        $nbPerPage = 3;
-
-        $listArticles = $this->getDoctrine()->getManager()->getRepository('CryptoConseilsBlogBundle:Article')->getArticles($page, $nbPerPage);
-
-        $nbPages = ceil(count($listArticles) / $nbPerPage);
-
-        if ($page > $nbPages) {
-            throw $this->createNotFoundException("La page " . $page . " n'existe pas.");
-        }
-
-        return $this->render('CryptoConseilsBlogBundle:Article:index.html.twig', array(
-            'listArticles' => $listArticles,
-            'nbPages' => $nbPages,
-            'page' => $page,
-        ));
-    }
-   */
-
-   /* public function viewAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $article = $em->getRepository("CryptoConseilsBlogBundle:Article")->find($id);
-
-        if (null === $article) {
-            throw new NotFoundHttpException("L'article d'id" . $id . "n'existe pas");
-        }
-
-        $listComments = $em->getRepository('CryptoConseilsBlogBundle:Comment')->findBy(array('article' => $article));
-
-        return $this->render('CryptoConseilsBlogBundle:Article:view.html.twig', array(
-            'article' => $article,
-            'listComments' => $listComments
-        ));
-    }*/
-
-    /**
-     * @Security("has_role('ROLE_AUTEUR')")
-     */
-    /*public function addAction(Request $request)
-    {
-        //Si l'on n'avait pas utilisé l'annontation au-dessus il aurait fallu mettre ces lignes de code
-//        if (!$this->get('security.authorization_checker')->isGranted('ROLE_AUTEUR')) {
-//            throw new AccessDeniedException('Accès limité aux auteurs.');
-//        }
-
-        $article = new Article();
-
-        // Création du form builder
-        //$form = $this->get('form.factory')->create(ArticleType::class, $article);
-        $form = $this->createForm(ArticleType::class, $article);
-
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($article);
-            $em->flush();
-
-            $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée');
-
-            return $this->redirectToRoute('cryptoconseils_blog_view', array('id' => $article->getId()));
-        }
-
-        return $this->render('CryptoConseilsBlogBundle:Article:add.html.twig',
-            array('form' => $form->createView()));
-    }*/
-
-    /*public function editAction($id, Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $article = $em->getRepository('CryptoConseilsBlogBundle:Article')->find($id);
-
-        $form = $this->createForm(EditArticleType::class, $article);
-
-        if (null === $article) {
-            throw new NotFoundHttpException("L'article d'id " . $id . " n'existe pas.");
-        }
-
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $em->persist($article);
-            $em->flush();
-            $request->getSession()->getFlashBag()->add('notice', 'Article modifié');
-
-            return $this->redirectToRoute('cryptoconseils_blog_view', array('id' => $article->getId()));
-        }
-
-        return $this->render('CryptoConseilsBlogBundle:Article:edit.html.twig',
-            array('article' => $article, 'form' => $form->createView()));
-
-    }*/
-
-   /* public function deleteAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $article = $em->getRepository('CryptoConseilsBlogBundle:Article')->find($id);
-
-        if (null === $article) {
-            throw new NotFoundHttpException("L'article d'id " . $id . " n'existe pas.");
-        }
-
-        $form = $this->get('form.factory')->create();
-        if($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $em->remove($article);
-            $em->flush();
-
-            $request->getSession()->getFlashBag()->add('info', "L'annonce a bien été supprimée.");
-
-            return $this->redirectToRoute('cryptoconseils_blog_home');
-        }
-
-        return $this->render('CryptoConseilsBlogBundle:Article:delete.html.twig', array(
-            'article' => $article,
-            'form' => $form->createView(),
-        ));
-    }*/
 
     public function menuAction($limit)
     {
@@ -160,7 +41,7 @@ class ArticleController extends FOSRestController
 
     /////////////// FONCTIONS CRUD DE L'API REST ///////////////
 
-    public function indexAction() // [GET] /blog/articles
+    public function indexAction() // [GET] /articles
     {
         $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findAll();
         $data = $this->get('jms_serializer')->serialize($articles, 'json');
@@ -172,7 +53,7 @@ class ArticleController extends FOSRestController
     }
 
 
-    public function showAction(Article $id) // [GET] /blog/articles/8
+    public function showAction(Article $id) // [GET] /articles/8
     {
         $data = $this->get('jms_serializer')->serialize($id, 'json');
 
@@ -183,74 +64,129 @@ class ArticleController extends FOSRestController
     }
 
 
-    public function newAction(Request $request) // [POST] /blog/articles/new
+    public function newAction(Request $request) // [POST] /articles/new  (ROLE_ADMIN ONLY)
     {
-        $data = $request->getContent();
-        $article = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Article', 'json');
+        // If user is not admin
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
+        }else{
+            $currentUserUsername = $this->getUser()->getUsername();
+            $em = $this->getDoctrine()->getManager();
+            $data = $request->getContent();
+            $categories = json_decode($data, true);
+            $article = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Article', 'json');
+
+            // If image_id is NULL
+            if (null === $article->getImageId()){
+                return new JsonResponse(array('error' => 'image_id required'), 403);
+            }else{
+                $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($article->getImageId());
+                $article->setImage($image);
+            }
+
+            if (isset($categories['category_id'])){
+                $categories = $categories['category_id'];
+
+                foreach ($categories as $category) {
+                    $category_id = $em->getRepository("CryptoConseilsBlogBundle:Category")->find($category);
+                    $article->AddCategory($category_id);
+                }
+            }
+
+            $article->setAuthor($currentUserUsername);
+            $article->setDate(new \DateTime('now'));
 
 
-        // Analyse si les conditions sur les champs sont respectées //
-        $errors = $this->get('validator')->validate($article);
+            // Analyse si les conditions sur les champs sont respectées //
+            $errors = $this->get('validator')->validate($article);
 
-        if (count($errors)) {
-            return new Response($errors, 400);
+            if (count($errors)) {
+                return new Response($errors, 400);
+            } // Fin d'analyse //
+
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($article);
+            $em->flush();
+            $article = $this->get('jms_serializer')->serialize($article, 'json');
+            return new JsonResponse(json_decode($article), 200);
         }
-        // Fin d'analyse //
-
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($article);
-        $em->flush();
-
-        return new JsonResponse(json_decode($data), 200);
     }
 
 
-    public function editAction($id, Request $request) // [PUT] /blog/articles/8
+    public function editAction($id, Request $request) // [PUT] /articles/8 (ROLE_ADMIN ONLY)
     {
-        $article = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->find($id);
+        // If user is not admin
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
+        }else{
+            $em = $this->getDoctrine()->getManager();
+            $article = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->find($id);
 
-        if (null === $article) {
-            return new Response("Article not found", 404);
+            if (null === $article) {
+                return new JsonResponse(array('error' => 'Article not found'), 404);
+            }
+
+            $username = $article->getAuthor();
+            $date_publication = $article->getDate();
+            $article->setAuthor($username);
+            $article->setDate($date_publication);
+
+            $data = json_decode($request->getContent(), true);
+
+            if (isset($data['category_id'])){
+                // On boucle sur les catégories du post pour les supprimer
+                foreach ($article->getCategories() as $category) {
+                    $article->removeCategory($category);
+                }
+
+                $categories = $data['category_id'];
+
+                foreach ($categories as $category) {
+                    $category_id = $em->getRepository("CryptoConseilsBlogBundle:Category")->find($category);
+                    $article->AddCategory($category_id);
+                }
+            }
+
+            $form = $this->createForm(EditArticleType::class, $article);
+            $form->submit($data);
+
+
+            // Analyse si les conditions sur les champs sont respectées //
+            $data_errors = $request->getContent();
+            $article_errors = $this->get('jms_serializer')->deserialize($data_errors, 'CryptoConseils\BlogBundle\Entity\Article', 'json');
+            $errors = $this->get('validator')->validate($article_errors);
+
+            if (count($errors)) {
+                return new Response($errors, 400);
+            } // Fin d'analyse //
+
+
+            $em->persist($article);
+            $em->flush();
+            $article = $this->get('jms_serializer')->serialize($article, 'json');
+            return new JsonResponse(json_decode($article), 200);
         }
-
-        $data = json_decode($request->getContent(), true);
-        $form = $this->createForm(EditArticleType::class, $article);
-        $form->submit($data);
-
-
-        // Analyse si les conditions sur les champs sont respectées //
-        $data_errors = $request->getContent();
-        $article_errors = $this->get('jms_serializer')->deserialize($data_errors, 'CryptoConseils\BlogBundle\Entity\Article', 'json');
-
-        $errors = $this->get('validator')->validate($article_errors);
-
-        if (count($errors)) {
-            return new Response($errors, 400);
-        }
-        // Fin d'analyse //
-
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($article);
-        $em->flush();
-
-        return new JsonResponse($data, 200);
     }
 
 
-    public function deleteAction($id) // [DELETE] /blog/articles/8
+    public function deleteAction($id) // [DELETE] /articles/8 (ROLE_ADMIN ONLY)
     {
-        $article = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->find($id);
+        // If user is not admin
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
+        }else{
+            $article = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->find($id);
 
-        if (null === $article) {
-            return new JsonResponse("Article not found", 404);
-        }
+            if (null === $article) {
+                return new JsonResponse(array('error' => 'Article not found'), 404);
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->remove($article);
             $em->flush();
 
-        return new JsonResponse("The delete was successful.", 200);
+            return new JsonResponse(array('success' => 'Article deleted'), 200);
+        }
     }
 }
