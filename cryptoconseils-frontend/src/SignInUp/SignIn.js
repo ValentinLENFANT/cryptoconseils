@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import Carousel from './Caroussel';
+import axios from 'axios'
+
 
 class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showSignUp: props.showSignUp,
+      username: '',
+      password: ''
     };
     this.changeForm = this.changeForm.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   changeForm(event) {
@@ -26,7 +32,33 @@ class SignIn extends Component {
       return this.SignInForm();
     }
   }
-
+  // for multiple input
+  handleChange(event) {
+    const target = event.target;
+    const value = target.value
+    const name = target.id;
+    this.setState({[name]: value});
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(this.state);
+    /*for(var item in this.state){
+      console.log(this.state[item]);
+    }*/
+    if(this.state.username !== '' && this.state.password != ''){
+      axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
+        grant_type: 'password',
+        username: this.state.username,
+        password: this.state.password,
+        client_id: process.env.REACT_APP_CLIENT_ID,
+        client_secret: process.env.REACT_APP_CLIENT_SECRET,
+      }).then(function (response) {
+        console.log(response.data);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }
   SignInForm() {
     return(
       <div className="SignInForm">
@@ -37,15 +69,33 @@ class SignIn extends Component {
         </div>
         {/*Section Title Ends */}
         {/*Form Starts */}
-        <form>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           {/*Input Field Starts */}
           <div className="form-group">
-            <input className="form-control" name="email" id="email" placeholder="EMAIL" type="email" required/>
+            <input
+              className="form-control"
+              name="username"
+              id="username"
+              placeholder="USERNAME"
+              type="text"
+              value={this.state.username}
+              onChange={this.handleChange}
+              required
+            />
           </div>
           {/*Input Field Ends */}
           {/*Input Field Starts */}
           <div className="form-group">
-            <input className="form-control" name="password" id="password" placeholder="PASSWORD" type="password" required/>
+            <input
+              className="form-control"
+              name="password"
+              id="password"
+              placeholder="PASSWORD"
+              type="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+              required
+            />
           </div>
           {/*Input Field Ends */}
           {/*Submit Form Button Starts */}
