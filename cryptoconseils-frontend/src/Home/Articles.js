@@ -22,7 +22,7 @@ class Articles extends Component {
   }
 
   getAllArticles() {
-    axios.get('http://127.0.0.1:8000/blog/articles')
+    axios.get('http://127.0.0.1:8000/articles/')
     .then(response => {
       console.log(response.data);
       this.setState({
