@@ -49,7 +49,9 @@ class SignIn extends Component {
       client_id: process.env.REACT_APP_CLIENT_ID,
       client_secret: process.env.REACT_APP_CLIENT_SECRET,
     }).then(response => {
-      this.setState({statusMsg: 'BIEN JOUÉ'})
+      sessionStorage.setItem('access_token', response.data.access_token);
+      sessionStorage.setItem('username', this.state.username);
+      this.props.history.push('/')
       console.log(response);
     }).catch(error => {
       this.setState({statusMsg: 'Username et/ou Mdp invalides'})
@@ -101,7 +103,7 @@ class SignIn extends Component {
           <div className="form-group">
             <button className="btn btn-primary" type="submit">Connexion</button>
             <p className="text-center">Pas de compte ?
-              <a href="#" onClick={this.changeForm}> Inscription</a>
+              <a href="" onClick={this.changeForm}> Inscription</a>
             </p>
           </div>
           {/*Submit Form Button Ends */}
@@ -156,18 +158,15 @@ class SignIn extends Component {
               id="password"
               placeholder="MOT DE PASSE"
               type="password"
-              onChange={this.handleChange}
               required
             />
           </div>
           {/* Input Field Ends */}
           {/* Submit Form Button Starts */}
           <div className="form-group">
-            <button className="btn btn-primary" type="submit">
-              créer un compte
-            </button>
+            <button className="btn btn-primary" type="submit">créer un compte</button>
             <p className="text-center">déjà un compte ?
-              <a href="#" onClick={this.changeForm}> Connexion</a>
+              <a href="" onClick={this.changeForm}> Connexion</a>
             </p>
           </div>
           {/* Submit Form Button Ends */}
