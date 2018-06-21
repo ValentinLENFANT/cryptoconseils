@@ -11,60 +11,62 @@ import Team from './Team';
 import Quote from './Quote';
 import BitcoinChart from './BitcoinChart';
 import Logo from '../Logo/Logo'
+import LoginDisplay from './LoginDisplay';
+import NotLoginDisplay from './NotLoginDisplay'
 
 class UserAction extends Component {
   render() {
-    return (
-      <div className="UserAction">
-        <div className="col-md-4 col-lg-4">
-          <ul className="unstyled user">
-            <li className="sign-in">
-              <a href="/signin" className="btn btn-primary">
-                <i className="fa fa-user"></i> Connexion</a></li>
-            <li className="sign-up">
-              <a href="/signup" className="btn btn-primary">
-              <i className="fa fa-user-plus"></i> Inscription</a></li>
-          </ul>
-        </div>
-      </div>
-    );
+    let loginControl = null;
+    if(this.props.isLogged){
+      return <LoginDisplay username={sessionStorage.getItem('username')}/>
+    }else {
+      return <NotLoginDisplay/>
+    }
   }
 }
 
 class BeginTrade extends Component {
   render() {
-    return (
-      <div className="BeginTrade">
-        <div className="call-action-all">
-          <div className="call-action-all-overlay">
-            <div className="container">
-              <div className="row">
-                <div className="col-xs-12">
-                  {/* Call To Action Text Starts */}
-                  <div className="action-text">
-                    <h2>Commencez dès maintenant à trader</h2>
-                    <p className="lead">Créer un compte gratuitement !</p>
+    if(this.props.isLogged === false){
+      return (
+        <div className="BeginTrade">
+          <div className="call-action-all">
+            <div className="call-action-all-overlay">
+              <div className="container">
+                <div className="row">
+                  <div className="col-xs-12">
+                    {/* Call To Action Text Starts */}
+                    <div className="action-text">
+                      <h2>Commencez dès maintenant à trader</h2>
+                      <p className="lead">Créer un compte gratuitement !</p>
+                    </div>
+                    {/* Call To Action Text Ends */}
+                    {/* Call To Action Button Starts */}
+                    <p className="action-btn">
+                      <a className="btn btn-primary" href="/signup">
+                      S'enregistrer
+                      </a>
+                    </p>
+                    {/* Call To Action Button Ends */}
                   </div>
-                  {/* Call To Action Text Ends */}
-                  {/* Call To Action Button Starts */}
-                  <p className="action-btn">
-                    <a className="btn btn-primary" href="/signup">
-                    S'enregistrer
-                    </a>
-                  </p>
-                  {/* Call To Action Button Ends */}
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }else {
+      return null;
+    }
   }
 }
 
 class Home extends Component {
   render() {
+    let isLogged = false;
+    if(sessionStorage.getItem('access_token')){
+      isLogged = true;
+    }
     return (
       <div className="App">
       {/* Wrapper Starts */}
@@ -80,7 +82,7 @@ class Home extends Component {
                   <Statistics />
                 {/* Statistics Ends */}
                 {/* User Sign In/Sign Up Starts */}
-                  <UserAction />
+                  <UserAction isLogged={isLogged}/>
                 {/* User Sign In/Sign Up Ends */}
               </div>
             </div>
@@ -135,7 +137,7 @@ class Home extends Component {
           {/* Quote and Chart Section Ends */}
 
           {/* Call To Action Section Starts */}
-            <BeginTrade />
+            <BeginTrade isLogged={isLogged}/>
           {/* Call To Action Section Ends */}
         {/* Wrapper Ends */}
         </div>
