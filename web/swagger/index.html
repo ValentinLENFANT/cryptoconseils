@@ -1,0 +1,160 @@
+<!-- HTML for static distribution bundle build -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Swagger UI</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./swagger-ui.css" >
+    <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
+    <style>
+      html
+      {
+        box-sizing: border-box;
+        overflow: -moz-scrollbars-vertical;
+        overflow-y: scroll;
+      }
+
+      *,
+      *:before,
+      *:after
+      {
+        box-sizing: inherit;
+      }
+
+      body
+      {
+        margin:0;
+        background: #2d3436;
+      }
+
+      .swagger-ui .topbar {
+        display: none;
+      }
+
+      span.url {
+        display: none;
+      }
+
+      .swagger-ui .info {
+        margin: 15px 0;
+      }
+
+      .swagger-ui .scheme-container .schemes {
+        display: none;
+      }
+
+      .swagger-ui .opblock .opblock-section-header {
+        background: #41444e;
+      }
+
+      .swagger-ui select {
+        color: #41444e;
+      }
+
+      .swagger-ui .scheme-container {
+        margin: 50px 0 40px;
+        padding: 1px 0;
+      }
+
+      .swagger-ui section.models {
+        background: rgba(162, 155, 254, .2);
+        border: 1px solid rgb(162, 155, 254);
+      }
+
+      .swagger-ui section.models h4 {
+        color: whitesmoke;
+      }
+
+      .swagger-ui .model-title {
+        color: whitesmoke;
+      }
+
+      .swagger-ui .model {
+        font-size: 14px;
+        color: whitesmoke;
+      }
+
+      .swagger-ui section.models.is-open h4 {
+        margin: 0 0 5px;
+        border-bottom: 1px solid rgb(162, 155, 254);
+      }
+
+      .swagger-ui .expand-methods, .swagger-ui .expand-operation {
+        border: none;
+        background: rgba(255, 255, 255, .7);
+        border-radius: 20px;
+        padding: 4px 11px;
+        padding-top: 10px;
+        /* border: 1px solid green; */
+      }
+
+      .logo {
+        width: 100%;
+        max-width: 1460px;
+        margin: 0 auto;
+        padding: 0 20px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        margin-top:30px;
+      }
+
+      .swagger-ui textarea {
+        font-size: 12px;
+        width: 100%;
+        min-height: 280px;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        outline: none;
+        background: #41444e;
+        font-family: Source Code Pro,monospace;
+        font-weight: 600;
+        color: whitesmoke;
+      }
+
+      .swagger-ui .scheme-container {
+        background: #fca130;
+      }
+
+      .swagger-ui .opblock-tag {
+        font-size: 24px;
+        margin: 0 0 5px;
+        font-family: Titillium Web,sans-serif;
+        color: whitesmoke;
+        border: 1px solid darkgray;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="logo"><img style="width: 14%;" src="logo.png"/></div>
+    <div id="swagger-ui"></div>
+
+    <script src="./swagger-ui-bundle.js"> </script>
+    <script src="./swagger-ui-standalone-preset.js"> </script>
+    <script>
+    window.onload = function() {
+
+      // Build a system
+      const ui = SwaggerUIBundle({
+        url: "https://restaurantlediv20.fr/cryptoconseils/swagger.json",
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ],
+        layout: "StandaloneLayout"
+      })
+
+      window.ui = ui
+    }
+  </script>
+  </body>
+</html>

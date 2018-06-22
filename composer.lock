@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "1f9c9cef983cb43adb94e9ab945a1a88",
@@ -1260,7 +1260,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2018-05-14T09:07:59+00:00"
+            "time": "2018-05-14 09:07:59"
         },
         {
             "name": "gedmo/doctrine-extensions",
