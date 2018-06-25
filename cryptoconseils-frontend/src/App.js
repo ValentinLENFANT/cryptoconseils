@@ -35,8 +35,8 @@ const Faq = Loadable({
   loading: Loading,
 });
 
-const Article = Loadable({
-  loader: () => import('./Articles/Article'),
+const Articles = Loadable({
+  loader: () => import('./Articles/Articles'),
   loading: Loading,
 });
 
