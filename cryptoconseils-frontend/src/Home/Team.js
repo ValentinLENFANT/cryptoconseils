@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Team extends Component {
   render() {
     return (
-      <div className="Team">
+      <div className="Team Component">
         <div className="team">
           <div className="container">
             {/* Section Title Starts */}

@@ -8,7 +8,7 @@ class Banner extends Component {
   render() {
     console.log(this.props.oui);
     return(
-      <div>
+      <div className="Banner Component">
         {/* Banner Area Starts */}
         <div className="banner-area">
           <div className="banner-overlay">

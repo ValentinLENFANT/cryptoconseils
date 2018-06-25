@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 class Faq extends Component {
   render() {
-    return (<div className="Faq">
+    return (<div className="Faq Component">
       {/* Section FAQ Starts */}
       <div ClassName="faq">
         <div ClassName="container">

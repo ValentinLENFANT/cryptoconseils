@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Features extends Component {
   render() {
     return(
-      <div className="Features">
+      <div className="Features Component">
         <div className="image-block">
           <div className="container-fluid">
             <div className="row">

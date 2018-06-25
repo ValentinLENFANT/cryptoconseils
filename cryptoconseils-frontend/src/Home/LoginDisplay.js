@@ -5,7 +5,7 @@ class LoginDisplay extends Component {
 
   render() {
     return (
-      <div className="UserAction">
+      <div className="Login Component">
         <div className="col-md-4 col-lg-4">
           <ul className="unstyled user">
             <li className="sign-in">
