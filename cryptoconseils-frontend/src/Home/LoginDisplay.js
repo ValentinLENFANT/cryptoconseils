@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import SignOut from '../SignOut/SignOut';
+import SignOut from '../Sign/SignOut';
 
 class LoginDisplay extends Component {
 

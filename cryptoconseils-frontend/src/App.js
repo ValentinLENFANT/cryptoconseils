@@ -11,12 +11,12 @@ const Home = Loadable({
 });
 
 const SignIn = Loadable({
-  loader: () => import('./SignInUp/SignIn'),
+  loader: () => import('./Sign/SignIn'),
   loading: Loading,
 });
 
 const SignUp = Loadable({
-  loader: () => import('./SignInUp/SignUp'),
+  loader: () => import('./Sign/SignUp'),
   loading: Loading,
 });
 
@@ -48,7 +48,7 @@ class App extends Component {
           <Route exact path="/" component={Home}/>
           <Route exact path="/signin" component={SignIn}/>
           <Route exact path="/signup" component={SignUp}/>
-          <Route exact path="/convertisseur" component={BitcoinCalculator}/>
+          <Route exact path="/calculator" component={BitcoinCalculator}/>
           <Route exact path="/faq" component={Faq}/>
           <Route path="/articles/:id" component={Articles}/>
           <Route component={NotFound}/>
