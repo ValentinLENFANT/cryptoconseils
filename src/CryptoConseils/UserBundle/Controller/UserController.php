@@ -36,15 +36,15 @@ class UserController extends FOSRestController
     }
 
 
-    public function showAction(User $id) // [GET] /users/8 (ROLE_ADMIN AND USER HIMSELF ONLY)
+    public function showAction(User $id) // [GET] /users/Alexandre (ROLE_ADMIN AND USER HIMSELF ONLY)
     {
-        $userId = $this->getDoctrine()->getRepository("CryptoConseilsUserBundle:User")->find($id)->getId();
+        $userId = $this->getDoctrine()->getRepository("CryptoConseilsUserBundle:User")->find($id)->getUsername();
 
         if (null === $currentUserId = $this->getUser()) {
             return new JsonResponse(array('error' => 'Access denied! You need to login'), 403);
         }
 
-        $currentUserId = $currentUserId->getId();
+        $currentUserId = $currentUserId->getUsername();
 
 
         // If user is not admin
@@ -94,7 +94,7 @@ class UserController extends FOSRestController
     }
 
 
-    public function editAction($id, Request $request) // [PUT] /users/8
+    public function editAction(User $id, Request $request) // [PUT] /users/8
     {
         $users = $this->getDoctrine()->getRepository('CryptoConseilsUserBundle:User')->find($id);
 
@@ -102,13 +102,13 @@ class UserController extends FOSRestController
             return new JsonResponse(array('error' => 'User not found'), 404);
         }
 
-        $userId = $this->getDoctrine()->getRepository("CryptoConseilsUserBundle:User")->find($id)->getId();
+        $userId = $this->getDoctrine()->getRepository("CryptoConseilsUserBundle:User")->find($id)->getUsername();
 
         if (null === $currentUserId = $this->getUser()) {
             return new JsonResponse(array('error' => 'Access denied! You need to login'), 403);
         }
 
-        $currentUserId = $currentUserId->getId();
+        $currentUserId = $currentUserId->getUsername();
 
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
@@ -167,7 +167,7 @@ class UserController extends FOSRestController
     }
 
 
-    public function deleteAction($id) // [DELETE] /users/8 (ROLE_ADMIN ONLY)
+    public function deleteAction(User $id) // [DELETE] /users/8 (ROLE_ADMIN ONLY)
     {
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {

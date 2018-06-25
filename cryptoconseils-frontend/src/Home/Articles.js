@@ -54,7 +54,6 @@ class Articles extends Component {
             <div className="row latest-posts-content">
               {/* Article Starts */}
               {/* slice(0,3) pour limiter à trois articles */}
-
               {this.state.articles.slice(0,3).map(article =>
                 <div className="col-sm-4 col-md-4 col-xs-12" key={article.id}>
                   <div className="latest-post">

@@ -8,7 +8,7 @@ cryptoconseils_users_index:
 
 
 cryptoconseils_users_show:
-    path:    /users/{id}
+    path:    /users/{username}
     defaults: { _controller: CryptoConseilsUserBundle:User:show }
     methods:    [GET]
     requirements:
@@ -16,7 +16,7 @@ cryptoconseils_users_show:
 
 
 cryptoconseils_users_edit:
-    path:    /users/{id}
+    path:    /users/{username}
     defaults: { _controller: CryptoConseilsUserBundle:User:edit }
     methods:    [PUT]
     requirements:
@@ -24,7 +24,7 @@ cryptoconseils_users_edit:
 
 
 cryptoconseils_users_delete:
-    path:    /users/{id}
+    path:    /users/{username}
     defaults: { _controller: CryptoConseilsUserBundle:User:delete }
     methods:    [DELETE]
     requirements:
