@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 //import Banner from './Banner';
 
-class Article extends Component {
+class Articles extends Component {
 
   constructor() {
     super();
@@ -25,7 +25,7 @@ class Article extends Component {
   render() {
       // TODO: REDECOUPER EN PLUSIEURS COMPOTENT (BANNER, ARTICLE, META)
     return(
-      <div>
+      <div className="Articles Component">
         {/* Banner Area Starts */}
         <div className="banner-area">
           <div className="banner-overlay">
@@ -104,4 +104,4 @@ class Article extends Component {
   }
 }
 
-export default Article;
+export default Articles;

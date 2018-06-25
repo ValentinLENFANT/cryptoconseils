@@ -50,7 +50,7 @@ class App extends Component {
           <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/convertisseur" component={BitcoinCalculator}/>
           <Route exact path="/faq" component={Faq}/>
-          <Route path="/articles/:id" component={Article}/>
+          <Route path="/articles/:id" component={Articles}/>
           <Route component={NotFound}/>
         </Switch>
       </Router>
