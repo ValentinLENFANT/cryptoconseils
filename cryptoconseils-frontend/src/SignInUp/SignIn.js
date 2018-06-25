@@ -10,6 +10,7 @@ class SignIn extends Component {
       username: '',
       password: '',
       statusMsg: null,
+      email: '',
     };
     this.changeForm = this.changeForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -24,6 +25,50 @@ class SignIn extends Component {
     }
   }
 
+  // for multiple input
+  handleChange(event) {
+    const target = event.target;
+    const value = target.value
+    const name = target.id;
+    this.setState({[name]: value});
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(this.state);
+    axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
+      grant_type: 'password',
+      username: this.state.username,
+      password: this.state.password,
+      client_id: process.env.REACT_APP_CLIENT_ID,
+      client_secret: process.env.REACT_APP_CLIENT_SECRET,
+    }).then(response => {
+      sessionStorage.clear();
+      sessionStorage.setItem('access_token', response.data.access_token);
+      sessionStorage.setItem('username', this.state.username);
+      this.props.history.push('/');
+      console.log(response);
+    }).catch(error => {
+      this.setState({statusMsg: 'Username et/ou Mdp invalides'})
+      console.log(error);
+    });
+  }
+  handleSignUp(event){
+    event.preventDefault();
+    axios.post(process.env.REACT_APP_API_ADDRESS+'/users/new/', {
+      username: this.state.username,
+      email: this.state.email,
+      enabled: true,
+      salt: "pboo3bgtbt01jPqvMhmcXy4Z6INSUaP1qZmrF1GDRdI",
+      password: this.state.password,
+    }).then(function (response) {
+      sessionStorage.clear();
+      sessionStorage.setItem('username', this.state.username);
+      this.props.history.push('/');
+      console.log(response.data);
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
   formRender(){
     if(this.state.showSignUp){
       return (
@@ -35,16 +80,17 @@ class SignIn extends Component {
           </div>
           {/* Section Title Ends */}
           {/* Form Starts */}
-          <form>
+          <form onSubmit={this.handleSignUp.bind(this)}>
             {/* Input Field Starts */}
             <div className="form-group">
               <input
                 className="form-control"
-                name="name"
-                id="name"
+                name="username"
+                id="username"
                 placeholder="NOM"
                 type="text"
                 onChange={this.handleChange}
+                value={this.state.username}
                 required
               />
             </div>
@@ -58,6 +104,7 @@ class SignIn extends Component {
                 placeholder="EMAIL"
                 type="email"
                 onChange={this.handleChange}
+                value={this.state.email}
                 required
               />
             </div>
@@ -70,6 +117,8 @@ class SignIn extends Component {
                 id="password"
                 placeholder="MOT DE PASSE"
                 type="password"
+                onChange={this.handleChange}
+                value={this.state.password}
                 required
               />
             </div>
@@ -140,32 +189,6 @@ class SignIn extends Component {
         </div>
       );
     }
-  }
-  // for multiple input
-  handleChange(event) {
-    const target = event.target;
-    const value = target.value
-    const name = target.id;
-    this.setState({[name]: value});
-  }
-  handleSubmit(event) {
-    event.preventDefault();
-    console.log(this.state);
-    axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
-      grant_type: 'password',
-      username: this.state.username,
-      password: this.state.password,
-      client_id: process.env.REACT_APP_CLIENT_ID,
-      client_secret: process.env.REACT_APP_CLIENT_SECRET,
-    }).then(response => {
-      sessionStorage.setItem('access_token', response.data.access_token);
-      sessionStorage.setItem('username', this.state.username);
-      this.props.history.push('/')
-      console.log(response);
-    }).catch(error => {
-      this.setState({statusMsg: 'Username et/ou Mdp invalides'})
-      console.log(error);
-    });
   }
   render() {
     return (
