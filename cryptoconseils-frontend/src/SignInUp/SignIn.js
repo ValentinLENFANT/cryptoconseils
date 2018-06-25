@@ -14,9 +14,11 @@ class SignIn extends Component {
     };
     this.changeForm = this.changeForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
   }
 
+  // switch entre les deux form
   changeForm(event) {
     if(this.state.showSignUp){
       this.setState({showSignUp: false});
@@ -25,16 +27,17 @@ class SignIn extends Component {
     }
   }
 
-  // for multiple input
+  // enregistre la valeur des inputs
   handleChange(event) {
     let target = event.target;
     let value = target.value
     let name = target.id;
     this.setState({[name]: value});
   }
-  handleSubmit(event) {
+
+  // connexion
+  handleSignIn(event) {
     event.preventDefault();
-    console.log(this.state);
     axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
       grant_type: 'password',
       username: this.state.username,
@@ -45,32 +48,34 @@ class SignIn extends Component {
       sessionStorage.clear();
       sessionStorage.setItem('access_token', response.data.access_token);
       sessionStorage.setItem('username', this.state.username);
-      this.props.history.push('/');
+      //this.props.history.push('/');
       console.log(response);
     }).catch(error => {
       this.setState({statusMsg: 'Username et/ou Mdp invalides'})
       console.log(error);
     });
   }
+
+  // inscription
   handleSignUp(event){
     event.preventDefault();
-    console.log(this.state);
     axios.post(process.env.REACT_APP_API_ADDRESS+'/users/new/', {
       username: this.state.username,
       email: this.state.email,
-      enabled: true,
-      salt: "pboo3bgtbt01jPqvMhmcXy4Z6INSUaP1qZmrF1GDRdI",
       password: this.state.password,
+      enabled: true,
     }).then(response => {
-      this.props.history.push('/');
-      //sessionStorage.clear();
-      //sessionStorage.setItem('username', this.state.username);
+      sessionStorage.clear();
+      sessionStorage.setItem('username', this.state.username);
       console.log(response.data);
     }).catch(error => {
       console.log(error);
     });
   }
+
+  // choix du form
   formRender(){
+    // formualaire inscription
     if(this.state.showSignUp){
       return (
         <div className="SignUpForm">
@@ -136,8 +141,8 @@ class SignIn extends Component {
           {/* Form Ends */}
         </div>
       );
-    }
-    else {
+    }else {
+      // formualaire connexion
       return (
         <div className="SignInForm">
           {/*Section Title Starts */}
@@ -148,7 +153,7 @@ class SignIn extends Component {
           </div>
           {/*Section Title Ends */}
           {/*Form Starts */}
-          <form onSubmit={this.handleSubmit.bind(this)}>
+          <form onSubmit={this.handleSignIn.bind(this)}>
             {/*Input Field Starts */}
             <div className="form-group">
               <input
@@ -192,6 +197,7 @@ class SignIn extends Component {
     }
   }
   render() {
+    // layout des formulaires
     return (
       <div className="SignIn">
         <div className="auth-page">
@@ -216,7 +222,5 @@ class SignIn extends Component {
     );
   }
 }
-
-
 
 export default SignIn;
