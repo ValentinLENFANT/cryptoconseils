@@ -85,6 +85,9 @@ class UserController extends FOSRestController
         }
         // Fin d'analyse //
 
+        $password = password_hash($user->getPassword(), PASSWORD_BCRYPT);
+        $user->setPassword($password);
+
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
