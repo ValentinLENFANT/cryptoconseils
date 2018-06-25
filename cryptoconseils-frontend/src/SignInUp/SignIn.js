@@ -26,10 +26,119 @@ class SignIn extends Component {
 
   formRender(){
     if(this.state.showSignUp){
-      return this.SignUpForm();
+      return (
+        <div className="SignUpForm">
+          {/* Section Title Starts */}
+          <div className="row text-center">
+            <h2 className="title-head hidden-xs">C'est <span>parti</span></h2>
+             <p className="info-form">Créez un compte rapidement et commencez le trading !</p>
+          </div>
+          {/* Section Title Ends */}
+          {/* Form Starts */}
+          <form>
+            {/* Input Field Starts */}
+            <div className="form-group">
+              <input
+                className="form-control"
+                name="name"
+                id="name"
+                placeholder="NOM"
+                type="text"
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            {/* Input Field Ends */}
+            {/* Input Field Starts */}
+            <div className="form-group">
+              <input
+                className="form-control"
+                name="email"
+                id="email"
+                placeholder="EMAIL"
+                type="email"
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            {/* Input Field Ends */}
+            {/* Input Field Starts */}
+            <div className="form-group">
+              <input
+                className="form-control"
+                name="password"
+                id="password"
+                placeholder="MOT DE PASSE"
+                type="password"
+                required
+              />
+            </div>
+            {/* Input Field Ends */}
+            {/* Submit Form Button Starts */}
+            <div className="form-group">
+              <button className="btn btn-primary" type="submit">créer un compte</button>
+              <p className="text-center">déjà un compte ?
+                <a onClick={this.changeForm}> Connexion</a>
+              </p>
+            </div>
+            {/* Submit Form Button Ends */}
+          </form>
+          {/* Form Ends */}
+        </div>
+      );
     }
     else {
-      return this.SignInForm();
+      return (
+        <div className="SignInForm">
+          {/*Section Title Starts */}
+          <div className="row text-center">
+            <h2 className="title-head hidden-xs"><span>Connexion</span></h2>
+            <h3>{this.state.statusMsg}</h3>
+            <p className="info-form">Bénéficier d'informations détaillées et de nos services en vous connectant</p>
+          </div>
+          {/*Section Title Ends */}
+          {/*Form Starts */}
+          <form onSubmit={this.handleSubmit.bind(this)}>
+            {/*Input Field Starts */}
+            <div className="form-group">
+              <input
+                className="form-control"
+                name="username"
+                id="username"
+                placeholder="USERNAME"
+                type="text"
+                value={this.state.username}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            {/*Input Field Ends */}
+            {/*Input Field Starts */}
+            <div className="form-group">
+              <input
+                className="form-control"
+                name="password"
+                id="password"
+                placeholder="PASSWORD"
+                type="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            {/*Input Field Ends */}
+            {/*Submit Form Button Starts */}
+            <div className="form-group">
+              <button className="btn btn-primary" type="submit">Connexion</button>
+              <p className="text-center">Pas de compte ?
+                <a onClick={this.changeForm}> Inscription</a>
+              </p>
+            </div>
+            {/*Submit Form Button Ends */}
+          </form>
+          {/*Form Ends */}
+        </div>
+      );
     }
   }
   // for multiple input
@@ -57,123 +166,6 @@ class SignIn extends Component {
       this.setState({statusMsg: 'Username et/ou Mdp invalides'})
       console.log(error);
     });
-  }
-  
-  SignInForm() {
-    return(
-      <div className="SignInForm">
-        {/*Section Title Starts */}
-        <div className="row text-center">
-          <h2 className="title-head hidden-xs"><span>Connexion</span></h2>
-          <h3>{this.state.statusMsg}</h3>
-          <p className="info-form">Bénéficier d'informations détaillées et de nos services en vous connectant</p>
-        </div>
-        {/*Section Title Ends */}
-        {/*Form Starts */}
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          {/*Input Field Starts */}
-          <div className="form-group">
-            <input
-              className="form-control"
-              name="username"
-              id="username"
-              placeholder="USERNAME"
-              type="text"
-              value={this.state.username}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          {/*Input Field Ends */}
-          {/*Input Field Starts */}
-          <div className="form-group">
-            <input
-              className="form-control"
-              name="password"
-              id="password"
-              placeholder="PASSWORD"
-              type="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          {/*Input Field Ends */}
-          {/*Submit Form Button Starts */}
-          <div className="form-group">
-            <button className="btn btn-primary" type="submit">Connexion</button>
-            <p className="text-center">Pas de compte ?
-              <a href="" onClick={this.changeForm}> Inscription</a>
-            </p>
-          </div>
-          {/*Submit Form Button Ends */}
-        </form>
-        {/*Form Ends */}
-      </div>
-    );
-  }
-
-  SignUpForm() {
-    return(
-      <div className="SignUpForm">
-        {/* Section Title Starts */}
-        <div className="row text-center">
-          <h2 className="title-head hidden-xs">C'est <span>parti</span></h2>
-           <p className="info-form">Créez un compte rapidement et commencez le trading !</p>
-        </div>
-        {/* Section Title Ends */}
-        {/* Form Starts */}
-        <form>
-          {/* Input Field Starts */}
-          <div className="form-group">
-            <input
-              className="form-control"
-              name="name"
-              id="name"
-              placeholder="NOM"
-              type="text"
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          {/* Input Field Ends */}
-          {/* Input Field Starts */}
-          <div className="form-group">
-            <input
-              className="form-control"
-              name="email"
-              id="email"
-              placeholder="EMAIL"
-              type="email"
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          {/* Input Field Ends */}
-          {/* Input Field Starts */}
-          <div className="form-group">
-            <input
-              className="form-control"
-              name="password"
-              id="password"
-              placeholder="MOT DE PASSE"
-              type="password"
-              required
-            />
-          </div>
-          {/* Input Field Ends */}
-          {/* Submit Form Button Starts */}
-          <div className="form-group">
-            <button className="btn btn-primary" type="submit">créer un compte</button>
-            <p className="text-center">déjà un compte ?
-              <a href="" onClick={this.changeForm}> Connexion</a>
-            </p>
-          </div>
-          {/* Submit Form Button Ends */}
-        </form>
-        {/* Form Ends */}
-      </div>
-    );
   }
   render() {
     return (
