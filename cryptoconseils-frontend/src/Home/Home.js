@@ -16,7 +16,7 @@ import NotLoginDisplay from './NotLoginDisplay'
 
 class UserAction extends Component {
   render() {
-    let loginControl = null;
+
     if(this.props.isLogged){
       return <LoginDisplay username={sessionStorage.getItem('username')}/>
     }else {
