@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Articles extends Component {
+class News extends Component {
 
   constructor() {
     super();
@@ -16,7 +16,7 @@ class Articles extends Component {
     this.getAllArticles();
   }
 
-  // TODO: a faire
+  // TODO: convertir la date en meilleur format
   convertDate(date){
     this.setState({
       newDate: date
@@ -24,6 +24,7 @@ class Articles extends Component {
     return this.state.newDate;
   }
 
+  // récupère tous les articles
   getAllArticles() {
     axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/')
     .then(response => {
@@ -39,7 +40,7 @@ class Articles extends Component {
 
   render() {
     return(
-      <div className="Articles">
+      <div className="News Component">
         <section className="blog">
           <div className="container">
             {/* Section Title Starts */}
@@ -96,4 +97,4 @@ class Articles extends Component {
   }
 }
 
-export default Articles;
+export default News;
