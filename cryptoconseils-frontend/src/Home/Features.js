@@ -93,7 +93,7 @@ class Features extends Component {
               <div className="col-md-4 ts-padding bg-image-1">
                 <div>
                   <div className="text-center">
-                    <a className="button-video mfp-youtube" href="https://www.youtube.com/watch?v=YoFCB0P3OZc"></a>
+                    <a className="button-video mfp-youtube" href="https://www.youtube.com/watch?v=YoFCB0P3OZc"> </a>
                   </div>
                 </div>
               </div>

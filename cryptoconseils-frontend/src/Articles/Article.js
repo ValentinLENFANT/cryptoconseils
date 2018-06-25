@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Banner from './Banner';
+//import Banner from './Banner';
 
 class Article extends Component {
 
@@ -43,7 +43,7 @@ class Article extends Component {
                     <div className="meta">
                       <span>
                         <i className="fa fa-user"></i>
-                        <a href="#">{this.state.article.author}</a>
+                        <a href="">{this.state.article.author}</a>
                       </span>
                       <span className="date">
                         <i className="fa fa-calendar"></i>
@@ -89,7 +89,7 @@ class Article extends Component {
 
                 {/* Meta Starts */}
                 <div className="meta second-font">
-                  <span><i className="fa fa-user"></i> <a href="#">{this.state.article.author}</a></span>
+                  <span><i className="fa fa-user"></i> <a href="">{this.state.article.author}</a></span>
                   <span className="date"><i className="fa fa-calendar"></i> {this.state.article.date}</span>
                   <span><i className="fa fa-commenting"></i> <a href="blog-post.html">18 comments</a></span>
                   <span><i className="fa fa-tags"></i>{this.state.article.categories}</span>
