@@ -9,8 +9,8 @@ class SignIn extends Component {
       showSignUp: props.showSignUp,
       username: '',
       password: '',
-      statusMsg: null,
-      email: '',
+      statusMsg: '',
+      email: ''
     };
     this.changeForm = this.changeForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -27,9 +27,9 @@ class SignIn extends Component {
 
   // for multiple input
   handleChange(event) {
-    const target = event.target;
-    const value = target.value
-    const name = target.id;
+    let target = event.target;
+    let value = target.value
+    let name = target.id;
     this.setState({[name]: value});
   }
   handleSubmit(event) {
@@ -54,18 +54,19 @@ class SignIn extends Component {
   }
   handleSignUp(event){
     event.preventDefault();
+    console.log(this.state);
     axios.post(process.env.REACT_APP_API_ADDRESS+'/users/new/', {
       username: this.state.username,
       email: this.state.email,
       enabled: true,
       salt: "pboo3bgtbt01jPqvMhmcXy4Z6INSUaP1qZmrF1GDRdI",
       password: this.state.password,
-    }).then(function (response) {
-      sessionStorage.clear();
-      sessionStorage.setItem('username', this.state.username);
+    }).then(response => {
       this.props.history.push('/');
+      //sessionStorage.clear();
+      //sessionStorage.setItem('username', this.state.username);
       console.log(response.data);
-    }).catch(function (error) {
+    }).catch(error => {
       console.log(error);
     });
   }
