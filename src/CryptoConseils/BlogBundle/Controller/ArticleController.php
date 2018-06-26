@@ -9,6 +9,7 @@
 namespace CryptoConseils\BlogBundle\Controller;
 
 use CryptoConseils\BlogBundle\Form\EditArticleType;
+use CryptoConseils\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -55,12 +56,18 @@ class ArticleController extends FOSRestController
 
     public function showAction(Article $id) // [GET] /articles/8
     {
-        $data = $this->get('jms_serializer')->serialize($id, 'json');
+        $user = new User();
+        $user = $this->getUser();
+        if ($user['premiumLevel'] >= $id->getPremium()) {
+            $data = $this->get('jms_serializer')->serialize($id, 'json');
 
-        $response = new Response($data);
-        $response->headers->set('Content-Type', 'application/json');
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
 
-        return $response;
+            return $response;
+        } else {
+            return new JsonResponse(array('error' => "Access denied ! Vous n'êtes pas à un niveau premium assez élevé"));
+        }
     }
 
 
@@ -69,7 +76,7 @@ class ArticleController extends FOSRestController
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
-        }else{
+        } else {
             $currentUserUsername = $this->getUser()->getUsername();
             $em = $this->getDoctrine()->getManager();
             $data = $request->getContent();
@@ -77,14 +84,14 @@ class ArticleController extends FOSRestController
             $article = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Article', 'json');
 
             // If image_id is NULL
-            if (null === $article->getImageId()){
+            if (null === $article->getImageId()) {
                 return new JsonResponse(array('error' => 'image_id required'), 403);
-            }else{
+            } else {
                 $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($article->getImageId());
                 $article->setImage($image);
             }
 
-            if (isset($categories['category_id'])){
+            if (isset($categories['category_id'])) {
                 $categories = $categories['category_id'];
 
                 foreach ($categories as $category) {
@@ -119,7 +126,7 @@ class ArticleController extends FOSRestController
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
-        }else{
+        } else {
             $em = $this->getDoctrine()->getManager();
             $article = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->find($id);
 
@@ -134,7 +141,7 @@ class ArticleController extends FOSRestController
 
             $data = json_decode($request->getContent(), true);
 
-            if (isset($data['category_id'])){
+            if (isset($data['category_id'])) {
                 // On boucle sur les catégories du post pour les supprimer
                 foreach ($article->getCategories() as $category) {
                     $article->removeCategory($category);
@@ -175,7 +182,7 @@ class ArticleController extends FOSRestController
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
-        }else{
+        } else {
             $article = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->find($id);
 
             if (null === $article) {

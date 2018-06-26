@@ -56,6 +56,7 @@ class LoadArticle extends AbstractFixture implements OrderedFixtureInterface
             $article->setContent($contents[$i]);
             $article->setDate($date);
             $article->setPublished($published);
+            $article->setPremium(rand(1,5));
 
             // On la persiste
             $manager->persist($article);
