@@ -21,17 +21,21 @@ OR <br>
 6) Launch the following command to populate the tables : <br>
 `php bin/console doctrine:fixtures:load`
 
-7) Install React dependencies
-`cd cryptoconseils-frontend && yarn install`
+7) Go to the cryptoconseils-frontend folder : <br>
+`cd cryptoconseils-frontend
 
-8) Start your local server
-* Start Symfony server
-`php bin/console server:start` and go to [http://127.0.0.1:8000](http://127.0.0.1:8000)
-* Start React server
-`yarn start`and go to [http://127.0.0.1:3000](http://127.0.0.1:3000)
+8) With the command line execute : <br>
+`yarn install`
 
-9) Go to the following URL :
-[localhost/cryptoconseils/web/app_dev.php/blog](localhost/cryptoconseils/web/app_dev.php/blog)
+9) Create a .env.local file then write into .env && .env.local : <br>
+`REACT_APP_API_ADDRESS='http://127.0.0.1:8000'`
+
+9) Start your locals servers
+* Symfony Server <br>
+`php bin/console server:start` 
+* React Server <br>
+`yarn start` <br>
+The following page to the URL [http://127.0.0.1:3000](http://127.0.0.1:3000) should be displayed
 
 # Useful commands
 
@@ -56,9 +60,9 @@ OR <br>
 ## React
 > Exécute these command in cryptoconseils-frontend
 
-* To install React dependencies:
+* To install React dependencies: <br>
 `yarn install`
-* To start React:
+* To start React: <br>
 `yarn start`
 
 
