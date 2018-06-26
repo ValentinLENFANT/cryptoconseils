@@ -18,7 +18,9 @@ class Banner extends Component {
                       {this.props.titlePart1}-<span>{this.props.titlePart2}</span></h2>
                     {/* Title Ends */}
                     <Breadcrumb pageName={this.props.pageName}/>
-                    <Meta article={this.props.article}/>
+                    <div className="meta">
+                      <Meta article={this.props.article}/>
+                    </div>
                   </div>
                 </div>
                 {/* Section Title Ends */}

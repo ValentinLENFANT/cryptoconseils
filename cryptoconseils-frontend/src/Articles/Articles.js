@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Banner from '../Banner/Banner';
-
+import Meta from '../Banner/Meta';
 class Articles extends Component {
 
   constructor() {
@@ -91,10 +91,7 @@ class Articles extends Component {
 
                 {/* Meta Starts */}
                 <div className="meta second-font">
-                  <span><i className="fa fa-user"></i> <a href="">{this.state.article.author}</a></span>
-                  <span className="date"><i className="fa fa-calendar"></i> {this.state.article.date}</span>
-                  <span><i className="fa fa-commenting"></i> <a href="blog-post.html">18 comments</a></span>
-                  <span><i className="fa fa-tags"></i>{this.state.article.categories}</span>
+                  <Meta article={this.props.article}/>
                 </div>
                 {/* Meta Ends */}
               </div>
