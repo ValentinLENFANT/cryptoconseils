@@ -87,6 +87,7 @@ class UserController extends FOSRestController
 
         $password = password_hash($user->getPassword(), PASSWORD_BCRYPT);
         $user->setPassword($password);
+        $user->setPremiumLevel(1);
 
 
         $em = $this->getDoctrine()->getManager();
