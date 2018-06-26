@@ -58,7 +58,7 @@ class ArticleController extends FOSRestController
     {
         $user = new User();
         $user = $this->getUser();
-        if ($user['premiumLevel'] >= $id->getPremium()) {
+        if ($user['premiumLevel'] >= $id->getPremium() || $id->getPremium() == 0) {
             $data = $this->get('jms_serializer')->serialize($id, 'json');
 
             $response = new Response($data);
