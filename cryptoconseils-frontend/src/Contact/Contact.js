@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Banner from '../Banner/Banner';
 import Widget from './Widget';
 import BeginTrade from '../BeginTrade/BeginTrade';
 
@@ -10,6 +11,7 @@ class Contact extends Component {
     }
     return (
       <div className="Contact Component">
+      <Banner titlePart1="Contactez" titlePart2="nous" pageName="contact"/> 
         <div className ="contact">
           <div className="container">
             <div className="row">
