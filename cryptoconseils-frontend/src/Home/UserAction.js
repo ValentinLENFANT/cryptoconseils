@@ -49,7 +49,7 @@ class UserAction extends Component {
                     Connexion</a>
                 </li>
                 <li className="sign-up">
-                  <a href="/signup" className="btn btn-primary">
+                  <a onClick={this.onChangeDisplayForm.bind(this)} className="btn btn-primary">
                     <i className="fa fa-user-plus"></i>
                     Inscription</a>
                 </li>

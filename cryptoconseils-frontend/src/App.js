@@ -10,16 +10,6 @@ const Home = Loadable({
   loading: Loading,
 });
 
-const SignIn = Loadable({
-  loader: () => import('./Sign/SignIn'),
-  loading: Loading,
-});
-
-const SignUp = Loadable({
-  loader: () => import('./Sign/SignUp'),
-  loading: Loading,
-});
-
 const NotFound = Loadable({
   loader: () => import('./NotFound/NotFound'),
   loading: Loading,
@@ -51,8 +41,6 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route exact path="/signin" component={SignIn}/>
-          <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/calculator" component={BitcoinCalculator}/>
           <Route exact path="/faq" component={Faq}/>
           <Route exact path="/contact" component={Contact}/>
