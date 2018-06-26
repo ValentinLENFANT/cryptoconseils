@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import Breadcrumb from './Breadcrumb';
+import Meta from './Meta';
 class Banner extends Component {
   render() {
     return(
@@ -16,12 +17,8 @@ class Banner extends Component {
                     <h2 className="title-head">
                       {this.props.titlePart1}-<span>{this.props.titlePart2}</span></h2>
                     {/* Title Ends */}
-                    {/* Breadcrumb Starts */}
-                    <ul className="breadcrumb">
-                      <li><a href="/"> Accueil</a></li>
-                      <li>{this.props.pageName}</li>
-                    </ul>
-                    {/* Breadcrumb Ends */}
+                    <Breadcrumb pageName={this.props.pageName}/>
+                    <Meta article={this.props.article}/>
                   </div>
                 </div>
                 {/* Section Title Ends */}
