@@ -118,6 +118,28 @@ class Article
     private $slug;
 
     /**
+     * @var integer
+     * @ORM\Column(name="Premium", type="integer")
+     */
+    private $premium;
+
+    /**
+     * @return integer
+     */
+    public function getPremium()
+    {
+        return $this->premium;
+    }
+
+    /**
+     * @param integer $premium
+     */
+    public function setPremium($premium)
+    {
+        $this->premium = $premium;
+    }
+
+    /**
      * Get id.
      *
      * @return int
