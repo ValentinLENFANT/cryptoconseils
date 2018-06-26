@@ -13,13 +13,38 @@ import BitcoinChart from './BitcoinChart';
 import Logo from '../Logo/Logo'
 import UserAction from './UserAction';
 import BeginTrade from '../BeginTrade/BeginTrade';
+import Sign from '../Sign/SignIn'
 
 class Home extends Component {
+  constructor() {
+       super();
+       // valeur par défault, affiche le caroussel
+       this.state = {
+         displayForm: null
+       };
+   }
+
+  // permet d'afficher le form
+  // selon la valeur du component enfant "NotLoginDisplay"
+  bindDisplayForm(choice) {
+    this.setState({
+        displayForm: choice
+    });
+  }
+
+  carouselOrSign() {
+    if(this.state.displayForm === true){
+      return <Sign/>
+    } else {
+      return <Carousel/>
+    }
+  }
   render() {
     let isLogged = false;
     if(sessionStorage.getItem('access_token')){
       isLogged = true;
     }
+    console.log(this.state.displayForm);
     return (
       <div className="App">
       {/* Wrapper Starts */}
@@ -35,7 +60,7 @@ class Home extends Component {
                   <Statistics />
                 {/* Statistics Ends */}
                 {/* User Sign In/Sign Up Starts */}
-                  <UserAction isLogged={isLogged}/>
+                  <UserAction isLogged={isLogged} displayForm={this.bindDisplayForm.bind(this)}/>
                 {/* User Sign In/Sign Up Ends */}
               </div>
             </div>
@@ -46,7 +71,7 @@ class Home extends Component {
           {/* Header Ends */}
 
           {/* Slider Starts */}
-            <Carousel />
+            {this.carouselOrSign()}
           {/* Slider Ends */}
 
           {/* Blog Section Starts */}
