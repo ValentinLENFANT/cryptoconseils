@@ -12,7 +12,7 @@ import Quote from './Quote';
 import BitcoinChart from './BitcoinChart';
 import Logo from '../Logo/Logo'
 import UserAction from './UserAction';
-import BeginTrade from './BeginTrade';
+import BeginTrade from '../BeginTrade/BeginTrade';
 
 class Home extends Component {
   render() {

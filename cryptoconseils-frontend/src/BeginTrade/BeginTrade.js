@@ -19,7 +19,7 @@ class BeginTrade extends Component {
                     {/* Call To Action Button Starts */}
                     <p className="action-btn">
                       <a className="btn btn-primary" href="/signup">
-                      S'enregistrer
+                        S'enregistrer
                       </a>
                     </p>
                     {/* Call To Action Button Ends */}
