@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-//import Banner from './Banner';
+import Banner from '../Banner/Banner';
 
 class Articles extends Component {
 
@@ -25,7 +25,9 @@ class Articles extends Component {
   render() {
       // TODO: REDECOUPER EN PLUSIEURS COMPOTENT (BANNER, ARTICLE, META)
     return(
+
       <div className="Articles Component">
+        <Banner titlePart1={this.state.article.title} pageName="Article" article={this.state.article}/>
         {/* Banner Area Starts */}
         <div className="banner-area">
           <div className="banner-overlay">
