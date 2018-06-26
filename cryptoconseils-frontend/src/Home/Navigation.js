@@ -26,7 +26,7 @@ class Navigation extends Component {
                   <li><a href="airdrops.html">Airdrops</a></li>
                   <li><a href="premium.html">Accès Prémium</a></li>
                   <li><a href="about.html">Team</a></li>
-                  <li><a href="contact.html">Contact</a></li>
+                  <li><a href="/contact">Contact</a></li>
                   {/* Search Icon Starts */}
                   <li className="search"><button className="fa fa-search"></button></li>
                   {/* Search Icon Ends */}
