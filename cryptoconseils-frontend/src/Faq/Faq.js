@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import News from '../Home/News'
 class Faq extends Component {
   render() {
     return (<div className="Faq Component">
@@ -121,103 +121,48 @@ class Faq extends Component {
               {/* Latest Posts Widget Ends */}
               <div ClassName="widget recent-posts">
                 <h3 ClassName="widget-title">Posts récents</h3>
-                <ul ClassName="unstyled clearfix">
-                  {/* Recent Post Widget Starts */}
-                  <li>
-                    <div ClassName="posts-thumb pull-left">
-                      <a href="blog-post.html">
-                        <img alt="img" src="images/blog/blog-post-small-1.jpg"/></a>
-                      </div>
-                      <div ClassName="post-info">
-                        <h4 ClassName="entry-title">
-                          <a href="blog-post.html">Les risques de l'investissement</a>
-                        </h4>
-                        <p ClassName="post-meta">
-                          <span ClassName="post-date">
-                            <i ClassName="fa fa-clock-o"></i>
-                            19 Janvier, 2018</span>
-                        </p>
-                      </div>
-                      <div ClassName="clearfix"></div>
-                    </li>
-                    {/* Recent Post Widget Ends */}
-                    {/* Recent Post Widget Starts */}
-                    <li>
-                    <div ClassName="posts-thumb pull-left">
-                      <a href="blog-post.html">
-                        <img alt="img" src="images/blog/blog-post-small-2.jpg"/>
-                      </a>
-                      </div>
-                      <div ClassName="post-info">
-                        <h4 ClassName="entry-title">
-                          <a href="blog-post.html">Qui sont les investisseurs en cryptomonnaie ?</a>
-                        </h4>
-                        <p ClassName="post-meta">
-                          <span ClassName="post-date">03 Aout, 2018</span>
-                        </p>
-                      </div>
-                      <div ClassName="clearfix"></div>
-                    </li>
-                      {/* Recent Post Widget Ends */}
-                      {/* Recent Post Widget Starts */}
-                      <li>
-                        <div ClassName="posts-thumb pull-left">
-                          <a href="blog-post.html">
-                            <img alt="img" src="images/blog/blog-post-small-3.jpg"/></a>
-                          </div>
-                          <div ClassName="post-info">
-                            <h4 ClassName="entry-title">
-                              <a href="blog-post.html">L'impact des cryptomonnaies</a>
-                            </h4>
-                            <p ClassName="post-meta">
-                              <span ClassName="post-date">27 Mars, 2018</span>
-                            </p>
-                          </div>
-                          <div ClassName="clearfix"></div>
-                        </li>
-                        {/* Recent Post Widget Ends */}
-                      </ul>
-                    </div>
-                    {/* Latest Posts Widget Ends */}
-                    {/* Tags Widget Starts */}
-                    <div ClassName="widget widget-tags">
-                      <h3 ClassName="widget-title">Tags populaires</h3>
-                      <ul ClassName="unstyled clearfix">
-                        <li>
-                          <a href=''>cryptomonnaie</a>
-                        </li>
-                        <li>
-                          <a href=''>crypto</a>
-                        </li>
-                        <li>
-                          <a href=''>trading</a>
-                        </li>
-                        <li>
-                          <a href=''>wallet</a>
-                        </li>
-                        <li>
-                          <a href=''>mining</a>
-                        </li>
-                        <li>
-                          <a href=''>transaction</a>
-                        </li>
-                        <li>
-                          <a href=''>bitcoin</a>
-                        </li>
-                        <li>
-                          <a href=''>ethereum</a>
-                        </li>
-                      </ul>
-                    </div>
-                    {/* Tags Widget Ends */}
-                  </div>
-                  {/* Sidebar Ends */}
-                </div>
+                <News/>
               </div>
+              {/* Latest Posts Widget Ends */}
+              {/* Tags Widget Starts */}
+              <div ClassName="widget widget-tags">
+                <h3 ClassName="widget-title">Tags populaires</h3>
+                <ul ClassName="unstyled clearfix">
+                  <li>
+                    <a href=''>cryptomonnaie</a>
+                  </li>
+                  <li>
+                    <a href=''>crypto</a>
+                  </li>
+                  <li>
+                    <a href=''>trading</a>
+                  </li>
+                  <li>
+                    <a href=''>wallet</a>
+                  </li>
+                  <li>
+                    <a href=''>mining</a>
+                  </li>
+                  <li>
+                    <a href=''>transaction</a>
+                  </li>
+                  <li>
+                    <a href=''>bitcoin</a>
+                  </li>
+                  <li>
+                    <a href=''>ethereum</a>
+                  </li>
+                </ul>
+              </div>
+              {/* Tags Widget Ends */}
             </div>
-            {/* Section FAQ Ends */}
+            {/* Sidebar Ends */}
           </div>
-          );
+        </div>
+      </div>
+      {/* Section FAQ Ends */}
+    </div>
+    );
   }
 }
 

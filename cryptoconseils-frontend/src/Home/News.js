@@ -41,7 +41,7 @@ class News extends Component {
   render() {
     return(
       <div className="News Component">
-        <section className="blog">
+        <div className="blog">
           <div className="container">
             {/* Section Title Starts */}
             <div className="row text-center">
@@ -84,14 +84,12 @@ class News extends Component {
                     {/* Article Content Ends */}
                   </div>
                 </div>
-
               )}
-
               {/* Article Ends */}
             </div>
             {/* Section Content Ends */}
           </div>
-        </section>
+        </div>
       </div>
     );
   }
