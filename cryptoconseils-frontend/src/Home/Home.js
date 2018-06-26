@@ -14,14 +14,15 @@ import Logo from '../Logo/Logo'
 import UserAction from './UserAction';
 import BeginTrade from '../BeginTrade/BeginTrade';
 import Sign from '../Sign/SignIn'
+import Footer from '../Footer/Footer';
 
 class Home extends Component {
   constructor() {
-       super();
-       // valeur par défault, affiche le caroussel
-       this.state = {
-         displayForm: null
-       };
+     super();
+     // valeur par défault, affiche le caroussel
+     this.state = {
+       displayForm: null
+     };
    }
 
   // permet d'afficher le form
@@ -32,6 +33,7 @@ class Home extends Component {
     });
   }
 
+  // affiche le form ou le caroussel
   carouselOrSign() {
     if(this.state.displayForm === true){
       return <Sign/>
@@ -39,11 +41,13 @@ class Home extends Component {
       return <Carousel/>
     }
   }
+
   render() {
     let isLogged = false;
     if(sessionStorage.getItem('access_token')){
       isLogged = true;
     }
+
     console.log(this.state.displayForm);
     return (
       <div className="App">
@@ -119,6 +123,7 @@ class Home extends Component {
           {/* Call To Action Section Ends */}
         {/* Wrapper Ends */}
         </div>
+        <Footer/>
       </div>
     );
   }
