@@ -65,6 +65,7 @@ class OrdersController extends Controller
 //                    'id' => $order->getId(),
 //                ], UrlGeneratorInterface::ABSOLUTE_URL),
                 'useraction' => 'commit',
+                'paypal_payer_id' => 'ZZ6WH4W5EEBTW',
             ]
         ];
 
@@ -123,23 +124,23 @@ class OrdersController extends Controller
         $ppc = $this->get('payment.plugin_controller');
         $result = $ppc->approveAndDeposit($payment->getId(), $payment->getTargetAmount());
 
-//        if($result->getStatus() === Result::STATUS_PENDING) {
-//            $ex = $result->getPluginException();
-//
-//            if ($ex instanceof ActionRequiredException) {
-//                $action = $ex->getAction();
-//
-//                if ($action instanceof VisitUrl) {
-//                    return $this->redirect($action->getUrl());
-//                }
-//            }
-//        }
+        if($result->getStatus() === Result::STATUS_PENDING) {
+            $ex = $result->getPluginException();
 
-        if($result->getStatus() === Result::STATUS_SUCCESS) {
-            return $this->redirect($this->generateUrl('cryptoconseils_blog_orders_paymentcomplete', [
-                'id' => $order->getId(),
-            ]));
+            if ($ex instanceof ActionRequiredException) {
+                $action = $ex->getAction();
+
+                if ($action instanceof VisitUrl) {
+                    return $this->redirect($action->getUrl());
+                }
+            }
         }
+
+//        if($result->getStatus() === Result::STATUS_SUCCESS) {
+//            return $this->redirect($this->generateUrl('cryptoconseils_blog_orders_paymentcomplete', [
+//                'id' => $order->getId(),
+//            ]));
+//        }
 
         throw $result->getPluginException();
     }
