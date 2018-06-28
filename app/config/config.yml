@@ -138,3 +138,12 @@ nelmio_cors:
         max_age: 3600
         hosts: []
         origin_regex: false
+
+jms_payment_core:
+    encryption:
+        secret: def000002ba3630071787c984706d5c70609927c493d1fa3d21b883725194bac4ee8a5e972acc80492bb8a314b40a80b4c8bb78a9a057123281bd8acaa25d4ce87e3db69
+
+jms_payment_paypal:
+    username: valentin.lenfant_api1.hotmail.com
+    password: 37FMNZB2Y8876CGH
+    signature: 04579326729B2DB48A4A2F2876E0DD7A
