@@ -91,6 +91,21 @@ class ArticleController extends FOSRestController
                 $article->setImage($image);
             }
 
+            // If title is NULL
+            if (null === $article->getTitle()) {
+                return new JsonResponse(array('error' => 'title required'), 403);
+            }
+
+            // If content is NULL
+            if (null === $article->getContent()) {
+                return new JsonResponse(array('error' => 'content required'), 403);
+            }
+
+            // If premium is NULL
+            if (null === $article->getPremium()) {
+                return new JsonResponse(array('error' => 'Premium number required'), 403);
+            }
+
             if (isset($categories['category_id'])) {
                 $categories = $categories['category_id'];
 
@@ -134,12 +149,52 @@ class ArticleController extends FOSRestController
                 return new JsonResponse(array('error' => 'Article not found'), 404);
             }
 
+
             $username = $article->getAuthor();
             $date_publication = $article->getDate();
             $article->setAuthor($username);
             $article->setDate($date_publication);
+            $content = $article->getContent();
+            $title = $article->getTitle();
+            $premium = $article->getpremium();
 
             $data = json_decode($request->getContent(), true);
+
+            // If json data is empty
+            if(empty($data)){
+                return new JsonResponse(array('error' => 'No data sent to modify this article'), 403);
+            }
+
+            // If content is NULL
+            if (!isset($data['content'])) {
+                $article->setContent($content);
+            }else{
+                $article->setContent($data['content']);
+            }
+
+            // If title is NULL
+            if (!isset($data['title'])) {
+                $article->setTitle($title);
+            }else{
+                $article->setTitle($data['title']);
+            }
+
+            // If premium is NULL
+            if (!isset($data['premium'])) {
+                $article->setPremium($premium);
+            }else{
+                $article->setPremium($data['premium']);
+            }
+
+            // If image_id is NULL
+            if (!isset($data['image_id'])) {
+                $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($article->getImageId());
+                $article->setImage($image);
+            }else{
+                $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($data['image_id']);
+                $article->setImage($image);
+            }
+
 
             if (isset($data['category_id'])) {
                 // On boucle sur les catégories du post pour les supprimer
