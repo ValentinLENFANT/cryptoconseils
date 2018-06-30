@@ -8,8 +8,8 @@ class Denied extends Component {
         <h1>
           Vous n'ètes pas connecté ou
           vous n'avez pas le niveau premium suffisant
-
         </h1>
+        <h2><a href="/">Retour à l'acceuil</a></h2>
       </div>
     );
   }
