@@ -3,8 +3,8 @@ import axios from 'axios';
 
 class News extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       articles: [],
       newDate: null
@@ -16,27 +16,14 @@ class News extends Component {
     this.getAllArticles();
   }
 
-  // TODO: convertir la date en meilleur format
-  convertDate(date){
-    this.setState({
-      newDate: date
-    });
-    return this.state.newDate;
-  }
-
   // récupère tous les articles
   getAllArticles() {
-
     // check si access token
     if(sessionStorage.getItem('access_token')){
       var config = {
         headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
       };
-      console.log(config);
-    } else {
-      var config = null
     }
-
 
     axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/',config)
     .then(response => {
@@ -44,10 +31,17 @@ class News extends Component {
       this.setState({
         articles: response.data
       });
-    })
-    .catch(error => {
+    }).catch(error => {
       console.log(error);
     });
+  }
+
+  // TODO: convertir la date en meilleur format
+  convertDate(date){
+    this.setState({
+      newDate: date
+    });
+    return this.state.newDate;
   }
 
   render() {
@@ -85,7 +79,9 @@ class News extends Component {
                         <a href={"/articles/" + article.id}>{article.title}</a>
                       </h4>
                       <div className="post-text">
-                        <p>{article.content}</p>
+                        <p>
+                          {article.content.split(" ").splice(0,40).join(" ")+" ..."}
+                        </p>
                       </div>
                     </div>
                     <div className="post-date">
