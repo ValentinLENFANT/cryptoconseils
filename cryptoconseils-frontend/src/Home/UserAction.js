@@ -8,7 +8,8 @@ class UserAction extends Component {
 
     // pour afficher le form
     this.state = {
-       displayForm: true
+       displayForm: true,
+       username: sessionStorage.getItem('username')
     };
   }
 
@@ -16,6 +17,7 @@ class UserAction extends Component {
   onChangeDisplayForm() {
     this.props.displayForm(this.state.displayForm);
   }
+
   render() {
     if(this.props.isLogged){
       return(
@@ -26,7 +28,7 @@ class UserAction extends Component {
                   <li className="sign-in">
                     <a href="/signin" className="btn btn-primary">
                       <i className="fa fa-user"></i>
-                      {sessionStorage.getItem('username')}
+                      {this.state.username}
                     </a>
                   </li>
                   <li className="sign-up">

@@ -21,10 +21,25 @@ class Home extends Component {
      super();
      // valeur par défault, affiche le caroussel
      this.state = {
-       displayForm: null
+       displayForm: null,
+       isLogged: false,
+       token: null
      };
    }
 
+  componentDidMount(){
+    if(sessionStorage.getItem('access_token')){
+      this.setState({
+        isLogged: true,
+        token: sessionStorage.getItem('access_token')
+      });
+    } else {
+      this.setState({
+        isLogged: false,
+        token: null
+      })
+    }
+  }
   // permet d'afficher le form
   // selon la valeur du component enfant "NotLoginDisplay"
   bindDisplayForm(choice) {
@@ -43,10 +58,7 @@ class Home extends Component {
   }
 
   render() {
-    let isLogged = false;
-    if(sessionStorage.getItem('access_token')){
-      isLogged = true;
-    }
+
 
     console.log(this.state.displayForm);
     return (
@@ -64,7 +76,7 @@ class Home extends Component {
                   <Statistics />
                 {/* Statistics Ends */}
                 {/* User Sign In/Sign Up Starts */}
-                  <UserAction isLogged={isLogged} displayForm={this.bindDisplayForm.bind(this)}/>
+                  <UserAction isLogged={this.state.isLogged} displayForm={this.bindDisplayForm.bind(this)}/>
                 {/* User Sign In/Sign Up Ends */}
               </div>
             </div>
@@ -79,7 +91,7 @@ class Home extends Component {
           {/* Slider Ends */}
 
           {/* Blog Section Starts */}
-            <News />
+            <News token={this.state.token}/>
           {/* Blog Section Ends */}
 
           {/* About Section Starts */}
@@ -119,7 +131,7 @@ class Home extends Component {
           {/* Quote and Chart Section Ends */}
 
           {/* Call To Action Section Starts */}
-            <BeginTrade isLogged={isLogged}/>
+            <BeginTrade isLogged={this.state.isLogged}/>
           {/* Call To Action Section Ends */}
         {/* Wrapper Ends */}
         </div>

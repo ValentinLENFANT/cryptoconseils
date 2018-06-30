@@ -10,7 +10,8 @@ class SignIn extends Component {
       username: '',
       password: '',
       statusMsg: '',
-      email: ''
+      email: '',
+      success: false
     };
     this.changeForm = this.changeForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -49,6 +50,9 @@ class SignIn extends Component {
       sessionStorage.setItem('access_token', response.data.access_token);
       sessionStorage.setItem('username', this.state.username);
       //this.props.history.push('/');
+      this.setState({
+        success: true
+      })
       console.log(response);
     }).catch(error => {
       this.setState({statusMsg: 'Username et/ou Mdp invalides'})
@@ -197,29 +201,34 @@ class SignIn extends Component {
     }
   }
   render() {
-    // layout des formulaires
-    return (
-      <div className="SignIn">
-        <div className="auth-page">
-          {/*Wrapper Starts */}
-          <div className="wrapper">
-            <div className="container-fluid user-auth">
-              <div className="hidden-xs col-sm-4 col-md-4 col-lg-4">
-                <Carousel />
-              </div>
-              <div className="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                <div className="form-container">
-                  <div>
-                    {this.formRender()}
+    if(this.state.success){
+      return null
+    }else {
+      // layout des formulaires
+      return (
+        <div className="SignIn">
+          <div className="auth-page">
+            {/*Wrapper Starts */}
+            <div className="wrapper">
+              <div className="container-fluid user-auth">
+                <div className="hidden-xs col-sm-4 col-md-4 col-lg-4">
+                  <Carousel />
+                </div>
+                <div className="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                  <div className="form-container">
+                    <div>
+                      {this.formRender()}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            {/*Wrapper Ends */}
           </div>
-          {/*Wrapper Ends */}
         </div>
-      </div>
-    );
+      );
+    }
+
   }
 }
 
