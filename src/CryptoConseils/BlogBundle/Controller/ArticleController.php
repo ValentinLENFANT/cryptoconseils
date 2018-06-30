@@ -82,7 +82,7 @@ class ArticleController extends FOSRestController
 
             return $response;
         } else {
-            return new JsonResponse(array('error' => "Access denied ! Vous n'êtes pas à un niveau premium assez élevé"));
+            return new JsonResponse(array('error' => "Access denied ! Vous n'êtes pas à un niveau premium assez élevé"), 403);
         }
     }
 
