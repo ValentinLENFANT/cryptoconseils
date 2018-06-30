@@ -26,7 +26,19 @@ class News extends Component {
 
   // récupère tous les articles
   getAllArticles() {
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/')
+
+    // check si access token
+    if(sessionStorage.getItem('access_token')){
+      var config = {
+        headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+      };
+      console.log(config);
+    } else {
+      var config = null
+    }
+
+
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/',config)
     .then(response => {
       console.log(response.data);
       this.setState({
