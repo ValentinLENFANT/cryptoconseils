@@ -6,24 +6,48 @@ class Articles extends Component {
 
   constructor() {
     super();
-    this.state = {article: []};
+    this.state = {article: [], access: false};
   }
 
   // éxécuté à la fin
   componentDidMount() {
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/'+this.props.match.params.id)
+
+    // check si access token
+    if(sessionStorage.getItem('access_token')){
+      var config = {
+        headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+      };
+      console.log(config);
+    } else {
+      var config = null
+    }
+
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/'+this.props.match.params.id,config)
     .then(response => {
       this.setState({
-        article: response.data
+        article: response.data,
+        access: true
       });
     })
     .catch(error => {
+      this.setState({
+        access: false
+      })
       console.log(error);
     });
   }
 
   render() {
       // TODO: REDECOUPER EN PLUSIEURS COMPOTENT (BANNER, ARTICLE, META)
+    if(this.state.access === false){
+      return(
+        <div>
+          <h1>T'AS PAS LE DROIT UESH</h1>
+        </div>
+      )
+    } else {
+
+
     return(
 
       <div className="Articles Component">
@@ -100,6 +124,7 @@ class Articles extends Component {
         </div>
       </div>
     );
+  }
   }
 }
 
