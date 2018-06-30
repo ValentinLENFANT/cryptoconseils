@@ -25,14 +25,16 @@ class News extends Component {
       };
     }
 
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/',config)
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/', config)
     .then(response => {
-      console.log(response.data);
+      console.log(response.error_description);
       this.setState({
         articles: response.data
       });
     }).catch(error => {
-      console.log(error);
+      if(error.response.data.error_description === "The access token provided has expired."){
+        sessionStorage.clear();
+      }
     });
   }
 
