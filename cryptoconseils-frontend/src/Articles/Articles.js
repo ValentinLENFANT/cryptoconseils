@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Banner from '../Banner/Banner';
-import Meta from '../Banner/Meta';
+import Meta from './Meta';
 import Denied from '../Denied/Denied'
 
 class Articles extends Component {
@@ -19,7 +19,7 @@ class Articles extends Component {
         headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
       };
     }
-    
+
     axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/'+this.props.match.params.id,authorization)
     .then(response => {
       this.setState({
@@ -38,48 +38,6 @@ class Articles extends Component {
       return(
         <div className="Articles Component">
           <Banner titlePart1={this.state.article.title} pageName="Article" article={this.state.article}/>
-          {/* Banner Area Starts */}
-          <div className="banner-area">
-            <div className="banner-overlay">
-              <div className="banner-text text-center">
-                <div className="container">
-                  {/* Section Title Starts */}
-                  <div className="row text-center">
-                    <div className="col-xs-12">
-                      {/* Title Starts */}
-                      <h2 className="title-head banner-post-title">
-                        {this.state.article.title}
-                      </h2>
-                      {/* Title Ends */}
-                      {/* Meta Starts */}
-                      <div className="meta">
-                        <span>
-                          <i className="fa fa-user"></i>
-                          <a href="">{this.state.article.author}</a>
-                        </span>
-                        <span className="date">
-                          <i className="fa fa-calendar"></i>
-                          {this.state.article.date}
-                          </span>
-                        <span>
-                          <i className="fa fa-commenting"></i>
-                          <a href="blog-post.html">29 commentaire</a>
-                        </span>
-                        <span>
-                          <i className="fa fa-tags"></i>
-                          {this.state.article.categories}
-                        </span>
-                      </div>
-                      {/* Meta Ends */}
-                    </div>
-                  </div>
-                  {/* Section Title Ends */}
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* Banner Area Ends */}
-
           {/* div Content Starts */}
           <div className="container blog-page">
             <div className="row">
@@ -100,7 +58,7 @@ class Articles extends Component {
 
                   {/* Meta Starts */}
                   <div className="meta second-font">
-                    <Meta article={this.props.article}/>
+                    <Meta article={this.state.article}/>
                   </div>
                   {/* Meta Ends */}
                 </div>
