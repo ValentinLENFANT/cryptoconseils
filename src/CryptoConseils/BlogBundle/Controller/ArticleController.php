@@ -44,7 +44,19 @@ class ArticleController extends FOSRestController
 
     public function indexAction() // [GET] /articles
     {
-        $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findAll();
+        if (null === $this->getUser()) {
+            $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticlePremium(0);
+            $data = $this->get('jms_serializer')->serialize($articles, 'json');
+
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
+        }
+
+        $currentUserLevel = $this->getUser()->getPremiumLevel();
+        $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticlePremium($currentUserLevel);
+
         $data = $this->get('jms_serializer')->serialize($articles, 'json');
 
         $response = new Response($data);
@@ -56,14 +68,13 @@ class ArticleController extends FOSRestController
 
     public function showAction(Article $id) // [GET] /articles/8
     {
-        $user = new User();
-        $user = $this->getUser();
-        if (getallheaders()['Host'] == "127.0.0.1:8000" && isset(getallheaders()['fromPostman']) && !empty(getallheaders()['fromPostman']) && getallheaders()['fromPostman'] == 1) {
-            $user['premiumLevel'] = 5;
-        } else if (getallheaders()['Host'] == "127.0.0.1:8000" && !isset(getallheaders()['fromPostman'])) {
-            return new JsonResponse(array('error' => "La requête ne contient pas le header fromPostman"));
+        if (null === $this->getUser()) {
+            return new JsonResponse(array('error' => 'Access denied! You need to login'), 403);
         }
-        if ($user['premiumLevel'] >= $id->getPremium() || $id->getPremium() == 0) { //A tester sur le site pour voir si le premiumLevel du User courant est bien récupéré
+
+        $currentUserLevel = $this->getUser()->getPremiumLevel();
+
+        if ($currentUserLevel >= $id->getPremium() || $id->getPremium() == 0) { //A tester sur le site pour voir si le premiumLevel du User courant est bien récupéré
             $data = $this->get('jms_serializer')->serialize($id, 'json');
 
             $response = new Response($data);

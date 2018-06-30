@@ -88,6 +88,7 @@ class UserController extends FOSRestController
         $password = password_hash($user->getPassword(), PASSWORD_BCRYPT);
         $user->setPassword($password);
         $user->setPremiumLevel(1);
+        $user->setEnabled(true);
 
 
         $em = $this->getDoctrine()->getManager();
@@ -113,6 +114,10 @@ class UserController extends FOSRestController
         }
 
         $currentUserId = $currentUserId->getUsername();
+        $email = $users->getEmail();
+        $enabled = $users->isEnabled();
+        $password = $users->getPassword();
+        $premium = $users->getPremiumLevel();
 
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
@@ -120,6 +125,49 @@ class UserController extends FOSRestController
             if ($userId == $currentUserId){
 
                 $data = json_decode($request->getContent(), true);
+
+
+                // If json data is empty
+                if(empty($data)){
+                    return new JsonResponse(array('error' => 'No data sent to modify this article'), 403);
+                }
+
+                // If username is NULL
+                if (!isset($data['username'])) {
+                    $users->setUsername($userId);
+                }else{
+                    $users->setUsername($data['username']);
+                }
+
+                // If email is NULL
+                if (!isset($data['email'])) {
+                    $users->setEmail($email);
+                }else{
+                    $users->setEmail($data['email']);
+                }
+
+                // If enabled is NULL
+                if (!isset($data['enabled'])) {
+                    $users->setEnabled($enabled);
+                }else{
+                    $users->setEnabled($data['enabled']);
+                }
+
+                // If password is NULL
+                if (!isset($data['password'])) {
+                    $users->setPassword($password);
+                }else{
+                    $users->setPassword(password_hash($data['password'], PASSWORD_BCRYPT));
+                }
+
+                // If premium is NULL
+                if (!isset($data['premiumLevel'])) {
+                    $users->setPremiumLevel($premium);
+                }else{
+                    $users->setPremiumLevel($data['premiumLevel']);
+                }
+
+
                 $form = $this->createForm(EditUserType::class, $users);
                 $form->submit($data);
 
@@ -146,6 +194,49 @@ class UserController extends FOSRestController
             }
         }else{
             $data = json_decode($request->getContent(), true);
+
+
+            // If json data is empty
+            if(empty($data)){
+                return new JsonResponse(array('error' => 'No data sent to modify this article'), 403);
+            }
+
+            // If username is NULL
+            if (!isset($data['username'])) {
+                $users->setUsername($userId);
+            }else{
+                $users->setUsername($data['username']);
+            }
+
+            // If email is NULL
+            if (!isset($data['email'])) {
+                $users->setEmail($email);
+            }else{
+                $users->setEmail($data['email']);
+            }
+
+            // If enabled is NULL
+            if (!isset($data['enabled'])) {
+                $users->setEnabled($enabled);
+            }else{
+                $users->setEnabled($data['enabled']);
+            }
+
+            // If password is NULL
+            if (!isset($data['password'])) {
+                $users->setPassword($password);
+            }else{
+                $users->setPassword(password_hash($data['password'], PASSWORD_BCRYPT));
+            }
+
+            // If premium is NULL
+            if (!isset($data['premiumLevel'])) {
+                $users->setPremiumLevel($premium);
+            }else{
+                $users->setPremiumLevel($data['premiumLevel']);
+            }
+
+
             $form = $this->createForm(EditUserType::class, $users);
             $form->submit($data);
 
