@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 class Comments extends Component {
 
+  constructor() {
+    super();
+    this.state = {showForm: false};
+  }
   renderReply() {
     return (
       // if tableau de réponse => render réponses
@@ -12,6 +16,30 @@ class Comments extends Component {
         </ul>
       </div>
     )
+  }
+  handleForm() {
+    this.setState({
+      showForm: !this.state.showForm
+    })
+  }
+
+  renderForm() {
+    return(
+      <div className="comments-form">
+        <form>
+          {/* Input Field Starts */}
+          <div className="form-group">
+            <textarea className="form-control" id="comment" name="comment" placeholder="COMMENT"  required></textarea>
+          </div>
+          {/* Input Field Ends */}
+          {/* Submit Form Button Starts */}
+          <div className="form-group">
+            <button className="btn btn-primary" type="submit">Envoyer commentaire</button>
+          </div>
+          {/* Submit Form Button Ends */}
+        </form>
+      </div>
+    );
   }
   renderComments(){
      return this.props.comments.map(cmt => {
@@ -27,7 +55,8 @@ class Comments extends Component {
               </div>
               <p className="comment-content">{cmt.content}</p>
               <div>
-                <a className="comment-reply" href="">Répondre</a>
+                <button className="comment-reply" onClick={this.handleForm.bind(this)}>Répondre</button>
+                { this.state.showForm ? this.renderForm() : null }
               </div>
             </div>
           </div>
