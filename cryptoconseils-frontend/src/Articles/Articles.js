@@ -3,6 +3,7 @@ import axios from 'axios';
 import Banner from '../Banner/Banner';
 import Meta from './Meta';
 import Denied from '../Denied/Denied'
+import Comments from './Comments'
 
 class Articles extends Component {
 
@@ -61,6 +62,9 @@ class Articles extends Component {
                     <Meta article={this.state.article}/>
                   </div>
                   {/* Meta Ends */}
+                  <div>
+                    <Comments comments={this.state.article.comments}/>
+                  </div>
                 </div>
               </div>
             </div>

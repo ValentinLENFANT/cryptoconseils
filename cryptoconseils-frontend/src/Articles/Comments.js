@@ -2,66 +2,47 @@ import React, { Component } from 'react';
 
 class Comments extends Component {
 
+  renderReply() {
+    return (
+      // if tableau de réponse => render réponses
+      <div>
+        <ul className="comments-reply">
+          <li>
+          </li>
+        </ul>
+      </div>
+    )
+  }
+  renderComments(){
+     return this.props.comments.map(cmt => {
+      return (
+        <li key={cmt.id}>
+          {/* Comment Starts */}
+          <div className="comment" >
+            <img className="comment-avatar pull-left" alt="" src="images/blog/user3.jpg"/>
+            <div className="comment-body">
+              <div className="meta-data">
+                <span className="comment-author">{cmt.author}</span>
+                <span className="comment-date pull-right">{cmt.date}</span>
+              </div>
+              <p className="comment-content">{cmt.content}</p>
+              <div>
+                <a className="comment-reply" href="">Répondre</a>
+              </div>
+            </div>
+          </div>
+          {/* Comment Ends */}
+        </li>
+      );
+    })
+  }
   render() {
     return(
       <div className="Comments Commponent">
         <div className="comments">
-          <h3 className="comments-heading uppercase">3 Comments</h3>
+          <h3 className="comments-heading uppercase">{this.props.comments.length} Comments</h3>
           <ul className="comments-list">
-            <li>
-              {/* Comment Starts */}
-              <div className="comment">
-                <img className="comment-avatar pull-left" alt="" src="images/blog/user1.jpg"/>
-                <div className="comment-body">
-                  <div className="meta-data">
-                    <span className="comment-author">Lina Marzouki</span>
-                    <span className="comment-date pull-right second-font">Janvier 17, 2018</span>
-                  </div>
-                  <p className="comment-content">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehen.</p>
-                  <div>
-                    <a className="comment-reply" href="#">Répondre</a>
-                  </div>
-                </div>
-              </div>
-              {/* Comment Ends */}
-              <ul className="comments-reply">
-                <li>
-                  {/* Comment Starts */}
-                  <div className="comment">
-                    <img className="comment-avatar pull-left" alt="" src="images/blog/user2.jpg"/>
-                    <div className="comment-body">
-                      <div className="meta-data">
-                        <span className="comment-author">Rawia Chniti</span>
-                        <span className="comment-date pull-right">Mars 29, 2018</span>
-                      </div>
-                      <p className="comment-content">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehen.</p>
-                      <div>
-                        <a className="comment-reply" href="#">Répondre</a>
-                      </div>
-                    </div>
-                  </div>
-                  {/* Comment Ends */}
-                </li>
-              </ul>
-              {/* Comment Starts */}
-              <div className="comment">
-                <img className="comment-avatar pull-left" alt="" src="images/blog/user3.jpg"/>
-                <div className="comment-body">
-                  <div className="meta-data">
-                    <span className="comment-author">Slim Hamdi</span>
-                    <span className="comment-date pull-right">Janvier 17, 2018</span>
-                  </div>
-                  <p className="comment-content">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehen.</p>
-                  <div>
-                    <a className="comment-reply" href="#">Répondre</a>
-                  </div>
-                </div>
-              </div>
-              {/* Comment Ends */}
-            </li>
+            {this.renderComments()}
           </ul>
           <h3 className="comments-heading add-comment">Ajouter un commentaire</h3>
           {/* Comments Form Starts */}
@@ -90,6 +71,7 @@ class Comments extends Component {
             </form>
           </div>
       </div>
+    </div>
     );
   }
 }
