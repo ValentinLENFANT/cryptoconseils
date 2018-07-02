@@ -73,7 +73,7 @@ class UserController extends FOSRestController
         }
     }
 
-    public function showUserCommentsByUsernameAction($username) // [GET] /users/comments/{username}
+    public function showUserCommentsByUsernameAction($username) // [GET] /users/comments/username/{username}
     {
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
@@ -100,7 +100,7 @@ class UserController extends FOSRestController
         return $response;
     }
 
-    public function showUserCommentsByIdAction($id) // [GET] /users/comments/{id}
+    public function showUserCommentsByIdAction($id) // [GET] /users/comments/id/{id}
     {
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');

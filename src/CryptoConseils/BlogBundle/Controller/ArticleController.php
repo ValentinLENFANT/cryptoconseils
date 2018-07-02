@@ -72,21 +72,30 @@ class ArticleController extends FOSRestController
 
     public function showAction(Article $id) // [GET] /articles/8
     {
-        if (null === $this->getUser()) {
-            return new JsonResponse(array('error' => 'Access denied! You need to login'), 403);
-        }
+        if ($id->getPremium() > 0) //si l'article n'est pas de niveau 0 il faut obligatoirement être au moins connecté
+        {
+            if (null === $this->getUser()) { //On vérifie si l'utilisateur est connecté
+                return new JsonResponse(array('error' => 'Access denied! You need to login'), 403);
+            }
+            $currentUserLevel = $this->getUser()->getPremiumLevel(); //On récupère le niveau de l'utilisateur
 
-        $currentUserLevel = $this->getUser()->getPremiumLevel();
+            if ($currentUserLevel >= $id->getPremium() || $id->getPremium() == 0) {
+                $data = $this->get('jms_serializer')->serialize($id, 'json');
 
-        if ($currentUserLevel >= $id->getPremium() || $id->getPremium() == 0) { //A tester sur le site pour voir si le premiumLevel du User courant est bien récupéré
+                $response = new Response($data);
+                $response->headers->set('Content-Type', 'application/json');
+
+                return $response;
+            } else {
+                return new JsonResponse(array('error' => "Access denied ! Vous n'êtes pas à un niveau premium assez élevé"), 403);
+            }
+        } else {
             $data = $this->get('jms_serializer')->serialize($id, 'json');
 
             $response = new Response($data);
             $response->headers->set('Content-Type', 'application/json');
 
             return $response;
-        } else {
-            return new JsonResponse(array('error' => "Access denied ! Vous n'êtes pas à un niveau premium assez élevé"), 403);
         }
     }
 
