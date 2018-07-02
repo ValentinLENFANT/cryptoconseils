@@ -4,12 +4,17 @@ import Banner from '../Banner/Banner';
 import Meta from './Meta';
 import Denied from '../Denied/Denied'
 import Comments from './Comments'
+import Reply from './Reply'
 
 class Articles extends Component {
 
   constructor() {
     super();
-    this.state = {article: [], access: false};
+    this.state = {
+      article: [],
+      access: false,
+      isLogged: false
+    };
   }
 
   // éxécuté à la fin
@@ -19,7 +24,13 @@ class Articles extends Component {
       var authorization = {
         headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
       };
+      this.setState({
+        isLogged: true
+      });
     } else {
+      this.setState({
+        isLogged: false
+      });
       var authorization = null
     }
 
@@ -66,6 +77,9 @@ class Articles extends Component {
                   {/* Meta Ends */}
                   <div>
                     <Comments comments={this.state.article.comments}/>
+                  </div>
+                  <div>
+                    <Reply article={this.state.article} isLogged={this.state.isLogged}/>
                   </div>
                 </div>
               </div>

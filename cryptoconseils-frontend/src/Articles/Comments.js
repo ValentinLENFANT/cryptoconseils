@@ -77,32 +77,6 @@ class Comments extends Component {
           <ul className="comments-list">
             {this.renderComments()}
           </ul>
-          <h3 className="comments-heading add-comment">Ajouter un commentaire</h3>
-          {/* Comments Form Starts */}
-          <div className="comments-form">
-            <form>
-              {/* Input Field Starts */}
-              <div className="form-group">
-                <input className="form-control" name="name" id="name" placeholder="NAME" type="text" required/>
-              </div>
-              {/* Input Field Ends */}
-              {/* Input Field Starts */}
-              <div className="form-group">
-                <input className="form-control" name="email" id="email" placeholder="EMAIL" type="email" required/>
-              </div>
-              {/* Input Field Ends */}
-              {/* Input Field Starts */}
-              <div className="form-group">
-                <textarea className="form-control" id="comment" name="comment" placeholder="COMMENT"  required></textarea>
-              </div>
-              {/* Input Field Ends */}
-              {/* Submit Form Button Starts */}
-              <div className="form-group">
-                <button className="btn btn-primary" type="submit">Envoyer commentaire</button>
-              </div>
-              {/* Submit Form Button Ends */}
-            </form>
-          </div>
       </div>
     </div>
     );
