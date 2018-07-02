@@ -51,11 +51,11 @@ class Profil extends Component {
             {/*Call premiums Ends */}
 
             {/*Airdrop premium Starts */}
-            <Airdrop />
+              <Airdrop />
             {/*Airdrop premiums Ends */}
 
             {/*InfosPerso Starts */}
-            <InfosPerso />
+              <InfosPerso />
             {/*InfosPerso Ends */}
 
             {/* Pricing Starts */}
