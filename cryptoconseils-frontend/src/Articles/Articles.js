@@ -5,6 +5,7 @@ import Meta from './Meta';
 import Denied from '../Denied/Denied'
 import Comments from './Comments'
 import Reply from './Reply'
+import Sidebar from '../Sidebar/Sidebar'
 
 class Articles extends Component {
 
@@ -69,7 +70,6 @@ class Articles extends Component {
                   </p>
                   {/* Content Ends */}
 
-
                   {/* Meta Starts */}
                   <div className="meta second-font">
                     <Meta article={this.state.article}/>
@@ -80,6 +80,9 @@ class Articles extends Component {
                   </div>
                   <div>
                     <Reply article={this.state.article} isLogged={this.state.isLogged}/>
+                  </div>
+                  <div>
+                    <Sidebar/>
                   </div>
                 </div>
               </div>
