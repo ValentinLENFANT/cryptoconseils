@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 class Statistics extends Component {
   render() {
     return (
-      <div className="Statistics">
+      <div className="Statistics Component">
         <div className="col-md-6 col-lg-6">
           <ul className="unstyled bitcoin-stats text-center">
             <li><h6>9,450 USD</h6><span>Dernier trade</span></li>

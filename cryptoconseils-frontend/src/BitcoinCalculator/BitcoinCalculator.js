@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class BitcoinCalculator extends Component {
   render() {
     return (
-      <div className="BitcoinCalculator">
+      <div className="BitcoinCalculator Component">
         <div className="bitcoin-calculator-section">
           <div className="container">
             <div className="row">

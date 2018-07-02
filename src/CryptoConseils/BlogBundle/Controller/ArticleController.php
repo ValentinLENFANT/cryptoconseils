@@ -9,6 +9,7 @@
 namespace CryptoConseils\BlogBundle\Controller;
 
 use CryptoConseils\BlogBundle\Form\EditArticleType;
+use CryptoConseils\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,7 +44,19 @@ class ArticleController extends FOSRestController
 
     public function indexAction() // [GET] /articles
     {
-        $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findAll();
+        if (null === $this->getUser()) {
+            $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticlePremium(0);
+            $data = $this->get('jms_serializer')->serialize($articles, 'json');
+
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
+        }
+
+        $currentUserLevel = $this->getUser()->getPremiumLevel();
+        $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticlePremium($currentUserLevel);
+
         $data = $this->get('jms_serializer')->serialize($articles, 'json');
 
         $response = new Response($data);
@@ -55,12 +68,22 @@ class ArticleController extends FOSRestController
 
     public function showAction(Article $id) // [GET] /articles/8
     {
-        $data = $this->get('jms_serializer')->serialize($id, 'json');
+        if (null === $this->getUser()) {
+            return new JsonResponse(array('error' => 'Access denied! You need to login'), 403);
+        }
 
-        $response = new Response($data);
-        $response->headers->set('Content-Type', 'application/json');
+        $currentUserLevel = $this->getUser()->getPremiumLevel();
 
-        return $response;
+        if ($currentUserLevel >= $id->getPremium() || $id->getPremium() == 0) { //A tester sur le site pour voir si le premiumLevel du User courant est bien récupéré
+            $data = $this->get('jms_serializer')->serialize($id, 'json');
+
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
+        } else {
+            return new JsonResponse(array('error' => "Access denied ! Vous n'êtes pas à un niveau premium assez élevé"), 403);
+        }
     }
 
 
@@ -69,7 +92,7 @@ class ArticleController extends FOSRestController
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
-        }else{
+        } else {
             $currentUserUsername = $this->getUser()->getUsername();
             $em = $this->getDoctrine()->getManager();
             $data = $request->getContent();
@@ -77,14 +100,29 @@ class ArticleController extends FOSRestController
             $article = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Article', 'json');
 
             // If image_id is NULL
-            if (null === $article->getImageId()){
+            if (null === $article->getImageId()) {
                 return new JsonResponse(array('error' => 'image_id required'), 403);
-            }else{
+            } else {
                 $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($article->getImageId());
                 $article->setImage($image);
             }
 
-            if (isset($categories['category_id'])){
+            // If title is NULL
+            if (null === $article->getTitle()) {
+                return new JsonResponse(array('error' => 'title required'), 403);
+            }
+
+            // If content is NULL
+            if (null === $article->getContent()) {
+                return new JsonResponse(array('error' => 'content required'), 403);
+            }
+
+            // If premium is NULL
+            if (null === $article->getPremium()) {
+                return new JsonResponse(array('error' => 'Premium number required'), 403);
+            }
+
+            if (isset($categories['category_id'])) {
                 $categories = $categories['category_id'];
 
                 foreach ($categories as $category) {
@@ -119,7 +157,7 @@ class ArticleController extends FOSRestController
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
-        }else{
+        } else {
             $em = $this->getDoctrine()->getManager();
             $article = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->find($id);
 
@@ -127,14 +165,54 @@ class ArticleController extends FOSRestController
                 return new JsonResponse(array('error' => 'Article not found'), 404);
             }
 
+
             $username = $article->getAuthor();
             $date_publication = $article->getDate();
             $article->setAuthor($username);
             $article->setDate($date_publication);
+            $content = $article->getContent();
+            $title = $article->getTitle();
+            $premium = $article->getpremium();
 
             $data = json_decode($request->getContent(), true);
 
-            if (isset($data['category_id'])){
+            // If json data is empty
+            if(empty($data)){
+                return new JsonResponse(array('error' => 'No data sent to modify this article'), 403);
+            }
+
+            // If content is NULL
+            if (!isset($data['content'])) {
+                $article->setContent($content);
+            }else{
+                $article->setContent($data['content']);
+            }
+
+            // If title is NULL
+            if (!isset($data['title'])) {
+                $article->setTitle($title);
+            }else{
+                $article->setTitle($data['title']);
+            }
+
+            // If premium is NULL
+            if (!isset($data['premium'])) {
+                $article->setPremium($premium);
+            }else{
+                $article->setPremium($data['premium']);
+            }
+
+            // If image_id is NULL
+            if (!isset($data['image_id'])) {
+                $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($article->getImageId());
+                $article->setImage($image);
+            }else{
+                $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($data['image_id']);
+                $article->setImage($image);
+            }
+
+
+            if (isset($data['category_id'])) {
                 // On boucle sur les catégories du post pour les supprimer
                 foreach ($article->getCategories() as $category) {
                     $article->removeCategory($category);
@@ -175,7 +253,7 @@ class ArticleController extends FOSRestController
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
-        }else{
+        } else {
             $article = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->find($id);
 
             if (null === $article) {

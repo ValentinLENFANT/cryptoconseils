@@ -1,6 +1,6 @@
 security:
     encoders:
-        CryptoConseils\UserBundle\Entity\User: sha512
+        CryptoConseils\UserBundle\Entity\User: bcrypt
 
     role_hierarchy:
         ROLE_ADMIN: [ROLE_AUTEUR, ROLE_MODERATEUR]

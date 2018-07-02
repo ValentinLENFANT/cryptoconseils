@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-
+import Breadcrumb from './Breadcrumb';
+import Meta from './Meta';
 class Banner extends Component {
-
-  constructor(props) {
-    super(props);
-  }
   render() {
-    console.log(this.props.oui);
     return(
-      <div>
+      <div className="Banner Component">
         {/* Banner Area Starts */}
         <div className="banner-area">
           <div className="banner-overlay">
@@ -18,17 +14,13 @@ class Banner extends Component {
                 <div className="row text-center">
                   <div className="col-xs-12">
                     {/* Title Starts */}
-                    <h2 className="title-head banner-post-title">
-                    </h2>
+                    <h2 className="title-head">
+                      {this.props.titlePart1}-<span>{this.props.titlePart2}</span></h2>
                     {/* Title Ends */}
-                    {/* Meta Starts */}
+                    <Breadcrumb pageName={this.props.pageName}/>
                     <div className="meta">
-                      <span><i className="fa fa-user"></i> <a href=""> </a></span>
-                      <span className="date"><i className="fa fa-calendar"></i></span>
-                      <span><i className="fa fa-commenting"></i> <a href="blog-post.html">29 commentaire</a></span>
-                      <span><i className="fa fa-tags"></i></span>
+                      <Meta article={this.props.article}/>
                     </div>
-                    {/* Meta Ends */}
                   </div>
                 </div>
                 {/* Section Title Ends */}

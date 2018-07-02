@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class BitcoinChart extends Component {
   render () {
     return (
-      <div className="BitcoinChart">
+      <div className="BitcoinChart Component">
 
         <div className="col-md-8 bg-grey-chart">
           <div className="chart-widget dark-chart chart-1">
@@ -12,7 +12,7 @@ class BitcoinChart extends Component {
             </div>
           </div>
         </div>
-      
+
       </div>
     );
   }

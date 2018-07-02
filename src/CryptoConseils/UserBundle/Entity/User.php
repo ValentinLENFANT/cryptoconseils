@@ -23,6 +23,28 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @var integer
+     * @ORM\Column(name="premiumLevel", type="integer")
+     */
+    private $premiumLevel;
+
+    /**
+     * @return int
+     */
+    public function getPremiumLevel()
+    {
+        return $this->premiumLevel;
+    }
+
+    /**
+     * @param int $premiumLevel
+     */
+    public function setPremiumLevel($premiumLevel)
+    {
+        $this->premiumLevel = $premiumLevel;
+    }
+
 
     /**
      * Get id

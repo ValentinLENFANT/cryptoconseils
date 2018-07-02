@@ -20,15 +20,16 @@ class LoadUser implements FixtureInterface, ContainerAwareInterface
     {
 
         $userManager = $this->container->get('fos_user.user_manager');
-        $listNames = array('Valentin', 'Aurélien', 'Guillaume', 'Alexandre');
+        $listNames = array('Valentin', 'Aurélien', 'Guillaume', 'Alexandre', 'Satoshi', 'Nakamoto', 'Vitalik', 'Brandon', 'George', 'David', 'Paul');
 
         foreach ($listNames as $name) {
             $user = $userManager->createUser();
             $user->setUsername($name);
             $user->setPlainPassword($name);
             $user->setRoles(array('ROLE_ADMIN'));
-            $user->setEmail($user->getUsername() . '@test.fr');
+            strtolower($user->setEmail($user->getUsername() . '@hotmail.fr'));
             $user->setEnabled(1);
+            $user->setPremiumLevel(rand(1,5));
             $manager->persist($user);
         }
         $manager->flush();
