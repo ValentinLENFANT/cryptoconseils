@@ -7,6 +7,16 @@ class Comments extends Component {
     this.state = {showForm: false, reply: null};
   }
 
+  convertDate(date){
+    date = new Date(date);
+    var month = date.toLocaleString('fr', { month: "long" });
+    var day = date.getDate();
+    var year = date.getFullYear();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    return month+' '+day+', '+year+' '+hours+':'+minutes;
+  }
+
   renderReply() {
     return (
       // if tableau de réponse => render réponses
@@ -51,11 +61,11 @@ class Comments extends Component {
         <li key={cmt.id}>
           {/* Comment Starts */}
           <div className="comment" >
-            <img className="comment-avatar pull-left" alt="" src="images/blog/user3.jpg"/>
+            <img className="comment-avatar pull-left" alt="" src=""/>
             <div className="comment-body">
               <div className="meta-data">
                 <span className="comment-author">{cmt.author}</span>
-                <span className="comment-date pull-right">{cmt.date}</span>
+                <span className="comment-date pull-right"> {this.convertDate(cmt.date)}</span>
               </div>
               <p className="comment-content">{cmt.content}</p>
               <div>
