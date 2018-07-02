@@ -12,7 +12,7 @@ class Meta extends Component {
         <div className="Meta Component">
           {/* Meta Starts */}
           <span>
-            <i className="fa fa-user"></i> <a href=""> {this.props.article.author}</a>
+            <i className="fa fa-user"></i> <a href=""> {this.props.article.author} </a>
           </span>
           <span className="date">
             <i className="fa fa-calendar"></i> {this.convertDate(this.props.article.date)}
