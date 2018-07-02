@@ -35,15 +35,33 @@ const Contact = Loadable({
   loading: Loading,
 });
 
+const Profil = Loadable({
+  loader: () => import('./Profil/Profil'),
+  loading: Loading,
+});
+
+const SignIn = Loadable({
+  loader: () => import('./Sign/SignIn'),
+  loading: Loading,
+});
+
+const SignUp = Loadable({
+  loader: () => import('./Sign/SignUp'),
+  loading: Loading,
+});
+
 class App extends Component {
   render() {
     return (
       <Router>
         <Switch>
           <Route exact path="/" component={Home}/>
+          <Route exact path="/profil" component={Profil}/>
           <Route exact path="/calculator" component={BitcoinCalculator}/>
           <Route exact path="/faq" component={Faq}/>
           <Route exact path="/contact" component={Contact}/>
+          <Route exact path="/signin" component={SignIn}/>
+          <Route exact path="/signup" component={SignUp}/>
           <Route path="/articles/:id" component={Articles}/>
           <Route component={NotFound}/>
         </Switch>
