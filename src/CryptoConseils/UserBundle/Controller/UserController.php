@@ -73,7 +73,34 @@ class UserController extends FOSRestController
         }
     }
 
-    public function showUserCommentsAction($id) // [GET] /users/comments/{id}
+    public function showUserCommentsByUsernameAction($username) // [GET] /users/comments/{username}
+    {
+        try {
+            $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+        $reponse = $bdd->query('SELECT * FROM comment');
+        $comments = array();
+        while ($donnees = $reponse->fetch()) {
+            if ($donnees['author'] == $username) {
+                $comments[] = ['id' => $donnees['id'],
+                    'article_id' => $donnees['article_id'],
+                    'author' => $donnees['author'],
+                    'content' => $donnees['content'],
+                    'date' => $donnees['date'],
+                    'user_id' => $donnees['user_id']];
+            }
+        }
+        $data = $this->get('jms_serializer')->serialize($comments, 'json');
+
+        $response = new Response($data);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    public function showUserCommentsByIdAction($id) // [GET] /users/comments/{id}
     {
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
