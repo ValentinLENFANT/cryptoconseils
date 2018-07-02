@@ -21,7 +21,6 @@ class Home extends Component {
      super();
      // valeur par défault, affiche le caroussel
      this.state = {
-       displayForm: false,
        isLogged: false,
        token: null
      };
@@ -40,23 +39,6 @@ class Home extends Component {
       })
     }
   }
-  // permet d'afficher le form
-  // selon la valeur du component enfant "NotLoginDisplay"
-  bindDisplayForm() {
-    this.setState({
-      displayForm: !this.state.displayForm
-    });
-  }
-
-  // affiche le form ou le caroussel
-  carouselOrSign() {
-    if(this.state.displayForm){
-      return <Sign/>
-    } else {
-      return <Carousel/>
-    }
-  }
-
   render() {
     return (
       <div className="App">
@@ -73,7 +55,7 @@ class Home extends Component {
                   <Statistics />
                 {/* Statistics Ends */}
                 {/* User Sign In/Sign Up Starts */}
-                  <UserAction isLogged={this.state.isLogged} displayForm={this.bindDisplayForm.bind(this)}/>
+                  <UserAction isLogged={this.state.isLogged}/>
                 {/* User Sign In/Sign Up Ends */}
               </div>
             </div>
@@ -84,7 +66,7 @@ class Home extends Component {
           {/* Header Ends */}
 
           {/* Slider Starts */}
-            {this.carouselOrSign()}
+            <Carousel/>
           {/* Slider Ends */}
 
           {/* Blog Section Starts */}

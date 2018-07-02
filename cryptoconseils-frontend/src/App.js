@@ -40,6 +40,16 @@ const Profil = Loadable({
   loading: Loading,
 });
 
+const SignIn = Loadable({
+  loader: () => import('./Sign/SignIn'),
+  loading: Loading,
+});
+
+const SignUp = Loadable({
+  loader: () => import('./Sign/SignUp'),
+  loading: Loading,
+});
+
 class App extends Component {
   render() {
     return (
@@ -50,6 +60,8 @@ class App extends Component {
           <Route exact path="/calculator" component={BitcoinCalculator}/>
           <Route exact path="/faq" component={Faq}/>
           <Route exact path="/contact" component={Contact}/>
+          <Route exact path="/signin" component={SignIn}/>
+          <Route exact path="/signup" component={SignUp}/>
           <Route path="/articles/:id" component={Articles}/>
           <Route component={NotFound}/>
         </Switch>
