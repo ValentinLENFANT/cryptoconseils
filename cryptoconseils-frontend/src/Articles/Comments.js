@@ -4,8 +4,9 @@ class Comments extends Component {
 
   constructor() {
     super();
-    this.state = {showForm: false};
+    this.state = {showForm: false, reply: null};
   }
+
   renderReply() {
     return (
       // if tableau de réponse => render réponses
@@ -23,10 +24,13 @@ class Comments extends Component {
     })
   }
 
+  sendForm() {
+    return this.state.reply
+  }
   renderForm() {
     return(
       <div className="comments-form">
-        <form>
+        <form onSubmit={this.sendForm.bind(this)}>
           {/* Input Field Starts */}
           <div className="form-group">
             <textarea className="form-control" id="comment" name="comment" placeholder="COMMENT"  required></textarea>
