@@ -54,9 +54,12 @@ class LoadComment extends AbstractFixture implements OrderedFixtureInterface
             // On crée la catégorie
             $comment = new comment();
             $comment->setArticle($articles_id[$i]);
-            $comment->setAuthor($author[rand(0,3)]);
-            $comment->setContent($content[rand(0,4)]);
+            $authorName = rand(0,4);
+            $user_id = $authorName;
+            $comment->setAuthor($author[$authorName]);
+            $comment->setContent($content[rand(0,7)]);
             $comment->setDate($date);
+            $comment->setUserId($user_id+1);
             // On la persiste
             $manager->persist($comment);
         }
