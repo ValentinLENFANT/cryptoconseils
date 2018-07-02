@@ -6,7 +6,7 @@ import Denied from '../Denied/Denied'
 import Comments from './Comments'
 import Reply from './Reply'
 import Sidebar from '../Sidebar/Sidebar'
-
+import Header from '../Header/Header'
 class Articles extends Component {
 
   constructor() {
@@ -51,6 +51,9 @@ class Articles extends Component {
   render() {
     if(this.state.access){
       return(
+        <div>
+        <Header/>
+
         <div className="Articles Component">
           <Banner titlePart1={this.state.article.title} pageName="Article" article={this.state.article}/>
           {/* div Content Starts */}
@@ -80,6 +83,7 @@ class Articles extends Component {
             </div>
           </div>
         </div>
+      </div>
       );
     } else {
       return(
