@@ -55,7 +55,7 @@ class Home extends Component {
                   <Statistics />
                 {/* Statistics Ends */}
                 {/* User Sign In/Sign Up Starts */}
-                  <UserAction isLogged={this.state.isLogged}/>
+                  <UserAction />
                 {/* User Sign In/Sign Up Ends */}
               </div>
             </div>

@@ -8,12 +8,13 @@ class UserAction extends Component {
     // pour afficher le form
     this.state = {
        displayForm: false,
-       username: sessionStorage.getItem('username')
+       username: sessionStorage.getItem('username'),
+       isLogged: sessionStorage.getItem('access_token')
     };
   }
-  
+
   render() {
-    if(this.props.isLogged){
+    if(this.state.isLogged){
       return(
         <div className="UserAction Component">
             <div className="Login Component">
