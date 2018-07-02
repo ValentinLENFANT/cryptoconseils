@@ -8,14 +8,14 @@ class UserAction extends Component {
 
     // pour afficher le form
     this.state = {
-       displayForm: true,
+       displayForm: false,
        username: sessionStorage.getItem('username')
     };
   }
 
   // afficher le form d'inscription
   onChangeDisplayForm() {
-    this.props.displayForm(this.state.displayForm);
+    this.props.displayForm(!this.state.displayForm);
   }
 
   render() {
@@ -26,12 +26,12 @@ class UserAction extends Component {
               <div className="col-md-4 col-lg-4">
                 <ul className="unstyled user">
                   <li className="sign-in">
-                    <a href="/signin" className="btn btn-primary">
+                    <a href="/profil" className="btn btn-primary">
                       <i className="fa fa-user"></i>
                       {this.state.username}
                     </a>
                   </li>
-                  <li className="sign-up">
+                  <li className="sign-out">
                     <SignOut/>
                   </li>
                 </ul>

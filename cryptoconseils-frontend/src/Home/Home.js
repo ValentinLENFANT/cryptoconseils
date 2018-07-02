@@ -21,7 +21,7 @@ class Home extends Component {
      super();
      // valeur par défault, affiche le caroussel
      this.state = {
-       displayForm: null,
+       displayForm: false,
        isLogged: false,
        token: null
      };
@@ -42,9 +42,9 @@ class Home extends Component {
   }
   // permet d'afficher le form
   // selon la valeur du component enfant "NotLoginDisplay"
-  bindDisplayForm(choice) {
+  bindDisplayForm() {
     this.setState({
-        displayForm: choice
+        displayForm: !this.state.displayForm
     });
   }
 
