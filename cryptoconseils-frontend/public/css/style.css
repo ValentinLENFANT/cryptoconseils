@@ -5020,3 +5020,24 @@ h4.panel-title a.collapsed:before {
     font-size: 28px;
   }
 }
+
+/*DEBUT CSS DE LA PAGE PROFIL */
+.titre-dashboard{color: #fd961a;text-transform: uppercase;border: 1px solid #fd961a;width: auto;}
+.mes-commentaires{color: white;font-size: 17px;text-transform: uppercase;}
+.icone-commentaire{color:white;margin-right:10px;float: left;margin-top: 6px;}
+.list-group-commentaire{padding-left:0px;}
+.button-profil{margin-right:5px;}
+.list-comment{background: #212121;}
+.panel-default>.panel-heading {border-color:inherit;}
+.premium-image{width:100%;}
+.avatar-change{display:block;background:#3e3e3e;font-size:13px;text-align:left;padding-left:20px;}
+.submit-infos{margin-top: 20px;margin-bottom: 30px;}
+
+
+/*FIN CSS DE LA PAGE PROFIL */
+
+/*DEBUT CSS DE LA PAGE PROFIL PREMIUM */
+/*FIN CSS DE LA PAGE PROFIL PREMIUM */
+
+/*DEBUT CSS DE LA PAGE ADMIN */
+/*FIN CSS DE LA PAGE ADMIN */
