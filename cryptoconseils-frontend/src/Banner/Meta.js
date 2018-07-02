@@ -2,13 +2,12 @@ import React, {Component} from 'react';
 
 class Meta extends Component {
 
-  convertDate(date){
+  convertDate(date) {
     date = new Date(date);
     return date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
   }
   render() {
     if(this.props.article) {
-      console.log(this.props.article);
       return(
         <div className="Meta Component">
           {/* Meta Starts */}
@@ -19,7 +18,7 @@ class Meta extends Component {
             <i className="fa fa-calendar"></i> {this.convertDate(this.props.article.date)}
           </span>
           <span>
-            <i className="fa fa-commenting"></i> {this.props.article.comments.length} commentaires
+            <i className="fa fa-commenting"></i> {this.props.article.comments.length+ " commentaires"}
           </span>
           <span>
             <i className="fa fa-tags"></i>{this.props.article.categories}
