@@ -90,6 +90,27 @@ class Comment
      */
     private $date;
 
+    /**
+     * @var int
+     * @ORM\Column(name="user_id", type="integer")
+     */
+    private $user_id;
+
+    /**
+     * @return int
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @param int $user_id
+     */
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+    }
 
     /**
      * Get id.
