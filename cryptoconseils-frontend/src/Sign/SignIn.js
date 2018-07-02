@@ -49,11 +49,11 @@ class SignIn extends Component {
       sessionStorage.clear();
       sessionStorage.setItem('access_token', response.data.access_token);
       sessionStorage.setItem('username', this.state.username);
-      //this.props.history.push('/');
       this.setState({
         success: true
-      })
-      console.log(response);
+      });
+      window.location.reload(true);
+      console.log(event);
     }).catch(error => {
       this.setState({statusMsg: 'Username et/ou Mdp invalides'})
       console.log(error);
@@ -71,7 +71,10 @@ class SignIn extends Component {
     }).then(response => {
       sessionStorage.clear();
       sessionStorage.setItem('username', this.state.username);
-      console.log(response.data);
+      this.setState({
+        success: true
+      });
+      window.location.reload(true);
     }).catch(error => {
       console.log(error);
     });

@@ -44,13 +44,13 @@ class Home extends Component {
   // selon la valeur du component enfant "NotLoginDisplay"
   bindDisplayForm() {
     this.setState({
-        displayForm: !this.state.displayForm
+      displayForm: !this.state.displayForm
     });
   }
 
   // affiche le form ou le caroussel
   carouselOrSign() {
-    if(this.state.displayForm === true){
+    if(this.state.displayForm){
       return <Sign/>
     } else {
       return <Carousel/>
@@ -58,9 +58,6 @@ class Home extends Component {
   }
 
   render() {
-
-
-    console.log(this.state.displayForm);
     return (
       <div className="App">
       {/* Wrapper Starts */}
