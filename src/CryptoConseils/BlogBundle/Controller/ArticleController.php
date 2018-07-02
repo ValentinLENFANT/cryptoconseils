@@ -51,6 +51,10 @@ class ArticleController extends FOSRestController
             $response = new Response($data);
             $response->headers->set('Content-Type', 'application/json');
 
+            if (null == $articles){
+                return new JsonResponse(array('error' => 'No articles found for your premium level'), 404);
+            }
+
             return $response;
         }
 
@@ -83,6 +87,39 @@ class ArticleController extends FOSRestController
             return $response;
         } else {
             return new JsonResponse(array('error' => "Access denied ! Vous n'êtes pas à un niveau premium assez élevé"));
+        }
+    }
+
+
+    public function show_by_categoryAction($category) // [GET] /articles/Airdrop
+    {
+        if (null === $this->getUser()) {
+            $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticleCategory($category, 0);
+            $data = $this->get('jms_serializer')->serialize($articles, 'json');
+
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            if (null == $articles){
+                return new JsonResponse(array('error' => 'No articles found for your premium level'), 404);
+            }
+
+            return $response;
+        }else{
+
+            $currentUserLevel = $this->getUser()->getPremiumLevel();
+
+            $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticleCategory($category, $currentUserLevel);
+            $data = $this->get('jms_serializer')->serialize($articles, 'json');
+
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            if (null == $articles){
+                return new JsonResponse(array('error' => 'No articles found for this category'), 404);
+            }
+
+            return $response;
         }
     }
 
@@ -229,7 +266,6 @@ class ArticleController extends FOSRestController
             $form = $this->createForm(EditArticleType::class, $article);
             $form->submit($data);
 
-
             // Analyse si les conditions sur les champs sont respectées //
             $data_errors = $request->getContent();
             $article_errors = $this->get('jms_serializer')->deserialize($data_errors, 'CryptoConseils\BlogBundle\Entity\Article', 'json');
@@ -238,7 +274,6 @@ class ArticleController extends FOSRestController
             if (count($errors)) {
                 return new Response($errors, 400);
             } // Fin d'analyse //
-
 
             $em->persist($article);
             $em->flush();
