@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import Navigation from '../Home/Navigation';
-import Statistics from '../Home/Statistics';
 import Price from '../Home/Price';
-import Logo from '../Logo/Logo';
 import Menus from './Menus';
 import Activites from './Activites';
 import Call from './Call';
 import Airdrop from './Airdrop';
 import InfosPerso from './InfosPerso';
-import UserAction from '../Home/UserAction';
+import Header from '../Header/Header';
 import Denied from '../Denied/Denied';
 
 class Profil extends Component {
@@ -19,24 +16,8 @@ class Profil extends Component {
         {/* Wrapper Starts */}
           <div className="wrapper">
             {/* Header Starts */}
-            <div className="header">
-              <div className="container">
-                <div className="row">
-                  {/* Logo Starts */}
-                    <Logo />
-                  {/* Logo Ends */}
-                  {/* Statistics Starts */}
-                    <Statistics />
-                  {/* Statistics Ends */}
-                  {/* User Sign In/Sign Up Starts */}
-                    <UserAction />
-                  {/* User Sign In/Sign Up Ends */}
-                </div>
-              </div>
-              {/* Navigation Menu Starts */}
-                <Navigation />
-              {/* Navigation Menu Ends */}
-              </div>
+              <Header/>
+            {/* Header Ends */}
 
             {/* Menus Starts */}
               <Menus />
