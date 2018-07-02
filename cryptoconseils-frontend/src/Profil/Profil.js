@@ -8,26 +8,7 @@ import Activites from './Activites';
 import Call from './Call';
 import Airdrop from './Airdrop';
 import InfosPerso from './InfosPerso';
-
-
-
-class UserAction extends Component {
-  render() {
-    return (
-      <div className="UserAction">
-        <div className="col-md-4 col-lg-4">
-          <ul className="unstyled user">
-            <li className="sign-out" >
-              <a href="#" className="btn btn-primary">
-                <i className="fa fa-user-plus"></i> Déconnexion
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    );
-  }
-}
+import UserAction from '../Home/UserAction'
 
 class Profil extends Component {
   render() {
@@ -58,21 +39,21 @@ class Profil extends Component {
           {/* Menus Starts */}
             <Menus />
           {/* Menus Ends */}
-          
+
           {/* Derniers commentaires Starts */}
             <Activites />
           {/* Derniers commentaires Ends */}
 
           {/*Call premium Starts */}
-            <Call /> 
+            <Call />
           {/*Call premiums Ends */}
 
           {/*Airdrop premium Starts */}
-          <Airdrop /> 
+          <Airdrop />
           {/*Airdrop premiums Ends */}
 
           {/*InfosPerso Starts */}
-          <InfosPerso /> 
+          <InfosPerso />
           {/*InfosPerso Ends */}
 
           {/* Pricing Starts */}
