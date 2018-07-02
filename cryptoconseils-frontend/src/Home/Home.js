@@ -66,11 +66,11 @@ class Home extends Component {
           {/* Header Ends */}
 
           {/* Slider Starts */}
-            <Carousel/>
+            <Carousel />
           {/* Slider Ends */}
 
           {/* Blog Section Starts */}
-            <News token={this.state.token}/>
+            <News />
           {/* Blog Section Ends */}
 
           {/* About Section Starts */}
