@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Navigation from './Navigation';
-import Statistics from './Statistics';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+
 import Carousel from './Caroussel';
 import About from './About';
 import News from './News';
@@ -10,11 +11,8 @@ import BitcoinCalculator from '../BitcoinCalculator/BitcoinCalculator';
 import Team from './Team';
 import Quote from './Quote';
 import BitcoinChart from './BitcoinChart';
-import Logo from '../Logo/Logo'
-import UserAction from './UserAction';
 import BeginTrade from '../BeginTrade/BeginTrade';
-import Sign from '../Sign/SignIn'
-import Footer from '../Footer/Footer';
+
 
 class Home extends Component {
   constructor() {
@@ -45,24 +43,7 @@ class Home extends Component {
       {/* Wrapper Starts */}
         <div className="wrapper">
           {/* Header Starts */}
-          <div className="header">
-            <div className="container">
-              <div className="row">
-                {/* Logo Starts */}
-                  <Logo />
-                {/* Logo Ends */}
-                {/* Statistics Starts */}
-                  <Statistics />
-                {/* Statistics Ends */}
-                {/* User Sign In/Sign Up Starts */}
-                  <UserAction />
-                {/* User Sign In/Sign Up Ends */}
-              </div>
-            </div>
-            {/* Navigation Menu Starts */}
-              <Navigation />
-            {/* Navigation Menu Ends */}
-            </div>
+            <Header/>
           {/* Header Ends */}
 
           {/* Slider Starts */}
