@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 
 import Carousel from './Caroussel';
 import About from './About';
@@ -95,7 +94,6 @@ class Home extends Component {
           {/* Call To Action Section Ends */}
         {/* Wrapper Ends */}
         </div>
-        <Footer/>
       </div>
     );
   }
