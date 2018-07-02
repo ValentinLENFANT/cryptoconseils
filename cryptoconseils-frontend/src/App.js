@@ -40,6 +40,11 @@ const Article = Loadable({
   loading: Loading,
 });
 
+const Profil = Loadable({
+  loader: () => import('./Profil/Profil'),
+  loading: Loading,
+});
+
 class App extends Component {
   render() {
     return (
@@ -48,6 +53,7 @@ class App extends Component {
           <Route exact path="/" component={Home}/>
           <Route exact path="/signin" component={SignIn}/>
           <Route exact path="/signup" component={SignUp}/>
+          <Route exact path="/profil" component={Profil}/>
           <Route exact path="/convertisseur" component={BitcoinCalculator}/>
           <Route exact path="/faq" component={Faq}/>
           <Route path="/articles/:id" component={Article}/>
