@@ -1,0 +1,8 @@
+{# src/BlogBundle/Resources/views/Orders/show.html.twig #}
+
+Total price : € {{ order.amount }}
+
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Pay € {{ order.amount }}" />
+{{ form_end(form) }}
