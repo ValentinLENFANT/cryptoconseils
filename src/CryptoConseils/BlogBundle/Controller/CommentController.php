@@ -46,9 +46,10 @@ class CommentController extends FOSRestController
     }
 
 
-    public function showAction(Comment $id) // [GET] /comments/8
+    public function showAction(Comment $article_id) // [GET] /comments/8
     {
-        $data = $this->get('jms_serializer')->serialize($id, 'json');
+        $comments = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Comment')->find($article_id);
+        $data = $this->get('jms_serializer')->serialize($comments, 'json');
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');
 
