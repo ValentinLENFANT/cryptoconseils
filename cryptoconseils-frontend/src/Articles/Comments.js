@@ -61,17 +61,18 @@ class Comments extends Component {
         <li key={cmt.id}>
           {/* Comment Starts */}
           <div className="comment" >
-            <img className="comment-avatar pull-left" alt="" src=""/>
+            <img className="comment-avatar pull-left" alt="" src="/images/blog/user1.jpg"/>
             <div className="comment-body">
               <div className="meta-data">
                 <span className="comment-author">{cmt.author}</span>
                 <span className="comment-date pull-right"> {this.convertDate(cmt.date)}</span>
               </div>
               <p className="comment-content">{cmt.content}</p>
-              <div>
-                <button className="comment-reply" onClick={this.handleForm.bind(this)}>Répondre</button>
+
+              {/* <div>
+                <a href=""className="comment-reply" onClick={this.handleForm.bind(this)}>Répondre</a>
                 { this.state.showForm ? this.renderForm() : null }
-              </div>
+              </div>*/}
             </div>
           </div>
           {/* Comment Ends */}
@@ -83,7 +84,7 @@ class Comments extends Component {
     return(
       <div className="Comments Commponent">
         <div className="comments">
-          <h3 className="comments-heading uppercase">{this.props.comments.length} Comments</h3>
+          <h3 className="comments-heading uppercase">{this.props.comments.length} commentaires</h3>
           <ul className="comments-list">
             {this.renderComments()}
           </ul>

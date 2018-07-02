@@ -61,7 +61,7 @@ class Articles extends Component {
                 <div>
                   {/* Figure Starts */}
                   <div className="blog-figure">
-                    <img className="img-responsive" src="images/blog/blog-post-1.jpg" alt=""/>
+                    <img className="img-responsive" src="/images/blog/blog-post-1.jpg" alt=""/>
                   </div>
                   {/* Figure Ends */}
                   {/* Content Starts */}
@@ -69,23 +69,14 @@ class Articles extends Component {
                       {this.state.article.content}
                   </p>
                   {/* Content Ends */}
-
                   {/* Meta Starts */}
-                  <div className="meta second-font">
-                    <Meta article={this.state.article}/>
-                  </div>
+                  <Meta article={this.state.article}/>
                   {/* Meta Ends */}
-                  <div>
-                    <Comments comments={this.state.article.comments}/>
-                  </div>
-                  <div>
-                    <Reply article={this.state.article} isLogged={this.state.isLogged}/>
-                  </div>
-                  <div>
-                    <Sidebar/>
-                  </div>
+                  <Comments comments={this.state.article.comments}/>
+                  <Reply article={this.state.article} isLogged={this.state.isLogged}/>
                 </div>
               </div>
+              <Sidebar/>
             </div>
           </div>
         </div>
