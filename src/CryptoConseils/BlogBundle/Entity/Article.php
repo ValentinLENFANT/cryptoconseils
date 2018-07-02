@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation\Expose;
  * @ORM\Table(name="article")
  * @ORM\Entity(repositoryClass="CryptoConseils\BlogBundle\Repository\ArticleRepository")
  * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(fields="title", message="Une annonce existe déjà avec ce titre.")
+ *
  */
 class Article
 {
@@ -38,7 +38,7 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="Title", type="string", length=255, unique=true)
+     * @ORM\Column(name="Title", type="string", length=255)
      * @Assert\Length(min=10)
      */
     private $title;
@@ -88,8 +88,8 @@ class Article
      * @var string
      *
      * @ORM\Column(name="Content", type="text")
-     * @Assert\NotBlank()
-     * @Antiflood()
+     *
+     *
      */
     private $content;
 
@@ -116,6 +116,28 @@ class Article
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
+
+    /**
+     * @var integer
+     * @ORM\Column(name="Premium", type="integer")
+     */
+    private $premium;
+
+    /**
+     * @return integer
+     */
+    public function getPremium()
+    {
+        return $this->premium;
+    }
+
+    /**
+     * @param integer $premium
+     */
+    public function setPremium($premium)
+    {
+        $this->premium = $premium;
+    }
 
     /**
      * Get id.

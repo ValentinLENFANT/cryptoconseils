@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Articles extends Component {
+class News extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       articles: [],
       newDate: null
@@ -16,7 +16,29 @@ class Articles extends Component {
     this.getAllArticles();
   }
 
-  // TODO: a faire
+  // récupère tous les articles
+  getAllArticles() {
+    // check si access token
+    if(sessionStorage.getItem('access_token')){
+      var config = {
+        headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+      };
+    }
+
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/', config)
+    .then(response => {
+      console.log(response.error_description);
+      this.setState({
+        articles: response.data
+      });
+    }).catch(error => {
+      if(error.response.data.error_description === "The access token provided has expired."){
+        sessionStorage.clear();
+      }
+    });
+  }
+
+  // TODO: convertir la date en meilleur format
   convertDate(date){
     this.setState({
       newDate: date
@@ -24,23 +46,10 @@ class Articles extends Component {
     return this.state.newDate;
   }
 
-  getAllArticles() {
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/')
-    .then(response => {
-      console.log(response.data);
-      this.setState({
-        articles: response.data
-      });
-    })
-    .catch(error => {
-      console.log(error);
-    });
-  }
-
   render() {
     return(
-      <div className="Articles">
-        <section className="blog">
+      <div className="News Component">
+        <div className="blog">
           <div className="container">
             {/* Section Title Starts */}
             <div className="row text-center">
@@ -54,9 +63,7 @@ class Articles extends Component {
             <div className="row latest-posts-content">
               {/* Article Starts */}
               {/* slice(0,3) pour limiter à trois articles */}
-
-              {
-                this.state.articles.slice(0,3).map(article =>
+              {this.state.articles.slice(0,3).map(article =>
                 <div className="col-sm-4 col-md-4 col-xs-12" key={article.id}>
                   <div className="latest-post">
                     {/* Featured Image Starts */}
@@ -74,28 +81,28 @@ class Articles extends Component {
                         <a href={"/articles/" + article.id}>{article.title}</a>
                       </h4>
                       <div className="post-text">
-                        <p>{article.content}</p>
+                        <p>
+                          {article.content.split(" ").splice(0,40).join(" ")+" ..."}
+                        </p>
                       </div>
                     </div>
                     <div className="post-date">
-                      <span>{this.convertDate.bind(article.date)}</span>
+                      <span>{article.date}</span>
                       <span>JAN</span>
                     </div>
                     <a href={"/articles/" + article.id} className="btn btn-primary">Lire plus</a>
                     {/* Article Content Ends */}
                   </div>
                 </div>
-
               )}
-
               {/* Article Ends */}
             </div>
             {/* Section Content Ends */}
           </div>
-        </section>
+        </div>
       </div>
     );
   }
 }
 
-export default Articles;
+export default News;

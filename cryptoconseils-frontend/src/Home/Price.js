@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Price extends Component {
   render() {
     return(
-      <div className="Price">
+      <div className="Price Component">
         <div className="pricing">
           <div className="container">
             {/* Section Title Starts */}

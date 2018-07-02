@@ -26,4 +26,18 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
 
         return new Paginator($query, true);
     }
+
+    public function findByArticlePremium($premium)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->where('a.premium <= :premium')
+            ->setParameter('premium', $premium)
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

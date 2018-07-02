@@ -99,7 +99,35 @@ class ImageController extends FOSRestController
                 return new JsonResponse(array('error' => 'Image not found'), 404);
             }
 
+            $url = $image->getUrl();
+            $alt = $image->getAlt();
+
             $data = json_decode($request->getContent(), true);
+
+
+            // If json data is empty
+            if(empty($data)){
+                return new JsonResponse(array('error' => 'No data sent to modify this image'), 403);
+            }
+
+            // If url is NULL
+            if (!isset($data['url'])) {
+                $image->setUrl($url);
+            }else{
+                $image->setUrl($data['url']);
+            }
+
+            // If alt is NULL
+            if (!isset($data['alt'])) {
+                $image->setAlt($alt);
+            }else{
+                $image->setAlt($data['alt']);
+            }
+
+
+
+
+
             $form = $this->createForm(EditImageType::class, $image);
             $form->submit($data);
 

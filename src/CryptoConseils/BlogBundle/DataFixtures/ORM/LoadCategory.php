@@ -20,7 +20,10 @@ class LoadCategory extends AbstractFixture implements OrderedFixtureInterface
             'Crypto-monnaies',
             'Tendance baissière',
             'Ethereum',
-            'Bear market'
+            'Bear market',
+            'Airdrop',
+            'Analyse',
+            'Call'
         );
 
         foreach ($names as $name) {

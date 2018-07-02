@@ -3,7 +3,7 @@ import Navigation from './Navigation';
 import Statistics from './Statistics';
 import Carousel from './Caroussel';
 import About from './About';
-import Articles from './Articles';
+import News from './News';
 import Features from './Features';
 import Price from './Price';
 import BitcoinCalculator from '../BitcoinCalculator/BitcoinCalculator';
@@ -11,60 +11,56 @@ import Team from './Team';
 import Quote from './Quote';
 import BitcoinChart from './BitcoinChart';
 import Logo from '../Logo/Logo'
-
-class UserAction extends Component {
-  render() {
-    return (
-      <div className="UserAction">
-        <div className="col-md-4 col-lg-4">
-          <ul className="unstyled user">
-            <li className="sign-in">
-              <a href="/signin" className="btn btn-primary">
-                <i className="fa fa-user"></i> Connexion</a></li>
-            <li className="sign-up">
-              <a href="/signup" className="btn btn-primary">
-              <i className="fa fa-user-plus"></i> Inscription</a></li>
-          </ul>
-        </div>
-      </div>
-    );
-  }
-}
-
-class BeginTrade extends Component {
-  render() {
-    return (
-      <div className="BeginTrade">
-        <div className="call-action-all">
-          <div className="call-action-all-overlay">
-            <div className="container">
-              <div className="row">
-                <div className="col-xs-12">
-                  {/* Call To Action Text Starts */}
-                  <div className="action-text">
-                    <h2>Commencez dès maintenant à trader</h2>
-                    <p className="lead">Créer un compte gratuitement !</p>
-                  </div>
-                  {/* Call To Action Text Ends */}
-                  {/* Call To Action Button Starts */}
-                  <p className="action-btn">
-                    <a className="btn btn-primary" href="/signup">
-                    S'enregistrer
-                    </a>
-                  </p>
-                  {/* Call To Action Button Ends */}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+import UserAction from './UserAction';
+import BeginTrade from '../BeginTrade/BeginTrade';
+import Sign from '../Sign/SignIn'
+import Footer from '../Footer/Footer';
 
 class Home extends Component {
+  constructor() {
+     super();
+     // valeur par défault, affiche le caroussel
+     this.state = {
+       displayForm: null,
+       isLogged: false,
+       token: null
+     };
+   }
+
+  componentDidMount(){
+    if(sessionStorage.getItem('access_token')){
+      this.setState({
+        isLogged: true,
+        token: sessionStorage.getItem('access_token')
+      });
+    } else {
+      this.setState({
+        isLogged: false,
+        token: null
+      })
+    }
+  }
+  // permet d'afficher le form
+  // selon la valeur du component enfant "NotLoginDisplay"
+  bindDisplayForm(choice) {
+    this.setState({
+        displayForm: choice
+    });
+  }
+
+  // affiche le form ou le caroussel
+  carouselOrSign() {
+    if(this.state.displayForm === true){
+      return <Sign/>
+    } else {
+      return <Carousel/>
+    }
+  }
+
   render() {
+
+
+    console.log(this.state.displayForm);
     return (
       <div className="App">
       {/* Wrapper Starts */}
@@ -80,7 +76,7 @@ class Home extends Component {
                   <Statistics />
                 {/* Statistics Ends */}
                 {/* User Sign In/Sign Up Starts */}
-                  <UserAction />
+                  <UserAction isLogged={this.state.isLogged} displayForm={this.bindDisplayForm.bind(this)}/>
                 {/* User Sign In/Sign Up Ends */}
               </div>
             </div>
@@ -91,11 +87,11 @@ class Home extends Component {
           {/* Header Ends */}
 
           {/* Slider Starts */}
-            <Carousel />
+            {this.carouselOrSign()}
           {/* Slider Ends */}
 
           {/* Blog Section Starts */}
-            <Articles />
+            <News token={this.state.token}/>
           {/* Blog Section Ends */}
 
           {/* About Section Starts */}
@@ -135,10 +131,11 @@ class Home extends Component {
           {/* Quote and Chart Section Ends */}
 
           {/* Call To Action Section Starts */}
-            <BeginTrade />
+            <BeginTrade isLogged={this.state.isLogged}/>
           {/* Call To Action Section Ends */}
         {/* Wrapper Ends */}
         </div>
+        <Footer/>
       </div>
     );
   }

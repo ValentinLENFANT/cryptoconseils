@@ -10,16 +10,6 @@ const Home = Loadable({
   loading: Loading,
 });
 
-const SignIn = Loadable({
-  loader: () => import('./SignInUp/SignIn'),
-  loading: Loading,
-});
-
-const SignUp = Loadable({
-  loader: () => import('./SignInUp/SignUp'),
-  loading: Loading,
-});
-
 const NotFound = Loadable({
   loader: () => import('./NotFound/NotFound'),
   loading: Loading,
@@ -35,8 +25,18 @@ const Faq = Loadable({
   loading: Loading,
 });
 
-const Article = Loadable({
-  loader: () => import('./Articles/Article'),
+const Articles = Loadable({
+  loader: () => import('./Articles/Articles'),
+  loading: Loading,
+});
+
+const Contact = Loadable({
+  loader: () => import('./Contact/Contact'),
+  loading: Loading,
+});
+
+const Profil = Loadable({
+  loader: () => import('./Profil/Profil'),
   loading: Loading,
 });
 
@@ -51,12 +51,11 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route exact path="/signin" component={SignIn}/>
-          <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/profil" component={Profil}/>
-          <Route exact path="/convertisseur" component={BitcoinCalculator}/>
+          <Route exact path="/calculator" component={BitcoinCalculator}/>
           <Route exact path="/faq" component={Faq}/>
-          <Route path="/articles/:id" component={Article}/>
+          <Route exact path="/contact" component={Contact}/>
+          <Route path="/articles/:id" component={Articles}/>
           <Route component={NotFound}/>
         </Switch>
       </Router>
