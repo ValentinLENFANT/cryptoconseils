@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Airdrop extends Component {
   render() {
     return(
-        <section class="calls-premium">
+        <section className="calls-premium">
             <div className="container">
                 <div className="row text-center">
                     <h2 className="title-head" id="airdrop-premium">Airdrop<span> du jour </span></h2>
