@@ -28,34 +28,9 @@ class Comments extends Component {
       </div>
     )
   }
-  handleForm() {
-    this.setState({
-      showForm: !this.state.showForm
-    })
-  }
 
-  sendForm() {
-    return this.state.reply
-  }
-  renderForm() {
-    return(
-      <div className="comments-form">
-        <form onSubmit={this.sendForm.bind(this)}>
-          {/* Input Field Starts */}
-          <div className="form-group">
-            <textarea className="form-control" id="comment" name="comment" placeholder="COMMENT"  required></textarea>
-          </div>
-          {/* Input Field Ends */}
-          {/* Submit Form Button Starts */}
-          <div className="form-group">
-            <button className="btn btn-primary" type="submit">Envoyer commentaire</button>
-          </div>
-          {/* Submit Form Button Ends */}
-        </form>
-      </div>
-    );
-  }
   renderComments(){
+    console.log(this.props.comments);
      return this.props.comments.map(cmt => {
       return (
         <li key={cmt.id}>
@@ -68,11 +43,6 @@ class Comments extends Component {
                 <span className="comment-date pull-right"> {this.convertDate(cmt.date)}</span>
               </div>
               <p className="comment-content">{cmt.content}</p>
-
-              {/* <div>
-                <a href=""className="comment-reply" onClick={this.handleForm.bind(this)}>Répondre</a>
-                { this.state.showForm ? this.renderForm() : null }
-              </div>*/}
             </div>
           </div>
           {/* Comment Ends */}
@@ -80,6 +50,7 @@ class Comments extends Component {
       );
     })
   }
+
   render() {
     return(
       <div className="Comments Commponent">
