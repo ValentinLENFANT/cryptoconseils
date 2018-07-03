@@ -26,9 +26,9 @@ class Reply extends Component {
     event.preventDefault();
 
     // check longeur du commentaire
-    if(this.state.comment.length < 30){
+    if(this.state.comment.length < 30 || this.state.comment.length > 3000){
       this.setState({
-        msg: "Votre commentaire doit contenir au minimum 30 caractères"
+        msg: "Votre commentaire doit contenir entre 30 et 3000 caractères"
       })
     } else {
       // check si access token
