@@ -27,7 +27,6 @@ class News extends Component {
 
     axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/', config)
     .then(response => {
-      console.log(response.error_description);
       this.setState({
         articles: response.data
       });
@@ -37,7 +36,7 @@ class News extends Component {
       }
     });
   }
-  
+
   convertDate(date){
     return new Date(date);
   }

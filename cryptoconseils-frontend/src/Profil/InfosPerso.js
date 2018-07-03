@@ -16,17 +16,17 @@ class InfosPerso extends Component {
                         <form role="form">
                             <div className="row">
                                 <div className="form-group">
-                                    <input type="email" name="email" id="email" className="form-control input-lg" placeholder="Nouveau email" tabindex="4" />
+                                    <input type="email" name="email" id="email" className="form-control input-lg" placeholder="Nouveau email" tabIndex="4" />
                                 </div>
                                 <div className="row">
                                     <div className="col-xs-12 col-sm-6 col-md-6">
                                         <div className="form-group">
-                                            <input type="password" name="password" id="password" className="form-control input-lg" placeholder="Nouveau mot de passe" tabindex="5" />
+                                            <input type="password" name="password" id="password" className="form-control input-lg" placeholder="Nouveau mot de passe" tabIndex="5" />
                                         </div>
                                     </div>
                                     <div className="col-xs-12 col-sm-6 col-md-6">
                                         <div className="form-group">
-                                            <input type="password" name="password_confirmation" id="password_confirmation" className="form-control input-lg" placeholder="Confirmer mot de passe" tabindex="6" />
+                                            <input type="password" name="password_confirmation" id="password_confirmation" className="form-control input-lg" placeholder="Confirmer mot de passe" tabIndex="6" />
                                         </div>
                                     </div>
                                     <div className="col-xs-12 col-sm-6 col-md-4">
@@ -38,9 +38,9 @@ class InfosPerso extends Component {
                                 </div>
                                 <div className="row">
                                     <div className="col-xs-12 col-md-12">
-                                        <input type="submit" value="Mettre à jour" className="btn btn-primary btn-block btn-lg submit-infos" tabindex="7" />
+                                        <input type="submit" value="Mettre à jour" className="btn btn-primary btn-block btn-lg submit-infos" tabIndex="7" />
                                     </div>
-                                </div>  
+                                </div>
                             </div>
                         </form>
                     </div>
