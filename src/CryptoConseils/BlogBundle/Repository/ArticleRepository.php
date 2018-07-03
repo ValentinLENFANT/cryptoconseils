@@ -40,4 +40,19 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
             ->getResult()
             ;
     }
+
+    public function findByArticleCategory($category, $premium)
+    {
+        $query = $this->createQueryBuilder('a')
+            ->leftJoin('a.categories', 'c')
+            ->where('c.id = :category AND a.premium <= :premium')
+            ->setParameter('category', $category)
+            ->setParameter('premium', $premium);
+
+
+        return $query
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

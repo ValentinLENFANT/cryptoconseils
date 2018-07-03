@@ -51,6 +51,10 @@ class ArticleController extends FOSRestController
             $response = new Response($data);
             $response->headers->set('Content-Type', 'application/json');
 
+            if (null == $articles){
+                return new JsonResponse(array('error' => 'No articles found for your premium level'), 404);
+            }
+
             return $response;
         }
 
@@ -68,21 +72,63 @@ class ArticleController extends FOSRestController
 
     public function showAction(Article $id) // [GET] /articles/8
     {
-        if (null === $this->getUser()) {
-            return new JsonResponse(array('error' => 'Access denied! You need to login'), 403);
-        }
+        if ($id->getPremium() > 0) //si l'article n'est pas de niveau 0 il faut obligatoirement être au moins connecté
+        {
+            if (null === $this->getUser()) { //On vérifie si l'utilisateur est connecté
+                return new JsonResponse(array('error' => 'Access denied! You need to login'), 403);
+            }
+            $currentUserLevel = $this->getUser()->getPremiumLevel(); //On récupère le niveau de l'utilisateur
 
-        $currentUserLevel = $this->getUser()->getPremiumLevel();
+            if ($currentUserLevel >= $id->getPremium() || $id->getPremium() == 0) {
+                $data = $this->get('jms_serializer')->serialize($id, 'json');
 
-        if ($currentUserLevel >= $id->getPremium() || $id->getPremium() == 0) { //A tester sur le site pour voir si le premiumLevel du User courant est bien récupéré
+                $response = new Response($data);
+                $response->headers->set('Content-Type', 'application/json');
+
+                return $response;
+            } else {
+                return new JsonResponse(array('error' => "Access denied ! Vous n'êtes pas à un niveau premium assez élevé"), 403);
+            }
+        } else {
             $data = $this->get('jms_serializer')->serialize($id, 'json');
 
             $response = new Response($data);
             $response->headers->set('Content-Type', 'application/json');
 
             return $response;
-        } else {
-            return new JsonResponse(array('error' => "Access denied ! Vous n'êtes pas à un niveau premium assez élevé"), 403);
+        }
+    }
+
+
+    public function show_by_categoryAction($category) // [GET] /articles/Airdrop
+    {
+        if (null === $this->getUser()) {
+            $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticleCategory($category, 0);
+            $data = $this->get('jms_serializer')->serialize($articles, 'json');
+
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            if (null == $articles){
+                return new JsonResponse(array('error' => 'No articles found for your premium level'), 404);
+            }
+
+            return $response;
+        }else{
+
+            $currentUserLevel = $this->getUser()->getPremiumLevel();
+
+            $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticleCategory($category, $currentUserLevel);
+            $data = $this->get('jms_serializer')->serialize($articles, 'json');
+
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            if (null == $articles){
+                return new JsonResponse(array('error' => 'No articles found for this category'), 404);
+            }
+
+            return $response;
         }
     }
 
@@ -229,7 +275,6 @@ class ArticleController extends FOSRestController
             $form = $this->createForm(EditArticleType::class, $article);
             $form->submit($data);
 
-
             // Analyse si les conditions sur les champs sont respectées //
             $data_errors = $request->getContent();
             $article_errors = $this->get('jms_serializer')->deserialize($data_errors, 'CryptoConseils\BlogBundle\Entity\Article', 'json');
@@ -238,7 +283,6 @@ class ArticleController extends FOSRestController
             if (count($errors)) {
                 return new Response($errors, 400);
             } // Fin d'analyse //
-
 
             $em->persist($article);
             $em->flush();

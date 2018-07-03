@@ -44,7 +44,7 @@ class Article
     private $title;
 
     /**
-     * @ORM\OneToOne(targetEntity="CryptoConseils\BlogBundle\Entity\Image", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="CryptoConseils\BlogBundle\Entity\Image", cascade={"persist", "remove"})
      * @Assert\Valid()
      */
     private $image;

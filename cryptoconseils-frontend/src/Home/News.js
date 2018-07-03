@@ -37,13 +37,9 @@ class News extends Component {
       }
     });
   }
-
-  // TODO: convertir la date en meilleur format
+  
   convertDate(date){
-    this.setState({
-      newDate: date
-    });
-    return this.state.newDate;
+    return new Date(date);
   }
 
   render() {
@@ -87,8 +83,10 @@ class News extends Component {
                       </div>
                     </div>
                     <div className="post-date">
-                      <span>{article.date}</span>
-                      <span>JAN</span>
+                      <span>{this.convertDate(article.date).getDate()}</span>
+                      <span>
+                        {this.convertDate(article.date).toLocaleString('fr', { month: "short" })}
+                      </span>
                     </div>
                     <a href={"/articles/" + article.id} className="btn btn-primary">Lire plus</a>
                     {/* Article Content Ends */}
