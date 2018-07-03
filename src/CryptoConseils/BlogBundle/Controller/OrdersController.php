@@ -27,9 +27,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class OrdersController extends Controller
 {
-    var $useProxy = TRUE;
-    var $proxyHost = 'localhost';//your host
-    var $proxyPort = 3128;//your port
     /**
      * @Route("/new/{amount}")
      */
@@ -43,7 +40,9 @@ class OrdersController extends Controller
 
         return $this->redirect($this->generateUrl('cryptoconseils_blog_orders_show', [
             'id' => $order->getId(),
-        ]));
+            'order' => $order->getId(),
+            'amount' => $amount,
+        ], UrlGeneratorInterface::ABSOLUTE_URL));
     }
 
     /**
@@ -54,16 +53,12 @@ class OrdersController extends Controller
     {
         $config = [
             'paypal_express_checkout' => [
-//                'return_url' => $this->generateUrl('cryptoconseils_blog_home'),
                 'return_url' => $this->generateUrl('cryptoconseils_blog_orders_paymentcreate', [
                     'id' => $order->getId(),
                 ], UrlGeneratorInterface::ABSOLUTE_URL),
                 'cancel_url' => $this->generateUrl('cryptoconseils_blog_orders_paymentcancel', [
                     'id' => $order->getId(),
                 ], UrlGeneratorInterface::ABSOLUTE_URL),
-//                'notify_url' => $this->generateUrl('cryptoconseils_blog_orders_ipn', [
-//                    'id' => $order->getId(),
-//                ], UrlGeneratorInterface::ABSOLUTE_URL),
                 'useraction' => 'commit',
                 'paypal_payer_id' => 'ZZ6WH4W5EEBTW',
             ]
@@ -135,14 +130,17 @@ class OrdersController extends Controller
                 }
             }
         }
-
+//
 //        if($result->getStatus() === Result::STATUS_SUCCESS) {
 //            return $this->redirect($this->generateUrl('cryptoconseils_blog_orders_paymentcomplete', [
 //                'id' => $order->getId(),
 //            ]));
 //        }
-
-        throw $result->getPluginException();
+//
+//        throw $result->getPluginException();
+        return $this->redirect($this->generateUrl('cryptoconseils_blog_orders_paymentcomplete', [
+            'id' => $order->getId(),
+        ]));
     }
 
     /**
