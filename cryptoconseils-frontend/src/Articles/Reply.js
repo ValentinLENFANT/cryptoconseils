@@ -6,9 +6,11 @@ class Reply extends Component {
   constructor() {
     super();
     this.state = {
-      comment: null
+      comment: null,
+      msg: null,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.sendComment = this.sendComment.bind(this);
   }
 
   // enregistre la valeur des inputs
@@ -20,35 +22,54 @@ class Reply extends Component {
   }
 
   sendComment(event){
+    // pour éviter le rechargement de la page
     event.preventDefault();
-    // check si access token
-    if(sessionStorage.getItem('access_token')){
-      var authorization = {
-        headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
-      };
-    }
-    // send coms
-    axios.post(process.env.REACT_APP_API_ADDRESS+'/comments/new/', {
-      article_id: this.props.article.id,
-      author: sessionStorage.getItem('username'),
-      content: this.state.comment,
-      user_id: 14
-    }, authorization)
-    .then(response => {
+
+    // check longeur du commentaire
+    if(this.state.comment.length < 30){
       this.setState({
-        comment: ''
-      });
-    }).catch(error => {
-      console.log(error.response);
-    });
+        msg: "Votre commentaire doit contenir au minimum 30 caractères"
+      })
+    } else {
+      // check si access token
+      if(sessionStorage.getItem('access_token')){
+        var authorization = {
+          headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+        };
+        // send coms
+        axios.post(process.env.REACT_APP_API_ADDRESS+'/comments/new/', {
+          article_id: this.props.article.id,
+          author: sessionStorage.getItem('username'),
+          content: this.state.comment,
+          user_id: 14
+        }, authorization)
+        .then(response => {
+          // réponse si succes
+          this.setState({
+            msg: "Votre commenaitre a été envoyé !",
+            comment: ''
+          })
+        }).catch(error => {
+          // si bug
+          this.setState({msg: "Une erreur s'est produite !"})
+          console.log(error.response);
+        });
+      } else {
+        // Si pas connecté
+        this.setState({
+          msg: "Vous devez être connecté pour écrire un commentaire"
+        })
+      }
+    }
   }
   render() {
     return(
       <div className="Reply Commponent">
         <h3 className="comments-heading add-comment">Ajouter un commentaire</h3>
+        <p>{this.state.msg}</p>
         {/* Comments Form Starts */}
         <div className="comments-form">
-          <form onSubmit={this.sendComment.bind(this)}>
+          <form onSubmit={this.sendComment}>
             {/* Input Field Starts */}
             <div className="form-group">
               <textarea
@@ -57,9 +78,9 @@ class Reply extends Component {
                 name="comment"
                 placeholder="COMMENT"
                 onChange={this.handleChange}
-                value={this.state.coms}
-                required
-                ></textarea>
+                value={this.state.comment}
+                required>
+              </textarea>
             </div>
             {/* Input Field Ends */}
             {/* Submit Form Button Starts */}
