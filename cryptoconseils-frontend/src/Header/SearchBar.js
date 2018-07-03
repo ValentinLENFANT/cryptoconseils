@@ -25,25 +25,29 @@ class SearchBar extends Component {
     this.setState({
       search: event.target.value
     }, () => this.searchTitle(this.state.articles,this.state.search));
-    console.log(this.state.results);
   }
 
   searchTitle(data, search){
-    var res = []
-    for(var x in data){
+    var res = [];
+    if(search == '') {
+      this.setState({
+        results: null
+      })
+    } else {
+      for(var x in data){
 
-      var title = data[x].title.toUpperCase();
-      var search = search.toUpperCase();
+        var title = data[x].title.toUpperCase();
+        var search = search.toUpperCase();
 
-      if(title.includes(search)){
-        console.log((data[x].title));
-        res = [...res, data[x]]
-
+        if(title.includes(search)){
+          res = [...res, data[x]]
+        }
       }
+      this.setState({
+        results: res
+      })
     }
-    this.setState({
-      results: res
-    })
+
   }
 
   renderSearchResults() {
@@ -51,7 +55,7 @@ class SearchBar extends Component {
       return this.state.results.map((item)=> {
         return(
           <li key={item.id}>
-            <img src="/images/blog/blog-post-1.jpg" class="img-search"/>
+            <img src="/images/blog/blog-post-1.jpg" className="img-search"/>
             <a href={"/articles/" + item.id}>{item.title}</a>
           </li>
         );
