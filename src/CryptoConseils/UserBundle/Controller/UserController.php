@@ -100,17 +100,20 @@ class UserController extends FOSRestController
         return $response;
     }
 
-    public function showUserCommentsByIdAction($id) // [GET] /users/comments/id/{id}
+    public function showUserCommentsByIdAction() // [GET] /users/comments/id/{id}
     {
+        $user = $this->getUser();
+        $userId = $user->getId();
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
+
         $reponse = $bdd->query('SELECT * FROM comment');
         $comments = array();
         while ($donnees = $reponse->fetch()) {
-            if ($donnees['user_id'] == $id) {
+            if ($donnees['user_id'] == $userId) {
                 $comments[] = ['id' => $donnees['id'],
                     'article_id' => $donnees['article_id'],
                     'author' => $donnees['author'],
