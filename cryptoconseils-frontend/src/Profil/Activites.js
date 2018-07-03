@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
+import Confirm from 'react-confirm-bootstrap';
 
 class Activites extends Component {
 
@@ -7,7 +8,8 @@ class Activites extends Component {
     super();
     this.state = {
       comments: [],
-      article: []
+      article: [],
+      msg: null
     }
   }
   componentDidMount(){
@@ -29,6 +31,15 @@ class Activites extends Component {
 
   }
 
+  convertDate(date){
+    date = new Date(date);
+    var month = date.toLocaleString('fr', { month: "long" });
+    var day = date.getDate();
+    var year = date.getFullYear();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    return 'Le '+day+' '+month+', '+year+' à '+hours+':'+minutes;
+  }
   getAllArticlesByid(id) {
     // check si access token
     if(sessionStorage.getItem('access_token')){
@@ -45,18 +56,29 @@ class Activites extends Component {
   }
 
   deleteComment(item){
-    const array = this.state.comments;
-
-    // index de l'item de la todo list que l'on veut supprimer
-    const index = array.indexOf(item);
-    //console.log(array);
-    // Supprimer du tableau la todo
-    array.splice(index, 1)
-
-    //update du tableau
-    this.setState({
-      comments: array
-    });
+    // check si access token
+    if(sessionStorage.getItem('access_token')){
+      var authorization = {
+        headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+      };
+      // send coms
+      axios.delete(process.env.REACT_APP_API_ADDRESS+'/comments/'+item.id, authorization)
+      .then(response => {
+        const array = this.state.comments;
+        // index de l'item de la todo list que l'on veut supprimer
+        const index = array.indexOf(item);
+        // Supprimer de l'affichage le commentaire
+        array.splice(index, 1)
+        //update de l'affichage des commentaires
+        this.setState({
+          comments: array,
+          msg: "Votre commenaitre a été supprimé !",
+        });
+      }).catch(error => {
+        this.setState({msg: "Une erreur s'est produite !"})
+        console.log(error.response);
+      });
+    }
   }
   renderComments(){
     return this.state.comments.map(item => {
@@ -68,12 +90,9 @@ class Activites extends Component {
             </div>
             <div className="col-xs-10 col-md-11">
               <div>
-                <a href={"/article/"+item.article_id}>
-                </a>
+                <a href={"/article/"+item.article_id}>UN TITRE D'ARTICLE</a>
                 <div className="mic-info">
-                  Par:
-                  <a href="">{item.author}</a>
-                  le {item.date}
+                  {this.convertDate(item.date)}
                 </div>
               </div>
               <div className="comment-text">
@@ -83,13 +102,19 @@ class Activites extends Component {
                 <button type="button" className="btn btn-info btn-xs button-profil" title="Edit">
                   <span className="fa fa-pencil"></span>
                 </button>
-                <button
-                  type="button"
-                  className="btn btn-danger btn-xs button-profil"
-                  title="Delete"
-                  onClick={this.deleteComment.bind(this, item)}>
-                  <span className="fa fa-trash"></span>
-                </button>
+                <Confirm
+                  onConfirm={this.deleteComment.bind(this, item)}
+                  confirmText="Oui supprimer"
+                  title="Suppresion de commentaire"
+                  body={"Voulez-vous vraiment supprimer votre commentaire:"+item.content.split(" ").splice(0,20).join(" ")+" ... ?"}>
+                  <button
+                    type="button"
+                    className="btn btn-danger btn-xs button-profil"
+                    title="Delete">
+                    <span className="fa fa-trash"></span>
+                  </button>
+              </Confirm>
+
               </div>
             </div>
           </div>
