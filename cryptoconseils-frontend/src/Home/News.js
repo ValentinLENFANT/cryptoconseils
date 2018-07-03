@@ -31,9 +31,7 @@ class News extends Component {
         articles: response.data
       });
     }).catch(error => {
-      if(error.response.data.error_description === "The access token provided has expired."){
-        sessionStorage.clear();
-      }
+      console.log(error);
     });
   }
 
