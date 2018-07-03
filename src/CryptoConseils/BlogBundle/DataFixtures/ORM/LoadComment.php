@@ -26,7 +26,21 @@ class LoadComment extends AbstractFixture implements OrderedFixtureInterface
             $this->getReference('article4'),
             $this->getReference('article5'),
             $this->getReference('article6'),
-            $this->getReference('article7')
+            $this->getReference('article7'),
+            $this->getReference('article8'),
+            $this->getReference('article9'),
+            $this->getReference('article10'),
+            $this->getReference('article11'),
+            $this->getReference('article12'),
+            $this->getReference('article13'),
+            $this->getReference('article14'),
+            $this->getReference('article15'),
+            $this->getReference('article16'),
+            $this->getReference('article17'),
+            $this->getReference('article18'),
+            $this->getReference('article19'),
+            $this->getReference('article20'),
+            $this->getReference('article21')
         );
 
         $author = array(
@@ -45,7 +59,13 @@ class LoadComment extends AbstractFixture implements OrderedFixtureInterface
             "Ce site est le meilleur que je n'ai jamais vu !",
             "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed urna.",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at euismod augue. Suspendisse faucibus tristique."
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at euismod augue. Suspendisse faucibus tristique.",
+            'Vive le Bicoin !',
+            'Je préfère les altcoins',
+            'Je suis Satoshi Nakamoto',
+            'Hey Jacquie ! Dis bonjour à Michel de ma part !',
+            'On dit merci qui ?',
+            "Le bear market n'est pas encore fini :("
         );
 
         $date = new \Datetime();
@@ -57,7 +77,7 @@ class LoadComment extends AbstractFixture implements OrderedFixtureInterface
             $authorName = rand(0,4);
             $user_id = $authorName;
             $comment->setAuthor($author[$authorName]);
-            $comment->setContent($content[rand(0,7)]);
+            $comment->setContent($content[rand(0,13)]);
             $comment->setDate($date);
             $comment->setUserId($user_id+1);
             // On la persiste

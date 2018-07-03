@@ -36,10 +36,29 @@ class LoadArticle extends AbstractFixture implements OrderedFixtureInterface
             'Le bear market dure depuis maintenant 3 mois...',
             'Lorem ipsum dolor sit amet ?',
             'Curabitur elementum ut ex quis finibus.',
-            'Donec diam ipsum, pretium vitae eros non'
+            'Donec diam ipsum, pretium vitae eros non',
+            'Le Bitcoin a chuté de près de 70% en 7 mois',
+            'La fin du Bitcoin est-elle proche ?',
+            'Bitcoin et monde réel : une impossible conciliation ?',
+            'Le Bitcoin contre les banques : qui triomphera ?',
+            'Ethereum : des failles de vulnérabilités béantes ?',
+            'Crypto-monnaies : ont-elles vraiment du sens ?',
+            "Impact des crypto-monnaies sur l'économie collaborative du XXIème siècle",
+            'Le BearMarket cessera-t-il un jour ?',
+            "Est-ce que la bulle des crypto-monnaies est comparable à celle d'nternet ?",
+            'Bear Market V.S Bull Market',
+            "2018 : l'année de la mort des crypto-monnaies ?",
+            'SEC et régulations : quelles sanctions pour les scammers ?',
+            'Pourquoi les médias traditionnels en savent-ils si peu sur les crypto-monnaies ?',
+            'Bitcoin, Ethereum, Ripple : qui est le plus décentralisé ?'
         );
 
-        $author = 'Valentin';
+        $author = array(
+            'Valentin',
+            'Aurélien',
+            'Alexandre',
+            'Guillaume'
+        );
 
         $contents = array(
             'Le Bitcoin a vu sa dominance passer de 90% à 33% en quelques années.',
@@ -61,24 +80,25 @@ class LoadArticle extends AbstractFixture implements OrderedFixtureInterface
             Aenean sed nisi mi. Pellentesque a viverra mauris. In eu enim leo. Quisque vel mollis lorem. Curabitur euismod viverra diam eu tempus. Etiam convallis lacus et tortor venenatis ultricies. Suspendisse potenti. Mauris sed tincidunt erat.
             Vivamus mollis quam nec euismod maximus. Sed id eleifend tortor. Integer ac bibendum augue. In dictum maximus dignissim. Donec at lacinia nisl. Cras maximus egestas nisi fringilla venenatis. Nulla tempor facilisis tempus. Maecenas id dolor sed leo congue aliquam mattis non lacus. Pellentesque varius, elit id interdum vulputate, sapien nulla commodo lectus, ac accumsan erat ex id lorem. Duis posuere leo quis odio vehicula molestie.
             Donec ultrices gravida nisi vitae laoreet. Nunc aliquet nibh nec leo semper, sed consequat justo blandit. Sed tincidunt urna tristique gravida posuere. Morbi nec urna et nunc aliquam venenatis. Aenean suscipit lorem a purus iaculis condimentum. Duis ultricies a risus vitae fringilla. Ut dolor est, facilisis non congue at, pretium eget risus. Morbi bibendum augue sit amet blandit iaculis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec at bibendum leo. Nam nec vestibulum ex. Ut convallis ligula erat, et sollicitudin odio convallis nec. Morbi vel ligula imperdiet, dignissim velit ac, mattis arcu. Cras est lectus, mollis mollis fringilla non, consectetur at lorem. Curabitur sit amet ante ut quam congue accumsan. Sed pulvinar quam erat. Aliquam sit amet interdum sem.',
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eu rutrum velit, id mattis augue. In viverra cursus lorem id accumsan. Pellentesque varius, urna sed maximus vestibulum, quam augue pretium lectus, id luctus purus felis quis ex. Morbi et pulvinar erat, ut tempor nulla. Proin eleifend mi porta purus vehicula, vitae iaculis augue aliquet. Fusce erat orci, ornare in leo at, tincidunt volutpat felis. Suspendisse bibendum eros quam, sit amet pharetra diam mattis a. Aliquam posuere vel lorem eget mollis. Donec lacinia magna tortor. Sed semper est nisl, vel porttitor nisi iaculis id. Donec diam ipsum, pretium vitae eros non.'
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eu rutrum velit, id mattis augue. In viverra cursus lorem id accumsan. Pellentesque varius, urna sed maximus vestibulum, quam augue pretium lectus, id luctus purus felis quis ex. Morbi et pulvinar erat, ut tempor nulla. Proin eleifend mi porta purus vehicula, vitae iaculis augue aliquet. Fusce erat orci, ornare in leo at, tincidunt volutpat felis. Suspendisse bibendum eros quam, sit amet pharetra diam mattis a. Aliquam posuere vel lorem eget mollis. Donec lacinia magna tortor. Sed semper est nisl, vel porttitor nisi iaculis id. Donec diam ipsum, pretium vitae eros non.',
+            'Bitcoin, Ethereum, Ripple : la décentralisation à tout prix.'
         );
 
         $date = new \Datetime();
 
         $published = 1;
 
-        for ($i = 0; $i < count($images_id); $i++) {
+        for ($i = 0; $i < count($titles); $i++) {
             // On crée la catégorie
             $article = new article();
-            $article->setImage($images_id[$i]);
+            $article->setImage($images_id[rand(0, 7)]);
             $article->setTitle($titles[$i]);
-            $article->setAuthor($author);
-            $article->setContent($contents[$i]);
+            $article->setAuthor($author[rand(0, 3)]);
+            $article->setContent($contents[rand(0, 7)]);
             $article->setDate($date);
             $article->setPublished($published);
             $article->setPremium(rand(0, 5));
-            $this->addReference('article'.$i, $article);
+            $this->addReference('article' . $i, $article);
 
             // On la persiste
             $manager->persist($article);

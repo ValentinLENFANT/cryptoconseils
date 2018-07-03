@@ -160,3 +160,23 @@ cryptoconseils_blog_image_delete:
     methods:    [DELETE]
     requirements:
         id: \d{1,}
+
+cryptoconseils_blog_orders_new:
+    path:   /orders/new/{amount}
+    defaults: { _controller: CryptoConseilsBlogBundle:Orders:new }
+
+cryptoconseils_blog_orders_show:
+    path:   /orders/show/{order}
+    defaults: { _controller: CryptoConseilsBlogBundle:Orders:show }
+
+cryptoconseils_blog_orders_paymentcreate:
+    path:   /orders/payment/create/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Orders:paymentCreate }
+
+cryptoconseils_blog_orders_paymentcomplete:
+    path:   /orders/payment/complete/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Orders:paymentComplete }
+
+cryptoconseils_blog_orders_paymentcancel:
+    path:   /orders/payment/cancel/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Orders:paymentCancel }
