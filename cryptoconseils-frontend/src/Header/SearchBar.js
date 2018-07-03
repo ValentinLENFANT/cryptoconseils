@@ -29,21 +29,19 @@ class SearchBar extends Component {
 
   searchTitle(data, search){
     var res = [];
-    if(search == '') {
+    if(search === '') {
       this.setState({
         results: null
       })
     } else {
       for(var x in data){
-
         var title = data[x].title.toUpperCase();
-        var search = search.toUpperCase();
+        search = search.toUpperCase();
 
         if(title.includes(search)){
           res = [...res, data[x]]
         }
-      }
-      this.setState({
+      }this.setState({
         results: res
       })
     }
