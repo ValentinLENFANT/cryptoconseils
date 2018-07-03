@@ -5,6 +5,7 @@ import Meta from './Meta';
 import Denied from '../Denied/Denied'
 import Comments from './Comments'
 import Reply from './Reply'
+
 import Sidebar from '../Sidebar/Sidebar'
 import Header from '../Header/Header'
 class Articles extends Component {
@@ -13,8 +14,7 @@ class Articles extends Component {
     super();
     this.state = {
       article: [],
-      access: false,
-      isLogged: false
+      access: false
     };
   }
 
@@ -25,16 +25,7 @@ class Articles extends Component {
       var authorization = {
         headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
       };
-      this.setState({
-        isLogged: true
-      });
-    } else {
-      this.setState({
-        isLogged: false
-      });
-      var authorization = null
     }
-
     axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/'+this.props.match.params.id,authorization)
     .then(response => {
       this.setState({
@@ -76,7 +67,7 @@ class Articles extends Component {
                   <Meta article={this.state.article}/>
                   {/* Meta Ends */}
                   <Comments comments={this.state.article.comments}/>
-                  <Reply article={this.state.article} isLogged={this.state.isLogged}/>
+                  <Reply article={this.state.article}/>
                 </div>
               </div>
               <Sidebar/>
