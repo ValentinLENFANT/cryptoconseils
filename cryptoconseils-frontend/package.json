@@ -11,7 +11,8 @@
     "react-loadable": "^5.4.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "react-tradingview-widget": "^1.2.5"
   },
   "scripts": {
     "start": "react-scripts start",

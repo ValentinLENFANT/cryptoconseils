@@ -5021,6 +5021,21 @@ h4.panel-title a.collapsed:before {
   }
 }
 
+/* DEBUT CSS MODULE CONNEXION*/
+i.fa.fa-user {margin-right: 5px;}
+ul.user li {display: inline-block;width: 172px;padding-right: 0px;padding-left: 0px;}
+/*FIN CSS MODULE CONNEXION*/
+
+
+
+/*****************/
+/*DEBUT CSS BACKOFFICE*/
+/***************/
+
+/*DEBUT CSS MENU PROFIL*/
+section.menu-dashboard {padding-top: 5px;}
+/*FIN CSS MENU PROFIL*/
+
 /*DEBUT CSS DE LA PAGE PROFIL */
 .titre-dashboard{color: #fd961a;text-transform: uppercase;border: 1px solid #fd961a;width: auto;}
 .mes-commentaires{color: white;font-size: 17px;text-transform: uppercase;}
@@ -5032,12 +5047,47 @@ h4.panel-title a.collapsed:before {
 .premium-image{width:100%;}
 .avatar-change{display:block;background:#3e3e3e;font-size:13px;text-align:left;padding-left:20px;}
 .submit-infos{margin-top: 20px;margin-bottom: 30px;}
-
-
 /*FIN CSS DE LA PAGE PROFIL */
 
+
 /*DEBUT CSS DE LA PAGE PROFIL PREMIUM */
+body { padding-top:30px; }
+.widget .panel-body { padding:0px; }
+.widget .list-group { margin-bottom: 0; }
+.widget .panel-title { display:inline }
+.widget .label-info { float: right; }
+.widget li.list-group-item {border-radius: 0;border: 0;border-top: 1px solid #ddd;}
+.widget li.list-group-item:hover { background-color: rgba(86,61,124,.1); }
+.widget .mic-info { color: #666666;font-size: 11px; }
+.widget .action { margin-top:5px; }
+.widget .comment-text { font-size: 12px; }
+.widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
+.titre-dashboard{color: #fd961a;text-transform: uppercase;border: 1px solid #fd961a;width: auto;}
+.section-profil {padding:25px 0;position: relative;}
+.coinmarketcap-currency-widget div {color: white !important;border: 0px !important;}
+.coinmarketcap-currency-widget a {color: white !important;}
+div#tradingview_20ffd-wrapper{width:100% !important;}
+div#tradingview_20ffd-wrapper div{width:100% !important;}
+.tradingview-widget-container div {width: 100% !important;}
+.tradingview-widget-container {width: 100% !important;}
+.coinmarketcap-currency-widget {margin-top: 20px;}
+.coinmarketcap-currency-widget div > div:nth-child(2) > a {display: none;}
+.button-call{margin-top:20px;}
+.prix-call{margin-top: 30px;font-size: 23px;color: white}
+p.desciption-call-premium {text-align: justify;}
+#airdrop-ticker{color:white;font-weight:900;text-align:left;margin-top: 10px;}
+.etape-airdrop{color:white;text-align:left;}
+.tradingview-widget-container iframe{height: 400px !important;}
+.tradingview-widget-container > article > div:nth-child(1) {height: 400px !important;}
+.call-premium-ticker{color:white;text-align:left;}
+.image-airdrop-premium{width:100%;}
+.texte-airdrop-premium{text-align:justify;}
+.recompense-airdrop{text-align:left;}
+.premium-logo{margin-bottom: 20px;margin-top:5px;}
+
 /*FIN CSS DE LA PAGE PROFIL PREMIUM */
+
+
 
 /*DEBUT CSS DE LA PAGE ADMIN */
 /*FIN CSS DE LA PAGE ADMIN */
