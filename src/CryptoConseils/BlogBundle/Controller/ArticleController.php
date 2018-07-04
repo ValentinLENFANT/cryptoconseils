@@ -132,6 +132,33 @@ class ArticleController extends FOSRestController
         }
     }
 
+    public function show_by_newestAction($number) // [GET] /articles/newest/3
+    {
+        if (null === $this->getUser()) {
+            $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticleNewest(0, $number);
+            $data = $this->get('jms_serializer')->serialize($articles, 'json');
+
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            if (null == $articles){
+                return new JsonResponse(array('error' => 'No articles found for your premium level'), 404);
+            }
+
+            return $response;
+        }
+
+        $currentUserLevel = $this->getUser()->getPremiumLevel();
+        $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticleNewest($currentUserLevel, $number);
+
+        $data = $this->get('jms_serializer')->serialize($articles, 'json');
+
+        $response = new Response($data);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
 
     public function newAction(Request $request) // [POST] /articles/new  (ROLE_ADMIN ONLY)
     {
