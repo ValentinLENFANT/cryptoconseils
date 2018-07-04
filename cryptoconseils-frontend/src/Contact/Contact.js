@@ -41,9 +41,9 @@ class Contact extends Component {
   render() {
     return (
       <div className="Contact Component">
-      <Header/>
-      <Banner titlePart1="Contactez" titlePart2="nous" pageName="contact"/>
-        <div className ="contact">
+        <Header/>
+        <Banner titlePart1="Contactez" titlePart2="nous" pageName="contact"/>
+        <section className="contact">
           <div className="container">
             <div className="row">
               <div className="col-xs-12 col-md-8 contact-form">
@@ -144,7 +144,7 @@ class Contact extends Component {
               <Widget/>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     );
   }
