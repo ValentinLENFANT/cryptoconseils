@@ -44,11 +44,13 @@ class Navigation extends Component {
                 {/* Main Menu Starts */}
                 <ul className="nav navbar-nav">
                   <li className="active"><a href="index.html">Accueil</a></li>
+                  <li><a href="/articles">News</a></li>
                   <li><a href="analyses-calls.html">Analyses & calls</a></li>
                   <li><a href="airdrops.html">Airdrops</a></li>
                   <li><a href="premium.html">Accès Prémium</a></li>
                   <li><a href="about.html">Team</a></li>
                   <li><a href="/contact">Contact</a></li>
+                    <li><a href="/faq">Faq</a></li>
                   {/* Search Icon Starts */}
                   <li className="search"><button className="fa fa-search" onClick={this.toggleSearch.bind(this)}></button></li>
                   {/* Search Icon Ends */}
