@@ -4,7 +4,7 @@ class Team extends Component {
   render() {
     return (
       <div className="Team Component">
-        <div className="team">
+        <section className="team">
           <div className="container">
             {/* Section Title Starts */}
             <div className="row text-center">
@@ -124,7 +124,7 @@ class Team extends Component {
             </div>
             {/* Team Members Ends */}
           </div>
-        </div>
+        </section>
       </div>
     );
   }

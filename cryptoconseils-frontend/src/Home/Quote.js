@@ -4,7 +4,7 @@ class Quote extends Component {
   render() {
     return (
       <div className="Quote Component">
-        <div className="col-md-4 img-block-quote bg-image-2">
+        <section className="col-md-4 img-block-quote bg-image-2">
           <blockquote>
             <p>
               Bitcoin est l'une des inventions les plus importantes de toute l'histoire humaine.
@@ -17,7 +17,7 @@ class Quote extends Component {
               <span>Aurélien BERANGER</span> - Crypto Analyste
             </footer>
           </blockquote>
-        </div>
+        </section>
       </div>
     );
   }

@@ -5,7 +5,7 @@ class BeginTrade extends Component {
     if(this.props.isLogged === false){
       return (
         <div className="BeginTrade Component">
-          <div className="call-action-all">
+          <section className="call-action-all">
             <div className="call-action-all-overlay">
               <div className="container">
                 <div className="row">
@@ -27,7 +27,7 @@ class BeginTrade extends Component {
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         </div>
       );
     }else {

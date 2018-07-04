@@ -4,7 +4,7 @@ class Features extends Component {
   render() {
     return(
       <div className="Features Component">
-        <div className="image-block">
+        <section className="image-block">
           <div className="container-fluid">
             <div className="row">
               {/* Features Starts */}
@@ -100,7 +100,7 @@ class Features extends Component {
               {/* Video Ends */}
             </div>
           </div>
-        </div>
+        </section>
       </div>
     );
   }

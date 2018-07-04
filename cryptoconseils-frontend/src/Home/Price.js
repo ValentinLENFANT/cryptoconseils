@@ -4,7 +4,7 @@ class Price extends Component {
   render() {
     return(
       <div className="Price Component">
-        <div className="pricing">
+        <section className="pricing">
           <div className="container">
             {/* Section Title Starts */}
             <div className="row text-center">
@@ -109,7 +109,7 @@ class Price extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     );
   }
