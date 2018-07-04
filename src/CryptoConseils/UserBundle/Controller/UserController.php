@@ -159,6 +159,19 @@ class UserController extends FOSRestController
         $em->persist($user);
         $em->flush();
 
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Votre inscription à CryptoConseils')
+            ->setFrom('cryptoconseils@gmail.com')
+            ->setTo($user->getEmail())
+            ->setContentType("text/html; charset=UTF-8")
+            ->setBody(
+                $this->renderView(
+                    'CryptoConseilsUserBundle:Emails:registration.html.twig',
+                    array('name' => $user->getUsername())
+                )
+            );
+            $this->get('mailer')->send($message);
+
         return new JsonResponse(json_decode($data), 200);
     }
 
