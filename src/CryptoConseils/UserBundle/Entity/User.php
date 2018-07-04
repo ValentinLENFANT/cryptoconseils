@@ -30,6 +30,28 @@ class User extends BaseUser
     private $premiumLevel;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="isEmailValidated", type="boolean")
+     */
+    private $isEmailValidated;
+
+    /**
+     * @return bool
+     */
+    public function isEmailValidated()
+    {
+        return $this->isEmailValidated;
+    }
+
+    /**
+     * @param bool $isEmailValidated
+     */
+    public function setIsEmailValidated($isEmailValidated)
+    {
+        $this->isEmailValidated = $isEmailValidated;
+    }
+
+    /**
      * @return int
      */
     public function getPremiumLevel()
