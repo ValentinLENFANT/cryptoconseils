@@ -15,21 +15,23 @@ class SignIn extends Component {
       statusMsg: '',
       email: '',
       success: false,
-      previousPath: document.referrer
+      previousPath: document.referrer,
+      showForgotPassword: false
     };
     this.changeForm = this.changeForm.bind(this);
+    this.forgotPasswodForm = this.forgotPasswodForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
+    this.handleForgotPassword = this.handleForgotPassword.bind(this);
   }
 
   // switch entre les deux form
   changeForm(event) {
-    if(this.state.showSignUp){
-      this.setState({showSignUp: false});
-    } else {
-      this.setState({showSignUp: true});
-    }
+    this.setState({showSignUp: !this.state.showSignUp,showForgotPassword:false});
+  }
+  forgotPasswodForm(event){
+    this.setState({showForgotPassword: true});
   }
 
   // enregistre la valeur des inputs
@@ -56,7 +58,7 @@ class SignIn extends Component {
       window.location.href = this.state.previousPath
     }).catch(error => {
       this.setState({statusMsg: 'Username et/ou Mdp invalides'})
-      console.log(error);
+      console.log(error.response);
     });
   }
 
@@ -80,18 +82,65 @@ class SignIn extends Component {
     });
   }
 
+  handleForgotPassword(event){
+
+  }
   // choix du form
   formRender(){
-
     // Si déjà connecté on envoie le component AlreadyLogin
     if(sessionStorage.getItem('access_token')){
       return <AlreadyLogin/>
     } else {
+
+      // si le user vient juste de s'inscrire
       if(this.state.success){
         return <Success email={this.state.email}/>
       }
+
+      // si mot de passe oublié
+      if(this.state.showForgotPassword){
+        return(
+          <div className="ForgotPasswordForm">
+            {/*Section Title Starts */}
+            <div className="row text-center">
+              <h2 className="title-head hidden-xs"><span>Mot de passe oublié ?</span></h2>
+              <h3>{this.state.statusMsg}</h3>
+              <p className="info-form">Un email contenant un lien de renitialisaiton de mot de passe vous seras envoyé à l'adresse ci dessous</p>
+            </div>
+            {/*Section Title Ends */}
+            {/*Form Starts */}
+            <form>
+              {/*Input Field Starts */}
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  name="email"
+                  id="email"
+                  placeholder="EMAIL"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
+              {/*Input Field Ends */}
+              {/*Submit Form Button Starts */}
+              <div className="form-group">
+                <button className="btn btn-primary" type="submit">Envoyer</button>
+                <p className="text-center">Pas de compte ?
+                  <a onClick={() => this.setState({showSignUp: true,showForgotPassword:false})}> Inscription</a>
+                    ou
+                  <a onClick={() => this.setState({showSignUp: false,showForgotPassword:false})}>Connexion</a>
+                </p>
+              </div>
+              {/*Submit Form Button Ends */}
+            </form>
+            {/*Form Ends */}
+          </div>
+        );
+      }
       // formualaire inscription
-      if(this.state.showSignUp){
+      else if(this.state.showSignUp){
         return (
           <div className="SignUpForm">
             {/* Section Title Starts */}
@@ -203,6 +252,9 @@ class SignIn extends Component {
                 <button className="btn btn-primary" type="submit">Connexion</button>
                 <p className="text-center">Pas de compte ?
                   <a onClick={this.changeForm}> Inscription</a>
+                </p>
+                <p className="text-center">Mot de passe oublié ?
+                  <a onClick={this.forgotPasswodForm}> Renitialiser mot de passe</a>
                 </p>
               </div>
               {/*Submit Form Button Ends */}
