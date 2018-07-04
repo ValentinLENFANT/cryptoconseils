@@ -3,7 +3,7 @@ import CallPremium from './Premium/CallPremium';
 
 class Call extends Component {
   render() {
-    if(this.props.premium > 0) {
+    if(this.props.premium >= 4) {
       return(
         <CallPremium/>
       );

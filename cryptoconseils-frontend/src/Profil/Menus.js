@@ -3,7 +3,7 @@ import MenusPremium from './Premium/MenusPremium';
 
 class Menus extends Component {
   render() {
-    if(this.props.premium > 0) {
+    if(this.props.premium >= 2) {
       return <MenusPremium/>
     }else {
       return (
