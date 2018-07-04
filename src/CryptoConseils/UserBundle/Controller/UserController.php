@@ -114,12 +114,16 @@ class UserController extends FOSRestController
         $comments = array();
         while ($donnees = $reponse->fetch()) {
             if ($donnees['user_id'] == $userId) {
+                $answer = $bdd->query('SELECT Title FROM article WHERE id ='.$donnees['article_id']);
+                $title = $answer->fetch();
                 $comments[] = ['id' => $donnees['id'],
                     'article_id' => $donnees['article_id'],
                     'author' => $donnees['author'],
                     'content' => $donnees['content'],
                     'date' => $donnees['date'],
-                    'user_id' => $donnees['user_id']];
+                    'user_id' => $donnees['user_id'],
+                    'title' => $title['Title']
+                ];
             }
         }
         $data = $this->get('jms_serializer')->serialize($comments, 'json');
