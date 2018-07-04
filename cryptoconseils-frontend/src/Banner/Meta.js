@@ -18,7 +18,8 @@ class Meta extends Component {
             <i className="fa fa-calendar"></i> {this.convertDate(this.props.article.date)}
           </span>
           <span>
-            <i className="fa fa-commenting"></i> {this.props.article.comments.length+ " commentaires"}
+            <i className="fa fa-commenting"></i>
+              {this.props.article.comments? this.props.article.comments.length+ " commentaires" : "0 commentaires"}
           </span>
           <span>
             <i className="fa fa-tags"></i>{this.props.article.categories}
