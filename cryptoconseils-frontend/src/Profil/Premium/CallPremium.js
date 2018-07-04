@@ -9,7 +9,7 @@ import TradingViewWidget from 'react-tradingview-widget';
 class CallPremium extends Component {
   render() {
     return(
-        <section className="calls-premium section-profil">
+      <section className="calls-premium section-profil">
         <div className="container">
             <div className="row text-center">
                 <h2 className="title-head" id="call-premium">Call<span> du jour </span></h2>
@@ -26,18 +26,18 @@ class CallPremium extends Component {
                     </div>
                     {/*TradingView REACT END*/}
                 </div>
-                
+
                 <div className="col-xs-12 col-sm-12 col-md-6">
                 <script type="text/jsx" src="https://files.coinmarketcap.com/static/widget/currency.js"></script>
-                    <div className="coinmarketcap-currency-widget" 
-                        data-currencyid="1" 
-                        data-base="USD" 
-                        data-secondary="" 
-                        data-ticker="false" 
-                        data-rank="false" 
-                        data-marketcap="false" 
-                        data-volume="false" 
-                        data-stats="USD" 
+                    <div className="coinmarketcap-currency-widget"
+                        data-currencyid="1"
+                        data-base="USD"
+                        data-secondary=""
+                        data-ticker="false"
+                        data-rank="false"
+                        data-marketcap="false"
+                        data-volume="false"
+                        data-stats="USD"
                         data-statsticker="false">
                     </div>
                     <div className="row">

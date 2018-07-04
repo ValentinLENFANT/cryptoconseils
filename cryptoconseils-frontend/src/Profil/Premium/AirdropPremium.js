@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class AirdropPremium extends Component {
   render() {
     return(
-        <section className="calls-premium section-profil" >
+        <div className="calls-premium section-profil" >
            <div className="container">
                <div className="row text-center">
                    <h2 className="title-head" id="airdrop-premium">Airdrop<span> du jour </span></h2>
@@ -21,7 +21,7 @@ class AirdropPremium extends Component {
                        <div className="row">
                            <div className="col-xs-12 col-sm-12 col-md-12">
                                <p id="airdrop-ticker">APIS (Apis)</p>
-                               <p className="texte-airdrop-premium">Apis est un projet d’hébergement de masternodes. Son token (Apis) permet de bénéficier de plusieurs avantages sur sa plate-forme. 
+                               <p className="texte-airdrop-premium">Apis est un projet d’hébergement de masternodes. Son token (Apis) permet de bénéficier de plusieurs avantages sur sa plate-forme.
                                Un airdrop est prévu jusqu’au 04/07/218. Dépêchez-vous ! 100 APIS seront distribués à chaque participants ce qui représente un peu plus de 10€ aujourd'hui mais qui pourrait rapidement prendre de la valeur et atteindre 50€ d'ici la fin du mois.
                                </p>
                            </div>
@@ -45,7 +45,7 @@ class AirdropPremium extends Component {
                     </div>
                </div>
            </div>
-       </section>
+       </div>
     );
   }
 }
