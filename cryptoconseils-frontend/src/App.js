@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import './App.css';
-
-const Loading = () => <div>Loading...</div> ;
+import PreLoader from './PreLoader/PreLoader';
+const Loading = () => <PreLoader/> ;
 
 const Home = Loadable({
   loader: () => import('./Home/Home'),
