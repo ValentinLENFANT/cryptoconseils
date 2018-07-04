@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Footer from './Footer/Footer';
+import JsFunction from './Home/JsFunction'
 
 import registerServiceWorker from './registerServiceWorker';
 require('dotenv').config()
@@ -12,6 +13,10 @@ require('dotenv').config()
 ReactDOM.render(<Header />, document.getElementById('header'));
 registerServiceWorker();
 */
+
+ReactDOM.render(<JsFunction />, document.getElementById('header'));
+registerServiceWorker();
+
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
 
