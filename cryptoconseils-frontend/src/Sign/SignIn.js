@@ -65,9 +65,8 @@ class SignIn extends Component {
     event.preventDefault();
     axios.post(process.env.REACT_APP_API_ADDRESS+'/users/new/', {
       username: this.state.username,
-      email: this.state.email,
-      password: this.state.password,
-      enabled: true,
+      email: this.state.email.toLowerCase(),
+      password: this.state.password
     }).then(response => {
       sessionStorage.clear();
       sessionStorage.setItem('username', this.state.username);
@@ -75,7 +74,9 @@ class SignIn extends Component {
         success: true
       });
     }).catch(error => {
-      console.log(error);
+      this.setState({
+        statusMsg: error.response.data.error
+      })
     });
   }
 
@@ -96,6 +97,7 @@ class SignIn extends Component {
             {/* Section Title Starts */}
             <div className="row text-center">
               <h2 className="title-head hidden-xs">C'est <span>parti</span></h2>
+              <h3>{this.state.statusMsg}</h3>
                <p className="info-form">Créez un compte rapidement et commencez le trading !</p>
             </div>
             {/* Section Title Ends */}

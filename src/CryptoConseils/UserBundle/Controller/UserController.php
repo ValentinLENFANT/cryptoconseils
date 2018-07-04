@@ -147,9 +147,9 @@ class UserController extends FOSRestController
 
         $reponse = $bdd->query('SELECT * FROM users');
         while ($donnees = $reponse->fetch()) {
-            if ($donnees['username'] == json_decode($data)->username) {
+            if ($donnees['username_canonical'] == strtolower(json_decode($data)->username)) {
                 return new JsonResponse(array('error' => "Désolé, ce nom d'utilisateur est déjà pris."), 403);
-            } else if ($donnees['email_canonical'] == json_decode($data)->email_canonical) {
+            } else if ($donnees['email_canonical'] == json_decode($data)->email) {
                 return new JsonResponse(array('error' => "Désolé, cette adresse email est déjà utilisée."), 403);
             }
         }

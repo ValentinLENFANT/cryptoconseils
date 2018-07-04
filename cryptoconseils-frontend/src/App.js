@@ -36,6 +36,11 @@ const LatestArticles = Loadable({
   loading: Loading,
 });
 
+const Categories = Loadable({
+  loader: () => import('./Categories/Categories'),
+  loading: Loading,
+});
+
 const Contact = Loadable({
   loader: () => import('./Contact/Contact'),
   loading: Loading,
@@ -63,7 +68,6 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/profil" component={Profil}/>
-          <Route exact path="/profilpremium" component={ProfilPremium}/>
           <Route exact path="/calculator" component={BitcoinCalculator}/>
           <Route exact path="/faq" component={Faq}/>
           <Route exact path="/contact" component={Contact}/>
@@ -71,6 +75,7 @@ class App extends Component {
           <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/articles" component={LatestArticles}/>
           <Route path="/articles/:id" component={Articles}/>
+          <Route path="/categories/:id" component={Categories}/>
           <Route component={NotFound}/>
         </Switch>
       </Router>
