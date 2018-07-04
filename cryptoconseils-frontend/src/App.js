@@ -58,10 +58,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/profil" component={Profil}/>
-<<<<<<< HEAD
           <Route exact path="/profilpremium" component={ProfilPremium}/>
-=======
->>>>>>> 74af5e6621a6f74b4ce98eaf3284804729a52188
           <Route exact path="/calculator" component={BitcoinCalculator}/>
           <Route exact path="/faq" component={Faq}/>
           <Route exact path="/contact" component={Contact}/>
