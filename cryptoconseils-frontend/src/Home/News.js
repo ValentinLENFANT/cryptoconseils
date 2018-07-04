@@ -13,11 +13,6 @@ class News extends Component {
 
   // éxécuté à la fin
   componentDidMount() {
-    this.getAllArticles();
-  }
-
-  // récupère tous les articles
-  getAllArticles() {
     // check si access token
     if(sessionStorage.getItem('access_token')){
       var authorization = {
@@ -25,6 +20,7 @@ class News extends Component {
       };
     }
 
+    // récupère tous les articles
     axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/newest/'+this.props.nbArticle, authorization)
     .then(response => {
       this.setState({
@@ -34,7 +30,7 @@ class News extends Component {
       console.log(error);
     });
   }
-
+  
   convertDate(date){
     return new Date(date);
   }
