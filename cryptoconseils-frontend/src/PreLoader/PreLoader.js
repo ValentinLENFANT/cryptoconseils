@@ -9,14 +9,14 @@ class Preloader extends Component {
               <filter id="dropshadow" height="130%">
               <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
               <feOffset dx="0" dy="0" result="offsetblur"/>
-              <feFlood flood-color="red"/>
+              <feFlood floodColor="red"/>
               <feComposite in2="offsetblur" operator="in"/>
               <feMerge>
               <feMergeNode/>
               <feMergeNode in="SourceGraphic"/>
               </feMerge>
               </filter>
-              <path class="path" fill="#000000" d="M446.089,261.45c6.135-41.001-25.084-63.033-67.769-77.735l13.844-55.532l-33.801-8.424l-13.48,54.068
+              <path className="path" fill="#000000" d="M446.089,261.45c6.135-41.001-25.084-63.033-67.769-77.735l13.844-55.532l-33.801-8.424l-13.48,54.068
                   c-8.896-2.217-18.015-4.304-27.091-6.371l13.568-54.429l-33.776-8.424l-13.861,55.521c-7.354-1.676-14.575-3.328-21.587-5.073
                   l0.034-0.171l-46.617-11.64l-8.993,36.102c0,0,25.08,5.746,24.549,6.105c13.689,3.42,16.159,12.478,15.75,19.658L208.93,357.23
                   c-1.675,4.158-5.925,10.401-15.494,8.031c0.338,0.485-24.579-6.134-24.579-6.134l-9.631,40.468l36.843,9.188
