@@ -7,17 +7,15 @@ class Reply extends Component {
   constructor() {
     super();
     this.state = {
-      comment: null,
+      comment: '',
       msg: null,
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   // enregistre la valeur des inputs
   handleChange(event) {
-    let target = event.target;
-    let value = target.value
-    let name = target.id;
-    this.setState({[name]: value});
+    this.setState({comment: event.target.value});
   }
 
   sendComment(event){
@@ -68,7 +66,7 @@ class Reply extends Component {
           <p>{this.state.msg}</p>
           {/* Comments Form Starts */}
           <div className="comments-form">
-            <form onSubmit={this.sendComment}>
+            <form onSubmit={this.sendComment.bind(this)}>
               {/* Input Field Starts */}
               <div className="form-group">
                 <textarea
