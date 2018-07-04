@@ -6,6 +6,7 @@ import Success from './Success'
 
 class SignIn extends Component {
   constructor(props) {
+
     super(props);
     this.state = {
       showSignUp: props.showSignUp,
@@ -13,7 +14,8 @@ class SignIn extends Component {
       password: '',
       statusMsg: '',
       email: '',
-      success: false
+      success: false,
+      previousPath: document.referrer
     };
     this.changeForm = this.changeForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -51,11 +53,7 @@ class SignIn extends Component {
       sessionStorage.clear();
       sessionStorage.setItem('access_token', response.data.access_token);
       sessionStorage.setItem('username', this.state.username);
-      this.setState({
-        success: true
-      });
-      this.props.history.push('/')
-      console.log(event);
+      window.location.href = this.state.previousPath
     }).catch(error => {
       this.setState({statusMsg: 'Username et/ou Mdp invalides'})
       console.log(error);

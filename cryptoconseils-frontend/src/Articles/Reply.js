@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+
 import axios from 'axios'
-import UserAction from '../Header/UserAction';
 
 class Reply extends Component {
 
@@ -10,8 +10,6 @@ class Reply extends Component {
       comment: null,
       msg: null,
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.sendComment = this.sendComment.bind(this);
   }
 
   // enregistre la valeur des inputs

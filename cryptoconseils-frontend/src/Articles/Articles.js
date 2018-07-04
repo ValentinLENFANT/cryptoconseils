@@ -43,38 +43,37 @@ class Articles extends Component {
     if(this.state.access){
       return(
         <div>
-        <Header/>
-
-        <div className="Articles Component">
-          <Banner titlePart1={this.state.article.title} pageName="Article" article={this.state.article}/>
-          {/* div Content Starts */}
-          <div className="container blog-page">
-            <div className="row">
-              <div className="content col-xs-12 col-md-8">
-                {/* Article Starts */}
-                <div>
-                  {/* Figure Starts */}
-                  <div className="blog-figure">
-                    <img className="img-responsive" src="/images/blog/blog-post-1.jpg" alt=""/>
+          <Header/>
+          <div className="Articles Component">
+            <Banner titlePart1={this.state.article.title} pageName="Article" article={this.state.article}/>
+            {/* div Content Starts */}
+            <div className="container blog-page">
+              <div className="row">
+                <div className="content col-xs-12 col-md-8">
+                  {/* Article Starts */}
+                  <div>
+                    {/* Figure Starts */}
+                    <div className="blog-figure">
+                      <img className="img-responsive" src="/images/blog/blog-post-1.jpg" alt=""/>
+                    </div>
+                    {/* Figure Ends */}
+                    {/* Content Starts */}
+                    <p className="content-article">
+                        {this.state.article.content}
+                    </p>
+                    {/* Content Ends */}
+                    {/* Meta Starts */}
+                    <Meta article={this.state.article}/>
+                    {/* Meta Ends */}
+                    <Comments comments={this.state.article.comments}/>
+                    <Reply article={this.state.article}/>
                   </div>
-                  {/* Figure Ends */}
-                  {/* Content Starts */}
-                  <p className="content-article">
-                      {this.state.article.content}
-                  </p>
-                  {/* Content Ends */}
-                  {/* Meta Starts */}
-                  <Meta article={this.state.article}/>
-                  {/* Meta Ends */}
-                  <Comments comments={this.state.article.comments}/>
-                  <Reply article={this.state.article}/>
                 </div>
+                <Sidebar/>
               </div>
-              <Sidebar/>
             </div>
           </div>
         </div>
-      </div>
       );
     } else {
       return(

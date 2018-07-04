@@ -9,7 +9,8 @@ class UserAction extends Component {
     this.state = {
        displayForm: false,
        username: sessionStorage.getItem('username'),
-       isLogged: sessionStorage.getItem('access_token')
+       isLogged: sessionStorage.getItem('access_token'),
+       previousPath: window.location.pathname
     };
   }
 
@@ -27,7 +28,7 @@ class UserAction extends Component {
                     </a>
                   </li>
                   <li className="sign-out">
-                    <SignOut/>
+                    <SignOut previousPath={this.state.previousPath}/>
                   </li>
                 </ul>
               </div>
