@@ -138,6 +138,22 @@ class UserController extends FOSRestController
     public function newAction(Request $request) // [POST] /users/new
     {
         $data = $request->getContent();
+
+        try {
+            $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+
+        $reponse = $bdd->query('SELECT * FROM users');
+        while ($donnees = $reponse->fetch()) {
+            if ($donnees['username'] == json_decode($data)->username) {
+                return new JsonResponse(array('error' => "Désolé, ce nom d'utilisateur est déjà pris."), 403);
+            } else if ($donnees['email_canonical'] == json_decode($data)->email_canonical) {
+                return new JsonResponse(array('error' => "Désolé, cette adresse email est déjà utilisée."), 403);
+            }
+        }
+
         $user = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\UserBundle\Entity\User', 'json');
 
 
