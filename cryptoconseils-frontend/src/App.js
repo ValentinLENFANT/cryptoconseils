@@ -31,6 +31,11 @@ const Articles = Loadable({
   loading: Loading,
 });
 
+const LatestArticles = Loadable({
+  loader: () => import('./Articles/LatestArticles'),
+  loading: Loading,
+});
+
 const Contact = Loadable({
   loader: () => import('./Contact/Contact'),
   loading: Loading,
@@ -64,6 +69,7 @@ class App extends Component {
           <Route exact path="/contact" component={Contact}/>
           <Route exact path="/signin" component={SignIn}/>
           <Route exact path="/signup" component={SignUp}/>
+          <Route exact path="/articles" component={LatestArticles}/>
           <Route path="/articles/:id" component={Articles}/>
           <Route component={NotFound}/>
         </Switch>
