@@ -25,7 +25,7 @@ class News extends Component {
       };
     }
 
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/newest/3', authorization)
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/newest/'+this.props.nbArticle, authorization)
     .then(response => {
       this.setState({
         articles: response.data

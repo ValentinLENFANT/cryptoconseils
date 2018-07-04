@@ -50,7 +50,7 @@ class Home extends Component {
           {/* Slider Ends */}
 
           {/* Blog Section Starts */}
-            <News />
+            <News nbArticle="3"/>
           {/* Blog Section Ends */}
 
           {/* About Section Starts */}
