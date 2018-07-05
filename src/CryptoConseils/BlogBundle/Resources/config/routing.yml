@@ -186,3 +186,13 @@ cryptoconseils_blog_orders_paymentcomplete:
 cryptoconseils_blog_orders_paymentcancel:
     path:   /orders/payment/cancel/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Orders:paymentCancel }
+
+cryptoconseils_blog_call_new:
+    path:   /call/new/
+    defaults: { _controller: CryptoConseilsBlogBundle:Calls:new }
+    methods:    [POST]
+
+cryptoconseils_blog_call_all:
+    path:   /call/
+    defaults: { _controller: CryptoConseilsBlogBundle:Calls:allCalls }
+    methods:    [GET]

@@ -222,7 +222,6 @@ class UserController extends FOSRestController
         return new JsonResponse("L'email a bien été activé", 200);
     }
 
-    //TODO éditer la vue forgotPassword.html.twig pour y ajouter le lien vers la page demandant le mail
     public function sendEmailForForgottenPasswordAction(Request $request) //[POST] /users/email/forgottenPassword/
     {
         $data = $request->getContent();
@@ -256,7 +255,6 @@ class UserController extends FOSRestController
         return new JsonResponse("L'email de réinitialisation du mot de passe a bien été envoyé", 200);
     }
 
-    //TODO éditer la vue passwordSuccesfullyChanged.html.twig pour y ajouter le lien vers signin/
     public function resetPasswordAction(Request $request) //[POST] /users/email/passwordSuccesfullyChanged/
     {
         $data = $request->getContent();
