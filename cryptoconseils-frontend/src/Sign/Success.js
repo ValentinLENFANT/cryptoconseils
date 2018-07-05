@@ -20,6 +20,15 @@ class Success extends Component {
           <a href="/">Retour à la page d'acceuil</a>
         </div>
       );
+    } else if (this.props.newPassword) {
+
+      return (
+        <div className="Success Component">
+          <p> L'email de réinitialisation du mot de passe a bien été envoyé</p>
+          <p> Veuillez cliquer sur le lien envoyé par mail pour procéder à la rénitialisaiton de votre mot de passe</p>
+          <a href="/">Retour à la page d'acceuil</a>
+        </div>
+      );
     }
 
   }

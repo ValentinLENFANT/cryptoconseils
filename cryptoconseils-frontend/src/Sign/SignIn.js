@@ -16,22 +16,24 @@ class SignIn extends Component {
       email: '',
       success: false,
       activated: false,
+      newPassword: false,
       previousPath: document.referrer,
       showForgotPassword: false
     };
     this.changeForm = this.changeForm.bind(this);
-    this.forgotPasswodForm = this.forgotPasswodForm.bind(this);
+    this.forgotPasswordForm = this.forgotPasswordForm.bind(this);
+    this.handleForgotPassword = this.handleForgotPassword.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
-    this.handleForgotPassword = this.handleForgotPassword.bind(this);
+
   }
 
   // switch entre les deux form
   changeForm(event) {
     this.setState({showSignUp: !this.state.showSignUp,showForgotPassword:false});
   }
-  forgotPasswodForm(event){
+  forgotPasswordForm(event){
     this.setState({showForgotPassword: true});
   }
 
@@ -46,7 +48,6 @@ class SignIn extends Component {
   // connexion
   handleSignIn(event) {
     event.preventDefault();
-
     // si première connexion
     if(this.props.match.params.token) {
       console.log(this.props.match.params.token);
@@ -114,8 +115,19 @@ class SignIn extends Component {
     });
   }
 
+  // mot de passe oublié
   handleForgotPassword(event){
+    event.preventDefault();
+    console.log(this.state.email);
+    axios.post(process.env.REACT_APP_API_ADDRESS+'/users/email/forgottenPassword/',{
+      email: this.state.email,
 
+    }).then(response => {
+      this.setState({  newPassword: true})
+      console.log(response);
+    }).catch(error => {
+      console.log(error);
+    });
   }
   // choix du form
   formRender(){
@@ -128,7 +140,9 @@ class SignIn extends Component {
     else if(this.state.success){
       return <Success email={this.state.email}/>
     }
-
+    else if(this.state.newPassword){
+      return <Success newPassword={this.state.newPassword}/>
+    }
     // Si déjà connecté on envoie le component AlreadyLogin
     else if(localStorage.getItem('access_token')){
       return <AlreadyLogin/>
@@ -137,6 +151,7 @@ class SignIn extends Component {
 
       // si mot de passe oublié
       if(this.state.showForgotPassword){
+        console.log(this.state.showForgotPassword);
         return(
           <div className="ForgotPasswordForm">
             {/*Section Title Starts */}
@@ -147,7 +162,7 @@ class SignIn extends Component {
             </div>
             {/*Section Title Ends */}
             {/*Form Starts */}
-            <form>
+            <form onSubmit={this.handleForgotPassword}>
               {/*Input Field Starts */}
               <div className="form-group">
                 <input
@@ -292,7 +307,7 @@ class SignIn extends Component {
                   <a onClick={this.changeForm}> Inscription</a>
                 </p>
                 <p className="text-center">Mot de passe oublié ?
-                  <a onClick={this.forgotPasswodForm}> Renitialiser mot de passe</a>
+                  <a onClick={this.forgotPasswordForm}> Renitialiser mot de passe</a>
                 </p>
               </div>
               {/*Submit Form Button Ends */}
