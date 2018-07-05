@@ -73,6 +73,20 @@ class UserController extends FOSRestController
         }
     }
 
+    public function getCurrentConnectedUserAction()
+    {
+        $user = $this->getUser();
+        return new JsonResponse(array('id' => $user->getId(),
+                'premiumLevel' => $user->getPremiumLevel(),
+                'username' => $user->getUsername(),
+                'email' => $user->getEmail(),
+                'isEmailValidated' => $user->isEmailValidated(),
+                'lastLogin' => $user->getLastLogin(),
+                'roles' => $user->getRoles())
+            , 200);
+
+    }
+
     public function showUserCommentsByUsernameAction($username) // [GET] /users/comments/username/{username}
     {
         try {
