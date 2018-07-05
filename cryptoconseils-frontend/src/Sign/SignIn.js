@@ -16,7 +16,7 @@ class SignIn extends Component {
       email: '',
       success: false,
       activated: false,
-      newPassword: false,
+      forgotPassword: false,
       previousPath: document.referrer,
       showForgotPassword: false
     };
@@ -26,7 +26,6 @@ class SignIn extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
-
   }
 
   // switch entre les deux form
@@ -54,7 +53,8 @@ class SignIn extends Component {
       axios.post(process.env.REACT_APP_API_ADDRESS+'/users/email/activate/',{
         "uniqueTokenForEmail": this.props.match.params.token
       }).then(response => {
-        console.log(response.status);
+
+          // auto connexion
           axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
             grant_type: 'password',
             username: this.state.username,
@@ -62,7 +62,6 @@ class SignIn extends Component {
             client_id: process.env.REACT_APP_CLIENT_ID,
             client_secret: process.env.REACT_APP_CLIENT_SECRET,
           }).then(response => {
-
             localStorage.setItem('access_token', response.data.access_token);
             localStorage.setItem('username', this.state.username);
             this.setState({
@@ -72,11 +71,12 @@ class SignIn extends Component {
             this.setState({statusMsg: 'Username et/ou Mdp invalides'})
             console.log(error.response);
           });
-
       }).catch(error => {
         console.log(error.reponse);
       });
-    } else {
+    }
+    // connexion normal
+    else {
       axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
         grant_type: 'password',
         username: this.state.username,
@@ -123,12 +123,15 @@ class SignIn extends Component {
       email: this.state.email,
 
     }).then(response => {
-      this.setState({  newPassword: true})
+      this.setState({  forgotPassword: true})
       console.log(response);
     }).catch(error => {
       console.log(error);
     });
   }
+
+
+
   // choix du form
   formRender(){
 
@@ -140,8 +143,8 @@ class SignIn extends Component {
     else if(this.state.success){
       return <Success email={this.state.email}/>
     }
-    else if(this.state.newPassword){
-      return <Success newPassword={this.state.newPassword}/>
+    else if(this.state.forgotPassword){
+      return <Success forgotPassword={this.state.forgotPassword}/>
     }
     // Si déjà connecté on envoie le component AlreadyLogin
     else if(localStorage.getItem('access_token')){
@@ -191,9 +194,8 @@ class SignIn extends Component {
             {/*Form Ends */}
           </div>
         );
-      }
-      // formualaire inscription
-      else if(this.state.showSignUp){
+      } else if(this.state.showSignUp){
+        // formualaire inscription
         return (
           <div className="SignUpForm">
             {/* Section Title Starts */}

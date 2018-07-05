@@ -20,7 +20,7 @@ class Success extends Component {
           <a href="/">Retour à la page d'acceuil</a>
         </div>
       );
-    } else if (this.props.newPassword) {
+    } else if (this.props.forgotPassword) {
 
       return (
         <div className="Success Component">
