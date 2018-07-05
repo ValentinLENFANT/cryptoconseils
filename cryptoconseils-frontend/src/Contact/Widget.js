@@ -46,22 +46,22 @@ class Widget extends Component {
                   <div className="social-contact">
                     <ul>
                       <li className="facebook">
-                        <a href="https://www.facebook.com/groups/CryptoConseils.fr/" target="_blank">
+                        <a href="https://www.facebook.com/groups/CryptoConseils.fr/">
                           <i className="fa fa-facebook"></i>
                         </a>
                       </li>
                       <li className="twitter">
-                        <a href="https://twitter.com/CryptoConseils" target="_blank">
+                        <a href="https://twitter.com/CryptoConseils">
                           <i className="fa fa-twitter"></i>
                         </a>
                       </li>
                       <li className="google-plus">
-                        <a href="https://twitter.com/CryptoConseils" target="_blank">
+                        <a href="https://twitter.com/CryptoConseils">
                           <i className="fa fa-google"></i>
                         </a>
                       </li>
                       <li className="linkedin">
-                        <a href="https://twitter.com/CryptoConseils" target="_blank">
+                        <a href="https://twitter.com/CryptoConseils">
                           <i className="fa fa-linkedin"></i>
                         </a>
                       </li>
