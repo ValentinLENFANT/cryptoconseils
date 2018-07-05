@@ -60,11 +60,6 @@ const SignUp = Loadable({
   loading: Loading,
 });
 
-const ForgotPassword = Loadable({
-  loader: () => import('./ForgotPassword/ForgotPassword'),
-  loading: Loading,
-});
-
 const NewPassword = Loadable({
   loader: () => import('./ForgotPassword/NewPassword'),
   loading: Loading,
@@ -84,8 +79,7 @@ class App extends Component {
           <Route exact path="/signin" component={SignIn}/>
           <Route exact path="/signin/token/:token" component={SignIn}/>
           <Route exact path="/signup" component={SignUp}/>
-          <Route exact path="/forgotpassord" component={ForgotPassword}/>
-          <Route exact path="/newpassword/:token" component={ForgotPassword}/>
+          <Route exact path="/newpassword/:token" component={NewPassword}/>
           <Route exact path="/articles" component={LatestArticles}/>
           <Route path="/articles/:id" component={Articles}/>
           <Route path="/categories/:id" component={Categories}/>
