@@ -76,7 +76,7 @@ class UserController extends FOSRestController
     public function showUserCommentsByUsernameAction($username) // [GET] /users/comments/username/{username}
     {
         try {
-            $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -105,7 +105,7 @@ class UserController extends FOSRestController
         $user = $this->getUser();
         $userId = $user->getId();
         try {
-            $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -140,7 +140,7 @@ class UserController extends FOSRestController
         $data = $request->getContent();
 
         try {
-            $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -197,7 +197,7 @@ class UserController extends FOSRestController
     {
         $data = $request->getContent();
         try {
-            $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -216,7 +216,7 @@ class UserController extends FOSRestController
         $uniqueTokenForForgottenPassword = md5(sha1(date("Y-m-d H:i:s")));
 
         try {
-            $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -234,7 +234,8 @@ class UserController extends FOSRestController
             ->setBody(
                 $this->renderView(
                     'CryptoConseilsUserBundle:Emails:forgotPassword.html.twig',
-                    array('uniqueTokenForForgottenPassword' => $uniqueTokenForForgottenPassword)
+                    array('uniqueTokenForForgottenPassword' => $uniqueTokenForForgottenPassword,
+                        'email' =>$email)
                 )
             );
         $this->get('mailer')->send($message);
@@ -250,7 +251,7 @@ class UserController extends FOSRestController
         $email = json_decode($data)->email;
 
         try {
-            $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
