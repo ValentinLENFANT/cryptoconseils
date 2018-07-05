@@ -14,7 +14,7 @@ class Articles extends Component {
     super();
     this.state = {
       article: [],
-      access: false
+      noAccess: false
     };
   }
 
@@ -30,17 +30,17 @@ class Articles extends Component {
     .then(response => {
       this.setState({
         article: response.data,
-        access: true
+        noAccess: false
       });
     }).catch(error => {
       this.setState({
-        access: false
+        noAccess: true
       })
     });
   }
 
   render() {
-    if(this.state.access){
+    if(!this.state.noAccess){
       return(
         <div>
           <Header/>
@@ -77,7 +77,7 @@ class Articles extends Component {
       );
     } else {
       return(
-        <Denied/>
+        <Denied noAccess={this.state.noAccess}/>
       );
     }
   }
