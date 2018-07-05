@@ -262,6 +262,7 @@ class UserController extends FOSRestController
         $data = $request->getContent();
         $uniqueToken = json_decode($data)->uniqueTokenForForgottenPassword;
         $password = json_decode($data)->password;
+        $password = password_hash($password, PASSWORD_BCRYPT);
         $email = json_decode($data)->email;
 
         try {
