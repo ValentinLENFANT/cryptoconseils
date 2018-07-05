@@ -36,6 +36,28 @@ class User extends BaseUser
     private $isEmailValidated;
 
     /**
+     * @return string
+     */
+    public function getUniqueTokenForEmail()
+    {
+        return $this->uniqueTokenForEmail;
+    }
+
+    /**
+     * @param string $uniqueTokenForEmail
+     */
+    public function setUniqueTokenForEmail($uniqueTokenForEmail)
+    {
+        $this->uniqueTokenForEmail = $uniqueTokenForEmail;
+    }
+
+    /**
+     * @var string
+     * @ORM\Column(name="uniqueTokenForEmail", type="string", nullable=true)
+     */
+    private $uniqueTokenForEmail;
+
+    /**
      * @return bool
      */
     public function isEmailValidated()

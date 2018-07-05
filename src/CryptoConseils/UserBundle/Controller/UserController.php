@@ -169,7 +169,8 @@ class UserController extends FOSRestController
         $user->setPassword($password);
         $user->setPremiumLevel(1);
         $user->setEnabled(true);
-
+        $user->setIsEmailValidated(false);
+        $user->setUniqueTokenForEmail(md5(sha1(date("Y-m-d H:i:s"))));
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
@@ -183,12 +184,28 @@ class UserController extends FOSRestController
             ->setBody(
                 $this->renderView(
                     'CryptoConseilsUserBundle:Emails:registration.html.twig',
-                    array('name' => $user->getUsername())
+                    array('name' => $user->getUsername(),
+                        'uniqueTokenForEmail' => $user->getUniqueTokenForEmail())
                 )
             );
             $this->get('mailer')->send($message);
 
         return new JsonResponse(json_decode($data), 200);
+    }
+
+    public function validateEmailAction(Request $request) // [POST] /users/email/activate/{uniqueTokenForEmail}
+    {
+        $data = $request->getContent();
+        try {
+            $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+        $req = $bdd->prepare('UPDATE users SET isEmailValidated = 1 WHERE uniqueTokenForEmail = :uniqueToken');
+        $req->execute(array(
+            'uniqueToken' => json_decode($data)->uniqueTokenForEmail
+        ));
+        return new JsonResponse("L'email a bien été activé", 200);
     }
 
 

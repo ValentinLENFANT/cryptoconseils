@@ -45,3 +45,8 @@ cryptoconseils_users_commentsById:
     path:   /users/comments/id/{id}
     defaults: { _controller: CryptoConseilsUserBundle:User:showUserCommentsById }
     methods:    [GET]
+
+cryptoconseils_users_activateEmail:
+    path:   /users/email/activate/
+    defaults: { _controller: CryptoConseilsUserBundle:User:validateEmail }
+    methods:    [POST]
