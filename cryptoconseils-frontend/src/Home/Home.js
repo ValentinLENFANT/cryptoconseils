@@ -14,28 +14,6 @@ import BeginTrade from '../BeginTrade/BeginTrade';
 
 
 class Home extends Component {
-  constructor() {
-     super();
-     // valeur par défault, affiche le caroussel
-     this.state = {
-       isLogged: false,
-       token: null
-     };
-   }
-
-  componentDidMount(){
-    if(localStorage.getItem('access_token')){
-      this.setState({
-        isLogged: true,
-        token: localStorage.getItem('access_token')
-      });
-    } else {
-      this.setState({
-        isLogged: false,
-        token: null
-      })
-    }
-  }
   render() {
     return (
       <div className="App">
@@ -90,7 +68,7 @@ class Home extends Component {
           {/* Quote and Chart Section Ends */}
 
           {/* Call To Action Section Starts */}
-            <BeginTrade isLogged={this.state.isLogged}/>
+            <BeginTrade/>
           {/* Call To Action Section Ends */}
         {/* Wrapper Ends */}
         </div>
