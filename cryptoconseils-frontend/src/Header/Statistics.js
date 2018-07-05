@@ -17,7 +17,7 @@ class Statistics extends Component {
       var btc = response.data.data.quotes.EUR;
       console.log(btc);
       this.setState({
-        price: btc.price.toLocaleString(),
+        price: btc.price.toLocaleString() + " €",
         percent_change_24h: btc.percent_change_24h +" %",
         volume_24h: (btc.volume_24h / btc.price).toLocaleString() + " BTC"
       });
