@@ -15,9 +15,9 @@ class Activites extends Component {
   }
   componentDidMount(){
     // check si access token
-    if(sessionStorage.getItem('access_token')){
+    if(localStorage.getItem('access_token')){
       var authorization = {
-        headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
     }
 
@@ -54,9 +54,9 @@ class Activites extends Component {
           const result = dialog.value
 
           //check si access token
-          if(sessionStorage.getItem('access_token')){
+          if(localStorage.getItem('access_token')){
             var authorization = {
-              headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+              headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
             };
             // update coms
             axios.put(process.env.REACT_APP_API_ADDRESS+'/comments/'+item.id,{
@@ -76,9 +76,9 @@ class Activites extends Component {
 
   deleteComment(item){
     // check si access token
-    if(sessionStorage.getItem('access_token')){
+    if(localStorage.getItem('access_token')){
       var authorization = {
-        headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
       // delete coms
       axios.delete(process.env.REACT_APP_API_ADDRESS+'/comments/'+item.id, authorization)

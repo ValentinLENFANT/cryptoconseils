@@ -11,9 +11,9 @@ class RecentPosts extends Component {
   }
   componentWillMount() {
     // check si access token
-    if(sessionStorage.getItem('access_token')){
+    if(localStorage.getItem('access_token')){
       var authorization = {
-        headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
       axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/newest/3', authorization)
       .then(response => {

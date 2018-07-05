@@ -9,7 +9,7 @@ import AirdropPremium from './AirdropPremium';
 
 class ProfilPremium extends Component {
   render() {
-    if(sessionStorage.getItem('access_token')){
+    if(localStorage.getItem('access_token')){
       return (
         <div className="App">
         {/* Wrapper Starts */}

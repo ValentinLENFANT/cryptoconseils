@@ -58,12 +58,12 @@ class InfosPerso extends Component {
 
   sendInfos(password,email){
     //check si access token
-    if(sessionStorage.getItem('access_token')){
+    if(localStorage.getItem('access_token')){
       var authorization = {
-        headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
       // update coms
-      axios.put(process.env.REACT_APP_API_ADDRESS+'/users/'+sessionStorage.getItem('username'),{
+      axios.put(process.env.REACT_APP_API_ADDRESS+'/users/'+localStorage.getItem('username'),{
         password: password,
         email: email
       }, authorization).then(response => {

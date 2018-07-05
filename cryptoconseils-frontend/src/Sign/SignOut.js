@@ -3,7 +3,7 @@ import Confirm from 'react-confirm-bootstrap';
 
 class SignOut extends Component {
   onConfirm() {
-    sessionStorage.clear();
+    localStorage.clear();
     window.location.href = this.props.previousPath
   }
   render() {

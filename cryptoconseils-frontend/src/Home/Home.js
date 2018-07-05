@@ -24,10 +24,10 @@ class Home extends Component {
    }
 
   componentDidMount(){
-    if(sessionStorage.getItem('access_token')){
+    if(localStorage.getItem('access_token')){
       this.setState({
         isLogged: true,
-        token: sessionStorage.getItem('access_token')
+        token: localStorage.getItem('access_token')
       });
     } else {
       this.setState({

@@ -21,10 +21,10 @@ class Reply extends Component {
   sendComment(event){
     // pour éviter le rechargement de la page
     event.preventDefault();
-    if(sessionStorage.getItem('access_token')) {
+    if(localStorage.getItem('access_token')) {
       // check si access token
       var authorization = {
-        headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
       // check longeur du commentaire
       if(this.state.comment.length < 30 || this.state.comment.length > 3000){
@@ -35,9 +35,8 @@ class Reply extends Component {
         // send coms
         axios.post(process.env.REACT_APP_API_ADDRESS+'/comments/new/', {
           article_id: this.props.article.id,
-          author: sessionStorage.getItem('username'),
-          content: this.state.comment,
-          user_id: 14
+          author: localStorage.getItem('username'),
+          content: this.state.comment
         }, authorization)
         .then(response => {
           // réponse si succes
@@ -59,7 +58,7 @@ class Reply extends Component {
     }
   }
   render() {
-    if(sessionStorage.getItem('access_token')) {
+    if(localStorage.getItem('access_token')) {
       return(
         <div className="Reply Commponent">
           <h3 className="comments-heading add-comment">Ajouter un commentaire</h3>

@@ -19,11 +19,11 @@ class Profil extends Component {
   }
   componentDidMount(){
     // check si access token
-    if(sessionStorage.getItem('access_token')){
+    if(localStorage.getItem('access_token')){
       var authorization = {
-        headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
-      axios.get(process.env.REACT_APP_API_ADDRESS+'/users/'+sessionStorage.getItem('username'), authorization)
+      axios.get(process.env.REACT_APP_API_ADDRESS+'/users/'+localStorage.getItem('username'), authorization)
       .then(response => {
         this.setState({
           premium: response.data.premium_level
@@ -35,7 +35,7 @@ class Profil extends Component {
   }
 
   render() {
-    if(sessionStorage.getItem('access_token')){
+    if(localStorage.getItem('access_token')){
       return (
         <div className="App">
         {/* Wrapper Starts */}

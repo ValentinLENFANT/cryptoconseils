@@ -70,8 +70,8 @@ class SignIn extends Component {
       email: this.state.email.toLowerCase(),
       password: this.state.password
     }).then(response => {
-      sessionStorage.clear();
-      sessionStorage.setItem('username', this.state.username);
+
+      localStorage.setItem('username', this.state.username);
       this.setState({
         success: true
       });
@@ -88,7 +88,7 @@ class SignIn extends Component {
   // choix du form
   formRender(){
     // Si déjà connecté on envoie le component AlreadyLogin
-    if(sessionStorage.getItem('access_token')){
+    else if(localStorage.getItem('access_token')){
       return <AlreadyLogin/>
     } else {
 

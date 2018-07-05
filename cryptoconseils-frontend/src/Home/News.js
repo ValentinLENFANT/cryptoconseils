@@ -14,9 +14,9 @@ class News extends Component {
   // éxécuté à la fin
   componentDidMount() {
     // check si access token
-    if(sessionStorage.getItem('access_token')){
+    if(localStorage.getItem('access_token')){
       var authorization = {
-        headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
     }
 

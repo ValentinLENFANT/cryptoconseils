@@ -64,9 +64,9 @@ class SearchBar extends Component {
   // récupère tous les articles
   getAllArticles() {
     // check si access token
-    if(sessionStorage.getItem('access_token')){
+    if(localStorage.getItem('access_token')){
       var config = {
-        headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
     }
 
@@ -78,7 +78,7 @@ class SearchBar extends Component {
       });
     }).catch(error => {
       if(error.response.data.error_description === "The access token provided has expired."){
-        sessionStorage.clear();
+        localStorage.clear();
       }
     });
   }

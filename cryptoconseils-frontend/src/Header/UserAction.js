@@ -8,8 +8,8 @@ class UserAction extends Component {
     // pour afficher le form
     this.state = {
        displayForm: false,
-       username: sessionStorage.getItem('username'),
-       isLogged: sessionStorage.getItem('access_token'),
+       username: localStorage.getItem('username'),
+       isLogged: localStorage.getItem('access_token'),
        previousPath: window.location.pathname
     };
   }
