@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Carousel from '../Sign/Caroussel';
+import Success from '../Success/Success';
 import axios from 'axios';
-import Success from '../Sign/Success';
+
 class NewPassword extends Component {
   constructor(){
     super()
@@ -63,7 +64,7 @@ class NewPassword extends Component {
         return <Success newPassword={this.state.success}/>
     }else {
       return(
-        <div className="ForgotPasswordForm">
+        <div className="NewPasswordForm">
           {/*Section Title Starts */}
           <div className="row text-center">
             <h2 className="title-head hidden-xs"><span>Nouveau mot de passe</span></h2>

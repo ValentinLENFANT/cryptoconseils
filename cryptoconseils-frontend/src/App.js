@@ -61,7 +61,7 @@ const SignUp = Loadable({
 });
 
 const NewPassword = Loadable({
-  loader: () => import('./ForgotPassword/NewPassword'),
+  loader: () => import('./NewPassword/NewPassword'),
   loading: Loading,
 });
 
