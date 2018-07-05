@@ -31,7 +31,7 @@ const Articles = Loadable({
 });
 
 const LatestArticles = Loadable({
-  loader: () => import('./Articles/LatestArticles'),
+  loader: () => import('./LatestArticles/LatestArticles'),
   loading: Loading,
 });
 
