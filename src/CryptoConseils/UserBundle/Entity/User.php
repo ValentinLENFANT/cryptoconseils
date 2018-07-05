@@ -58,6 +58,12 @@ class User extends BaseUser
     private $uniqueTokenForEmail;
 
     /**
+     * @var @var string
+     * @ORM\Column(name="uniqueTokenForForgottenPassword", type="string", nullable=true)
+     */
+    private $uniqueTokenForForgottenPassword;
+
+    /**
      * @return bool
      */
     public function isEmailValidated()
