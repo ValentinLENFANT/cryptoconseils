@@ -60,3 +60,8 @@ cryptoconseils_users_sendEmailToConfirmPasswordHaschanged:
     path:   /users/email/passwordSuccesfullyChanged/
     defaults: { _controller: CryptoConseilsUserBundle:User:resetPassword }
     methods:    [POST]
+
+cryptoconseils_users_currentConnectedUser:
+    path:   /users/current/
+    defaults: { _controller: CryptoConseilsUserBundle:User:getCurrentConnectedUser }
+    methods:    [GET]
