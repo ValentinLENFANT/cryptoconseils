@@ -21,11 +21,17 @@ class Success extends Component {
         </div>
       );
     } else if (this.props.forgotPassword) {
-
       return (
         <div className="Success Component">
           <p> L'email de réinitialisation du mot de passe a bien été envoyé</p>
           <p> Veuillez cliquer sur le lien envoyé par mail pour procéder à la rénitialisaiton de votre mot de passe</p>
+          <a href="/">Retour à la page d'acceuil</a>
+        </div>
+      );
+    } else if (this.props.newPassword) {
+      return (
+        <div className="Success Component">
+          <p> Votre mot de passe a été changé !</p>
           <a href="/">Retour à la page d'acceuil</a>
         </div>
       );
