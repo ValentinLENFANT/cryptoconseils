@@ -208,6 +208,71 @@ class UserController extends FOSRestController
         return new JsonResponse("L'email a bien été activé", 200);
     }
 
+    //TODO éditer la vue forgotPassword.html.twig pour y ajouter le lien vers la page demandant le mail
+    public function sendEmailForForgottenPasswordAction(Request $request) //[POST] /users/email/forgottenPassword/
+    {
+        $data = $request->getContent();
+        $email = json_decode($data)->email;
+        $uniqueTokenForForgottenPassword = md5(sha1(date("Y-m-d H:i:s")));
+
+        try {
+            $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+        $req = $bdd->prepare('UPDATE users SET uniqueTokenForForgottenPassword = :uniqueToken WHERE email = :email');
+        $req->execute(array(
+            'email' => $email,
+            'uniqueToken' => $uniqueTokenForForgottenPassword
+        ));
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Réinitialisation de votre mot de pass CryptoConseils')
+            ->setFrom('cryptoconseils@gmail.com')
+            ->setTo($email)
+            ->setContentType("text/html; charset=UTF-8")
+            ->setBody(
+                $this->renderView(
+                    'CryptoConseilsUserBundle:Emails:forgotPassword.html.twig',
+                    array('uniqueTokenForForgottenPassword' => $uniqueTokenForForgottenPassword)
+                )
+            );
+        $this->get('mailer')->send($message);
+        return new JsonResponse("L'email de réinitialisation du mot de passe a bien été envoyé", 200);
+    }
+
+    //TODO éditer la vue passwordSuccesfullyChanged.html.twig pour y ajouter le lien vers signin/
+    public function resetPasswordAction(Request $request) //[POST] /users/email/passwordSuccesfullyChanged/
+    {
+        $data = $request->getContent();
+        $uniqueToken = json_decode($data)->uniqueTokenForForgottenPassword;
+        $password = json_decode($data)->password;
+        $email = json_decode($data)->email;
+
+        try {
+            $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+        $req = $bdd->prepare('UPDATE users SET password = :password WHERE uniqueTokenForForgottenPassword = :uniqueToken');
+        $req->execute(array(
+            'uniqueToken' => $uniqueToken,
+            'password' => $password
+        ));
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Mot de passe changé avec succès')
+            ->setFrom('cryptoconseils@gmail.com')
+            ->setTo($email)
+            ->setContentType("text/html; charset=UTF-8")
+            ->setBody(
+                $this->renderView(
+                    'CryptoConseilsUserBundle:Emails:passwordSuccesfullyChanged.html.twig')
+            );
+        $this->get('mailer')->send($message);
+        return new JsonResponse("Mot de passe changé avec succès", 200);
+    }
+
 
     public function editAction(User $id, Request $request) // [PUT] /users/8
     {
