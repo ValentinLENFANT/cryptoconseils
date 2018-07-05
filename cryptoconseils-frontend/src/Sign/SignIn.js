@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Carousel from './Caroussel';
-import axios from 'axios'
 import AlreadyLogin from './AlreadyLogin'
-import Success from './Success'
+import Success from '../Success/Success'
+import axios from 'axios'
 
 class SignIn extends Component {
   constructor(props) {

@@ -11,7 +11,6 @@ class Success extends Component {
         </div>
       );
     } else if (this.props.activated) {
-
       return (
         <div className="Success Component">
           <meta http-equiv="refresh" content="3; url=/" />
