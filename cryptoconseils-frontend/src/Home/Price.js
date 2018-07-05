@@ -4,7 +4,7 @@ class Price extends Component {
   render() {
     return(
       <div className="Price Component">
-        <section className="pricing">
+        <section className="pricing" id="pricing">
           <div className="container">
             {/* Section Title Starts */}
             <div className="row text-center">

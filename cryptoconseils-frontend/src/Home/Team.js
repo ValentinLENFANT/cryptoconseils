@@ -4,7 +4,7 @@ class Team extends Component {
   render() {
     return (
       <div className="Team Component">
-        <section className="team">
+        <section className="team" id="team">
           <div className="container">
             {/* Section Title Starts */}
             <div className="row text-center">
