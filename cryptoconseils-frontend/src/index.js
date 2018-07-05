@@ -8,13 +8,7 @@ import JsFunction from './Home/JsFunction'
 import registerServiceWorker from './registerServiceWorker';
 require('dotenv').config()
 
-/*import Header from './Header/Header'
-
-ReactDOM.render(<Header />, document.getElementById('header'));
-registerServiceWorker();
-*/
-
-ReactDOM.render(<JsFunction />, document.getElementById('header'));
+ReactDOM.render(<JsFunction />, document.getElementById('JsScriptFiles'));
 registerServiceWorker();
 
 ReactDOM.render(<App />, document.getElementById('root'));
