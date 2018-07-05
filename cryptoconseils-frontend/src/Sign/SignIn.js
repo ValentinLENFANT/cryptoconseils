@@ -15,6 +15,7 @@ class SignIn extends Component {
       statusMsg: '',
       email: '',
       success: false,
+      activated: false,
       previousPath: document.referrer,
       showForgotPassword: false
     };
@@ -45,21 +46,52 @@ class SignIn extends Component {
   // connexion
   handleSignIn(event) {
     event.preventDefault();
-    axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
-      grant_type: 'password',
-      username: this.state.username,
-      password: this.state.password,
-      client_id: process.env.REACT_APP_CLIENT_ID,
-      client_secret: process.env.REACT_APP_CLIENT_SECRET,
-    }).then(response => {
-      sessionStorage.clear();
-      sessionStorage.setItem('access_token', response.data.access_token);
-      sessionStorage.setItem('username', this.state.username);
-      window.location.href = this.state.previousPath
-    }).catch(error => {
-      this.setState({statusMsg: 'Username et/ou Mdp invalides'})
-      console.log(error.response);
-    });
+
+    // si première connexion
+    if(this.props.match.params.token) {
+      console.log(this.props.match.params.token);
+      axios.post(process.env.REACT_APP_API_ADDRESS+'/users/email/activate/',{
+        "uniqueTokenForEmail": this.props.match.params.token
+      }).then(response => {
+        console.log(response.status);
+          axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
+            grant_type: 'password',
+            username: this.state.username,
+            password: this.state.password,
+            client_id: process.env.REACT_APP_CLIENT_ID,
+            client_secret: process.env.REACT_APP_CLIENT_SECRET,
+          }).then(response => {
+
+            localStorage.setItem('access_token', response.data.access_token);
+            localStorage.setItem('username', this.state.username);
+            this.setState({
+              activated: true
+            });
+          }).catch(error => {
+            this.setState({statusMsg: 'Username et/ou Mdp invalides'})
+            console.log(error.response);
+          });
+
+      }).catch(error => {
+        console.log(error.reponse);
+      });
+    } else {
+      axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
+        grant_type: 'password',
+        username: this.state.username,
+        password: this.state.password,
+        client_id: process.env.REACT_APP_CLIENT_ID,
+        client_secret: process.env.REACT_APP_CLIENT_SECRET,
+      }).then(response => {
+
+        localStorage.setItem('access_token', response.data.access_token);
+        localStorage.setItem('username', this.state.username);
+        window.location.href = this.state.previousPath
+      }).catch(error => {
+        this.setState({statusMsg: 'Username et/ou Mdp invalides'})
+        console.log(error.response);
+      });
+    }
   }
 
   // inscription
@@ -87,15 +119,21 @@ class SignIn extends Component {
   }
   // choix du form
   formRender(){
+
+    // si le user vient d'activer son compte
+    if(this.state.activated){
+      return <Success activated={this.state.activated}/>
+    }
+    // si le user vient juste de s'inscrire
+    else if(this.state.success){
+      return <Success email={this.state.email}/>
+    }
+
     // Si déjà connecté on envoie le component AlreadyLogin
     else if(localStorage.getItem('access_token')){
       return <AlreadyLogin/>
     } else {
 
-      // si le user vient juste de s'inscrire
-      if(this.state.success){
-        return <Success email={this.state.email}/>
-      }
 
       // si mot de passe oublié
       if(this.state.showForgotPassword){

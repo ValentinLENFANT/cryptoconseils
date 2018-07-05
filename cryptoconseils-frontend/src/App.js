@@ -71,6 +71,7 @@ class App extends Component {
           <Route exact path="/faq" component={Faq}/>
           <Route exact path="/contact" component={Contact}/>
           <Route exact path="/signin" component={SignIn}/>
+          <Route exact path="/signin/token/:token" component={SignIn}/>
           <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/articles" component={LatestArticles}/>
           <Route path="/articles/:id" component={Articles}/>
