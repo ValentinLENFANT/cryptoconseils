@@ -2989,6 +2989,9 @@ section.contact {
   background: #dd4b39;
 }
 
+.contact-page-info .social-contact ul li.linkedin a i {
+  background: #0073B0;
+}
 /*** Shopping Cart ***/
 
 section.shop-cart {

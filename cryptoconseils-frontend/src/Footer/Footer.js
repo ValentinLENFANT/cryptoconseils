@@ -16,8 +16,8 @@ class Footer extends Component {
                   <div className="menu">
                     <ul>
                       <li><a href="/">Accueil</a></li>
-                      <li><a href="about.html">Team</a></li>
-                      <li><a href="contact.html">Contact</a></li>
+                      <li><a href="/#team">Team</a></li>
+                      <li><a href="/contact">Contact</a></li>
                     </ul>
                   </div>
                 </div>
@@ -42,10 +42,10 @@ class Footer extends Component {
                   <h4>Contactez-nous</h4>
                   <div className="contacts">
                     <div>
-                      <span>cryptoconseils@gmail.com</span>
+                      <span><a href="mailto:cryptoconseils@gmail.com" target="_top">cryptoconseils@gmail.com</a></span>
                     </div>
                     <div>
-                      <span>06 37 75 13 15</span>
+                      <span><a href="tel:+33637751315">06 37 75 13 15</a></span>
                     </div>
                     <div>
                       <span>Paris, France</span>

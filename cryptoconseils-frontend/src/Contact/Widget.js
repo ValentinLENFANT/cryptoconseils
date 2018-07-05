@@ -14,7 +14,9 @@ class Widget extends Component {
                 <i className="fa fa-home big-icon"></i>
                 <div className="contact-info-box-content">
                   <h4>Adresse</h4>
-                  <p>12 Rue De La Paix, Paris, France</p>
+                  <p>
+                    <a href="https://maps.google.com/?q=243 Rue du Faubourg Saint-Antoine 75011 Paris">243 Rue du Faubourg Saint-Antoine 75011 Paris  </a>
+                  </p>
                 </div>
               </div>
               {/* Contact Info Box Ends */}
@@ -23,7 +25,7 @@ class Widget extends Component {
                 <i className="fa fa-phone big-icon"></i>
                 <div className="contact-info-box-content">
                   <h4>Numéro de téléphone</h4>
-                  <p>+33 681758319</p>
+                  <p><a href="tel:+33681758319"></a>06 81 75 83 19</p>
                 </div>
               </div>
               {/* Contact Info Box Ends */}
@@ -32,8 +34,7 @@ class Widget extends Component {
                 <i className="fa fa-envelope big-icon"></i>
                 <div className="contact-info-box-content">
                   <h4>Adresse Email</h4>
-
-                  <p>cryptoconseils@gmail.com</p>
+                  <p><a href="mailto:cryptoconseils@gmail.com" target="_top">cryptoconseils@gmail.com</a></p>
                 </div>
               </div>
               {/* Contact Info Box Ends */}
@@ -45,18 +46,23 @@ class Widget extends Component {
                   <div className="social-contact">
                     <ul>
                       <li className="facebook">
-                        <a href="" target="_blank">
+                        <a href="https://www.facebook.com/groups/CryptoConseils.fr/" target="_blank">
                           <i className="fa fa-facebook"></i>
                         </a>
                       </li>
                       <li className="twitter">
-                        <a href="" target="_blank">
+                        <a href="https://twitter.com/CryptoConseils" target="_blank">
                           <i className="fa fa-twitter"></i>
                         </a>
                       </li>
                       <li className="google-plus">
-                        <a href="" target="_blank">
-                          <i className="fa fa-google-plus"></i>
+                        <a href="https://twitter.com/CryptoConseils" target="_blank">
+                          <i className="fa fa-google"></i>
+                        </a>
+                      </li>
+                      <li className="linkedin">
+                        <a href="https://twitter.com/CryptoConseils" target="_blank">
+                          <i className="fa fa-linkedin"></i>
                         </a>
                       </li>
                     </ul>
