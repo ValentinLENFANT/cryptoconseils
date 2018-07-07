@@ -5090,39 +5090,4 @@ p.desciption-call-premium {text-align: justify;}
 
 
 /*DEBUT CSS DE LA PAGE ADMIN */
-p.apercu-admin {font-size: 25px;color: white;padding-top: 12px;padding-bottom: 14px;text-transform: uppercase;background: #fd961a;font-weight: 900;margin-bottom: 30px;margin-top: 20px;border-radius: 3px;}
-textarea#analyse{padding-top: 10px;}
-textarea{resize:none}
-i.fa.fa-picture-o {position: relative;top: 1px;}
-textarea#source_description {padding-top: 10px;height: 400px;}
-.image-article-admin{width:100%;border-radius: 3px;margin-top:5px;}
-.container-article{background: #222222 !important;}
-#boutton{float:right;margin-top:15px;}
-h4.media-heading {color: white;font-size: 21px;}
-.boutton-supp-modif{float:right;}
-h3.panel-title {color: white;font-size: 17px;text-transform: uppercase;}
-span.fa.fa-comment.fa-lg  {color: white;font-size: 21px;margin-right:7px;}
-button.btn.btn-success.btn-xs {margin-right: 5px;}
-.control-label{float: left;}
-.button-edit{display: inline-flex;}
-.editer-edit-button{margin-right:30px;}
-.fa-minus-square{margin-right:5px;}
-ul.button-edit{list-style-type: none;}
-
-
-/*CSS SMARTPHONE */
-@media (max-width: 767px) and (min-width: 0){
-    h2{font-size: 35px !important;line-height: 37px !important;}
-    .btn-group.boutton-supp-modif.open {float: left;margin-right: 20px;}
-    .boutton-supp-modif {float: left !important;margin-right: 20px;}
-    .image-article-admin {width: 100%;height: auto;}
-    h4.media-heading {font-size: 14px;margin-top: 15px;}
-    ul.button-edit {margin-top: 6px;float: left;padding: 0px;margin-bottom: 0px;list-style-type: none;}
-}
-
-/* CSS TABLETTE */
-@media (min-width: 768px) and (max-width: 1024px) {
- h3.titre-dashboard {font-size: 15px;margin-top: 50px;}
-
-}
 /*FIN CSS DE LA PAGE ADMIN */
