@@ -22,9 +22,6 @@ class LoadImage extends AbstractFixture implements OrderedFixtureInterface
             'jpeg',
             'jpg',
             'png',
-            'jpg',
-            'jpeg',
-            'png',
             'jpg'
         );
 
@@ -33,10 +30,7 @@ class LoadImage extends AbstractFixture implements OrderedFixtureInterface
             'Cryptocurrencies banner',
             'Downtrend banner',
             'Ethereum banner',
-            'BearMarket banner',
-            'Analysis',
-            'Cours',
-            'Lorem Ipsum'
+            'BearMarket banner'
         );
 
             for ($i=0; $i<count($urls); $i++) {

@@ -35,13 +35,3 @@ cryptoconseils_users_new:
     path:    /users/new/
     defaults: { _controller: CryptoConseilsUserBundle:User:new }
     methods:    [POST]
-
-cryptoconseils_users_commentsByUsername:
-    path:   /users/comments/username/{username}
-    defaults: { _controller: CryptoConseilsUserBundle:User:showUserCommentsByUsername }
-    methods:    [GET]
-
-cryptoconseils_users_commentsById:
-    path:   /users/comments/id/{id}
-    defaults: { _controller: CryptoConseilsUserBundle:User:showUserCommentsById }
-    methods:    [GET]

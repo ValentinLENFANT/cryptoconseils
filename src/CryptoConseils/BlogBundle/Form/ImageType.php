@@ -16,9 +16,9 @@ class ImageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        //$builder
-            //->add('url', TextType::class)
-            //->add('alt', TextType::class);
+        $builder
+            ->add('url', TextType::class)
+            ->add('alt', TextType::class);
     }/**
      * {@inheritdoc}
      */
