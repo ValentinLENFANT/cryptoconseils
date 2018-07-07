@@ -1,12 +1,12 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_host: localhost
-    database_port: null
-    database_name: cryptoconseils
-    database_user: root
-    database_password: null
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: cryptoconseils@gmail.com
-    mailer_password: null
-    secret: ThisTokenIsNotSoSecretChangeIt
+    database_host: xxxx
+    database_port: xxxx
+    database_name: xxxx
+    database_user: xxxx
+    database_password: xxxx
+    mailer_transport: xxxx
+    mailer_host: xxxx
+    mailer_user: xxxx
+    mailer_password: xxxx
+    secret: xxxx

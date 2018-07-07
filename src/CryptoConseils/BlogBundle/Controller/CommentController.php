@@ -46,9 +46,10 @@ class CommentController extends FOSRestController
     }
 
 
-    public function showAction(Comment $id) // [GET] /comments/8
+    public function showAction(Comment $article_id) // [GET] /comments/8
     {
-        $data = $this->get('jms_serializer')->serialize($id, 'json');
+        $comments = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Comment')->find($article_id);
+        $data = $this->get('jms_serializer')->serialize($comments, 'json');
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');
 
@@ -62,7 +63,7 @@ class CommentController extends FOSRestController
             return new JsonResponse(array('error' => 'Access denied! You need to login before comment'), 403);
         }else{
             $currentUserUsername = $currentUserUsername->getUsername();
-
+            $userId = $this->getUser()->getId();
             $em = $this->getDoctrine()->getManager();
             $data = $request->getContent();
 
@@ -72,6 +73,7 @@ class CommentController extends FOSRestController
             $comment->setArticle($article);
             $comment->setAuthor($currentUserUsername);
             $comment->setDate(new \DateTime('now'));
+            $comment->setUserId($userId);
 
             // Analyse si les conditions sur les champs sont respectées //
             $errors = $this->get('validator')->validate($comment);

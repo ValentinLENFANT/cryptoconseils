@@ -1,16 +1,21 @@
 <?php
 namespace CryptoConseils\BlogBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * Comment
  *
  * @ORM\Table(name="comment")
  * @ORM\Entity(repositoryClass="CryptoConseils\BlogBundle\Repository\CommentRepository")
+ * @ORM\HasLifecycleCallbacks()
  *
- *
- * @ExclusionPolicy("all")
  */
 class Comment
 {
@@ -45,8 +50,6 @@ class Comment
      *
      * @ORM\Column(name="article_id", type="integer")
      *
-     *
-     * @Expose
      */
     private $article_id;
 
@@ -87,6 +90,27 @@ class Comment
      */
     private $date;
 
+    /**
+     * @var int
+     * @ORM\Column(name="user_id", type="integer")
+     */
+    private $user_id;
+
+    /**
+     * @return int
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @param int $user_id
+     */
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+    }
 
     /**
      * Get id.
@@ -184,7 +208,7 @@ class Comment
     /**
      * Set advert.
      *
-     * @param \CryptoConseils\BlogBundle\Entity\Article $advert
+     * @param \CryptoConseils\BlogBundle\Entity\Article $article
      *
      * @return Comment
      */

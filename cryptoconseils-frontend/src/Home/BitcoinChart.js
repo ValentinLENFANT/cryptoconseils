@@ -5,13 +5,13 @@ class BitcoinChart extends Component {
     return (
       <div className="BitcoinChart Component">
 
-        <div className="col-md-8 bg-grey-chart">
+        <section className="col-md-8 bg-grey-chart">
           <div className="chart-widget dark-chart chart-1">
             <div>
               <div className="btcwdgt-chart" data-bw-theme="dark"></div>
             </div>
           </div>
-        </div>
+        </section>
 
       </div>
     );

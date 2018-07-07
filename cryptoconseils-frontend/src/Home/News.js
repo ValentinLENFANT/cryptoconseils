@@ -3,8 +3,8 @@ import axios from 'axios';
 
 class News extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       articles: [],
       newDate: null
@@ -13,35 +13,32 @@ class News extends Component {
 
   // éxécuté à la fin
   componentDidMount() {
-    this.getAllArticles();
-  }
+    // check si access token
+    if(localStorage.getItem('access_token')){
+      var authorization = {
+        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
+      };
+    }
 
-  // TODO: convertir la date en meilleur format
-  convertDate(date){
-    this.setState({
-      newDate: date
-    });
-    return this.state.newDate;
-  }
-
-  // récupère tous les articles
-  getAllArticles() {
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/')
+    // récupère tous les articles
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/newest/'+this.props.nbArticle, authorization)
     .then(response => {
-      console.log(response.data);
       this.setState({
         articles: response.data
       });
-    })
-    .catch(error => {
+    }).catch(error => {
       console.log(error);
     });
+  }
+  
+  convertDate(date){
+    return new Date(date);
   }
 
   render() {
     return(
       <div className="News Component">
-        <div className="blog">
+        <section className="blog">
           <div className="container">
             {/* Section Title Starts */}
             <div className="row text-center">
@@ -55,7 +52,7 @@ class News extends Component {
             <div className="row latest-posts-content">
               {/* Article Starts */}
               {/* slice(0,3) pour limiter à trois articles */}
-              {this.state.articles.slice(0,3).map(article =>
+              {this.state.articles.map(article =>
                 <div className="col-sm-4 col-md-4 col-xs-12" key={article.id}>
                   <div className="latest-post">
                     {/* Featured Image Starts */}
@@ -73,12 +70,16 @@ class News extends Component {
                         <a href={"/articles/" + article.id}>{article.title}</a>
                       </h4>
                       <div className="post-text">
-                        <p>{article.content}</p>
+                        <p>
+                          {article.content.split(" ").splice(0,40).join(" ")+" ..."}
+                        </p>
                       </div>
                     </div>
                     <div className="post-date">
-                      <span>{article.date}</span>
-                      <span>JAN</span>
+                      <span>{this.convertDate(article.date).getDate()}</span>
+                      <span>
+                        {this.convertDate(article.date).toLocaleString('fr', { month: "short" })}
+                      </span>
                     </div>
                     <a href={"/articles/" + article.id} className="btn btn-primary">Lire plus</a>
                     {/* Article Content Ends */}
@@ -89,7 +90,7 @@ class News extends Component {
             </div>
             {/* Section Content Ends */}
           </div>
-        </div>
+        </section>
       </div>
     );
   }

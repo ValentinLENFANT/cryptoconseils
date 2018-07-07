@@ -5,32 +5,30 @@ class UserAction extends Component {
 
   constructor(props) {
     super();
-
     // pour afficher le form
     this.state = {
-       displayForm: true
+       displayForm: false,
+       username: localStorage.getItem('username'),
+       isLogged: localStorage.getItem('access_token'),
+       previousPath: window.location.pathname
     };
   }
 
-  // afficher le form d'inscription
-  onChangeDisplayForm() {
-    this.props.displayForm(this.state.displayForm);
-  }
   render() {
-    if(this.props.isLogged){
+    if(this.state.isLogged){
       return(
         <div className="UserAction Component">
             <div className="Login Component">
               <div className="col-md-4 col-lg-4">
                 <ul className="unstyled user">
                   <li className="sign-in">
-                    <a href="/signin" className="btn btn-primary">
+                    <a href="/profil" className="btn btn-primary">
                       <i className="fa fa-user"></i>
-                      {sessionStorage.getItem('username')}
+                      {this.state.username}
                     </a>
                   </li>
-                  <li className="sign-up">
-                    <SignOut/>
+                  <li className="sign-out">
+                    <SignOut previousPath={this.state.previousPath}/>
                   </li>
                 </ul>
               </div>
@@ -44,12 +42,12 @@ class UserAction extends Component {
             <div className="col-md-4 col-lg-4">
               <ul className="unstyled user">
                 <li className="sign-in">
-                  <a onClick={this.onChangeDisplayForm.bind(this)} className="btn btn-primary">
+                  <a href="/signin" className="btn btn-primary">
                     <i className="fa fa-user"></i>
                     Connexion</a>
                 </li>
                 <li className="sign-up">
-                  <a onClick={this.onChangeDisplayForm.bind(this)} className="btn btn-primary">
+                  <a href="/signup" className="btn btn-primary">
                     <i className="fa fa-user-plus"></i>
                     Inscription</a>
                 </li>
