@@ -32,8 +32,6 @@ class CallsController extends FOSRestController
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
         } else {
-            $username = $this->getUser()->getUsername();
-            $em = $this->getDoctrine()->getManager();
             $data = $request->getContent();
             $data = json_decode($data);
 
@@ -104,7 +102,6 @@ class CallsController extends FOSRestController
                 die('Erreur : ' . $e->getMessage());
             }
             $reponse = $bdd->query('SELECT * FROM calls');
-            $comments = array();
             while ($donnees = $reponse->fetch()) {
                     $calls[] = ['id' => $donnees['id'],
                         'author' => $donnees['author'],
@@ -122,6 +119,71 @@ class CallsController extends FOSRestController
             $response->headers->set('Content-Type', 'application/json');
 
             return $response;
+        }
+    }
+
+    public function callAction(Request $request, $id) // [GET] /call/{id}
+    {
+        $user = $this->getUser();
+        if ($user->getPremiumLevel() < 4)
+        {
+            return new JsonResponse(array('error' => 'You can not get the article. You do not have the premium level needed.'), 403);
+        }
+//        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+//            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
+//        } else {
+            try {
+                $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            } catch (Exception $e) {
+                die('Erreur : ' . $e->getMessage());
+            }
+            $data = $request->getContent();
+            $data = json_decode($data);
+            $response = $bdd->query('SELECT * FROM calls WHERE id='.$id);
+
+            while ($donnees = $response->fetch()) {
+                $call[] = ['id' => $donnees['id'],
+                    'author' => $donnees['author'],
+                    'date' => $donnees['date'],
+                    'cryptocurrencyPair' => $donnees['cryptocurrencyPair'],
+                    'cryptocurrencyName' => $donnees['cryptocurrencyName'],
+                    'content' => $donnees['content'],
+                    'buyPrice' => $donnees['buyPrice'],
+                    'sellPrice' => $donnees['sellPrice'],
+                    'scoring' => $donnees['scoring']];
+            }
+            if(!isset($call))
+            {
+                return new JsonResponse(array('error' => 'The call does not exist'), 404);
+            }
+            $data = $this->get('jms_serializer')->serialize($call, 'json');
+
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
+//        }
+    }
+
+    public function deleteAction($id) // [DELETE] /call/delete/{id} (ROLE_ADMIN ONLY)
+    {
+        // If user is not admin
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
+        } else {
+            try {
+                $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            } catch (Exception $e) {
+                die('Erreur : ' . $e->getMessage());
+            }
+
+            $response = $bdd->exec('DELETE FROM calls WHERE id=' . $id);
+
+            if (0 === $response) {
+                return new JsonResponse(array('error' => 'Call not found'), 404);
+            }
+
+            return new JsonResponse(array('success' => 'Call deleted'), 200);
         }
     }
 }

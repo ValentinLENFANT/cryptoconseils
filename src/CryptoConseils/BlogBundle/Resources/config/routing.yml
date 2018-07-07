@@ -193,6 +193,16 @@ cryptoconseils_blog_call_new:
     methods:    [POST]
 
 cryptoconseils_blog_call_all:
-    path:   /call/
+    path:   /call/all/
     defaults: { _controller: CryptoConseilsBlogBundle:Calls:allCalls }
     methods:    [GET]
+
+cryptoconseils_blog_call:
+    path:   /call/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Calls:call }
+    methods:    [GET]
+
+cryptoconseils_blog_delete_call:
+    path:   call/delete/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Calls:delete }
+    methods:    [DELETE]
