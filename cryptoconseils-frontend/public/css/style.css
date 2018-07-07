@@ -5020,3 +5020,109 @@ h4.panel-title a.collapsed:before {
     font-size: 28px;
   }
 }
+
+/* DEBUT CSS MODULE CONNEXION*/
+i.fa.fa-user {margin-right: 5px;}
+ul.user li {display: inline-block;width: 172px;padding-right: 0px;padding-left: 0px;}
+/*FIN CSS MODULE CONNEXION*/
+
+
+
+/*****************/
+/*DEBUT CSS BACKOFFICE*/
+/***************/
+
+/*DEBUT CSS MENU PROFIL*/
+section.menu-dashboard {padding-top: 5px;}
+/*FIN CSS MENU PROFIL*/
+
+/*DEBUT CSS DE LA PAGE PROFIL */
+.titre-dashboard{color: #fd961a;text-transform: uppercase;border: 1px solid #fd961a;width: auto;}
+.mes-commentaires{color: white;font-size: 17px;text-transform: uppercase;}
+.icone-commentaire{color:white;margin-right:10px;float: left;margin-top: 6px;}
+.list-group-commentaire{padding-left:0px;}
+.button-profil{margin-right:5px;}
+.list-comment{background: #212121;}
+.panel-default>.panel-heading {border-color:inherit;}
+.premium-image{width:100%;}
+.avatar-change{display:block;background:#3e3e3e;font-size:13px;text-align:left;padding-left:20px;}
+.submit-infos{margin-top: 20px;margin-bottom: 30px;}
+/*FIN CSS DE LA PAGE PROFIL */
+
+
+/*DEBUT CSS DE LA PAGE PROFIL PREMIUM */
+body { padding-top:30px; }
+.widget .panel-body { padding:0px; }
+.widget .list-group { margin-bottom: 0; }
+.widget .panel-title { display:inline }
+.widget .label-info { float: right; }
+.widget li.list-group-item {border-radius: 0;border: 0;border-top: 1px solid #ddd;}
+.widget li.list-group-item:hover { background-color: rgba(86,61,124,.1); }
+.widget .mic-info { color: #666666;font-size: 11px; }
+.widget .action { margin-top:5px; }
+.widget .comment-text { font-size: 12px; }
+.widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
+.titre-dashboard{color: #fd961a;text-transform: uppercase;border: 1px solid #fd961a;width: auto;}
+.section-profil {padding:25px 0;position: relative;}
+.coinmarketcap-currency-widget div {color: white !important;border: 0px !important;}
+.coinmarketcap-currency-widget a {color: white !important;}
+div#tradingview_20ffd-wrapper{width:100% !important;}
+div#tradingview_20ffd-wrapper div{width:100% !important;}
+.tradingview-widget-container div {width: 100% !important;}
+.tradingview-widget-container {width: 100% !important;}
+.coinmarketcap-currency-widget {margin-top: 20px;}
+.coinmarketcap-currency-widget div > div:nth-child(2) > a {display: none;}
+.button-call{margin-top:20px;}
+.prix-call{margin-top: 30px;font-size: 23px;color: white}
+p.desciption-call-premium {text-align: justify;}
+#airdrop-ticker{color:white;font-weight:900;text-align:left;margin-top: 10px;}
+.etape-airdrop{color:white;text-align:left;}
+.tradingview-widget-container iframe{height: 400px !important;}
+.tradingview-widget-container > article > div:nth-child(1) {height: 400px !important;}
+.call-premium-ticker{color:white;text-align:left;}
+.image-airdrop-premium{width:100%;}
+.texte-airdrop-premium{text-align:justify;}
+.recompense-airdrop{text-align:left;}
+.premium-logo{margin-bottom: 20px;margin-top:5px;}
+
+/*FIN CSS DE LA PAGE PROFIL PREMIUM */
+
+
+
+/*DEBUT CSS DE LA PAGE ADMIN */
+p.apercu-admin {font-size: 25px;color: white;padding-top: 12px;padding-bottom: 14px;text-transform: uppercase;background: #fd961a;font-weight: 900;margin-bottom: 30px;margin-top: 20px;border-radius: 3px;}
+textarea#analyse{padding-top: 10px;}
+textarea{resize:none}
+i.fa.fa-picture-o {position: relative;top: 1px;}
+textarea#source_description {padding-top: 10px;height: 400px;}
+.image-article-admin{width:100%;border-radius: 3px;margin-top:5px;}
+.container-article{background: #222222 !important;}
+#boutton{float:right;margin-top:15px;}
+h4.media-heading {color: white;font-size: 21px;}
+.boutton-supp-modif{float:right;}
+h3.panel-title {color: white;font-size: 17px;text-transform: uppercase;}
+span.fa.fa-comment.fa-lg  {color: white;font-size: 21px;margin-right:7px;}
+button.btn.btn-success.btn-xs {margin-right: 5px;}
+.control-label{float: left;}
+.button-edit{display: inline-flex;}
+.editer-edit-button{margin-right:30px;}
+.fa-minus-square{margin-right:5px;}
+ul.button-edit{list-style-type: none;}
+
+
+/*CSS SMARTPHONE */
+@media (max-width: 767px) and (min-width: 0){
+    h2{font-size: 35px !important;line-height: 37px !important;}
+    .btn-group.boutton-supp-modif.open {float: left;margin-right: 20px;}
+    .boutton-supp-modif {float: left !important;margin-right: 20px;}
+    .image-article-admin {width: 100%;height: auto;}
+    h4.media-heading {font-size: 14px;margin-top: 15px;}
+    ul.button-edit {margin-top: 6px;float: left;padding: 0px;margin-bottom: 0px;list-style-type: none;}
+}
+
+/* CSS TABLETTE */
+@media (min-width: 768px) and (max-width: 1024px) {
+ h3.titre-dashboard {font-size: 15px;margin-top: 50px;}
+
+}
+/*FIN CSS DE LA PAGE ADMIN */

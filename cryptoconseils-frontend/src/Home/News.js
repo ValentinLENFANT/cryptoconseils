@@ -3,8 +3,8 @@ import axios from 'axios';
 
 class News extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       articles: [],
       newDate: null
@@ -16,26 +16,30 @@ class News extends Component {
     this.getAllArticles();
   }
 
-  // TODO: convertir la date en meilleur format
-  convertDate(date){
-    this.setState({
-      newDate: date
-    });
-    return this.state.newDate;
-  }
-
   // récupère tous les articles
   getAllArticles() {
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/')
+    // check si access token
+    if(sessionStorage.getItem('access_token')){
+      var config = {
+        headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+      };
+    }
+
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/', config)
     .then(response => {
-      console.log(response.data);
+      console.log(response.error_description);
       this.setState({
         articles: response.data
       });
-    })
-    .catch(error => {
-      console.log(error);
+    }).catch(error => {
+      if(error.response.data.error_description === "The access token provided has expired."){
+        sessionStorage.clear();
+      }
     });
+  }
+  
+  convertDate(date){
+    return new Date(date);
   }
 
   render() {
@@ -73,12 +77,16 @@ class News extends Component {
                         <a href={"/articles/" + article.id}>{article.title}</a>
                       </h4>
                       <div className="post-text">
-                        <p>{article.content}</p>
+                        <p>
+                          {article.content.split(" ").splice(0,40).join(" ")+" ..."}
+                        </p>
                       </div>
                     </div>
                     <div className="post-date">
-                      <span>{article.date}</span>
-                      <span>JAN</span>
+                      <span>{this.convertDate(article.date).getDate()}</span>
+                      <span>
+                        {this.convertDate(article.date).toLocaleString('fr', { month: "short" })}
+                      </span>
                     </div>
                     <a href={"/articles/" + article.id} className="btn btn-primary">Lire plus</a>
                     {/* Article Content Ends */}
