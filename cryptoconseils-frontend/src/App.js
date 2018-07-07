@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import './App.css';
-import ProfilPremium from './ProfilPremium/ProfilPremium';
-import Admin from './Admin/Admin';
 
 const Loading = () => <div>Loading...</div> ;
 
@@ -37,40 +35,15 @@ const Contact = Loadable({
   loading: Loading,
 });
 
-const Profil = Loadable({
-  loader: () => import('./Profil/Profil'),
-  loading: Loading,
-});
-
-const SignIn = Loadable({
-  loader: () => import('./Sign/SignIn'),
-  loading: Loading,
-});
-
-const SignUp = Loadable({
-  loader: () => import('./Sign/SignUp'),
-  loading: Loading,
-});
-
-const AdminPage = Loadable({
-  loader: () => import('./Admin/Admin'),
-  loading: Loading,
-});
-
 class App extends Component {
   render() {
     return (
       <Router>
         <Switch>
           <Route exact path="/" component={Home}/>
-          <Route exact path="/profil" component={Profil}/>
-          <Route exact path="/profilpremium" component={ProfilPremium}/>
-          <Route exact path="/admin" component={AdminPage}/>
           <Route exact path="/calculator" component={BitcoinCalculator}/>
           <Route exact path="/faq" component={Faq}/>
           <Route exact path="/contact" component={Contact}/>
-          <Route exact path="/signin" component={SignIn}/>
-          <Route exact path="/signup" component={SignUp}/>
           <Route path="/articles/:id" component={Articles}/>
           <Route component={NotFound}/>
         </Switch>

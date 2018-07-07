@@ -26,8 +26,9 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            //->add('title', TextType::class)
-            //->add('content', CKEditorType::class, array('config_name' => 'basic_config'))
+            ->add('title', TextType::class)
+            ->add('image_id', TextType::class)
+            ->add('content', CKEditorType::class, array('config_name' => 'basic_config'))
             // Bloc commenté pour mettre en évidence l'existence d'une méthode alternative permettant d'ajouter des nouvelles catégories plutôt que de
             // récupérer les existantes
 //            ->add('categories', CollectionType::class, array(

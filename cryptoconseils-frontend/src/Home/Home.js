@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Header from '../Header/Header';
-
+import Navigation from './Navigation';
+import Statistics from './Statistics';
 import Carousel from './Caroussel';
 import About from './About';
 import News from './News';
@@ -10,43 +10,72 @@ import BitcoinCalculator from '../BitcoinCalculator/BitcoinCalculator';
 import Team from './Team';
 import Quote from './Quote';
 import BitcoinChart from './BitcoinChart';
+import Logo from '../Logo/Logo'
+import UserAction from './UserAction';
 import BeginTrade from '../BeginTrade/BeginTrade';
-
+import Sign from '../Sign/SignIn'
+import Footer from '../Footer/Footer';
 
 class Home extends Component {
   constructor() {
      super();
      // valeur par défault, affiche le caroussel
      this.state = {
-       isLogged: false,
-       token: null
+       displayForm: null
      };
    }
 
-  componentDidMount(){
-    if(sessionStorage.getItem('access_token')){
-      this.setState({
-        isLogged: true,
-        token: sessionStorage.getItem('access_token')
-      });
+  // permet d'afficher le form
+  // selon la valeur du component enfant "NotLoginDisplay"
+  bindDisplayForm(choice) {
+    this.setState({
+        displayForm: choice
+    });
+  }
+
+  // affiche le form ou le caroussel
+  carouselOrSign() {
+    if(this.state.displayForm === true){
+      return <Sign/>
     } else {
-      this.setState({
-        isLogged: false,
-        token: null
-      })
+      return <Carousel/>
     }
   }
+
   render() {
+    let isLogged = false;
+    if(sessionStorage.getItem('access_token')){
+      isLogged = true;
+    }
+
+    console.log(this.state.displayForm);
     return (
       <div className="App">
       {/* Wrapper Starts */}
         <div className="wrapper">
           {/* Header Starts */}
-            <Header/>
+          <div className="header">
+            <div className="container">
+              <div className="row">
+                {/* Logo Starts */}
+                  <Logo />
+                {/* Logo Ends */}
+                {/* Statistics Starts */}
+                  <Statistics />
+                {/* Statistics Ends */}
+                {/* User Sign In/Sign Up Starts */}
+                  <UserAction isLogged={isLogged} displayForm={this.bindDisplayForm.bind(this)}/>
+                {/* User Sign In/Sign Up Ends */}
+              </div>
+            </div>
+            {/* Navigation Menu Starts */}
+              <Navigation />
+            {/* Navigation Menu Ends */}
+            </div>
           {/* Header Ends */}
 
           {/* Slider Starts */}
-            <Carousel />
+            {this.carouselOrSign()}
           {/* Slider Ends */}
 
           {/* Blog Section Starts */}
@@ -90,10 +119,11 @@ class Home extends Component {
           {/* Quote and Chart Section Ends */}
 
           {/* Call To Action Section Starts */}
-            <BeginTrade isLogged={this.state.isLogged}/>
+            <BeginTrade isLogged={isLogged}/>
           {/* Call To Action Section Ends */}
         {/* Wrapper Ends */}
         </div>
+        <Footer/>
       </div>
     );
   }

@@ -4,7 +4,6 @@ import Confirm from 'react-confirm-bootstrap';
 class SignOut extends Component {
   onConfirm() {
     sessionStorage.clear();
-    window.location.reload(true);
   }
   render() {
     return (
