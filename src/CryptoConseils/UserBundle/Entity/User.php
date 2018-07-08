@@ -30,6 +30,56 @@ class User extends BaseUser
     private $premiumLevel;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="isEmailValidated", type="boolean")
+     */
+    private $isEmailValidated;
+
+    /**
+     * @return string
+     */
+    public function getUniqueTokenForEmail()
+    {
+        return $this->uniqueTokenForEmail;
+    }
+
+    /**
+     * @param string $uniqueTokenForEmail
+     */
+    public function setUniqueTokenForEmail($uniqueTokenForEmail)
+    {
+        $this->uniqueTokenForEmail = $uniqueTokenForEmail;
+    }
+
+    /**
+     * @var string
+     * @ORM\Column(name="uniqueTokenForEmail", type="string", nullable=true)
+     */
+    private $uniqueTokenForEmail;
+
+    /**
+     * @var @var string
+     * @ORM\Column(name="uniqueTokenForForgottenPassword", type="string", nullable=true)
+     */
+    private $uniqueTokenForForgottenPassword;
+
+    /**
+     * @return bool
+     */
+    public function isEmailValidated()
+    {
+        return $this->isEmailValidated;
+    }
+
+    /**
+     * @param bool $isEmailValidated
+     */
+    public function setIsEmailValidated($isEmailValidated)
+    {
+        $this->isEmailValidated = $isEmailValidated;
+    }
+
+    /**
      * @return int
      */
     public function getPremiumLevel()

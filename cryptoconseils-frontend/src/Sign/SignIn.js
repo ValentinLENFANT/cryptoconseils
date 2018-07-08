@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Carousel from './Caroussel';
-import axios from 'axios'
 import AlreadyLogin from './AlreadyLogin'
-import Success from './Success'
+import Success from '../Success/Success'
+import axios from 'axios'
 
 class SignIn extends Component {
   constructor(props) {
+
     super(props);
     this.state = {
       showSignUp: props.showSignUp,
@@ -13,9 +14,15 @@ class SignIn extends Component {
       password: '',
       statusMsg: '',
       email: '',
-      success: false
+      success: false,
+      activated: false,
+      forgotPassword: false,
+      previousPath: document.referrer,
+      showForgotPassword: false
     };
     this.changeForm = this.changeForm.bind(this);
+    this.forgotPasswordForm = this.forgotPasswordForm.bind(this);
+    this.handleForgotPassword = this.handleForgotPassword.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
@@ -23,11 +30,10 @@ class SignIn extends Component {
 
   // switch entre les deux form
   changeForm(event) {
-    if(this.state.showSignUp){
-      this.setState({showSignUp: false});
-    } else {
-      this.setState({showSignUp: true});
-    }
+    this.setState({showSignUp: !this.state.showSignUp,showForgotPassword:false});
+  }
+  forgotPasswordForm(event){
+    this.setState({showForgotPassword: true});
   }
 
   // enregistre la valeur des inputs
@@ -41,25 +47,52 @@ class SignIn extends Component {
   // connexion
   handleSignIn(event) {
     event.preventDefault();
-    axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
-      grant_type: 'password',
-      username: this.state.username,
-      password: this.state.password,
-      client_id: process.env.REACT_APP_CLIENT_ID,
-      client_secret: process.env.REACT_APP_CLIENT_SECRET,
-    }).then(response => {
-      sessionStorage.clear();
-      sessionStorage.setItem('access_token', response.data.access_token);
-      sessionStorage.setItem('username', this.state.username);
-      this.setState({
-        success: true
+    // si première connexion
+    if(this.props.match.params.token) {
+      console.log(this.props.match.params.token);
+      axios.post(process.env.REACT_APP_API_ADDRESS+'/users/email/activate/',{
+        "uniqueTokenForEmail": this.props.match.params.token
+      }).then(response => {
+
+          // auto connexion
+          axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
+            grant_type: 'password',
+            username: this.state.username,
+            password: this.state.password,
+            client_id: process.env.REACT_APP_CLIENT_ID,
+            client_secret: process.env.REACT_APP_CLIENT_SECRET,
+          }).then(response => {
+            localStorage.setItem('access_token', response.data.access_token);
+            localStorage.setItem('username', this.state.username);
+            this.setState({
+              activated: true
+            });
+          }).catch(error => {
+            this.setState({statusMsg: 'Username et/ou Mdp invalides'})
+            console.log(error.response);
+          });
+      }).catch(error => {
+        console.log(error.reponse);
       });
-      this.props.history.push('/')
-      console.log(event);
-    }).catch(error => {
-      this.setState({statusMsg: 'Username et/ou Mdp invalides'})
-      console.log(error);
-    });
+    }
+    // connexion normal
+    else {
+      axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
+        grant_type: 'password',
+        username: this.state.username,
+        password: this.state.password,
+        client_id: process.env.REACT_APP_CLIENT_ID,
+        client_secret: process.env.REACT_APP_CLIENT_SECRET,
+      }).then(response => {
+
+        localStorage.setItem('access_token', response.data.access_token);
+        localStorage.setItem('username', this.state.username);
+        window.location.href = this.state.previousPath
+      }).catch(error => {
+        this.setState({statusMsg: 'Username et/ou Mdp invalides'})
+        console.log(error.response);
+      });
+    }
   }
 
   // inscription
@@ -67,37 +100,108 @@ class SignIn extends Component {
     event.preventDefault();
     axios.post(process.env.REACT_APP_API_ADDRESS+'/users/new/', {
       username: this.state.username,
-      email: this.state.email,
-      password: this.state.password,
-      enabled: true,
+      email: this.state.email.toLowerCase(),
+      password: this.state.password
     }).then(response => {
-      sessionStorage.clear();
-      sessionStorage.setItem('username', this.state.username);
+
+      localStorage.setItem('username', this.state.username);
       this.setState({
         success: true
       });
+    }).catch(error => {
+      this.setState({
+        statusMsg: error.response.data.error
+      })
+    });
+  }
+
+  // mot de passe oublié
+  handleForgotPassword(event){
+    event.preventDefault();
+    console.log(this.state.email);
+    axios.post(process.env.REACT_APP_API_ADDRESS+'/users/email/forgottenPassword/',{
+      email: this.state.email,
+
+    }).then(response => {
+      this.setState({  forgotPassword: true})
+      console.log(response);
     }).catch(error => {
       console.log(error);
     });
   }
 
+
+
   // choix du form
   formRender(){
 
+    // si le user vient d'activer son compte
+    if(this.state.activated){
+      return <Success activated={this.state.activated}/>
+    }
+    // si le user vient juste de s'inscrire
+    else if(this.state.success){
+      return <Success email={this.state.email}/>
+    }
+    else if(this.state.forgotPassword){
+      return <Success forgotPassword={this.state.forgotPassword}/>
+    }
     // Si déjà connecté on envoie le component AlreadyLogin
-    if(sessionStorage.getItem('access_token')){
+    else if(localStorage.getItem('access_token')){
       return <AlreadyLogin/>
     } else {
-      if(this.state.success){
-        return <Success email={this.state.email}/>
-      }
-      // formualaire inscription
-      if(this.state.showSignUp){
+
+
+      // si mot de passe oublié
+      if(this.state.showForgotPassword){
+        console.log(this.state.showForgotPassword);
+        return(
+          <div className="ForgotPasswordForm">
+            {/*Section Title Starts */}
+            <div className="row text-center">
+              <h2 className="title-head hidden-xs"><span>Mot de passe oublié ?</span></h2>
+              <h3>{this.state.statusMsg}</h3>
+              <p className="info-form">Un email contenant un lien de renitialisaiton de mot de passe vous seras envoyé à l'adresse ci dessous</p>
+            </div>
+            {/*Section Title Ends */}
+            {/*Form Starts */}
+            <form onSubmit={this.handleForgotPassword}>
+              {/*Input Field Starts */}
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  name="email"
+                  id="email"
+                  placeholder="EMAIL"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
+              {/*Input Field Ends */}
+              {/*Submit Form Button Starts */}
+              <div className="form-group">
+                <button className="btn btn-primary" type="submit">Envoyer</button>
+                <p className="text-center">Pas de compte ?
+                  <a onClick={() => this.setState({showSignUp: true,showForgotPassword:false})}> Inscription</a>
+                    ou
+                  <a onClick={() => this.setState({showSignUp: false,showForgotPassword:false})}>Connexion</a>
+                </p>
+              </div>
+              {/*Submit Form Button Ends */}
+            </form>
+            {/*Form Ends */}
+          </div>
+        );
+      } else if(this.state.showSignUp){
+        // formualaire inscription
         return (
           <div className="SignUpForm">
             {/* Section Title Starts */}
             <div className="row text-center">
               <h2 className="title-head hidden-xs">C'est <span>parti</span></h2>
+              <h3>{this.state.statusMsg}</h3>
                <p className="info-form">Créez un compte rapidement et commencez le trading !</p>
             </div>
             {/* Section Title Ends */}
@@ -203,6 +307,9 @@ class SignIn extends Component {
                 <button className="btn btn-primary" type="submit">Connexion</button>
                 <p className="text-center">Pas de compte ?
                   <a onClick={this.changeForm}> Inscription</a>
+                </p>
+                <p className="text-center">Mot de passe oublié ?
+                  <a onClick={this.forgotPasswordForm}> Renitialiser mot de passe</a>
                 </p>
               </div>
               {/*Submit Form Button Ends */}

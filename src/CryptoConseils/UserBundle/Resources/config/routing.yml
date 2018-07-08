@@ -45,3 +45,23 @@ cryptoconseils_users_commentsById:
     path:   /users/comments/id/{id}
     defaults: { _controller: CryptoConseilsUserBundle:User:showUserCommentsById }
     methods:    [GET]
+
+cryptoconseils_users_activateEmail:
+    path:   /users/email/activate/
+    defaults: { _controller: CryptoConseilsUserBundle:User:validateEmail }
+    methods:    [POST]
+
+cryptoconseils_users_sendEmailForForgottenPassword:
+    path:   /users/email/forgottenPassword/
+    defaults: { _controller: CryptoConseilsUserBundle:User:sendEmailForForgottenPassword }
+    methods:    [POST]
+
+cryptoconseils_users_sendEmailToConfirmPasswordHaschanged:
+    path:   /users/email/passwordSuccesfullyChanged/
+    defaults: { _controller: CryptoConseilsUserBundle:User:resetPassword }
+    methods:    [POST]
+
+cryptoconseils_users_currentConnectedUser:
+    path:   /users/current/
+    defaults: { _controller: CryptoConseilsUserBundle:User:getCurrentConnectedUser }
+    methods:    [GET]

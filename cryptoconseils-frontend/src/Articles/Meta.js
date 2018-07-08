@@ -18,7 +18,7 @@ class Meta extends Component {
               {this.convertDate(this.props.article.date)}
             </span>
           <span><i className="fa fa-commenting"> </i>
-            <a href="blog-post.html"> {this.props.article.comments.lenght} comments </a>
+            <a href="blog-post.html"> {this.props.article.comments?this.props.article.comments.length+ " commentaires" : "0 commentaires"} </a>
           </span>
           <span>
             <i className="fa fa-tags"></i>

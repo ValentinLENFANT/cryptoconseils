@@ -55,4 +55,20 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
             ->getResult()
             ;
     }
+
+    public function findByArticleNewest($premium, $number)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->where('a.premium <= :premium')
+            ->setParameter('premium', $premium)
+            ->orderBy('a.date', 'DESC')
+            ->setMaxResults($number);
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

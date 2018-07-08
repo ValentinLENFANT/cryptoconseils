@@ -73,10 +73,24 @@ class UserController extends FOSRestController
         }
     }
 
+    public function getCurrentConnectedUserAction()
+    {
+        $user = $this->getUser();
+        return new JsonResponse(array('id' => $user->getId(),
+                'premiumLevel' => $user->getPremiumLevel(),
+                'username' => $user->getUsername(),
+                'email' => $user->getEmail(),
+                'isEmailValidated' => $user->isEmailValidated(),
+                'lastLogin' => $user->getLastLogin(),
+                'roles' => $user->getRoles())
+            , 200);
+
+    }
+
     public function showUserCommentsByUsernameAction($username) // [GET] /users/comments/username/{username}
     {
         try {
-            $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -100,23 +114,30 @@ class UserController extends FOSRestController
         return $response;
     }
 
-    public function showUserCommentsByIdAction($id) // [GET] /users/comments/id/{id}
+    public function showUserCommentsByIdAction() // [GET] /users/comments/id/{id}
     {
+        $user = $this->getUser();
+        $userId = $user->getId();
         try {
-            $bdd = new PDO('mysql:host=localhost;dbname=cryptoconseils;charset=utf8', 'root', '');
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
+
         $reponse = $bdd->query('SELECT * FROM comment');
         $comments = array();
         while ($donnees = $reponse->fetch()) {
-            if ($donnees['user_id'] == $id) {
+            if ($donnees['user_id'] == $userId) {
+                $answer = $bdd->query('SELECT Title FROM article WHERE id ='.$donnees['article_id']);
+                $title = $answer->fetch();
                 $comments[] = ['id' => $donnees['id'],
                     'article_id' => $donnees['article_id'],
                     'author' => $donnees['author'],
                     'content' => $donnees['content'],
                     'date' => $donnees['date'],
-                    'user_id' => $donnees['user_id']];
+                    'user_id' => $donnees['user_id'],
+                    'title' => $title['Title']
+                ];
             }
         }
         $data = $this->get('jms_serializer')->serialize($comments, 'json');
@@ -131,6 +152,22 @@ class UserController extends FOSRestController
     public function newAction(Request $request) // [POST] /users/new
     {
         $data = $request->getContent();
+
+        try {
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+
+        $reponse = $bdd->query('SELECT * FROM users');
+        while ($donnees = $reponse->fetch()) {
+            if ($donnees['username_canonical'] == strtolower(json_decode($data)->username)) {
+                return new JsonResponse(array('error' => "Désolé, ce nom d'utilisateur est déjà pris."), 403);
+            } else if ($donnees['email_canonical'] == json_decode($data)->email) {
+                return new JsonResponse(array('error' => "Désolé, cette adresse email est déjà utilisée."), 403);
+            }
+        }
+
         $user = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\UserBundle\Entity\User', 'json');
 
 
@@ -146,13 +183,108 @@ class UserController extends FOSRestController
         $user->setPassword($password);
         $user->setPremiumLevel(1);
         $user->setEnabled(true);
-
+        $user->setIsEmailValidated(false);
+        $user->setUniqueTokenForEmail(md5(sha1(date("Y-m-d H:i:s"))));
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
 
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Votre inscription à CryptoConseils')
+            ->setFrom('cryptoconseils@gmail.com')
+            ->setTo($user->getEmail())
+            ->setContentType("text/html; charset=UTF-8")
+            ->setBody(
+                $this->renderView(
+                    'CryptoConseilsUserBundle:Emails:registration.html.twig',
+                    array('name' => $user->getUsername(),
+                        'uniqueTokenForEmail' => $user->getUniqueTokenForEmail())
+                )
+            );
+            $this->get('mailer')->send($message);
+
         return new JsonResponse(json_decode($data), 200);
+    }
+
+    public function validateEmailAction(Request $request) // [POST] /users/email/activate/{uniqueTokenForEmail}
+    {
+        $data = $request->getContent();
+        try {
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+        $req = $bdd->prepare('UPDATE users SET isEmailValidated = 1 WHERE uniqueTokenForEmail = :uniqueToken');
+        $req->execute(array(
+            'uniqueToken' => json_decode($data)->uniqueTokenForEmail
+        ));
+        return new JsonResponse("L'email a bien été activé", 200);
+    }
+
+    public function sendEmailForForgottenPasswordAction(Request $request) //[POST] /users/email/forgottenPassword/
+    {
+        $data = $request->getContent();
+        $email = json_decode($data)->email;
+        $uniqueTokenForForgottenPassword = md5(sha1(date("Y-m-d H:i:s")));
+
+        try {
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+        $req = $bdd->prepare('UPDATE users SET uniqueTokenForForgottenPassword = :uniqueToken WHERE email = :email');
+        $req->execute(array(
+            'email' => $email,
+            'uniqueToken' => $uniqueTokenForForgottenPassword
+        ));
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Réinitialisation de votre mot de pass CryptoConseils')
+            ->setFrom('cryptoconseils@gmail.com')
+            ->setTo($email)
+            ->setContentType("text/html; charset=UTF-8")
+            ->setBody(
+                $this->renderView(
+                    'CryptoConseilsUserBundle:Emails:forgotPassword.html.twig',
+                    array('uniqueTokenForForgottenPassword' => $uniqueTokenForForgottenPassword,
+                        'email' =>$email)
+                )
+            );
+        $this->get('mailer')->send($message);
+        return new JsonResponse("L'email de réinitialisation du mot de passe a bien été envoyé", 200);
+    }
+
+    public function resetPasswordAction(Request $request) //[POST] /users/email/passwordSuccesfullyChanged/
+    {
+        $data = $request->getContent();
+        $uniqueToken = json_decode($data)->uniqueTokenForForgottenPassword;
+        $password = json_decode($data)->password;
+        $password = password_hash($password, PASSWORD_BCRYPT);
+        $email = json_decode($data)->email;
+
+        try {
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+        $req = $bdd->prepare('UPDATE users SET password = :password WHERE uniqueTokenForForgottenPassword = :uniqueToken');
+        $req->execute(array(
+            'uniqueToken' => $uniqueToken,
+            'password' => $password
+        ));
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Mot de passe changé avec succès')
+            ->setFrom('cryptoconseils@gmail.com')
+            ->setTo($email)
+            ->setContentType("text/html; charset=UTF-8")
+            ->setBody(
+                $this->renderView(
+                    'CryptoConseilsUserBundle:Emails:passwordSuccesfullyChanged.html.twig')
+            );
+        $this->get('mailer')->send($message);
+        return new JsonResponse("Mot de passe changé avec succès", 200);
     }
 
 

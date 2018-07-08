@@ -13,28 +13,21 @@ class News extends Component {
 
   // éxécuté à la fin
   componentDidMount() {
-    this.getAllArticles();
-  }
-
-  // récupère tous les articles
-  getAllArticles() {
     // check si access token
-    if(sessionStorage.getItem('access_token')){
-      var config = {
-        headers: {'Authorization': "Bearer " + sessionStorage.getItem('access_token')}
+    if(localStorage.getItem('access_token')){
+      var authorization = {
+        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
     }
 
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/', config)
+    // récupère tous les articles
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/newest/'+this.props.nbArticle, authorization)
     .then(response => {
-      console.log(response.error_description);
       this.setState({
         articles: response.data
       });
     }).catch(error => {
-      if(error.response.data.error_description === "The access token provided has expired."){
-        sessionStorage.clear();
-      }
+      console.log(error);
     });
   }
   
@@ -45,7 +38,7 @@ class News extends Component {
   render() {
     return(
       <div className="News Component">
-        <div className="blog">
+        <section className="blog">
           <div className="container">
             {/* Section Title Starts */}
             <div className="row text-center">
@@ -59,7 +52,7 @@ class News extends Component {
             <div className="row latest-posts-content">
               {/* Article Starts */}
               {/* slice(0,3) pour limiter à trois articles */}
-              {this.state.articles.slice(0,3).map(article =>
+              {this.state.articles.map(article =>
                 <div className="col-sm-4 col-md-4 col-xs-12" key={article.id}>
                   <div className="latest-post">
                     {/* Featured Image Starts */}
@@ -97,7 +90,7 @@ class News extends Component {
             </div>
             {/* Section Content Ends */}
           </div>
-        </div>
+        </section>
       </div>
     );
   }

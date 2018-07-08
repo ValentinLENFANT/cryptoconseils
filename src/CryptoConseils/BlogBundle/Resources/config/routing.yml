@@ -23,6 +23,12 @@ cryptoconseils_blog_show_by_category:
     methods:    [GET]
 
 
+cryptoconseils_blog_show_by_newest:
+    path:    /articles/newest/{number}
+    defaults: { _controller: CryptoConseilsBlogBundle:Article:show_by_newest }
+    methods:    [GET]
+
+
 
 cryptoconseils_blog_edit:
     path:    /articles/{id}
@@ -180,3 +186,23 @@ cryptoconseils_blog_orders_paymentcomplete:
 cryptoconseils_blog_orders_paymentcancel:
     path:   /orders/payment/cancel/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Orders:paymentCancel }
+
+cryptoconseils_blog_call_new:
+    path:   /call/new/
+    defaults: { _controller: CryptoConseilsBlogBundle:Calls:new }
+    methods:    [POST]
+
+cryptoconseils_blog_call_all:
+    path:   /call/all/
+    defaults: { _controller: CryptoConseilsBlogBundle:Calls:allCalls }
+    methods:    [GET]
+
+cryptoconseils_blog_call:
+    path:   /call/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Calls:call }
+    methods:    [GET]
+
+cryptoconseils_blog_delete_call:
+    path:   call/delete/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Calls:delete }
+    methods:    [DELETE]

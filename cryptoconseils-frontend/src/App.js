@@ -4,8 +4,9 @@ import Loadable from 'react-loadable';
 import './App.css';
 import ProfilPremium from './ProfilPremium/ProfilPremium';
 import Admin from './Admin/Admin';
-
 const Loading = () => <div>Loading...</div> ;
+import PreLoader from './PreLoader/PreLoader';
+const Loading = () => <PreLoader/> ;
 
 const Home = Loadable({
   loader: () => import('./Home/Home'),
@@ -29,6 +30,16 @@ const Faq = Loadable({
 
 const Articles = Loadable({
   loader: () => import('./Articles/Articles'),
+  loading: Loading,
+});
+
+const LatestArticles = Loadable({
+  loader: () => import('./LatestArticles/LatestArticles'),
+  loading: Loading,
+});
+
+const Categories = Loadable({
+  loader: () => import('./Categories/Categories'),
   loading: Loading,
 });
 
@@ -57,6 +68,11 @@ const AdminPage = Loadable({
   loading: Loading,
 });
 
+const NewPassword = Loadable({
+  loader: () => import('./NewPassword/NewPassword'),
+  loading: Loading,
+});
+
 class App extends Component {
   render() {
     return (
@@ -70,8 +86,12 @@ class App extends Component {
           <Route exact path="/faq" component={Faq}/>
           <Route exact path="/contact" component={Contact}/>
           <Route exact path="/signin" component={SignIn}/>
+          <Route exact path="/signin/token/:token" component={SignIn}/>
           <Route exact path="/signup" component={SignUp}/>
+          <Route exact path="/newpassword/:token" component={NewPassword}/>
+          <Route exact path="/articles" component={LatestArticles}/>
           <Route path="/articles/:id" component={Articles}/>
+          <Route path="/categories/:id" component={Categories}/>
           <Route component={NotFound}/>
         </Switch>
       </Router>

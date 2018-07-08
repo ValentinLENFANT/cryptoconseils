@@ -1,6 +1,28 @@
 import React, { Component } from 'react';
 import Logo from '../Logo/Logo';
+import SearchBar from './SearchBar'
+
+
 class Navigation extends Component {
+
+  constructor() {
+    super()
+    this.state = {
+      showSearchBar: false
+    }
+  }
+  toggleSearch() {
+    this.setState({
+      showSearchBar: !this.state.showSearchBar
+    });
+  }
+
+  renderSearchBar(){
+    if(this.state.showSearchBar){
+      return <SearchBar/>
+    }else return null
+  }
+
   render() {
     return(
       <div className="Statistics">
@@ -21,14 +43,16 @@ class Navigation extends Component {
               <div className="collapse navbar-collapse navbar-responsive-collapse">
                 {/* Main Menu Starts */}
                 <ul className="nav navbar-nav">
-                  <li className="active"><a href="index.html">Accueil</a></li>
+                  <li className="active"><a href="/">Accueil</a></li>
+                  <li><a href="/articles">News</a></li>
                   <li><a href="analyses-calls.html">Analyses & calls</a></li>
                   <li><a href="airdrops.html">Airdrops</a></li>
-                  <li><a href="premium.html">Accès Prémium</a></li>
+                  <li><a href="#pricing">Accès Prémium</a></li>
                   <li><a href="about.html">Team</a></li>
                   <li><a href="/contact">Contact</a></li>
+                  <li><a href="/faq">Faq</a></li>
                   {/* Search Icon Starts */}
-                  <li className="search"><button className="fa fa-search"></button></li>
+                  <li className="search"><button className="fa fa-search" onClick={this.toggleSearch.bind(this)}></button></li>
                   {/* Search Icon Ends */}
                 </ul>
                 {/* Main Menu Ends */}
@@ -36,12 +60,7 @@ class Navigation extends Component {
             </div>
           </div>
           {/* Search Input Starts */}
-          <div className="site-search">
-            <div className="container">
-              <input type="text" placeholder="type your keyword and hit enter ..."/>
-              <span className="close">×</span>
-            </div>
-          </div>
+          {this.renderSearchBar()}
         </nav>
         {/* Search Input Ends */}
       </div>
