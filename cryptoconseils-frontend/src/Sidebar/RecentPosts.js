@@ -9,7 +9,7 @@ class RecentPosts extends Component {
       recent: null
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     // check si access token
     if(localStorage.getItem('access_token')){
       var authorization = {

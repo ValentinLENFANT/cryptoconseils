@@ -8,6 +8,13 @@ class Meta extends Component {
     var year = date.getFullYear();
     return day+' '+month+' '+year;
   }
+  getCategories(){
+    if(this.props.article.categories) {
+      return this.props.article.categories.map(cate => {
+        return(<a key={cate.id} href={"/categories/"+cate.id}>{cate.name}</a>)
+      })
+    }
+  }
   render() {
     return(
       <div className="Meta Component">
@@ -22,7 +29,7 @@ class Meta extends Component {
           </span>
           <span>
             <i className="fa fa-tags"></i>
-            {this.props.article.categories}
+            {this.getCategories()}
           </span>
         </div>
       </div>

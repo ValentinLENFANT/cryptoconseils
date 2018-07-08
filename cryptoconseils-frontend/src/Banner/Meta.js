@@ -6,11 +6,13 @@ class Meta extends Component {
     date = new Date(date);
     return date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
   }
+
   getCategories(){
-    console.log(this.props.article);
-    return this.props.article.categories.map(cate => {
-      console.log(cate.name);
-    })
+    if(this.props.article.categories) {
+      return this.props.article.categories.map(cate => {
+        return(<a key={cate.id} href={"/categories/"+cate.id}>{cate.name}</a>);
+      })
+    }
   }
   render() {
     if(this.props.article) {
