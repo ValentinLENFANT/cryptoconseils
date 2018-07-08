@@ -31,20 +31,27 @@ class Contact extends Component {
       [name]: value
     });
   }
+
   renderStatusMsg() {
     if(this.state.statusMsg !== null) {
-      return(<p className="output_message error">{this.state.statusMsg}</p>)
-    } else if (this.state.success === true ) {
-      return (<p className="output_message success">Votre message a été envoyé</p>)
+      return(
+        <div className="col-xs-12 text-center output_message_holder d-block">
+          <p className="output_message error">{this.state.statusMsg}</p>
+        </div>
+      );
+    } else if (this.state.isSuccess === true ) {
+      return (
+        <div className="col-xs-12 text-center output_message_holder d-block">
+          <p className="output_message success">Votre message a été envoyé</p>
+        </div>
+      );
     }
   }
 
   handleSubmit(event) {
     event.preventDefault();
     console.log(this.state);
-    for(var item in this.state){
-      console.log(this.state[item]);
-    }
+
     axios.post(process.env.REACT_APP_API_ADDRESS+"/contact/new/",{
       prenom: this.state.firstname,
       nom: this.state.lastname,
@@ -52,7 +59,6 @@ class Contact extends Component {
       email: this.state.email,
       message: this.state.message
     }).then(response => {
-      console.log(response);
       this.setState({
         isSuccess: true
       })
@@ -158,9 +164,7 @@ class Contact extends Component {
                   </div>
                   {/* Submit Form Button Ends */}
                   {/* Form Submit Message Starts */}
-                  <div className="col-xs-12 text-center output_message_holder d-none">
-                    <p className="success">Votre message a été envoyé</p>
-                  </div>
+                    {this.renderStatusMsg()}
                   {/* Form Submit Message Ends */}
                 </form>
                 {/* Contact Form Ends */}

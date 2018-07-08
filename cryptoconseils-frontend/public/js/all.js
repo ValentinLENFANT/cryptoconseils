@@ -561,30 +561,30 @@ this.activeTarget=b,this.clear();var c=this.selector+'[data-target="'+b+'"],'+th
 		/* ----------------------------------------------------------- */
 		/*  AJAX CONTACT FORM
 		/* ----------------------------------------------------------- */
-
-        $(".form-contact").on("submit", function() {
-            $(".output_message").text("Loading...");
-
-            var form = $(this);
-            $.ajax({
-                url: form.attr("action"),
-                method: form.attr("method"),
-                data: form.serialize(),
-                success: function(result) {
-                    if (result == "success") {
-						$(".form-contact").find(".output_message_holder").addClass("d-block");
-						$(".form-contact").find(".output_message").addClass("success");
-                        $(".output_message").text("Your message has been sent successfully!");
-                    } else {
-                        $(".form-contact").find(".output_message_holder").addClass("d-block");
-						$(".form-contact").find(".output_message").addClass("error");
-                        $(".output_message").text("Error while Sending email! try later");
-                    }
-                }
-            });
-
-            return false;
-        });
+        //
+        // $(".form-contact").on("submit", function() {
+        //     $(".output_message").text("Loading...");
+        //
+        //     var form = $(this);
+        //     $.ajax({
+        //         url: form.attr("action"),
+        //         method: form.attr("method"),
+        //         data: form.serialize(),
+        //         success: function(result) {
+        //             if (result == "success") {
+				// 		$(".form-contact").find(".output_message_holder").addClass("d-block");
+				// 		$(".form-contact").find(".output_message").addClass("success");
+        //                 $(".output_message").text("Your message has been sent successfully!");
+        //             } else {
+        //                 $(".form-contact").find(".output_message_holder").addClass("d-block");
+				// 		$(".form-contact").find(".output_message").addClass("error");
+        //                 $(".output_message").text("Error while Sending email! try later");
+        //             }
+        //         }
+        //     });
+        //
+        //     return false;
+        // });
 
 		/* ----------------------------------------------------------- */
 		/*  NUMBER SPINNER HORIZONTAL [ QUANTITY IN SHOPPING CART PAGE ]
