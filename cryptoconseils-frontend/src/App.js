@@ -4,7 +4,6 @@ import Loadable from 'react-loadable';
 import './App.css';
 import ProfilPremium from './ProfilPremium/ProfilPremium';
 import Admin from './Admin/Admin';
-const Loading = () => <div>Loading...</div> ;
 import PreLoader from './PreLoader/PreLoader';
 const Loading = () => <PreLoader/> ;
 

@@ -42,7 +42,7 @@ class Footer extends Component {
                   <h4>Contactez-nous</h4>
                   <div className="contacts">
                     <div>
-                      <span><a href="mailto:cryptoconseils@gmail.com" target="_top">cryptoconseils@gmail.com</a></span>
+                      <span><a href="mailto:cryptoconseilsfr@gmail.com" target="_top">cryptoconseilsfr@gmail.com</a></span>
                     </div>
                     <div>
                       <span><a href="tel:+33637751315">06 37 75 13 15</a></span>

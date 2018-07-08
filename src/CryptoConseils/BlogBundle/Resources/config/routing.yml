@@ -206,3 +206,8 @@ cryptoconseils_blog_delete_call:
     path:   call/delete/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Calls:delete }
     methods:    [DELETE]
+
+cryptoconseils_blog_new_contact:
+    path:   contact/new
+    defaults:   { _controller: CryptoConseilsBlogBundle:Contact:new }
+    methods:    [POST]
