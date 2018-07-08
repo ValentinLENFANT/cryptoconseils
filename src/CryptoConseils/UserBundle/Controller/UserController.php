@@ -73,7 +73,7 @@ class UserController extends FOSRestController
         }
     }
 
-    public function getCurrentConnectedUserAction()
+    public function getCurrentConnectedUserAction() // [GET] /users/current/
     {
         $user = $this->getUser();
         return new JsonResponse(array('id' => $user->getId(),
