@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+var accessToken = localStorage.getItem('access_token');
+
 class Price extends Component {
   render() {
     return(
@@ -31,7 +33,7 @@ class Price extends Component {
                           </div>
                         </header>
                         <footer className="pricing-footer">
-                          <a href="http://localhost/cryptoconseils/web/app_dev.php/orders/new/100" className="btn btn-primary">COMMANDER</a>
+                          <a href={ 'http://localhost/cryptoconseils/web/app_dev.php/orders/new/100?accessToken=' + accessToken } className="btn btn-primary">COMMANDER</a>
                         </footer>
                       </li>
                       {/* Buy Pricing Table #1 Ends */}
@@ -49,7 +51,7 @@ class Price extends Component {
                           </div>
                         </header>
                         <footer className="pricing-footer">
-                          <a href="http://localhost/cryptoconseils/web/app_dev.php/orders/new/300" className="btn btn-primary">COMMANDER</a>
+                            <a href={ 'http://localhost/cryptoconseils/web/app_dev.php/orders/new/300?accessToken=' + accessToken } className="btn btn-primary">COMMANDER</a>
                         </footer>
                       </li>
                       {/* Buy Pricing Table #2 Ends */}
@@ -67,7 +69,7 @@ class Price extends Component {
                           </div>
                         </header>
                         <footer className="pricing-footer">
-                          <a href="http://localhost/cryptoconseils/web/app_dev.php/orders/new/500" className="btn btn-primary">COMMANDER</a>
+                            <a href={ 'http://localhost/cryptoconseils/web/app_dev.php/orders/new/500?accessToken=' + accessToken } className="btn btn-primary">COMMANDER</a>
                         </footer>
                       </li>
                       {/* Buy Pricing Table #3 Ends */}
@@ -85,7 +87,7 @@ class Price extends Component {
                           </div>
                         </header>
                         <footer className="pricing-footer">
-                          <a href="http://localhost/cryptoconseils/web/app_dev.php/orders/new/1000" className="btn btn-primary">COMMANDER</a>
+                            <a href={ 'http://localhost/cryptoconseils/web/app_dev.php/orders/new/1000?accessToken=' + accessToken } className="btn btn-primary">COMMANDER</a>
                         </footer>
                       </li>
                       {/* Buy Pricing Table #4 Ends */}
