@@ -9,6 +9,7 @@
 namespace CryptoConseils\BlogBundle\Controller;
 
 use CryptoConseils\BlogBundle\Entity\Order;
+use CryptoConseils\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use JMS\Payment\CoreBundle\Form\ChoosePaymentMethodType;
@@ -19,6 +20,7 @@ use JMS\Payment\CoreBundle\Plugin\Exception\ActionRequiredException;
 use JMS\Payment\CoreBundle\Plugin\Exception\Action\VisitUrl;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use \PDO;
 
 /**
  * Class OrdersController
@@ -32,6 +34,7 @@ class OrdersController extends Controller
      */
     public function newAction($amount)
     {
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
         $order = new Order($amount);
@@ -130,14 +133,6 @@ class OrdersController extends Controller
                 }
             }
         }
-//
-//        if($result->getStatus() === Result::STATUS_SUCCESS) {
-//            return $this->redirect($this->generateUrl('cryptoconseils_blog_orders_paymentcomplete', [
-//                'id' => $order->getId(),
-//            ]));
-//        }
-//
-//        throw $result->getPluginException();
         return $this->redirect($this->generateUrl('cryptoconseils_blog_orders_paymentcomplete', [
             'id' => $order->getId(),
         ]));
@@ -148,6 +143,41 @@ class OrdersController extends Controller
      */
     public function paymentCompleteAction(Order $order)
     {
+        //TODO CHANGE THE USER ID TO GET IT DYNAMICALLY
+        $userId = 1; //Changer le userId
+        try {
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+        if (100 == $order->getAmount()){
+            $req = $bdd->prepare('UPDATE users SET premiumLevel = :premiumLevel WHERE id = :id');
+            $req->execute(array(
+                'premiumLevel' => 2,
+                'id' => $userId
+            ));
+        } else if (300 == $order->getAmount()) {
+            $req = $bdd->prepare('UPDATE users SET premiumLevel = :premiumLevel WHERE id = :id');
+            $req->execute(array(
+                'premiumLevel' => 3,
+                'id' => $userId
+            ));
+        } else if (500 == $order->getAmount()) {
+            $req = $bdd->prepare('UPDATE users SET premiumLevel = :premiumLevel WHERE id = :id');
+            $req->execute(array(
+                'premiumLevel' => 4,
+                'id' => $userId
+            ));
+        } else if (1000 == $order->getAmount()) {
+            $req = $bdd->prepare('UPDATE users SET premiumLevel = :premiumLevel WHERE id = :id');
+            $req->execute(array(
+                'premiumLevel' => 5,
+                'id' => $userId
+            ));
+        } else {
+            echo "Error.";
+        }
+        echo "Cliquez <a href='localhost:3000' target='_blank'>ici</a> pour retourner à la page d'accueil. </br>";
         return new Response('Payment complete');
     }
 
