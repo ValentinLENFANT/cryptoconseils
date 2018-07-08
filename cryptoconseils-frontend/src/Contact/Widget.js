@@ -15,7 +15,7 @@ class Widget extends Component {
                 <div className="contact-info-box-content">
                   <h4>Adresse</h4>
                   <p>
-                    <a href="https://maps.google.com/?q=243 Rue du Faubourg Saint-Antoine 75011 Paris">243 Rue du Faubourg Saint-Antoine 75011 Paris  </a>
+                    <a href="https://maps.google.com/?q=242 Rue du Faubourg Saint-Antoine 75011 Paris">242 Rue du Faubourg Saint-Antoine 75011 Paris  </a>
                   </p>
                 </div>
               </div>
@@ -25,7 +25,7 @@ class Widget extends Component {
                 <i className="fa fa-phone big-icon"></i>
                 <div className="contact-info-box-content">
                   <h4>Numéro de téléphone</h4>
-                  <p><a href="tel:+33681758319"></a>06 81 75 83 19</p>
+                  <p><a href="tel:+33681758319"></a>06 95 10 52 02</p>
                 </div>
               </div>
               {/* Contact Info Box Ends */}
@@ -34,7 +34,7 @@ class Widget extends Component {
                 <i className="fa fa-envelope big-icon"></i>
                 <div className="contact-info-box-content">
                   <h4>Adresse Email</h4>
-                  <p><a href="mailto:cryptoconseils@gmail.com" target="_top">cryptoconseils@gmail.com</a></p>
+                  <p><a href="mailto:cryptoconseilsfr@gmail.com" target="_top">cryptoconseilsfr@gmail.com</a></p>
                 </div>
               </div>
               {/* Contact Info Box Ends */}
@@ -56,12 +56,12 @@ class Widget extends Component {
                         </a>
                       </li>
                       <li className="google-plus">
-                        <a href="https://twitter.com/CryptoConseils">
+                        <a href="https://plus.google.com/u/0/103426360644440789179">
                           <i className="fa fa-google"></i>
                         </a>
                       </li>
                       <li className="linkedin">
-                        <a href="https://twitter.com/CryptoConseils">
+                        <a href="https://www.linkedin.com/company/cryptoconseils-fr/">
                           <i className="fa fa-linkedin"></i>
                         </a>
                       </li>
