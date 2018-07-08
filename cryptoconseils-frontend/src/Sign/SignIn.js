@@ -12,7 +12,7 @@ class SignIn extends Component {
       showSignUp: props.showSignUp,
       username: '',
       password: '',
-      statusMsg: '',
+      statusMsg: null,
       email: '',
       success: false,
       activated: false,
@@ -42,6 +42,22 @@ class SignIn extends Component {
     let value = target.value
     let name = target.id;
     this.setState({[name]: value});
+  }
+
+  renderStatusMsg() {
+    if(this.state.statusMsg !== null) {
+      return(
+        <div className="col-xs-12 text-center output_message_holder d-block">
+          <p className="output_message error">{this.state.statusMsg}</p>
+        </div>
+      );
+    } else if (this.state.success === true ) {
+      return (
+        <div className="col-xs-12 text-center output_message_holder d-block">
+          <p className="output_message success">Votre message a été envoyé</p>
+        </div>
+      );
+    }
   }
 
   // connexion
@@ -84,9 +100,11 @@ class SignIn extends Component {
         client_id: process.env.REACT_APP_CLIENT_ID,
         client_secret: process.env.REACT_APP_CLIENT_SECRET,
       }).then(response => {
-
         localStorage.setItem('access_token', response.data.access_token);
         localStorage.setItem('username', this.state.username);
+        if(this.state.previousPath ==="/signin"){
+          this.setState({previousPath: "/"})
+        }
         window.location.href = this.state.previousPath
       }).catch(error => {
         this.setState({statusMsg: 'Username et/ou Mdp invalides'})
@@ -103,7 +121,6 @@ class SignIn extends Component {
       email: this.state.email.toLowerCase(),
       password: this.state.password
     }).then(response => {
-
       localStorage.setItem('username', this.state.username);
       this.setState({
         success: true
@@ -118,19 +135,14 @@ class SignIn extends Component {
   // mot de passe oublié
   handleForgotPassword(event){
     event.preventDefault();
-    console.log(this.state.email);
     axios.post(process.env.REACT_APP_API_ADDRESS+'/users/email/forgottenPassword/',{
       email: this.state.email,
-
     }).then(response => {
-      this.setState({  forgotPassword: true})
-      console.log(response);
+      this.setState({forgotPassword: true})
     }).catch(error => {
       console.log(error);
     });
   }
-
-
 
   // choix du form
   formRender(){
@@ -151,10 +163,8 @@ class SignIn extends Component {
       return <AlreadyLogin/>
     } else {
 
-
       // si mot de passe oublié
       if(this.state.showForgotPassword){
-        console.log(this.state.showForgotPassword);
         return(
           <div className="ForgotPasswordForm">
             {/*Section Title Starts */}
@@ -165,7 +175,8 @@ class SignIn extends Component {
             </div>
             {/*Section Title Ends */}
             {/*Form Starts */}
-            <form onSubmit={this.handleForgotPassword}>
+            <form className="contact-form" onSubmit={this.handleForgotPassword}>
+              {this.renderStatusMsg()}
               {/*Input Field Starts */}
               <div className="form-group">
                 <input
@@ -201,12 +212,12 @@ class SignIn extends Component {
             {/* Section Title Starts */}
             <div className="row text-center">
               <h2 className="title-head hidden-xs">C'est <span>parti</span></h2>
-              <h3>{this.state.statusMsg}</h3>
                <p className="info-form">Créez un compte rapidement et commencez le trading !</p>
             </div>
             {/* Section Title Ends */}
             {/* Form Starts */}
-            <form onSubmit={this.handleSignUp.bind(this)}>
+            <form className="contact-form" onSubmit={this.handleSignUp.bind(this)}>
+              {this.renderStatusMsg()}
               {/* Input Field Starts */}
               <div className="form-group">
                 <input
@@ -268,12 +279,12 @@ class SignIn extends Component {
             {/*Section Title Starts */}
             <div className="row text-center">
               <h2 className="title-head hidden-xs"><span>Connexion</span></h2>
-              <h3>{this.state.statusMsg}</h3>
               <p className="info-form">Bénéficier d'informations détaillées et de nos services en vous connectant</p>
             </div>
             {/*Section Title Ends */}
             {/*Form Starts */}
-            <form onSubmit={this.handleSignIn.bind(this)}>
+            <form className="contact-form" onSubmit={this.handleSignIn.bind(this)}>
+              {this.renderStatusMsg()}
               {/*Input Field Starts */}
               <div className="form-group">
                 <input
