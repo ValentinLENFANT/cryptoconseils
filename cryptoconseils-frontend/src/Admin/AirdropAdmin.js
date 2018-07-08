@@ -16,12 +16,12 @@ class AirdropAdmin extends Component {
                {/*<!-- FORMULAIRE AiRDROP DU JOUR PREMIUM --> */}
                <div className="row">
                    <div className="col-md-12">
-                       <div className="form-area">  
+                       <div className="form-area">
                            <form role="form">
                                <div className="col-md-6">
                                    <div className="form-group">
                                        <div className="row">
-                                           <label className="control-label" for="source_image">Airdrop image (max height:400px) <i className="fa fa-picture-o" aria-hidden="true"></i></label>
+                                           <label className="control-label" htmlFor="source_image">Airdrop image (max height:400px) <i className="fa fa-picture-o" aria-hidden="true"></i></label>
                                        </div>
                                        <div className="row">
                                            <input id="source_image" name="source_image" className="input-file" type="file" />
@@ -33,10 +33,10 @@ class AirdropAdmin extends Component {
                                        <input type="text" className="form-control" id="ticker" name="ticker" placeholder="Ticker, ex: Bitcoin (BTC)" required/>
                                    </div>
                                    <div className="form-group">
-                                       <textarea className="form-control" type="textarea" id="analyse" placeholder="Analyse technique" maxlength="140" rows="7"></textarea>
+                                       <textarea className="form-control" type="textarea" id="analyse" placeholder="Analyse technique" maxLength="140" rows="7"></textarea>
                                        <span className="help-block">
                                            <p id="characterLeft" className="help-block ">Limite de charactères atteintes</p>
-                                       </span>                    
+                                       </span>
                                    </div>
                                    <div className="form-group">
                                        <input type="text" className="form-control" id="achat" name="achat" placeholder="Prix achat" required/>
@@ -47,7 +47,7 @@ class AirdropAdmin extends Component {
                                    <div className="form-group">
                                        <input type="text" className="form-control" id="score" name="score" placeholder="Score" required />
                                    </div>
-                                  
+
                                    <button type="button" id="submit" name="submit" className="btn btn-primary pull-right">Mettre à jour</button>
                                </div>
                            </form>
@@ -74,7 +74,7 @@ class AirdropAdmin extends Component {
                        <div className="row">
                            <div className="col-xs-12 col-sm-12 col-md-12">
                                <p id="airdrop-ticker">APIS</p>
-                               <p className="texte-airdrop-premium">Apis est un projet d’hébergement de masternodes. Son token (Apis) permet de bénéficier de plusieurs avantages sur sa plate-forme. 
+                               <p className="texte-airdrop-premium">Apis est un projet d’hébergement de masternodes. Son token (Apis) permet de bénéficier de plusieurs avantages sur sa plate-forme.
                                Un airdrop est prévu jusqu’au 04/07/218. Dépêchez-vous ! 100 APIS seront distribués à chaque participants ce qui représente un peu plus de 10€ aujourd'hui mais qui pourrait rapidement prendre de la valeur et atteindre 50€ d'ici la fin du mois.
                                </p>
                            </div>

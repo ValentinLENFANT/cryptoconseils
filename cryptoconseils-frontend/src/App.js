@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import './App.css';
-import ProfilPremium from './ProfilPremium/ProfilPremium';
-import Admin from './Admin/Admin';
 import PreLoader from './PreLoader/PreLoader';
 const Loading = () => <PreLoader/> ;
 
@@ -72,6 +70,10 @@ const NewPassword = Loadable({
   loading: Loading,
 });
 
+const Admin = Loadable({
+  loader: () => import('./Admin/Admin'),
+  loading: Loading,
+});
 class App extends Component {
   render() {
     return (
@@ -91,6 +93,7 @@ class App extends Component {
           <Route exact path="/articles" component={LatestArticles}/>
           <Route path="/articles/:id" component={Articles}/>
           <Route path="/categories/:id" component={Categories}/>
+          <Route path="/admin" component={Admin}/>
           <Route component={NotFound}/>
         </Switch>
       </Router>

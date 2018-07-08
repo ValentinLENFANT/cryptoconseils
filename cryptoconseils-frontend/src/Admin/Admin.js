@@ -7,10 +7,40 @@ import CallAdmin from './CallAdmin';
 import AirdropAdmin from './AirdropAdmin';
 import MenusAdmin from './MenusAdmin';
 import Moderation from './Moderation';
+import axios from 'axios'
 
 class Admin extends Component {
+
+  constructor(){
+    super();
+    this.state = {
+      noAccess: true
+    }
+  }
+  componentWillMount() {
+    // check si access token
+    if(localStorage.getItem('access_token')){
+      var authorization = {
+        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
+      };
+      axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/',authorization)
+      .then(response => {
+        if(response.data.roles[0] === "ROLE_ADMIN") {
+          this.setState({noAccess: false})
+        } else {
+          this.setState({noAccess: true});
+        }
+      }).catch(error => {
+        this.setState({noAccess: true})
+      });
+    } else {
+      this.setState({noAccess: true})
+    }
+  }
   render() {
-    if(sessionStorage.getItem('access_token')){
+    if(this.state.noAccess){
+      return <Denied/>
+    } else {
       return (
         <div className="App">
         {/* Wrapper Starts */}
@@ -47,12 +77,7 @@ class Admin extends Component {
           </div>
         </div>
       );
-    } else {
-      return(
-        <Denied />
-      );
     }
-
   }
 }
 

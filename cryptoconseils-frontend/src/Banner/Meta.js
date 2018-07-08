@@ -6,6 +6,12 @@ class Meta extends Component {
     date = new Date(date);
     return date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
   }
+  getCategories(){
+    console.log(this.props.article);
+    return this.props.article.categories.map(cate => {
+      console.log(cate.name);
+    })
+  }
   render() {
     if(this.props.article) {
       return(
@@ -22,7 +28,7 @@ class Meta extends Component {
               {this.props.article.comments? this.props.article.comments.length+ " commentaires" : "0 commentaires"}
           </span>
           <span>
-            <i className="fa fa-tags"></i>{this.props.article.categories}
+            <i className="fa fa-tags"></i>{this.getCategories()}
           </span>
           {/* Meta Ends */}
         </div>
