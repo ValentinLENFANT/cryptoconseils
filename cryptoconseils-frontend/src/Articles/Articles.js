@@ -13,13 +13,13 @@ class Articles extends Component {
   constructor() {
     super();
     this.state = {
-      article: [],
+      article: null,
       noAccess: false
     };
   }
 
   // éxécuté à la fin
-  componentDidMount() {
+  componentWillMount() {
     // check si access token
     if(localStorage.getItem('access_token')){
       var authorization = {
@@ -28,6 +28,7 @@ class Articles extends Component {
     }
     axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/'+this.props.match.params.id,authorization)
     .then(response => {
+      console.log(response);
       this.setState({
         article: response.data,
         noAccess: false
@@ -40,7 +41,7 @@ class Articles extends Component {
   }
 
   render() {
-    if(!this.state.noAccess){
+    if(!this.state.noAccess && this.state.article){
       return(
         <div>
           <Header/>

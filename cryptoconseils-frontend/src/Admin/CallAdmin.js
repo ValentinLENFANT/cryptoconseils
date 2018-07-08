@@ -4,10 +4,10 @@ import TradingViewWidget from 'react-tradingview-widget';
 
 class CallAdmin extends Component {
   render() {
-    return(        
+    return(
         <section className="calls-premium section-profil">
             <div className="container">
-         
+
                 <div className="row text-center">
                     <h2 className="title-head" id="call-premium">Call<span> du jour </span></h2>
                     <div className="title-head-subtitle">
@@ -18,7 +18,7 @@ class CallAdmin extends Component {
                 {/*<!-- FORMULAIRE CALL DU JOUR PREMIUM -->*/}
                 <div className="row">
                     <div className="col-md-12">
-                        <div className="form-area">  
+                        <div className="form-area">
                             <form role="form">
                                 <div className="col-md-6">
                                     <div className="form-group">
@@ -30,10 +30,10 @@ class CallAdmin extends Component {
                                         <input type="text" className="form-control" id="ticker" name="ticker" placeholder="Nom de la crypto, exemple : Bitcoin (BTC)" required />
                                     </div>
                                     <div className="form-group">
-                                        <textarea className="form-control" type="textarea" id="analyse" placeholder="Analyse technique" maxlength="300" rows="7"></textarea>
+                                        <textarea className="form-control" type="textarea" id="analyse" placeholder="Analyse technique" maxLength="300" rows="7"></textarea>
                                         <span className="help-block">
                                             <p id="characterLeft" className="help-block ">Limite de 300 charactères</p>
-                                        </span>                    
+                                        </span>
                                     </div>
                                     <div className="form-group">
                                         <input type="text" className="form-control" id="achat" name="achat" placeholder="Prix achat, ex : 6101€ à 6500€" required />
@@ -44,7 +44,7 @@ class CallAdmin extends Component {
                                     <div className="form-group">
                                         <input type="text" className="form-control" id="score" name="score" placeholder="Score, ex : 80%" required />
                                     </div>
-                                   
+
                                     <button type="button" id="submit" name="submit" className="btn btn-primary pull-right">Mettre à jour</button>
                                 </div>
                             </form>
@@ -70,18 +70,18 @@ class CallAdmin extends Component {
                         </div>
                         {/*TradingView REACT END*/}
                     </div>
-                    
+
                     <div className="col-xs-12 col-sm-12 col-md-6">
                         <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/currency.js"></script>
-                        <div className="coinmarketcap-currency-widget" 
-                            data-currencyid="1" 
-                            data-base="USD" 
-                            data-secondary="" 
-                            data-ticker="false" 
-                            data-rank="false" 
-                            data-marketcap="false" 
-                            data-volume="false" 
-                            data-stats="USD" 
+                        <div className="coinmarketcap-currency-widget"
+                            data-currencyid="1"
+                            data-base="USD"
+                            data-secondary=""
+                            data-ticker="false"
+                            data-rank="false"
+                            data-marketcap="false"
+                            data-volume="false"
+                            data-stats="USD"
                             data-statsticker="false">
                         </div>
                         <div className="row">

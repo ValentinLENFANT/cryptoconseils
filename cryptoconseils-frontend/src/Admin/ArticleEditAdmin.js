@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class ArticleEditAdmin extends Component {
   render() {
     return(
-<section> 
+<section>
             <div className="container">
                 {/*<!--DEBUT TITRE DE SECTION  -->*/}
                 <div className="row text-center">
@@ -20,7 +20,7 @@ class ArticleEditAdmin extends Component {
                     <div className="col-xs-12 col-sm-12 col-md-6">
                         <div className="form-group">
                             <div>
-                            <label className="control-label" for="article_categories">Catégorie</label>
+                            <label className="control-label" htmlFor="article_categories">Catégorie</label>
                             <select id="article_categories" name="article_categories" className="form-control">
                                 <option value="0">-</option>
                                 <option value="1">Finances</option>
@@ -32,10 +32,10 @@ class ArticleEditAdmin extends Component {
                         </div>
                     </div>
 
-         {/*<!-- Auteur -->*/}            
+         {/*<!-- Auteur -->*/}
                     <div className="col-xs-12 col-sm-12 col-md-6">
                         <div className="form-group">
-                            <label className="control-label" for="article_categories">Auteur</label>
+                            <label className="control-label" htmlFor="article_categories">Auteur</label>
                             <div>
                                 <select id="article_categories" name="article_categories" className="form-control">
                                     <option value="0">-</option>
@@ -80,7 +80,7 @@ class ArticleEditAdmin extends Component {
                             </div>
                             <div className="col-xs-12 col-sm-12 col-md-9 text-justify">
                                 <h4 className="media-heading">L'IMPACT DES CRYPTO-MONNAIES SUR LE SYSTÊME FINANCIER MONDIALE</h4>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nulla sapien, semper in sodales ac, rutrum at orci. Maecenas vulputate nec tellus sit amet porttitor. Suspendisse congue porta sagittis. Ut erat diam, consectetur sed tempus id, sodales nec felis. Donec sagittis nunc sapien, non consequat nunc ultrices non. Aliquam accumsan ligula ante, non commodo risus sodales a. Vestibulum facilisis, enim in porta fringilla, tortor sapien congue purus, porta consectetur sem turpis vitae mauris. Donec dapibus justo a elit semper, et scelerisque mauris ullamcorper. Maecenas blandit arcu nec euismod pellentesque. Fusce et imperdiet nisi, at suscipit sem. Aliquam pulvinar risus id cursus elementum. Nulla elementum placerat nibh, in dictum enim mollis non. Morbi vehicula eget est et tristique. Aenean condimentum augue id congue convallis. Phasellus congue non tellus nec pretium. Maecenas eu vulputate lacus, eget feugiat odio...       
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nulla sapien, semper in sodales ac, rutrum at orci. Maecenas vulputate nec tellus sit amet porttitor. Suspendisse congue porta sagittis. Ut erat diam, consectetur sed tempus id, sodales nec felis. Donec sagittis nunc sapien, non consequat nunc ultrices non. Aliquam accumsan ligula ante, non commodo risus sodales a. Vestibulum facilisis, enim in porta fringilla, tortor sapien congue purus, porta consectetur sem turpis vitae mauris. Donec dapibus justo a elit semper, et scelerisque mauris ullamcorper. Maecenas blandit arcu nec euismod pellentesque. Fusce et imperdiet nisi, at suscipit sem. Aliquam pulvinar risus id cursus elementum. Nulla elementum placerat nibh, in dictum enim mollis non. Morbi vehicula eget est et tristique. Aenean condimentum augue id congue convallis. Phasellus congue non tellus nec pretium. Maecenas eu vulputate lacus, eget feugiat odio...
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@ class ArticleEditAdmin extends Component {
                             </div>
                             <div className="col-xs-12 col-sm-12 col-md-9 text-justify">
                                 <h4 className="media-heading">L'IMPACT DES CRYPTO-MONNAIES SUR LE SYSTÊME FINANCIER MONDIALE</h4>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nulla sapien, semper in sodales ac, rutrum at orci. Maecenas vulputate nec tellus sit amet porttitor. Suspendisse congue porta sagittis. Ut erat diam, consectetur sed tempus id, sodales nec felis. Donec sagittis nunc sapien, non consequat nunc ultrices non. Aliquam accumsan ligula ante, non commodo risus sodales a. Vestibulum facilisis, enim in porta fringilla, tortor sapien congue purus, porta consectetur sem turpis vitae mauris. Donec dapibus justo a elit semper, et scelerisque mauris ullamcorper. Maecenas blandit arcu nec euismod pellentesque. Fusce et imperdiet nisi, at suscipit sem. Aliquam pulvinar risus id cursus elementum. Nulla elementum placerat nibh, in dictum enim mollis non. Morbi vehicula eget est et tristique. Aenean condimentum augue id congue convallis. Phasellus congue non tellus nec pretium. Maecenas eu vulputate lacus, eget feugiat odio...       
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nulla sapien, semper in sodales ac, rutrum at orci. Maecenas vulputate nec tellus sit amet porttitor. Suspendisse congue porta sagittis. Ut erat diam, consectetur sed tempus id, sodales nec felis. Donec sagittis nunc sapien, non consequat nunc ultrices non. Aliquam accumsan ligula ante, non commodo risus sodales a. Vestibulum facilisis, enim in porta fringilla, tortor sapien congue purus, porta consectetur sem turpis vitae mauris. Donec dapibus justo a elit semper, et scelerisque mauris ullamcorper. Maecenas blandit arcu nec euismod pellentesque. Fusce et imperdiet nisi, at suscipit sem. Aliquam pulvinar risus id cursus elementum. Nulla elementum placerat nibh, in dictum enim mollis non. Morbi vehicula eget est et tristique. Aenean condimentum augue id congue convallis. Phasellus congue non tellus nec pretium. Maecenas eu vulputate lacus, eget feugiat odio...
                             </div>
                         </div>
                     </div>
