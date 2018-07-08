@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import './App.css';
+import ProfilPremium from './ProfilPremium/ProfilPremium';
+import Admin from './Admin/Admin';
+const Loading = () => <div>Loading...</div> ;
 import PreLoader from './PreLoader/PreLoader';
 const Loading = () => <PreLoader/> ;
 
@@ -60,11 +63,15 @@ const SignUp = Loadable({
   loading: Loading,
 });
 
+const AdminPage = Loadable({
+  loader: () => import('./Admin/Admin'),
+  loading: Loading,
+});
+
 const NewPassword = Loadable({
   loader: () => import('./NewPassword/NewPassword'),
   loading: Loading,
 });
-
 
 class App extends Component {
   render() {
@@ -73,6 +80,8 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/profil" component={Profil}/>
+          <Route exact path="/profilpremium" component={ProfilPremium}/>
+          <Route exact path="/admin" component={AdminPage}/>
           <Route exact path="/calculator" component={BitcoinCalculator}/>
           <Route exact path="/faq" component={Faq}/>
           <Route exact path="/contact" component={Contact}/>

@@ -6992,7 +6992,7 @@ react-scripts@1.1.4:
     whatwg-fetch "2.0.3"
   optionalDependencies:
     fsevents "^1.1.3"
-
+    
 react-split-pane@^0.1.77:
   version "0.1.81"
   resolved "https://registry.yarnpkg.com/react-split-pane/-/react-split-pane-0.1.81.tgz#b1e8b82e0a6edd10f18fd639a5f512db3cbbb4e6"
@@ -7007,7 +7007,7 @@ react-style-proptype@^3.0.0:
   resolved "https://registry.yarnpkg.com/react-style-proptype/-/react-style-proptype-3.2.1.tgz#7cfeb9b87ec7ab9dcbde9715170ed10c11fb86aa"
   dependencies:
     prop-types "^15.5.4"
-
+    
 react-tradingview-widget@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/react-tradingview-widget/-/react-tradingview-widget-1.2.5.tgz#76118a4e5586368f60135f4a17820ffd52111d1c"
