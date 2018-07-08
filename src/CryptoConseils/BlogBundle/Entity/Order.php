@@ -32,6 +32,12 @@ class Order
     /** @ORM\Column(type="decimal", precision=10, scale=5) */
     private $amount;
 
+    /**
+     * @var string
+     * @ORM\Column(name="accessToken", type="string", nullable=true)
+     */
+    private $accessToken;
+
     public function __construct($amount)
     {
         $this->amount = $amount;

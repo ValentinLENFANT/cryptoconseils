@@ -34,12 +34,22 @@ class OrdersController extends Controller
      */
     public function newAction($amount)
     {
-        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
         $order = new Order($amount);
         $em->persist($order);
         $em->flush();
+
+        try {
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+        $req = $bdd->prepare('UPDATE orders SET accessToken = :accessToken WHERE id = :id');
+        $req->execute(array(
+            'accessToken' => $_GET['accessToken'],
+            'id' => $order->getId()
+        ));
 
         return $this->redirect($this->generateUrl('cryptoconseils_blog_orders_show', [
             'id' => $order->getId(),
@@ -143,13 +153,20 @@ class OrdersController extends Controller
      */
     public function paymentCompleteAction(Order $order)
     {
-        //TODO CHANGE THE USER ID TO GET IT DYNAMICALLY
-        $userId = 1; //Changer le userId
+        $orderId = $order->getId();
         try {
             $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
+        $answer = $bdd->query('SELECT accessToken FROM orders WHERE id ='.$orderId);
+        $accessToken = $answer->fetch();
+        $accessToken = $accessToken['accessToken'];
+        $response = $bdd->prepare('SELECT user_id FROM oauth2_access_tokens WHERE token = ?');
+        $response->execute(array($accessToken));
+        $userId = $response->fetch();
+        $userId = $userId['user_id'];
+
         if (100 == $order->getAmount()){
             $req = $bdd->prepare('UPDATE users SET premiumLevel = :premiumLevel WHERE id = :id');
             $req->execute(array(
