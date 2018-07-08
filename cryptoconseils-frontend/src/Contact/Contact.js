@@ -3,7 +3,7 @@ import Header from '../Header/Header';
 import Banner from '../Banner/Banner';
 import Widget from './Widget';
 import BeginTrade from '../BeginTrade/BeginTrade';
-
+import axios from 'axios'
 class Contact extends Component {
 
   constructor() {
@@ -13,7 +13,9 @@ class Contact extends Component {
       lastname: null,
       email: null,
       subject: null,
-      message: null
+      message: null,
+      statusMsg: null,
+      isSuccess: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,6 +31,13 @@ class Contact extends Component {
       [name]: value
     });
   }
+  renderStatusMsg() {
+    if(this.state.statusMsg !== null) {
+      return(<p className="output_message error">{this.state.statusMsg}</p>)
+    } else if (this.state.success === true ) {
+      return (<p className="output_message success">Votre message a été envoyé</p>)
+    }
+  }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -36,6 +45,21 @@ class Contact extends Component {
     for(var item in this.state){
       console.log(this.state[item]);
     }
+    axios.post(process.env.REACT_APP_API_ADDRESS+"/contact/new/",{
+      prenom: this.state.firstname,
+      nom: this.state.lastname,
+      sujet: this.state.subject,
+      email: this.state.email,
+      message: this.state.message
+    }).then(response => {
+      console.log(response);
+      this.setState({
+        isSuccess: true
+      })
+    }).catch(error => {
+      this.setState({isSuccess: false})
+      console.log(error.response);
+    })
   }
 
   render() {
@@ -135,7 +159,7 @@ class Contact extends Component {
                   {/* Submit Form Button Ends */}
                   {/* Form Submit Message Starts */}
                   <div className="col-xs-12 text-center output_message_holder d-none">
-                    <p className="output_message"></p>
+                    <p className="success">Votre message a été envoyé</p>
                   </div>
                   {/* Form Submit Message Ends */}
                 </form>
