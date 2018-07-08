@@ -72,7 +72,6 @@ class Admin extends Component {
             {/* ArticleAdmin Starts */}
              <ArticleEditAdmin />
             {/* ArticleAdmin Ends */}
-
           {/* Wrapper Ends */}
           </div>
         </div>

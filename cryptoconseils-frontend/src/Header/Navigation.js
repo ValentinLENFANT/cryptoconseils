@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Logo from '../Logo/Logo';
 import SearchBar from './SearchBar'
-
+import axios from 'axios'
 
 class Navigation extends Component {
 
@@ -23,6 +23,11 @@ class Navigation extends Component {
     }else return null
   }
 
+  renderAdminLink(){
+    if(this.props.isAdmin){
+      return (<li><a href="/admin">Admin</a></li>);
+    }
+  }
   render() {
     return(
       <div className="Statistics">
@@ -51,6 +56,7 @@ class Navigation extends Component {
                   <li><a href="about.html">Team</a></li>
                   <li><a href="/contact">Contact</a></li>
                   <li><a href="/faq">Faq</a></li>
+                  {this.renderAdminLink()}
                   {/* Search Icon Starts */}
                   <li className="search"><button className="fa fa-search" onClick={this.toggleSearch.bind(this)}></button></li>
                   {/* Search Icon Ends */}

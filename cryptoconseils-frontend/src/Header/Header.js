@@ -3,9 +3,29 @@ import Logo from '../Logo/Logo';
 import Statistics from './Statistics';
 import UserAction from './UserAction';
 import Navigation from './Navigation';
-
+import axios from 'axios'
 class Header extends Component {
-
+  constructor() {
+    super();
+    this.state = {
+      isAdmin: false
+    }
+  }
+  componentWillMount(){
+    if(localStorage.getItem('access_token')){
+      var authorization = {
+        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
+      };
+      axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/',authorization)
+      .then(response => {
+        if(response.data.roles[0] === "ROLE_ADMIN") {
+          this.setState({
+            isAdmin: true
+          })
+        }
+      })
+    }
+  }
   render() {
     return(
       <div className="Header Component">
@@ -25,7 +45,7 @@ class Header extends Component {
             </div>
           </div>
           {/* Navigation Menu Starts */}
-            <Navigation />
+            <Navigation isAdmin={this.state.isAdmin}/>
           {/* Navigation Menu Ends */}
         </div>
         {/* Header Ends */}
