@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import CallPremium from './Premium/CallPremium';
+import CallOfDay from '../Call/CallOfDay';
 
 class Call extends Component {
   render() {
     if(this.props.premium >= 4) {
       return(
-        <CallPremium/>
+        <CallOfDay/>
       );
     }
     else {
