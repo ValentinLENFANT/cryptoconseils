@@ -49,19 +49,22 @@ class UserController extends FOSRestController
 
         $currentUserId = $currentUserId->getUsername();
 
-
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            // If the user logged in request himself
-            if ($userId == $currentUserId) {
-                $data = $this->get('jms_serializer')->serialize($id, 'json');
+            if($id->isEnabled() == true) {
+                // If the user logged in request himself
+                if ($userId == $currentUserId) {
+                    $data = $this->get('jms_serializer')->serialize($id, 'json');
 
-                $response = new Response($data);
-                $response->headers->set('Content-Type', 'application/json');
+                    $response = new Response($data);
+                    $response->headers->set('Content-Type', 'application/json');
 
-                return $response;
+                    return $response;
+                } else {
+                    return new JsonResponse(array('error' => 'Access denied! This user is not you'), 403);
+                }
             } else {
-                return new JsonResponse(array('error' => 'Access denied! This user is not you'), 403);
+                return new JsonResponse(array('error'=> 'Access denied! Le compte a été supprimé.'), 404);
             }
         } else {
             $data = $this->get('jms_serializer')->serialize($id, 'json');
@@ -464,7 +467,8 @@ class UserController extends FOSRestController
             }
 
             $em = $this->getDoctrine()->getManager();
-            $em->remove($users);
+            $users->setEnables(0);
+            $em->persist($users);
             $em->flush();
 
             return new JsonResponse(array('success' => 'User deleted'), 200);
