@@ -50,7 +50,7 @@ class Navigation extends Component {
                 <ul className="nav navbar-nav">
                   <li className="active"><a href="/">Accueil</a></li>
                   <li><a href="/articles">News</a></li>
-                  <li><a href="analyses-calls.html">Analyses & calls</a></li>
+                  <li><a href="/call">Analyses & calls</a></li>
                   <li><a href="airdrops.html">Airdrops</a></li>
                   <li><a href="#pricing">Accès Prémium</a></li>
                   <li><a href="/team">Team</a></li>
