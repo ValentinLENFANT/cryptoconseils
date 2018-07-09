@@ -38,13 +38,13 @@ class RecentPosts extends Component {
         return(
           <li key={post.id}>
             <div className="posts-thumb pull-left">
-              <a href="blog-post.html">
+              <a href={"/articles/"+post.id}>
                 <img alt="img" src={"/images/blog/blog-post-small-"+post.id+".jpg"}/>
               </a>
             </div>
             <div className="post-info">
               <h4 className="entry-title">
-                <a href="blog-post.html">{post.title}</a>
+                <a href={"/articles/"+post.id}>{post.title}</a>
               </h4>
               <p className="post-meta">
                 <span className="post-date">
