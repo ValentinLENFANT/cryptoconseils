@@ -56,6 +56,17 @@ class ArticleAdmin extends Component {
     }).catch(error => {
       console.log(error);
     });
+
+    // on récupère toute les catégories
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/categories/')
+    .then(response => {
+      console.log(response.data);
+      this.setState({
+        listCategories: response.data
+      });
+    }).catch(error => {
+      console.log(error);
+    });
   }
   sendArticle(event){
     // pour éviter le rechargement de la page

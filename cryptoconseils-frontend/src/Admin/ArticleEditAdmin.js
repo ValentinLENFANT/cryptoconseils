@@ -33,6 +33,15 @@ class ArticleEditAdmin extends Component {
       });
 
       // on récupère les catégories
+      axios.get(process.env.REACT_APP_API_ADDRESS+'/categories/')
+      .then(response => {
+        console.log(response.data);
+        this.setState({
+          listCategories: response.data
+        });
+      }).catch(error => {
+        console.log(error);
+      });
     }
   }
   onChangeAuthor(event) {
@@ -76,26 +85,25 @@ class ArticleEditAdmin extends Component {
     if(this.state.searchCategorie !== null) {
       console.log("catégorie recherché:", this.state.searchCategorie);
       // initialisation du tableau
-      var res= []
+      var res = [];
 
       // on récupère la catégorie recherché
-      var searchCategorie = this.state.searchCategorie
+      var searchCategorie = this.state.searchCategorie;
       // on récupère la liste des articles déjà trié par auteur
-      var data = this.state.listArticles
+      var data = this.state.listArticles;
 
 
       for(var x in data) {
         if(typeof data[x].categories !== "undefined" && data[x].categories.length > 0 ) {
 
           var categories = data[x].categories[0].id
-          console.log("categories",categories,"- searchCategorie", searchCategorie);
-          if(categories === searchCategorie){
+          if(categories === Number(searchCategorie)){
             res = [...res, data[x]]
           }
         }
-      }
+      }this.setState({listArticles: res});
     }
-    this.setState({listArticles: res});
+
   }
 
   orderByCategorie(data,searchCategorie){
@@ -107,9 +115,9 @@ class ArticleEditAdmin extends Component {
     for(var x in data){
       if(typeof data[x].categories !== "undefined" && data[x].categories.length > 0 ){
         var categories = data[x].categories[0].id;
-
+        console.log(categories, Number(searchCategorie));
         // si il y a la catégorie recherché dans l'article
-        if(categories === searchCategorie){
+        if(categories === Number(searchCategorie)) {
           res = [...res, data[x]]
         }
       }
@@ -193,7 +201,7 @@ class ArticleEditAdmin extends Component {
                 <label className="control-label" htmlFor="article_categories">Catégorie</label>
                 <select onChange={this.onChangeCategorie.bind(this)}id="article_categories" name="article_categories" className="form-control">
                   <option value="">-</option>
-                  {this.props.listCategories.map(categorie => {
+                  {this.state.listCategories.map(categorie => {
                     return (
                       <option key={categorie.id} value={[categorie.id]}>{categorie.name}</option>
                     );

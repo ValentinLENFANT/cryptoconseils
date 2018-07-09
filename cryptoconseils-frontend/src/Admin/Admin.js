@@ -37,16 +37,6 @@ class Admin extends Component {
     } else {
       this.setState({noAccess: true})
     }
-
-    // on récupère toute les catégories
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/categories/')
-    .then(response => {
-      this.setState({
-        listCategories: response.data
-      });
-    }).catch(error => {
-      console.log(error);
-    });
   }
   render() {
     if(this.state.noAccess){
@@ -81,7 +71,7 @@ class Admin extends Component {
             {/* ArticleAdmin Ends */}
 
             {/* ArticleAdmin Starts */}
-             <ArticleEditAdmin listCategories={this.state.listCategories}/>
+             <ArticleEditAdmin />
             {/* ArticleAdmin Ends */}
           {/* Wrapper Ends */}
           </div>
