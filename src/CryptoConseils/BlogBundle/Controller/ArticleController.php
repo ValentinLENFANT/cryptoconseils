@@ -45,13 +45,13 @@ class ArticleController extends FOSRestController
     public function indexAction() // [GET] /articles
     {
         if (null === $this->getUser()) {
-            $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticlePremium(0);
+            $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticlePublishedAndPremium(1, 0);
             $data = $this->get('jms_serializer')->serialize($articles, 'json');
 
             $response = new Response($data);
             $response->headers->set('Content-Type', 'application/json');
 
-            if (null == $articles){
+            if (null == $articles) {
                 return new JsonResponse(array('error' => 'No articles found for your premium level'), 404);
             }
 
@@ -59,7 +59,7 @@ class ArticleController extends FOSRestController
         }
 
         $currentUserLevel = $this->getUser()->getPremiumLevel();
-        $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticlePremium($currentUserLevel);
+        $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticlePublishedAndPremium(1, $currentUserLevel);
 
         $data = $this->get('jms_serializer')->serialize($articles, 'json');
 
@@ -72,30 +72,34 @@ class ArticleController extends FOSRestController
 
     public function showAction(Article $id) // [GET] /articles/8
     {
-        if ($id->getPremium() > 0) //si l'article n'est pas de niveau 0 il faut obligatoirement être au moins connecté
-        {
-            if (null === $this->getUser()) { //On vérifie si l'utilisateur est connecté
-                return new JsonResponse(array('error' => 'Access denied! You need to login'), 403);
-            }
-            $currentUserLevel = $this->getUser()->getPremiumLevel(); //On récupère le niveau de l'utilisateur
+        if ($id->getPublished() == 1) {
+            if ($id->getPremium() > 0) //si l'article n'est pas de niveau 0 il faut obligatoirement être au moins connecté
+            {
+                if (null === $this->getUser()) { //On vérifie si l'utilisateur est connecté
+                    return new JsonResponse(array('error' => 'Access denied! You need to login'), 403);
+                }
+                $currentUserLevel = $this->getUser()->getPremiumLevel(); //On récupère le niveau de l'utilisateur
 
-            if ($currentUserLevel >= $id->getPremium() || $id->getPremium() == 0) {
+                if ($currentUserLevel >= $id->getPremium() || $id->getPremium() == 0) {
+                    $data = $this->get('jms_serializer')->serialize($id, 'json');
+
+                    $response = new Response($data);
+                    $response->headers->set('Content-Type', 'application/json');
+
+                    return $response;
+                } else {
+                    return new JsonResponse(array('error' => "Access denied ! Vous n'êtes pas à un niveau premium assez élevé"), 403);
+                }
+            } else {
                 $data = $this->get('jms_serializer')->serialize($id, 'json');
 
                 $response = new Response($data);
                 $response->headers->set('Content-Type', 'application/json');
 
                 return $response;
-            } else {
-                return new JsonResponse(array('error' => "Access denied ! Vous n'êtes pas à un niveau premium assez élevé"), 403);
             }
         } else {
-            $data = $this->get('jms_serializer')->serialize($id, 'json');
-
-            $response = new Response($data);
-            $response->headers->set('Content-Type', 'application/json');
-
-            return $response;
+            return new JsonResponse(array('error' => "L'article auquel vous tenté d'accéder à été supprimé."), 404);
         }
     }
 
@@ -109,12 +113,12 @@ class ArticleController extends FOSRestController
             $response = new Response($data);
             $response->headers->set('Content-Type', 'application/json');
 
-            if (null == $articles){
+            if (null == $articles) {
                 return new JsonResponse(array('error' => 'No articles found for your premium level'), 404);
             }
 
             return $response;
-        }else{
+        } else {
 
             $currentUserLevel = $this->getUser()->getPremiumLevel();
 
@@ -124,7 +128,7 @@ class ArticleController extends FOSRestController
             $response = new Response($data);
             $response->headers->set('Content-Type', 'application/json');
 
-            if (null == $articles){
+            if (null == $articles) {
                 return new JsonResponse(array('error' => 'No articles found for this category'), 404);
             }
 
@@ -141,7 +145,7 @@ class ArticleController extends FOSRestController
             $response = new Response($data);
             $response->headers->set('Content-Type', 'application/json');
 
-            if (null == $articles){
+            if (null == $articles) {
                 return new JsonResponse(array('error' => 'No articles found for your premium level'), 404);
             }
 
@@ -250,28 +254,28 @@ class ArticleController extends FOSRestController
             $data = json_decode($request->getContent(), true);
 
             // If json data is empty
-            if(empty($data)){
+            if (empty($data)) {
                 return new JsonResponse(array('error' => 'No data sent to modify this article'), 403);
             }
 
             // If content is NULL
             if (!isset($data['content'])) {
                 $article->setContent($content);
-            }else{
+            } else {
                 $article->setContent($data['content']);
             }
 
             // If title is NULL
             if (!isset($data['title'])) {
                 $article->setTitle($title);
-            }else{
+            } else {
                 $article->setTitle($data['title']);
             }
 
             // If premium is NULL
             if (!isset($data['premium'])) {
                 $article->setPremium($premium);
-            }else{
+            } else {
                 $article->setPremium($data['premium']);
             }
 
@@ -279,7 +283,7 @@ class ArticleController extends FOSRestController
             if (!isset($data['image_id'])) {
                 $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($article->getImageId());
                 $article->setImage($image);
-            }else{
+            } else {
                 $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($data['image_id']);
                 $article->setImage($image);
             }
@@ -332,7 +336,8 @@ class ArticleController extends FOSRestController
             }
 
             $em = $this->getDoctrine()->getManager();
-            $em->remove($article);
+            $article->setPublished(0);
+            $em->persist($article);
             $em->flush();
 
             return new JsonResponse(array('success' => 'Article deleted'), 200);

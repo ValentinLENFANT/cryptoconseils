@@ -41,6 +41,22 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
             ;
     }
 
+    public function findByArticlePublishedAndPremium($published, $premium)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->where('a.published = :published')
+            ->setParameter('published', $published)
+            ->andWhere('a.premium <= :premium')
+            ->setParameter('premium', $premium)
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     public function findByArticleCategory($category, $premium)
     {
         $query = $this->createQueryBuilder('a')
