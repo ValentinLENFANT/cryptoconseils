@@ -29,13 +29,12 @@ class LoadCalls extends AbstractFixture
         );
 
         $cryptocurrencyPair = array(
-            "BTC/USD",
-            "BTC/ETH",
-            "ETH/LOC",
-            "BTC/XRP",
-            "BTC/TRX",
-            "ETH,FLiK",
-            "BTC/EOS"
+            "BTCUSD",
+            "BTCETH",
+            "LOCETH",
+            "XRPBTC",
+            "TRXBTC",
+            "EOSBTC"
         );
 
         $cryptocurrencyName = array(
@@ -54,7 +53,6 @@ class LoadCalls extends AbstractFixture
             "Margin trading conseillé sur cette paire. Les variations sont importantes mais des profits de l'ordre de 10% sont à attendre.",
             "Ripple, l'éternel outsider centralisé pourrait avoir un bon point d'entrée en raison de l'explosion récente du volume.",
             "Tron, l'éternel terrain de jeu des whales est idéal pour du margin trading.",
-            "Lol, qui achète encore du FLiK ?",
             "EOS, malgré les supposées vulnérabilités, reste toujours un investissement judicieux."
         );
 
@@ -64,7 +62,6 @@ class LoadCalls extends AbstractFixture
             "0.05",
             "0.0002",
             "0.003",
-            "0",
             "4.5"
         );
 
@@ -74,7 +71,6 @@ class LoadCalls extends AbstractFixture
             "0.1",
             "0.0004",
             "0.004",
-            "0",
             "12"
         );
 
@@ -84,7 +80,6 @@ class LoadCalls extends AbstractFixture
             "81",
             "75",
             "79",
-            "1000",
             "88"
         );
 

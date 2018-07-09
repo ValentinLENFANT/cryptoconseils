@@ -48,7 +48,7 @@ class Call extends Component {
             {/* TradingView REACT BEGIN */}
             <div className="tradingview-widget-container">
               <div id="tradingview_5421e"></div>
-              <TradingViewWidget symbol={calls.cryptocurrencyPair.replace('/','')}/>
+              <TradingViewWidget symbol={calls.cryptocurrencyPair}/>
             </div>
             {/* TradingView REACT END */}
           </div>
