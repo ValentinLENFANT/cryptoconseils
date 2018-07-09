@@ -79,6 +79,11 @@ const Team = Loadable({
   loader: () => import('./Team/Team'),
   loading: Loading,
 });
+
+const Call = Loadable({
+  loader: () => import('./Call/Call'),
+  loading: Loading,
+});
 class App extends Component {
   render() {
     return (
@@ -99,6 +104,7 @@ class App extends Component {
           <Route path="/categories/:id" component={Categories}/>
           <Route exact path="/admin" component={Admin}/>
           <Route exact path="/team" component={Team}/>
+          <Route exact path="/call" component={Call}/>
           <Route component={NotFound}/>
         </Switch>
       </Router>

@@ -93,6 +93,10 @@ class CallsController extends FOSRestController
 
     public function allCallsAction() // [GET] call/
     {
+        $user = $this->getUser();
+        if ($user->getPremiumLevel() < 4) {
+            return new JsonResponse(array('error' => 'Vous n\'avez pas le niveau premium suffisant'), 403);
+        }
         try {
             $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
