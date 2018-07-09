@@ -74,6 +74,11 @@ const Admin = Loadable({
   loader: () => import('./Admin/Admin'),
   loading: Loading,
 });
+
+const Team = Loadable({
+  loader: () => import('./Team/Team'),
+  loading: Loading,
+});
 class App extends Component {
   render() {
     return (
@@ -92,7 +97,8 @@ class App extends Component {
           <Route exact path="/articles" component={LatestArticles}/>
           <Route path="/articles/:id" component={Articles}/>
           <Route path="/categories/:id" component={Categories}/>
-          <Route path="/admin" component={Admin}/>
+          <Route exact path="/admin" component={Admin}/>
+          <Route exact path="/team" component={Team}/>
           <Route component={NotFound}/>
         </Switch>
       </Router>

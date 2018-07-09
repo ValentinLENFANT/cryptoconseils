@@ -53,7 +53,7 @@ class Navigation extends Component {
                   <li><a href="analyses-calls.html">Analyses & calls</a></li>
                   <li><a href="airdrops.html">Airdrops</a></li>
                   <li><a href="#pricing">Accès Prémium</a></li>
-                  <li><a href="about.html">Team</a></li>
+                  <li><a href="/team">Team</a></li>
                   <li><a href="/contact">Contact</a></li>
                   <li><a href="/faq">Faq</a></li>
                   {this.renderAdminLink()}

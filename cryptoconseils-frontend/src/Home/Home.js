@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import Header from '../Header/Header';
 
 import Carousel from './Caroussel';
-import About from './About';
+import WhoAreWe from '../Team/WhoAreWe';
 import News from './News';
 import Features from './Features';
 import Price from './Price';
 import BitcoinCalculator from '../BitcoinCalculator/BitcoinCalculator';
-import Team from './Team';
+import Expert from '../Team/Expert';
 import Quote from './Quote';
 import BitcoinChart from './BitcoinChart';
 import BeginTrade from '../BeginTrade/BeginTrade';
@@ -32,7 +32,7 @@ class Home extends Component {
           {/* Blog Section Ends */}
 
           {/* About Section Starts */}
-            <About />
+            <WhoAreWe />
           {/* About Section Ends */}
 
           {/* Features and Video Section Starts */}
@@ -48,7 +48,7 @@ class Home extends Component {
           {/* Bitcoin Calculator Section Ends */}
 
           {/* Team Section Starts */}
-            <Team />
+            <Expert />
           {/* Team Section Ends */}
 
           {/* Quote and Chart Section Starts */}

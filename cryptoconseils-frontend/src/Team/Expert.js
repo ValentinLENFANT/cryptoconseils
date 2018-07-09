@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-class Team extends Component {
+class Expert extends Component {
   render() {
     return (
-      <div className="Team Component">
+      <div className="Expert Component">
         <section className="team" id="team">
           <div className="container">
             {/* Section Title Starts */}
@@ -130,4 +130,4 @@ class Team extends Component {
   }
 }
 
-export default Team;
+export default Expert;
