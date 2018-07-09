@@ -16,34 +16,12 @@ class ArticleAdmin extends Component {
       listCategories: [],
       statusMsg: '',
       published: false,
-      article_id: ''
+      article_id: '',
+      selectedFile: null
     }
     this.handleChange = this.handleChange.bind(this);
   }
-  // enregistre la valeur des inputs
-  handleChange(event) {
-    let target = event.target;
-    let value = target.value
-    let name = target.id;
-    this.setState({[name]: value});
-  }
 
-  renderStatusMsg() {
-    if(this.state.published) {
-      return(
-        <div>
-          <p>L'article a été publié !</p>
-          <a href={"/articles/"+this.state.article_id}>Acceder à l'article</a>
-        </div>
-      );
-    } else {
-      return(
-        <div>
-          <p>{this.state.statusMsg}</p>
-        </div>
-      );
-    }
-  }
   componentWillMount(){
     var authorization = {
       headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
@@ -60,7 +38,6 @@ class ArticleAdmin extends Component {
     // on récupère toute les catégories
     axios.get(process.env.REACT_APP_API_ADDRESS+'/categories/')
     .then(response => {
-      console.log(response.data);
       this.setState({
         listCategories: response.data
       });
@@ -68,6 +45,51 @@ class ArticleAdmin extends Component {
       console.log(error);
     });
   }
+
+  // enregistre la valeur des inputs
+  handleChange(event) {
+    let target = event.target;
+    let value = target.value
+    let name = target.id;
+    this.setState({[name]: value});
+  }
+
+  renderStatusMsg() {
+    if(this.state.published === true) {
+      return(
+        <div>
+          <p>L'article a été publié !</p>
+          <a href={"/articles/"+this.state.article_id}>Acceder à l'article</a>
+        </div>
+      );
+    } else {
+      return(
+        <div>
+          <p>{this.state.statusMsg}</p>
+        </div>
+      );
+    }
+  }
+
+
+  selectImage = event => {
+    this.setState({
+      selectedFile:event.target.files[0].name
+    })
+    console.log(event.target.files[0]);
+  }
+
+  sendImage(event) {
+    var authorization = {
+      headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
+    };
+    let data = new FormData();
+    data.append('file', event.target.files[0]);
+    axios.post(process.env.REACT_APP_API_ADDRESS+'/images/new/',data,authorization).then(response => {
+       console.log(response.data);
+   });
+  }
+
   sendArticle(event){
     // pour éviter le rechargement de la page
     event.preventDefault();
@@ -96,7 +118,6 @@ class ArticleAdmin extends Component {
         "category_id": [this.state.article_categories]
       },authorization)
       .then(response => {
-        console.log(response);
         this.setState({published: true,article_id: response.data.id})
       }).catch(error => {
         console.log(error);
@@ -112,7 +133,7 @@ class ArticleAdmin extends Component {
                 Article</span>
             </h2>
             <div className="title-head-subtitle">
-              {this.renderStatusMsg}
+              <p>Créer des articles</p>
             </div>
             {this.renderStatusMsg()}
           </div>
@@ -199,8 +220,15 @@ class ArticleAdmin extends Component {
                       </div>
                       <div className="row">
                         <div className="col-xs-12 col-sm-12 col-md-12">
-                          <input id="source_image" name="source_image" className="input-file" type="file"/>
+                          <input
+                            id="source_image"
+                            name="source_image"
+                            className="input-file"
+                            type="file"
+                            onChange={this.sendImage}
+                            />
                         </div>
+                        <button onClick={this.sendImage}>Uploader</button>
                       </div>
                     </div>
                   </div>
