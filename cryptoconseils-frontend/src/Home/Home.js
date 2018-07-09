@@ -5,7 +5,7 @@ import Carousel from './Caroussel';
 import WhoAreWe from '../Team/WhoAreWe';
 import News from './News';
 import Features from './Features';
-import Price from './Price';
+import Price from '../Price/Price';
 import BitcoinCalculator from '../BitcoinCalculator/BitcoinCalculator';
 import Expert from '../Team/Expert';
 import Quote from './Quote';
