@@ -41,7 +41,6 @@ class Call extends Component {
 
   renderLatestCall(){
     var listCalls = this.sortArray(this.state.allCalls);
-
     return listCalls.slice(0,1).map(calls => {
       return(
         <div key={calls.id} className="row">
@@ -149,38 +148,37 @@ class Call extends Component {
       return (
         <div>
           <Header/>
-        <section className="calls-premium section-profil">
-          <div className="container">
+          <section className="calls-premium section-profil">
+            <div className="container">
 
-            <div className="row text-center">
-              <h2 className="title-head" id="call-premium">Call<span>
-                  du jour
-                </span>
-              </h2>
-              <div className="title-head-subtitle">
-                <p>Création du call premium</p>
+              <div className="row text-center">
+                <h2 className="title-head" id="call-premium">Call<span>
+                    du jour
+                  </span>
+                </h2>
+                <div className="title-head-subtitle">
+                  <p>Création du call premium</p>
+                </div>
               </div>
-            </div>
-              {this.renderLatestCall()}
-            <div className="row text-center">
-              <h2 className="title-head" id="call-premium">Calls<span>
-                  précédents</span>
-              </h2>
-              <div className="title-head-subtitle">
-                <p>La liste des derniers calls</p>
+                {this.renderLatestCall()}
+              <div className="row text-center">
+                <h2 className="title-head" id="call-premium">Calls<span>
+                    précédents</span>
+                </h2>
+                <div className="title-head-subtitle">
+                  <p>La liste des derniers calls</p>
+                </div>
               </div>
+              {this.renderOldCalls()}
             </div>
-            {this.renderOldCalls()}
-          </div>
-        </section>
-      </div>
+          </section>
+        </div>
       );
     } else if(this.state.noAccess === true) {
       return <Denied noAccess={true}/>
     } else if (this.state.noLogged === true) {
       return <Denied noLogged={true}/>
     }
-
   }
 }
 

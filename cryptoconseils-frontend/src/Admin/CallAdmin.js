@@ -1,125 +1,280 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import TradingViewWidget from 'react-tradingview-widget';
-
-
+import axios from 'axios'
 class CallAdmin extends Component {
-  render() {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      ticker: '',
+      name: '',
+      analyse: '',
+      achat: 0,
+      vente: 0,
+      score: 0,
+      statusMsg: null,
+      published: false
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  // enregistre la valeur des inputs
+  handleChange(event) {
+
+    let target = event.target;
+    let value = target.value
+    let name = target.id;
+    this.setState({[name]: value}, () => {
+      if(name === "achat" || name ==="vente") {
+        this.calculateScore(this.state.achat,this.state.vente);
+      }
+    });
+  }
+  renderStatusMsg(){
+    if (this.state.published === true) {
+      return(
+        <div className="col-md-10 text-center output_message_holder d-block">
+        <a href="/call">  <p className="output_message success">{this.state.statusMsg}</p></a>
+        </div>
+      );
+    }else if(this.state.statusMsg !== null && this.state.published === false ) {
+      return(
+        <div className="col-md-10 text-center output_message_holder d-block">
+          <p className="output_message error">{this.state.statusMsg}</p>
+        </div>
+      );
+    }
+  }
+  calculateScore(achat,vente) {
+    var x = Number(achat);
+    var y = Number(vente);
+    var score = (y - x) / x * 100;
+    if(typeof score !== "NaN"){
+      this.setState({score: score})
+    }
+  }
+  sendCall(event){
+    // pour éviter le rechargement de la page
+    event.preventDefault();
+    console.log(this.state);
+    // vérification des champs
+    if(this.state.ticker.length < 6 || this.state.ticker.length > 6) {
+      this.setState({statusMsg: "Le ticker doit contenir 6 caractères"})
+    } else if (this.state.name.length <= 0) {
+      this.setState({statusMsg: "Le nom est requis"})
+    } else if (this.state.analyse.length < 30 || this.state.analyse.length > 300) {
+      this.setState({statusMsg: "L'analyse doit faire entre 30 et 300 caractères"})
+    } else if (Number(this.state.achat) <= 0) {
+      this.setState({statusMsg: "Le prix d'achat doit être supérieur à 0"})
+    } else if (Number(this.state.vente) <= 0) {
+      this.setState({statusMsg: "Le prix de vente doit être supérieur à 0"})
+    } else if (Number(this.state.vente) < Number(this.state.achat)) {
+      this.setState({statusMsg: "Le prix de vente doit être supérieux au prix d'achat"})
+    } else if (Number(this.state.achat) > Number(this.state.vente)) {
+      this.setState({statusMsg: "Le prix d'achat doit être inférieur au prix de vente"})
+    } else if (Number(this.state.score) <= 0) {
+      this.setState({statusMsg: "Le score doit être supérieux à 0 %"})
+    }else {
+      console.log("TENTAVIE DE PUBLICATION");
+      var authorization = {
+        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
+      };
+      axios.post(process.env.REACT_APP_API_ADDRESS+'/call/new/',{
+        cryptocurrencyPair: this.state.ticker,
+        cryptocurrencyName: this.state.name,
+        author: this.props.author,
+        content: this.state.analyse,
+        buyPrice: this.state.achat,
+        sellPrice: this.state.vente,
+        scoring: this.state.score
+      },authorization)
+      .then(response => {
+        console.log(response);
+        this.setState({published: true,statusMsg: "Le call du jour a été publié !"})
+      }).catch(error => {
+        console.log(error.response);
+      });
+    }
+  }
+  renderLiveCall() {
     return(
-        <section className="calls-premium section-profil">
-            <div className="container">
+      <div className="row">
+        <div className="col-xs-12 col-sm-12 col-md-6">
+          {/* TradingView REACT BEGIN */}
+          <div className="tradingview-widget-container">
+            <div id="tradingview_5421e"></div>
+            <TradingViewWidget symbol={this.state.ticker}/>
+          </div>
+          {/* TradingView REACT END */}
+        </div>
 
-                <div className="row text-center">
-                    <h2 className="title-head" id="call-premium">Call<span> du jour </span></h2>
-                    <div className="title-head-subtitle">
-                        <p>Création du call premium</p>
-                    </div>
-                </div>
-
-                {/*<!-- FORMULAIRE CALL DU JOUR PREMIUM -->*/}
-                <div className="row">
-                    <div className="col-md-12">
-                        <div className="form-area">
-                            <form role="form">
-                                <div className="col-md-6">
-                                    <div className="form-group">
-                                        <input type="text" className="form-control" id="graphique-ticker" name="achat" placeholder="TradingView Ticker (exemple : BTCUSD )" required/>
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="form-group">
-                                        <input type="text" className="form-control" id="ticker" name="ticker" placeholder="Nom de la crypto, exemple : Bitcoin (BTC)" required />
-                                    </div>
-                                    <div className="form-group">
-                                        <textarea className="form-control" type="textarea" id="analyse" placeholder="Analyse technique" maxLength="300" rows="7"></textarea>
-                                        <span className="help-block">
-                                            <p id="characterLeft" className="help-block ">Limite de 300 charactères</p>
-                                        </span>
-                                    </div>
-                                    <div className="form-group">
-                                        <input type="text" className="form-control" id="achat" name="achat" placeholder="Prix achat, ex : 6101€ à 6500€" required />
-                                    </div>
-                                    <div className="form-group">
-                                        <input type="text" className="form-control" id="vente" name="vente" placeholder="Prix vente, ex : 7101€ à 7500€" required />
-                                    </div>
-                                    <div className="form-group">
-                                        <input type="text" className="form-control" id="score" name="score" placeholder="Score, ex : 80%" required />
-                                    </div>
-
-                                    <button type="button" id="submit" name="submit" className="btn btn-primary pull-right">Mettre à jour</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                 {/*<!--FIN FORMULAIRE CALL DU JOUR PREMIUM -->*/}
-
-
-                <div className="row">
-                    <div className="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <p className="apercu-admin">Aperçu <i className="fa fa-chevron-down" aria-hidden="true"></i></p>
-                    </div>
-                </div>
-
-
-                <div className="row">
-                    <div className="col-xs-12 col-sm-12 col-md-6">
-                        {/*TradingView REACT BEGIN*/}
-                        <div className="tradingview-widget-container">
-                            <div id="tradingview_5421e"></div>
-                            <TradingViewWidget symbol="BTCUSD" />
-                        </div>
-                        {/*TradingView REACT END*/}
-                    </div>
-
-                    <div className="col-xs-12 col-sm-12 col-md-6">
-                        <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/currency.js"></script>
-                        <div className="coinmarketcap-currency-widget"
-                            data-currencyid="1"
-                            data-base="USD"
-                            data-secondary=""
-                            data-ticker="false"
-                            data-rank="false"
-                            data-marketcap="false"
-                            data-volume="false"
-                            data-stats="USD"
-                            data-statsticker="false">
-                        </div>
-                        <div className="row">
-                            <div className="col-xs-12 col-sm-12 col-md-12">
-                                <p className="desciption-call-premium">Constatation troublante tous les 06 du mois. Préparation à une grosse montée.
-                                    Des signaux évidents d’un retournement du marché sont actuellement présents.
-                                    Le 06-06 dernier était une journée qui s'est remarquée par une grosse action.
-                                </p>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-xs-4 col-sm-4 col-md-4 button-call">
-                                <div className="btn btn-info btn-lg">ACHAT</div>
-                            </div>
-                            <div className="col-xs-8 col-sm-8 col-md-8 prix-call">
-                                <div>6101€ à 6500€</div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-xs-4 col-sm-4 col-md-4 button-call">
-                                <div className="btn btn-warning btn-lg">VENTE</div>
-                            </div>
-                            <div className="col-xs-8 col-sm-8 col-md-8 prix-call">
-                                <div>7101€ à 7200€</div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-xs-4 col-sm-4 col-md-4  button-call">
-                                <div className="btn btn-success btn-lg">SCORE</div>
-                            </div>
-                            <div className="col-xs-8 col-sm-8 col-md-8 prix-call">
-                                <div>82%</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div className="col-xs-12 col-sm-12 col-md-6">
+          <div className="row">
+            <div className="col-xs-12 col-sm-12 col-md-12">
+              <p className="desciption-call-premium">
+                {this.state.analyse}
+              </p>
             </div>
-        </section>
+          </div>
+          <div className="row">
+            <div className="col-xs-4 col-sm-4 col-md-4 button-call">
+              <div className="btn btn-info btn-lg">ACHAT</div>
+            </div>
+            <div className="col-xs-8 col-sm-8 col-md-8 prix-call">
+              <div>{this.state.achat+"€"}</div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xs-4 col-sm-4 col-md-4 button-call">
+              <div className="btn btn-warning btn-lg">VENTE</div>
+            </div>
+            <div className="col-xs-8 col-sm-8 col-md-8 prix-call">
+              <div>{this.state.vente+"€"}</div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xs-4 col-sm-4 col-md-4  button-call">
+              <div className="btn btn-success btn-lg">SCORE</div>
+            </div>
+            <div className="col-xs-8 col-sm-8 col-md-8 prix-call">
+              <div>{this.state.score+"%"}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  render() {
+    return (
+      <section className="calls-premium section-profil">
+        <div className="container">
+
+          <div className="row text-center">
+            <h2 className="title-head" id="call-premium">Call<span>
+                du jour
+              </span>
+            </h2>
+            <div className="title-head-subtitle">
+              <p>Création du call premium</p>
+            </div>
+          </div>
+
+          {/* <!-- FORMULAIRE CALL DU JOUR PREMIUM --> */}
+          <div className="row">
+            <div className="col-md-12">
+              <div className="form-area">
+                <form role="form" className="contact-form" onSubmit={this.sendCall.bind(this)}>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        className="form-control uppercase"
+                        id="ticker"
+                        name="ticker"
+                        placeholder="TradingView Ticker (exemple : BTCUSD )"
+                        required="required"
+                        maxLength="6"
+                        value={this.state.ticker}
+                        onChange={this.handleChange}/>
+                    </div>
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="name"
+                        name="name"
+                        placeholder="Nom de la crypto, exemple : Bitcoin (BTC)"
+                        required="required"
+                        value={this.state.name}
+                        onChange={this.handleChange}/>
+                    </div>
+                    <div className="form-group">
+                      <textarea
+                        className="form-control"
+                        type="textarea"
+                        id="analyse"
+                        name="analyse"
+                        placeholder="Analyse technique"
+                        maxLength="300"
+                        rows="7"
+                        value={this.state.analyse}
+                        onChange={this.handleChange}>
+                      </textarea>
+                      <span className="help-block">
+                        <p id="characterLeft" className="help-block ">{300 - this.state.analyse.length} caractères restant</p>
+                      </span>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="achat"
+                        name="achat"
+                        placeholder="Prix achat en €, ex : 6101"
+                        required="required"
+                        value={this.state.achat}
+                        onChange={this.handleChange}/>
+                        <span className="help-block">
+                          <p id="characterLeft" className="help-block ">Prix achat en €, ex : 6101</p>
+                        </span>
+                    </div>
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="vente"
+                        name="vente"
+                        placeholder="Prix vente en €, ex : 7101€"
+                        required="required"
+                        value={this.state.vente}
+                        onChange={this.handleChange}/>
+                        <span className="help-block">
+                          <p id="characterLeft" className="help-block ">Prix vente en €, ex : 7101€</p>
+                        </span>
+                    </div>
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        className="form-control readOnly"
+                        id="score"
+                        name="score"
+                        placeholder="Score en %, ex : 80"
+                        required="required"
+                        value={this.state.score}
+                        onChange={this.handleChange}
+                        />
+                        <span className="help-block">
+                          <p id="characterLeft" className="help-block ">Score en %, ex : 80</p>
+                        </span>
+                    </div>
+                  </div>
+                  <div className="col-md-12 form-group">
+                    {this.renderStatusMsg()}
+                    <button className="col-md-2"
+                      type="Submit"
+                      id="submit"
+                      name="submit"
+                      className="btn btn-primary pull-right">PUBLIER
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          {/* <!--FIN FORMULAIRE CALL DU JOUR PREMIUM --> */}
+
+          <div className="row">
+            <div className="col-xs-12 col-sm-12 col-md-12 text-center">
+              <p className="apercu-admin">Aperçu
+                <i className="fa fa-chevron-down" aria-hidden="true"></i>
+              </p>
+            </div>
+          </div>
+          {this.renderLiveCall()}
+        </div>
+      </section>
     );
   }
 }

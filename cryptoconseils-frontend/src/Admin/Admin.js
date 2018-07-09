@@ -15,7 +15,8 @@ class Admin extends Component {
     super();
     this.state = {
       noAccess: null,
-      listCategories: []
+      listCategories: [],
+      username: ''
     }
   }
   componentWillMount() {
@@ -26,8 +27,9 @@ class Admin extends Component {
       };
       axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/',authorization)
       .then(response => {
+        console.log(response.data);
         if(response.data.roles[0] === "ROLE_ADMIN") {
-          this.setState({noAccess: false})
+          this.setState({noAccess: false,username: response.data.username})
         } else {
           this.setState({noAccess: true});
         }
@@ -37,6 +39,16 @@ class Admin extends Component {
     } else {
       this.setState({noAccess: true})
     }
+    // on récupère les catégories
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/categories/')
+    .then(aled => {
+      console.log(aled.data);
+      this.setState({
+        listCategories: aled.data
+      });
+    }).catch(error => {
+      console.log(error);
+    });
   }
   render() {
     if(this.state.noAccess){
@@ -59,7 +71,7 @@ class Admin extends Component {
             {/* Derniers commentaires Ends */}
 
             {/*Call premium Starts */}
-              <CallAdmin />
+              <CallAdmin author={this.state.username}/>
             {/*Call premiums Ends */}
 
             {/*Airdrop premium Starts */}
@@ -67,11 +79,11 @@ class Admin extends Component {
             {/*Airdrop premiums Ends */}
 
             {/* ArticleAdmin Starts */}
-              <ArticleAdmin />
+              <ArticleAdmin listCategories={this.state.listCategories} author={this.state.username} />
             {/* ArticleAdmin Ends */}
 
             {/* ArticleAdmin Starts */}
-             <ArticleEditAdmin />
+             <ArticleEditAdmin listCategories={this.state.listCategories}/>
             {/* ArticleAdmin Ends */}
           {/* Wrapper Ends */}
           </div>
