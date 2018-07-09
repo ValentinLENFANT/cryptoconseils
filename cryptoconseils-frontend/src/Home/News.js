@@ -12,7 +12,7 @@ class News extends Component {
   }
 
   // éxécuté à la fin
-  componentDidMount() {
+  componentWillMount() {
     // check si access token
     if(localStorage.getItem('access_token')){
       var authorization = {
@@ -30,7 +30,7 @@ class News extends Component {
       console.log(error);
     });
   }
-  
+
   convertDate(date){
     return new Date(date);
   }
