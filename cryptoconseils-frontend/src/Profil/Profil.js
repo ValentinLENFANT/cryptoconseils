@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Price from '../Home/Price';
+import Price from '../Price/Price';
 import Menus from './Menus';
 
 import Activites from './Activites';
