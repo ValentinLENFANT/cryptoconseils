@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 class ArticleEditAdmin extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       listArticles: [],
       listArticlesOrder: [],
       categorie: null,
       searchAuthor: null,
       searchCategorie: null,
-      allArticles: [],
-      listCategories: []
+      allArticles: []
     }
   }
 
@@ -19,25 +18,13 @@ class ArticleEditAdmin extends Component {
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
-
       // récupère tous les articles
-      axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/newest/20', authorization)
+      axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/newest/5', authorization)
       .then(response => {
         console.log(response.data);
         this.setState({
           listArticles: response.data,
           allArticles: response.data
-        });
-      }).catch(error => {
-        console.log(error);
-      });
-
-      // on récupère les catégories
-      axios.get(process.env.REACT_APP_API_ADDRESS+'/categories/')
-      .then(response => {
-        console.log(response.data);
-        this.setState({
-          listCategories: response.data
         });
       }).catch(error => {
         console.log(error);
@@ -199,7 +186,7 @@ class ArticleEditAdmin extends Component {
                 <label className="control-label" htmlFor="article_categories">Catégorie</label>
                 <select onChange={this.onChangeCategorie.bind(this)}id="article_categories" name="article_categories" className="form-control">
                   <option value="">-</option>
-                  {this.state.listCategories.map(categorie => {
+                  {this.props.listCategories.map(categorie => {
                     return (
                       <option key={categorie.id} value={[categorie.id]}>{categorie.name}</option>
                     );

@@ -3,17 +3,16 @@ import axios from 'axios'
 
 class ArticleAdmin extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       article_title: '',
       article_date: '',
-      article_author: '',
+      article_author: this.props.username,
       article_categories: [],
       source_image: 1,
       source_description: '',
       article_premium: '',
-      listCategories: [],
       statusMsg: '',
       published: false,
       article_id: '',
@@ -21,31 +20,6 @@ class ArticleAdmin extends Component {
     }
     this.handleChange = this.handleChange.bind(this);
   }
-
-  componentWillMount(){
-    var authorization = {
-      headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
-    };
-
-    // on récupère l'utilisateur actuel
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/',authorization)
-    .then(response => {
-      this.setState({article_author: response.data.username})
-    }).catch(error => {
-      console.log(error);
-    });
-
-    // on récupère toute les catégories
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/categories/')
-    .then(response => {
-      this.setState({
-        listCategories: response.data
-      });
-    }).catch(error => {
-      console.log(error);
-    });
-  }
-
   // enregistre la valeur des inputs
   handleChange(event) {
     let target = event.target;
@@ -198,7 +172,7 @@ class ArticleAdmin extends Component {
                           value={this.state.article_categories}
                           onChange={this.handleChange}>
                           <option value=""></option>
-                          {this.state.listCategories.map(categorie => {
+                          {this.props.listCategories.map(categorie => {
                             return (
                               <option key={categorie.id} value={[categorie.id]}>{categorie.name}</option>
                             );
