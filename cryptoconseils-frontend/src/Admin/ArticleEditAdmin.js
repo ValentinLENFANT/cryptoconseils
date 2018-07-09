@@ -150,8 +150,6 @@ class ArticleEditAdmin extends Component {
   }
 
 
-
-
   deleteArticle(article){
     // check si access token
     if(localStorage.getItem('access_token')){
@@ -234,7 +232,7 @@ class ArticleEditAdmin extends Component {
           return(
             <div key={article.id} className="panel panel-default container-article">
               <div className="panel-heading text-left">
-                <a href="#" className="auteur">{article.author}</a>
+                <a href={"/articles/"+article.id} className="auteur">{article.author}</a>
                 <div className="btn-group boutton-supp-modif">
                   <ul className="button-edit">
                     <li>
@@ -255,12 +253,14 @@ class ArticleEditAdmin extends Component {
               <div className="panel-body">
                 <div className="row">
                   <div className="col-xs-12 col-sm-12 col-md-3">
-                    <a href="#">
+                    <a href={"/articles/"+article.id} >
                       <img className="image-article-admin" src="images/blog/blog-post-1.jpg" alt="cover"/>
                     </a>
                   </div>
                   <div className="col-xs-12 col-sm-12 col-md-9 text-justify">
-                    <h4 className="media-heading">{article.title}</h4>
+                    <a href={"/articles/"+article.id} >
+                      <h4 className="media-heading">{article.title}</h4>
+                    </a>
                     {article.content}
                   </div>
                 </div>
