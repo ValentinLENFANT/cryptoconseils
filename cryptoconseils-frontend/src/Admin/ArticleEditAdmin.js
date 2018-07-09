@@ -8,7 +8,9 @@ class ArticleEditAdmin extends Component {
       listArticlesOrder: [],
       categorie: null,
       searchAuthor: null,
-      allArticles: []
+      searchCategorie: null,
+      allArticles: [],
+      listCategories: []
     }
   }
 
@@ -17,9 +19,11 @@ class ArticleEditAdmin extends Component {
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
+
       // récupère tous les articles
       axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/newest/20', authorization)
       .then(response => {
+        console.log(response.data);
         this.setState({
           listArticles: response.data,
           allArticles: response.data
@@ -27,6 +31,8 @@ class ArticleEditAdmin extends Component {
       }).catch(error => {
         console.log(error);
       });
+
+      // on récupère les catégories
     }
   }
   onChangeAuthor(event) {
@@ -36,20 +42,108 @@ class ArticleEditAdmin extends Component {
     }, () => this.orderByAuthor(this.state.allArticles,this.state.searchAuthor));
   }
 
+  onChangeCategorie(event) {
+    // Update de la valeur
+    this.setState({
+      searchCategorie: event.target.value
+    }, () => this.orderByCategorie(this.state.allArticles,this.state.searchCategorie));
+  }
+
   orderByAuthor(data,searchAuthor){
+    console.log("Recherche par auteur:", searchAuthor);
+    // initialisation du tableau
     var res= []
+
+    // recherche de la catégorie dans l'article
     for(var x in data){
+
+      // on met le nom de l'auteur de l'article en maj
       var author = data[x].author.toUpperCase();
+      // on met le nom de l'auteur recherché en maj
       searchAuthor = searchAuthor.toUpperCase();
 
+      // si il y a le nom de l'auteur recherché dans l'article
       if(author.includes(searchAuthor)){
         res = [...res, data[x]]
       }
-    }this.setState({
-      listArticles: res
-    })
+    }
 
+    // enregistrements des articles trié par auteur
+    this.setState({listArticles: res});
+
+    // si en plus de l'auteur recherché
+    // on cherche une catégorie
+    if(this.state.searchCategorie !== null) {
+      console.log("catégorie recherché:", this.state.searchCategorie);
+      // initialisation du tableau
+      var res= []
+
+      // on récupère la catégorie recherché
+      var searchCategorie = this.state.searchCategorie
+      // on récupère la liste des articles déjà trié par auteur
+      var data = this.state.listArticles
+
+
+      for(var x in data) {
+        if(typeof data[x].categories !== "undefined" && data[x].categories.length > 0 ) {
+
+          var categories = data[x].categories[0].id
+          console.log("categories",categories,"- searchCategorie", searchCategorie);
+          if(categories === searchCategorie){
+            res = [...res, data[x]]
+          }
+        }
+      }
+    }
+    this.setState({listArticles: res});
   }
+
+  orderByCategorie(data,searchCategorie){
+    console.log("Recherche par catégorie", this.state.searchCategorie);
+    // initialisation du tableau
+    var res= []
+
+    // recherche de la catégorie dans l'article
+    for(var x in data){
+      if(typeof data[x].categories !== "undefined" && data[x].categories.length > 0 ){
+        var categories = data[x].categories[0].id;
+
+        // si il y a la catégorie recherché dans l'article
+        if(categories === searchCategorie){
+          res = [...res, data[x]]
+        }
+      }
+    }
+    // enregistrements des articles trié par catégorie
+    this.setState({listArticles: res});
+
+    // si en plus de la catégorie recherché
+    // on cherche un auteur
+    if(this.state.searchAuthor !== null){
+      console.log("Auteur recherché:", this.state.searchAuthor);
+      // initialisation du tableau
+      var res= []
+      // on récupère le nom de l'auteur recherché
+      var searchAuthor = this.state.searchAuthor;
+      // on récupère la liste des articles déjà trié par catégorie
+      var data = this.state.listArticles
+
+      for(var x in data){
+        var author = data[x].author.toUpperCase();
+        searchAuthor = searchAuthor.toUpperCase();
+
+        // si le nom de l'auteur est dans l'article
+        if(author.includes(searchAuthor)){
+          res = [...res, data[x]]
+        }
+      }
+      this.setState({listArticles: res});
+    }
+  }
+
+
+
+
   deleteArticle(article){
     // check si access token
     if(localStorage.getItem('access_token')){
@@ -97,12 +191,13 @@ class ArticleEditAdmin extends Component {
             <div className="form-group">
               <div>
                 <label className="control-label" htmlFor="article_categories">Catégorie</label>
-                <select id="article_categories" name="article_categories" className="form-control">
-                  <option value="0">-</option>
-                  <option value="1">Finances</option>
-                  <option value="2">Airdrop</option>
-                  <option value="3">ICOS</option>
-                  <option value="4">Trading</option>
+                <select onChange={this.onChangeCategorie.bind(this)}id="article_categories" name="article_categories" className="form-control">
+                  <option value="">-</option>
+                  {this.props.listCategories.map(categorie => {
+                    return (
+                      <option key={categorie.id} value={[categorie.id]}>{categorie.name}</option>
+                    );
+                  })}
                 </select>
               </div>
             </div>

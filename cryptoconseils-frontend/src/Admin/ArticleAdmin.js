@@ -10,7 +10,7 @@ class ArticleAdmin extends Component {
       article_date: '',
       article_author: '',
       article_categories: [],
-      source_image: 9,
+      source_image: 1,
       source_description: '',
       article_premium: '',
       listCategories: [],
@@ -53,16 +53,6 @@ class ArticleAdmin extends Component {
     axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/',authorization)
     .then(response => {
       this.setState({article_author: response.data.username})
-    }).catch(error => {
-      console.log(error);
-    });
-
-    // on récupère toute les catégories
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/categories/')
-    .then(response => {
-      this.setState({
-        listCategories: response.data
-      });
     }).catch(error => {
       console.log(error);
     });
