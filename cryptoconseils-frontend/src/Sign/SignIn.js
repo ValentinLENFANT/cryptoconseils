@@ -65,7 +65,6 @@ class SignIn extends Component {
     event.preventDefault();
     // si première connexion
     if(this.props.match.params.token) {
-      console.log(this.props.match.params.token);
       axios.post(process.env.REACT_APP_API_ADDRESS+'/users/email/activate/',{
         "uniqueTokenForEmail": this.props.match.params.token
       }).then(response => {

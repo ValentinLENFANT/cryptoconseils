@@ -88,6 +88,7 @@ a:focus {
   border-radius: 0;
   outline: 0;
   transition: .1s;
+  white-space: pre-line;
 }
 
 .form-control:focus {
@@ -2457,6 +2458,7 @@ body.blog.grid-no-sidebar article h4 {
 }
 
 body.blog p.excerpt, body.blog p.content-article {
+  white-space: pre-line;
   margin: 22px 0;
 }
 
