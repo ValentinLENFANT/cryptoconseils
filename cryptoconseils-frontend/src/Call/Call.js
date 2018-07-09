@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import TradingViewWidget from 'react-tradingview-widget';
-import axios from 'axios'
+import Header from '../Header/Header'
 import Denied from '../Denied/Denied'
+import axios from 'axios'
 class Call extends Component {
 
   constructor() {
@@ -31,7 +32,7 @@ class Call extends Component {
       this.setState({noLogged: true})
     }
   }
-  
+
   sortArray(array) {
     return array.sort(function (a, b) {
       return b.id - a.id;
@@ -91,9 +92,63 @@ class Call extends Component {
     })
   }
 
+  renderOldCalls() {
+    var listCalls = this.sortArray(this.state.allCalls);
+
+    return listCalls.slice(1,3).map(calls => {
+      return(
+        <div key={calls.id} className="row">
+          <div className="col-xs-12 col-sm-12 col-md-6">
+            {/* TradingView REACT BEGIN */}
+            <div className="tradingview-widget-container">
+              <div id="tradingview_5421e"></div>
+              <TradingViewWidget symbol={calls.cryptocurrencyPair.replace('/','')}/>
+            </div>
+            {/* TradingView REACT END */}
+          </div>
+          <div className="col-xs-12 col-sm-12 col-md-6">
+
+            <div className="row">
+              <div className="col-xs-12 col-sm-12 col-md-12">
+                <p className="desciption-call-premium">
+                  {calls.content}
+                </p>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-xs-4 col-sm-4 col-md-4 button-call">
+                <div className="btn btn-info btn-lg">ACHAT</div>
+              </div>
+              <div className="col-xs-8 col-sm-8 col-md-8 prix-call">
+                <div>{calls.buyPrice+"€"}</div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-xs-4 col-sm-4 col-md-4 button-call">
+                <div className="btn btn-warning btn-lg">VENTE</div>
+              </div>
+              <div className="col-xs-8 col-sm-8 col-md-8 prix-call">
+                <div>{calls.sellPrice+"€"}</div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-xs-4 col-sm-4 col-md-4  button-call">
+                <div className="btn btn-success btn-lg">SCORE</div>
+              </div>
+              <div className="col-xs-8 col-sm-8 col-md-8 prix-call">
+                <div>{calls.scoring+"%"}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    })
+  }
   render() {
     if (this.state.noAccess === false && this.state.noLogged === false) {
       return (
+        <div>
+          <Header/>
         <section className="calls-premium section-profil">
           <div className="container">
 
@@ -112,12 +167,13 @@ class Call extends Component {
                   précédents</span>
               </h2>
               <div className="title-head-subtitle">
-                <p>Création du call premium</p>
+                <p>La liste des derniers calls</p>
               </div>
             </div>
-
+            {this.renderOldCalls()}
           </div>
         </section>
+      </div>
       );
     } else if(this.state.noAccess === true) {
       return <Denied noAccess={true}/>
