@@ -14,7 +14,8 @@ class Profil extends Component {
   constructor(){
     super();
     this.state = {
-      premium: 0
+      premium: 0,
+      user: []
     }
   }
   componentDidMount(){
@@ -23,10 +24,11 @@ class Profil extends Component {
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
-      axios.get(process.env.REACT_APP_API_ADDRESS+'/users/'+localStorage.getItem('username'), authorization)
+      axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/', authorization)
       .then(response => {
         this.setState({
-          premium: response.data.premium_level
+          user: response.data,
+          premium: response.data.premiumLevel
         })
       }).catch(error => {
         console.log(error);
@@ -61,7 +63,7 @@ class Profil extends Component {
             {/*Airdrop premiums Ends */}
 
             {/*InfosPerso Starts */}
-              <InfosPerso />
+              <InfosPerso user={this.state.user}/>
             {/*InfosPerso Ends */}
 
             {/* Pricing Starts */}
@@ -74,7 +76,7 @@ class Profil extends Component {
       );
     } else {
       return(
-        <Denied />
+        <Denied noLogges={true}/>
       );
     }
 

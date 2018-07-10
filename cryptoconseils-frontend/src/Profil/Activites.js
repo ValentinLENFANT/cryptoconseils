@@ -15,11 +15,9 @@ class Activites extends Component {
   }
   componentDidMount(){
     // check si access token
-    if(localStorage.getItem('access_token')){
-      var authorization = {
-        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
-      };
-    }
+    var authorization = {
+      headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
+    };
 
     // get tous les coms, le "/1" est nécéssaire pour l'api,
     // la récupération de l'utilisateur courant se fait dans l'api
@@ -52,23 +50,19 @@ class Activites extends Component {
         Dialog.CancelAction(),
         Dialog.OKAction((dialog) => {
           const result = dialog.value
-
-          //check si access token
-          if(localStorage.getItem('access_token')){
-            var authorization = {
-              headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
-            };
-            // update coms
-            axios.put(process.env.REACT_APP_API_ADDRESS+'/comments/'+item.id,{
-              content:result
-            }, authorization).then(response => {
-              //update de l'affichage des commentaires
-              alert("Votre commenaitre a été modifié !");
-            }).catch(error => {
-              alert("Une erreur s'est produite");
-              console.log(error.response);
-            });
-          }
+          var authorization = {
+            headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
+          };
+          // update coms
+          axios.put(process.env.REACT_APP_API_ADDRESS+'/comments/'+item.id,{
+            content:result
+          }, authorization).then(response => {
+            //update de l'affichage des commentaires
+            alert("Votre commenaitre a été modifié !");
+          }).catch(error => {
+            alert("Une erreur s'est produite");
+            console.log(error.response);
+          });
         })
       ]
     })

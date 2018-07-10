@@ -26,9 +26,7 @@ class InfosPerso extends Component {
       if(password === password_confirmation) {
         this.setState({statusMsg: "Les mots de passes correspondent !"});
         goUpdate = true;
-        //console.log("mdp valide");
       } else{
-        //console.log("mdp NON valide");
         this.setState({statusMsg: "Les mots de passes ne correspondent pas"});
         goUpdate = false;
       }
@@ -37,14 +35,11 @@ class InfosPerso extends Component {
       if (this.validateEmail(email)) {
         this.setState({statusMsg: "email valide ! "});
         goUpdate = true;
-        //console.log("email valide");
       } else {
-        //console.log("email NON valide");
         this.setState({statusMsg: "email non valide"});
         goUpdate = false;
       }
     }
-    console.log(goUpdate);
     if(goUpdate){
       this.sendInfos(password,email);
     } else {
@@ -58,24 +53,23 @@ class InfosPerso extends Component {
 
   sendInfos(password,email){
     //check si access token
-    if(localStorage.getItem('access_token')){
-      var authorization = {
-        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
-      };
-      // update coms
-      axios.put(process.env.REACT_APP_API_ADDRESS+'/users/'+localStorage.getItem('username'),{
-        password: password,
-        email: email
-      }, authorization).then(response => {
-        //update de l'affichage des commentaires
-        alert("Vos infos ont été modifié !");
-        this.setState({password: '',email:'',password_confirmation:''})
-      }).catch(error => {
-        this.setState({statusMsg: "l'email existe déjà ou le mot de passe est le m",
-        password: '',email:'',password_confirmation:''})
-        console.log(error.response);
-      });
-    }
+    var authorization = {
+      headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
+    };
+    // update coms
+    axios.put(process.env.REACT_APP_API_ADDRESS+'/users/'+this.props.user.username,{
+      password: password,
+      email: email
+    }, authorization).then(response => {
+      //update de l'affichage des commentaires
+      alert("Vos infos ont été modifié !");
+      this.setState({password: '',email:'',password_confirmation:''})
+    }).catch(error => {
+      this.setState({statusMsg: "l'email existe déjà ou le mot de passe est le m",
+      password: '',email:'',password_confirmation:''})
+      console.log(error.response);
+    });
+
   }
   updateInfos(event){
     event.preventDefault();
