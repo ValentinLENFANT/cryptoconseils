@@ -4,9 +4,7 @@ import './index.css';
 import App from './App';
 import Footer from './Footer/Footer';
 import JsFunction from './Home/JsFunction'
-
 import registerServiceWorker from './registerServiceWorker';
-require('dotenv').config()
 
 ReactDOM.render(<JsFunction />, document.getElementById('JsScriptFiles'));
 registerServiceWorker();
