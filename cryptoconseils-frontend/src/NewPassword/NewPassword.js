@@ -10,7 +10,7 @@ class NewPassword extends Component {
       statusMsg: null,
       password: '',
       password_confirmation: '',
-      success: false
+      success: null
     }
     this.handleChange = this.handleChange.bind(this);
   }
@@ -26,17 +26,19 @@ class NewPassword extends Component {
     event.preventDefault();
     var goUpdate = false;
     if(this.state.password !== '' || this.state.password_confirmation !=='') {
-      if(this.state.password === this.state.password_confirmation) {
-        this.setState({statusMsg: "Les mots de passes correspondent !"});
-        goUpdate = true;
-        //console.log("mdp valide");
-      } else{
-        //console.log("mdp NON valide");
+      if(this.state.password.length < 8) {
+        goUpdate = false;
+        this.setState({statusMsg: "Le mot de passe doit contenir 8 caractères"});
+      } else if(this.state.password !== this.state.password_confirmation){
+        goUpdate = false;
         this.setState({statusMsg: "Les mots de passes ne correspondent pas"});
+      } else if(this.state.password === this.state.password_confirmation) {
+        goUpdate = true;
+      } else{
+        this.setState({statusMsg: "Erreur"});
         goUpdate = false;
       }
     }
-    console.log(goUpdate);
     if(goUpdate){
       this.handleNewPassword(this.state.password, this.props.match.params.token,this.props.location.search.split("=").pop());
     } else {
@@ -50,7 +52,6 @@ class NewPassword extends Component {
       password: password,
       email: email,
     }).then(response => {
-      //update de l'affichage des commentaires
       this.setState({success: true})
     }).catch(error => {
       this.setState({statusMsg: "Impossible de changer votre mot de passe"});
@@ -59,8 +60,17 @@ class NewPassword extends Component {
 
   }
 
+  renderStatusMsg(){
+    if(this.state.statusMsg !== null) {
+      return(
+        <div className="col-xs-12 text-center output_message_holder d-block">
+          <p className="output_message error">{this.state.statusMsg}</p>
+        </div>
+      );
+    }
+  }
   formRender(){
-    if(this.state.success){
+    if(this.state.success === true){
         return <Success newPassword={this.state.success}/>
     }else {
       return(
@@ -68,12 +78,12 @@ class NewPassword extends Component {
           {/*Section Title Starts */}
           <div className="row text-center">
             <h2 className="title-head hidden-xs"><span>Nouveau mot de passe</span></h2>
-            <h3>{this.state.statusMsg}</h3>
             <p className="info-form">Entrez votre nouveau mot de passe</p>
           </div>
           {/*Section Title Ends */}
           {/*Form Starts */}
-          <form onSubmit={this.checkPassword.bind(this)}>
+          <form onSubmit={this.checkPassword.bind(this)} className="contact-form">
+            {this.renderStatusMsg()}
             {/*Input Field Starts */}
             <div className="form-group">
               <input

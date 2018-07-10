@@ -14,8 +14,8 @@ class SignIn extends Component {
       password: '',
       statusMsg: null,
       email: '',
-      success: false,
-      activated: false,
+      success: null,
+      activated: null,
       forgotPassword: false,
       previousPath: document.referrer,
       showForgotPassword: false
@@ -44,17 +44,17 @@ class SignIn extends Component {
     this.setState({[name]: value});
   }
 
+  validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+
+  // affichage des messages d'erreurs
   renderStatusMsg() {
     if(this.state.statusMsg !== null) {
       return(
         <div className="col-xs-12 text-center output_message_holder d-block">
           <p className="output_message error">{this.state.statusMsg}</p>
-        </div>
-      );
-    } else if (this.state.success === true ) {
-      return (
-        <div className="col-xs-12 text-center output_message_holder d-block">
-          <p className="output_message success">Votre message a été envoyé</p>
         </div>
       );
     }
@@ -115,20 +115,27 @@ class SignIn extends Component {
   // inscription
   handleSignUp(event){
     event.preventDefault();
-    axios.post(process.env.REACT_APP_API_ADDRESS+'/users/new/', {
-      username: this.state.username,
-      email: this.state.email.toLowerCase(),
-      password: this.state.password
-    }).then(response => {
-      localStorage.setItem('username', this.state.username);
-      this.setState({
-        success: true
-      });
-    }).catch(error => {
-      this.setState({
-        statusMsg: error.response.data.error
-      })
-    });
+    if(this.state.username.length < 4) {
+      this.setState({statusMsg: "Le nom d'utilisateur doit contenir 4 caractères minimum"})
+    } else if(!this.validateEmail(this.state.email)){
+      this.setState({statusMsg: "L'email n'est pas valide"})
+    } else if (this.state.password.length < 8) {
+      this.setState({statusMsg: "Le mot de passe doit contenir 8 caractères minimum"})
+    } else {
+      this.setState({success: true},() => {
+        axios.post(process.env.REACT_APP_API_ADDRESS+'/users/new/', {
+          username: this.state.username,
+          email: this.state.email.toLowerCase(),
+          password: this.state.password
+        }).then(response => {
+          localStorage.setItem('username', this.state.username);
+        }).catch(error => {
+          this.setState({
+            statusMsg: error.response.data.error
+          })
+        });
+      }
+    )}
   }
 
   // mot de passe oublié
@@ -147,22 +154,22 @@ class SignIn extends Component {
   formRender(){
 
     // si le user vient d'activer son compte
-    if(this.state.activated){
+    if(this.state.activated === true){
       return <Success activated={this.state.activated}/>
     }
     // si le user vient juste de s'inscrire
-    else if(this.state.success){
+    else if(this.state.success === true){
       return <Success email={this.state.email}/>
     }
-    else if(this.state.forgotPassword){
+    // // si mot de passe oublié
+    else if(this.state.forgotPassword === true){
       return <Success forgotPassword={this.state.forgotPassword}/>
     }
     // Si déjà connecté on envoie le component AlreadyLogin
     else if(localStorage.getItem('access_token')){
       return <AlreadyLogin/>
     } else {
-
-      // si mot de passe oublié
+      // si clic sur mot de passe oublié
       if(this.state.showForgotPassword){
         return(
           <div className="ForgotPasswordForm">
