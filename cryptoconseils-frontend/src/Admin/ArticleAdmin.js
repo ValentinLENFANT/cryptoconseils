@@ -10,7 +10,7 @@ class ArticleAdmin extends Component {
       article_date: '',
       article_author: this.props.username,
       article_categories: [],
-      source_image: 1,
+      source_image: '',
       source_description: '',
       article_premium: '',
       statusMsg: '',
@@ -45,22 +45,13 @@ class ArticleAdmin extends Component {
     }
   }
 
-
-  selectImage = event => {
-    this.setState({
-      selectedFile:event.target.files[0].name
-    })
-    console.log(event.target.files[0]);
-  }
-
   sendImage(event) {
-    var authorization = {
-      headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
-    };
     let data = new FormData();
-    data.append('file', event.target.files[0]);
-    axios.post(process.env.REACT_APP_API_ADDRESS+'/images/new/',data,authorization).then(response => {
-       console.log(response.data);
+    data.append('image', event.target.files[0]);
+    axios.post(process.env.REACT_APP_API_ADDRESS+'/images/new/',data)
+    .then(response => {
+      console.log(response.data);
+      this.setState({source_image: response.data.id})
    });
   }
 
@@ -92,9 +83,10 @@ class ArticleAdmin extends Component {
         "category_id": [this.state.article_categories]
       },authorization)
       .then(response => {
+        console.log(response.data);
         this.setState({published: true,article_id: response.data.id})
       }).catch(error => {
-        console.log(error);
+        console.log(error.response);
       });
     }
   }
@@ -199,10 +191,9 @@ class ArticleAdmin extends Component {
                             name="source_image"
                             className="input-file"
                             type="file"
-                            onChange={this.sendImage}
+                            onChange={this.sendImage.bind(this)}
                             />
                         </div>
-                        <button onClick={this.sendImage}>Uploader</button>
                       </div>
                     </div>
                   </div>
