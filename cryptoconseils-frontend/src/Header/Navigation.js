@@ -11,6 +11,7 @@ class Navigation extends Component {
       showSearchBar: false
     }
   }
+
   toggleSearch() {
     this.setState({
       showSearchBar: !this.state.showSearchBar

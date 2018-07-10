@@ -6,8 +6,10 @@ import Denied from '../Denied/Denied'
 import Comments from './Comments'
 import Reply from './Reply'
 
-import Sidebar from '../Sidebar/Sidebar'
-import Header from '../Header/Header'
+import Sidebar from '../Sidebar/Sidebar';
+import Header from '../Header/Header';
+import PreLoader from '../PreLoader/PreLoader';
+
 class Articles extends Component {
 
   constructor() {
@@ -15,10 +17,11 @@ class Articles extends Component {
     this.state = {
       article: [],
       image: [],
-      noAccess: false
+      noAccess: null,
+      noLogged: null
     };
   }
-  componentWillMount(){
+  componentDidMount(){
     // check si access token
     if(localStorage.getItem('access_token')){
       var authorization = {
@@ -29,43 +32,20 @@ class Articles extends Component {
         this.setState({
           article: response.data,
           image: response.data.image,
-          noAccess: false
+          noAccess: false,
+          noLogged: false
         });
       }).catch(error => {
         this.setState({
           noAccess: true
         })
       });
+    } else {
+      this.setState({noLogged: true})
     }
   }
-
-  renderArticle(){
-    return(
-      <div className="content col-xs-12 col-md-8">
-        {/* Article Starts */}
-        <div>
-          {/* Figure Starts */}
-          <div className="blog-figure">
-            <img className="img-responsive" src={"/images/articles/"+this.state.image.file_name} alt=""/>
-          </div>
-          {/* Figure Ends */}
-          {/* Content Starts */}
-          <p className="content-article">
-              {this.state.article.content}
-          </p>
-          {/* Content Ends */}
-          {/* Meta Starts */}
-          <Meta article={this.state.article}/>
-          {/* Meta Ends */}
-          <Comments comments={this.state.article.comments}/>
-          <Reply article={this.state.article}/>
-        </div>
-      </div>
-    );
-  }
   render() {
-
-    if(this.state.noAccess === false){
+    if(this.state.noAccess === false && this.state.noLogged === false){
       return(
         <div>
           <Header/>
@@ -74,18 +54,37 @@ class Articles extends Component {
             {/* div Content Starts */}
             <div className="container blog-page">
               <div className="row">
-                {this.renderArticle()}
+                <div className="content col-xs-12 col-md-8">
+                  {/* Article Starts */}
+                  <div>
+                    {/* Figure Starts */}
+                    <div className="blog-figure">
+                      <img className="img-responsive" src={"/images/articles/"+this.state.image.file_name} alt=""/>
+                    </div>
+                    {/* Figure Ends */}
+                    {/* Content Starts */}
+                    <p className="content-article">
+                      {this.state.article.content}
+                    </p>
+                    {/* Content Ends */}
+                    {/* Meta Starts */}
+                    <Meta article={this.state.article}/>
+                    {/* Meta Ends */}
+                    <Comments comments={this.state.article.comments}/>
+                    <Reply article={this.state.article}/>
+                  </div>
+                </div>
                 <Sidebar/>
               </div>
             </div>
           </div>
         </div>
       );
-    } else {
-      return(
-        <Denied noAccess={this.state.noAccess}/>
-      );
-    }
+    } else if(this.state.noAccess === true) {
+      return (<Denied noAccess={this.state.noAccess}/>);
+    } else if(this.state.noLogged === true){
+      return (<Denied noLogged={this.state.noLogged}/>);
+    } else return (<PreLoader/>);
   }
 }
 

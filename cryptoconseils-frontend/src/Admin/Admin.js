@@ -8,6 +8,7 @@ import AirdropAdmin from './AirdropAdmin';
 import MenusAdmin from './MenusAdmin';
 import Moderation from './Moderation';
 import UserModeration from './UserModeration'
+import PreLoader from '../PreLoader/PreLoader';
 import axios from 'axios'
 
 class Admin extends Component {
@@ -29,8 +30,26 @@ class Admin extends Component {
       };
       axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/',authorization)
       .then(response => {
-        console.log(response.data);
+
+        // si le user est bien un admin
         if(response.data.roles[0] === "ROLE_ADMIN") {
+
+          // on récupère les catégories
+          axios.get(process.env.REACT_APP_API_ADDRESS+'/categories/')
+          .then(categories => {
+            this.setState({listCategories: categories.data});
+          }).catch(error => {
+            console.log(error);
+          });
+
+          // on récupère les users
+          axios.get(process.env.REACT_APP_API_ADDRESS+'/users/',authorization)
+          .then(user => {
+            this.setState({listUsers: user.data});
+          }).catch(error => {
+            console.log(error);
+          });
+
           this.setState({noAccess: false,username: response.data.username})
         } else {
           this.setState({noAccess: true});
@@ -41,34 +60,9 @@ class Admin extends Component {
     } else {
       this.setState({noAccess: true})
     }
-
-    // on récupère les catégories
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/categories/')
-    .then(categories => {
-      console.log(categories.data);
-      this.setState({
-        listCategories: categories.data
-      });
-    }).catch(error => {
-      console.log(error);
-    });
-
-    // on récupère les users
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/users/',authorization)
-    .then(user => {
-      console.log(user.data);
-      this.setState({
-        listUsers: user.data
-      });
-    }).catch(error => {
-      console.log(error);
-    });
-
   }
   render() {
-    if(this.state.noAccess){
-      return <Denied/>
-    } else {
+    if(this.state.noAccess === false) {
       return (
         <div className="App">
         {/* Wrapper Starts */}
@@ -106,6 +100,10 @@ class Admin extends Component {
           </div>
         </div>
       );
+    } else if(this.state.noAccess === true){
+      return (<Denied/>);
+    } else {
+      return <PreLoader/>
     }
   }
 }

@@ -8,6 +8,8 @@ import Airdrop from './Airdrop';
 import InfosPerso from './InfosPerso';
 import Header from '../Header/Header';
 import Denied from '../Denied/Denied';
+import PreLoader from '../PreLoader/PreLoader';
+
 import axios from 'axios'
 class Profil extends Component {
 
@@ -15,7 +17,8 @@ class Profil extends Component {
     super();
     this.state = {
       premium: 0,
-      user: []
+      user: [],
+      noLogged: null
     }
   }
   componentDidMount(){
@@ -28,16 +31,19 @@ class Profil extends Component {
       .then(response => {
         this.setState({
           user: response.data,
-          premium: response.data.premiumLevel
+          premium: response.data.premiumLevel,
+          noLogged: false
         })
       }).catch(error => {
         console.log(error);
       });
+    } else {
+      this.setState({noLogged: true})
     }
   }
 
   render() {
-    if(localStorage.getItem('access_token')){
+    if(this.state.noLogged === false){
       return (
         <div className="App">
         {/* Wrapper Starts */}
@@ -74,12 +80,11 @@ class Profil extends Component {
           </div>
         </div>
       );
+    } else if(this.state.noLogged === true){
+      return <Denied noLogged={true}/>
     } else {
-      return(
-        <Denied noLogges={true}/>
-      );
+      return <PreLoader/>
     }
-
   }
 }
 

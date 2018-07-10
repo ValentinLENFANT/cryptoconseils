@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import TradingViewWidget from 'react-tradingview-widget';
 import Header from '../Header/Header'
 import Denied from '../Denied/Denied'
+import PreLoader from '../PreLoader/PreLoader';
 import axios from 'axios'
 import CallOfDay from './CallOfDay';
 import OldCalls from './OldCalls';
@@ -12,11 +13,11 @@ class Call extends Component {
     super();
     this.state = {
       allCalls: [],
-      noAccess: false,
-      noLogged: false
+      noAccess: null,
+      noLogged: null
     }
   }
-  componentWillMount() {
+  componentDidMount() {
     // check si access token
     if (localStorage.getItem('access_token')) {
       var authorization = {
@@ -26,8 +27,11 @@ class Call extends Component {
       };
       axios.get(process.env.REACT_APP_API_ADDRESS + '/call/all/', authorization)
       .then(response => {
-
-        this.setState({allCalls: response.data})
+        this.setState({
+          allCalls: response.data,
+          noAccess:false,
+          noLogged: false,
+        })
       }).catch(error => {
         this.setState({noAccess: true})
       });
@@ -51,7 +55,6 @@ class Call extends Component {
           <section className="calls-premium section-profil">
             <div className="container">
               <CallOfDay />
-              
               <OldCalls allCalls={this.state.allCalls}/>
             </div>
           </section>
@@ -61,6 +64,8 @@ class Call extends Component {
       return <Denied noAccess={true}/>
     } else if (this.state.noLogged === true) {
       return <Denied noLogged={true}/>
+    } else {
+      return <PreLoader/>
     }
   }
 }
