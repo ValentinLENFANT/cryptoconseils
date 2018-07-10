@@ -72,12 +72,14 @@ class ImageController extends FOSRestController
         $size = $file->getSize();
         //Récupération du répertoire courant
         $pathName = getcwd();
+
         //Remonte d'un cran dans l'arborescense
-        $pathName = chdir('..');
+        $pathName = chdir('../');
         //Défini le dossier contenant les images des articles
-        $pathName = chdir('cryptoconseils-frontend\public\images\articles');
+
+        $pathName = chdir('./cryptoconseils-frontend/public/images/articles');
         $pathName = getcwd();
-        $pathName = '\\cryptoconseils' . explode('cryptoconseils', $pathName)[2];
+        $pathName = '/cryptoconseils' . explode('cryptoconseils', $pathName)[2];
         //Fin récupération du fichier upload et enregistrement sur le disque
 
         try {
@@ -111,7 +113,8 @@ class ImageController extends FOSRestController
 
         $image = ['fileExtension' => $mimeType,
             'filePath' => $pathName,
-            'fileName' => $fileName];
+            'fileName' => $fileName,
+            'id' => $id];
 
         $image = $this->get('jms_serializer')->serialize($image, 'json');
         return new JsonResponse(json_decode($image), 200);

@@ -19,7 +19,7 @@ class LoadImage extends AbstractFixture implements OrderedFixtureInterface
         // Liste des noms de catégorie à ajouter
         $fileExtension = '.jpg';
 
-        $filePath = '\cryptoconseils-frontend\public\images\articles';
+        $filePath = '/cryptoconseils-frontend/public/images/articles';
 
         $fileName = ['blog-article-1',
             'blog-article-2',
