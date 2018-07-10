@@ -21,38 +21,24 @@ class Image
     private $id;
 
     /**
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\Column(name="fileExtension", type="string", length=5)
      */
-    private $url;
+    private $fileExtension;
 
     /**
-     * @ORM\Column(name="alt", type="string", length=255)
+     * @var string;
+     * @ORM\Column(name="filePath", type="string")
      */
-    private $alt;
-
-    private $file;
-
-    private $tempFilename;
-
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    public function setFile(UploadedFile $file = null)
-    {
-        $this->file = $file;
-        if (null !== $this->url) {
-            $this->tempFilename = $this->url;
-            $this->url = null;
-            $this->alt = null;
-        }
-    }
+    private $filePath;
 
     /**
-     * Get id.
-     *
-     * @return int
+     * @var string
+     * @ORM\Column(name="fileName", type="string", nullable=true)
+     */
+    private $fileName;
+
+    /**
+     * @return mixed
      */
     public function getId()
     {
@@ -60,124 +46,58 @@ class Image
     }
 
     /**
-     * Set url.
-     *
-     * @param string $url
-     *
-     * @return Image
+     * @param mixed $id
      */
-    public function setUrl($url)
+    public function setId($id)
     {
-        $this->url = $url;
-
-        return $this;
+        $this->id = $id;
     }
 
     /**
-     * Get url.
-     *
+     * @return mixed
+     */
+    public function getFileExtension()
+    {
+        return $this->fileExtension;
+    }
+
+    /**
+     * @param mixed $fileExtension
+     */
+    public function setFileExtension($fileExtension)
+    {
+        $this->fileExtension = $fileExtension;
+    }
+
+    /**
      * @return string
      */
-    public function getUrl()
+    public function getFilePath()
     {
-        return $this->url;
+        return $this->filePath;
     }
 
     /**
-     * Set alt.
-     *
-     * @param string $alt
-     *
-     * @return Image
+     * @param string $filePath
      */
-    public function setAlt($alt)
+    public function setFilePath($filePath)
     {
-        $this->alt = $alt;
-
-        return $this;
+        $this->filePath = $filePath;
     }
 
     /**
-     * Get alt.
-     *
      * @return string
      */
-    public function getAlt()
+    public function getFileName()
     {
-        return $this->alt;
+        return $this->fileName;
     }
 
     /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
+     * @param string $fileName
      */
-    public function preUpload()
+    public function setFileName($fileName)
     {
-        if (null === $this->file) {
-            return;
-        }
-        $this->url = $this->file->guessExtension();
-        $this->alt = $this->file->getClientOriginalName();
-    }
-
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
-    public function upload()
-    {
-        if (null === $this->file) {
-            return;
-        }
-        //Suppression de l'ancien fichier éventuel
-        if (null !== $this->tempFilename) {
-            $oldFile = $this->getUploadRootdir().'/'.$this->id.'.'.$this->tempFilename;
-            if(file_exists($oldFile)) {
-                unlink($oldFile);
-            }
-        }
-
-        //Déplacement du nouveau fichier
-        $this->file->move(
-            $this->getUploadRootdir(), //Le répertoire de destination
-            $this->id.'.'.$this->url //Le nom du fichier à créer
-        );
-    }
-
-    /**
-     * @ORM\PreRemove()
-     */
-    public function preRemoveUpload()
-    {
-        // Sauvegarde temporaire du nom du fichier dépendant de l'id
-        $this->tempFilename = $this->getUploadRootdir().'/'.$this->id.'.'.$this->url;
-    }
-
-    /**
-     * @ORM\PostRemove()
-     */
-    public function removeUpload()
-    {
-        //Utilisation du nom sauvegardé au préalable
-        if(file_exists($this->tempFilename)) {
-            unlink($this->tempFilename);
-        }
-    }
-
-    public function getUploadDir()
-    {
-        //On retourne le chemin relatif vers l'image pour un navigateur
-        return 'uploads/img';
-    }
-
-    protected function getUploadRootdir()
-    {
-        //On retourne le chemin relatif vers l'image pour le code PHP
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
-    }
-
-    public function getWebPath()
-    {
-        return $this->getUploadDir().'/'.$this->getId().'.'.$this->getUrl();
+        $this->fileName = $fileName;
     }
 }

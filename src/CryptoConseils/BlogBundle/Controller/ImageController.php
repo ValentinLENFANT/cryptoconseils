@@ -14,6 +14,7 @@ use CryptoConseils\BlogBundle\Entity\Image;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
+use \PDO;
 
 class ImageController extends FOSRestController
 {
@@ -60,30 +61,60 @@ class ImageController extends FOSRestController
 
     public function newAction(Request $request) // [POST] /images/new (ROLE_ADMIN ONLY)
     {
-        // If user is not admin
-        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
-        }else{
-            $data = $request->getContent();
-            $image = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Image', 'json');
+        //Récupération du fichier upload et enregistrement sur le disque
+        $file = $request->files->all();
+        $file = $file["image"];
+        $originalName = $file->getClientOriginalName();
+        $mimeType = $file->getMimeType();
+        //Récupération de l'extension du fichier
+        $mimeType = explode('/', $mimeType)[1];
+        $mimeType = '.' . $mimeType;
+        $size = $file->getSize();
+        //Récupération du répertoire courant
+        $pathName = getcwd();
+        //Remonte d'un cran dans l'arborescense
+        $pathName = chdir('..');
+        //Défini le dossier contenant les images des articles
+        $pathName = chdir('cryptoconseils-frontend\public\images\articles');
+        $pathName = getcwd();
+        $pathName = '\\cryptoconseils' . explode('cryptoconseils', $pathName)[2];
+        //Fin récupération du fichier upload et enregistrement sur le disque
 
-
-            // Analyse si les conditions sur les champs sont respectées //
-            $errors = $this->get('validator')->validate($image);
-
-            if (count($errors)) {
-                return new Response($errors, 400);
-            }
-            // Fin d'analyse //
-
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($image);
-            $em->flush();
-
-            $image = $this->get('jms_serializer')->serialize($image, 'json');
-            return new JsonResponse(json_decode($image), 200);
+        try {
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
         }
+
+        $req = $bdd->prepare('INSERT INTO image(fileExtension, filePath) VALUES(:fileExtension, :filePath)');
+        $req->execute(array(
+            'fileExtension' => $mimeType,
+            'filePath' => $pathName
+        ));
+
+        //Récupération du dernier ID inséré afin de bien enregistrer le nom du fichier dans la BDD
+        $id = $bdd->lastInsertId();
+
+        //Update de la colonne fileName afin d'y renseigner l'id récupéré
+        $req = $bdd->prepare('UPDATE image SET filename = :filename WHERE id = :id');
+        $req->execute(array(
+            'filename' => 'blog-article-' . $bdd->lastInsertId() . $mimeType,
+            'id' => $id
+        ));
+
+        //Concaténation du nom du fichier à son extension
+        $fileName = 'blog-article-' . $id . $mimeType;
+        $file->move(
+            getcwd(),
+            $fileName
+        );
+
+        $image = ['fileExtension' => $mimeType,
+            'filePath' => $pathName,
+            'fileName' => $fileName];
+
+        $image = $this->get('jms_serializer')->serialize($image, 'json');
+        return new JsonResponse(json_decode($image), 200);
     }
 
 
@@ -92,7 +123,7 @@ class ImageController extends FOSRestController
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
-        }else{
+        } else {
             $image = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Image')->find($id);
 
             if (null === $image) {
@@ -106,26 +137,23 @@ class ImageController extends FOSRestController
 
 
             // If json data is empty
-            if(empty($data)){
+            if (empty($data)) {
                 return new JsonResponse(array('error' => 'No data sent to modify this image'), 403);
             }
 
             // If url is NULL
             if (!isset($data['url'])) {
                 $image->setUrl($url);
-            }else{
+            } else {
                 $image->setUrl($data['url']);
             }
 
             // If alt is NULL
             if (!isset($data['alt'])) {
                 $image->setAlt($alt);
-            }else{
+            } else {
                 $image->setAlt($data['alt']);
             }
-
-
-
 
 
             $form = $this->createForm(EditImageType::class, $image);
@@ -159,7 +187,7 @@ class ImageController extends FOSRestController
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
-        }else{
+        } else {
             $image = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Image')->find($id);
 
             if (null === $image) {
