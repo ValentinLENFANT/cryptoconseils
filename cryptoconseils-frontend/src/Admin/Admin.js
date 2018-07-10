@@ -7,6 +7,7 @@ import CallAdmin from './CallAdmin';
 import AirdropAdmin from './AirdropAdmin';
 import MenusAdmin from './MenusAdmin';
 import Moderation from './Moderation';
+import UserModeration from './UserModeration'
 import axios from 'axios'
 
 class Admin extends Component {
@@ -16,6 +17,7 @@ class Admin extends Component {
     this.state = {
       noAccess: null,
       listCategories: [],
+      listUsers: [],
       username: ''
     }
   }
@@ -39,16 +41,29 @@ class Admin extends Component {
     } else {
       this.setState({noAccess: true})
     }
+
     // on récupère les catégories
     axios.get(process.env.REACT_APP_API_ADDRESS+'/categories/')
-    .then(aled => {
-      console.log(aled.data);
+    .then(categories => {
+      console.log(categories.data);
       this.setState({
-        listCategories: aled.data
+        listCategories: categories.data
       });
     }).catch(error => {
       console.log(error);
     });
+
+    // on récupère les users
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/users/',authorization)
+    .then(user => {
+      console.log(user.data);
+      this.setState({
+        listUsers: user.data
+      });
+    }).catch(error => {
+      console.log(error);
+    });
+
   }
   render() {
     if(this.state.noAccess){
@@ -85,6 +100,8 @@ class Admin extends Component {
             {/* ArticleAdmin Starts */}
              <ArticleEditAdmin listCategories={this.state.listCategories}/>
             {/* ArticleAdmin Ends */}
+
+            <UserModeration listUsers={this.state.listUsers}/>
           {/* Wrapper Ends */}
           </div>
         </div>
