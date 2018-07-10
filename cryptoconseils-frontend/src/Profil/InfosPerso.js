@@ -20,6 +20,12 @@ class InfosPerso extends Component {
     this.setState({[name]: value});
   }
 
+  renderPremium(){
+    var lvl = ["Pas inscrit","Inscrit","Débutant","Avancé","Export","Lambo"];
+    return(
+      <p>{lvl[this.props.user.premiumLevel]}</p>
+    );
+  }
   checkNewInfos(password, password_confirmation, email){
     var goUpdate = false;
     if(this.state.password !== '' || this.state.password_confirmation !=='') {
@@ -168,8 +174,8 @@ class InfosPerso extends Component {
               <div className="team-member">
                 <img src="images/team/member1.jpg" className="img-responsive" alt="team member"/>
                 <div className="team-member-caption social-icons">
-                  <h4>Satoshi Nakamoto</h4>
-                  <p>compte gratuit</p>
+                  <h4>{this.props.user.username}</h4>
+                  {this.renderPremium()}
                 </div>
               </div>
             </div>

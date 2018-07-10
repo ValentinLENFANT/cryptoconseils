@@ -28,10 +28,10 @@ class Profil extends Component {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
       axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/', authorization)
-      .then(response => {
+      .then(res => {
         this.setState({
-          user: response.data,
-          premium: response.data.premiumLevel,
+          user: res.data,
+          premium: res.data.premiumLevel,
           noLogged: false
         })
       }).catch(error => {
@@ -73,7 +73,7 @@ class Profil extends Component {
             {/*InfosPerso Ends */}
 
             {/* Pricing Starts */}
-              <Price />
+              <Price/>
             {/* Pricing Ends */}
 
           {/* Wrapper Ends */}
