@@ -1,15 +1,17 @@
 {# src/BlogBundle/Resources/views/Orders/show.html.twig #}
+<div align="center">
+    <img src="https://pbs.twimg.com/profile_images/925818595887734784/uRLle8dP_400x400.jpg"/>
+</div>
 
-Total price : € {{ order.amount }}
 
-{{ form_start(form) }}
+
+<div align="center">
+    <p><b>Vous pouvez annuler à tout moment le paiement en <a href="http://90.90.204.101:81/">cliquant ici.</a></b></p>
+    Total price : € {{ order.amount }}
+
+    {{ form_start(form) }}
     {{ form_widget(form) }}
-    <input type="submit" value="Pay € {{ order.amount }}" />
-{{ form_end(form) }}
-
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
-    <input type="hidden" name="cmd" value="_s-xclick">
-    <input type="hidden" name="hosted_button_id" value="DCHKVZRV9U2P4">
-    <input type="image" src="https://www.sandbox.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne">
-    <img alt="" border="0" src="https://www.sandbox.paypal.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
-</form>
+    <br>
+    <input type="submit" value="Pay € {{ order.amount }}"/>
+    {{ form_end(form) }}
+</div>
