@@ -35,7 +35,7 @@ class LoadImage extends AbstractFixture implements OrderedFixtureInterface
                 $image = new Image();
                 $image->setFileExtension($fileExtension);
                 $image->setFilePath($filePath);
-                $image->setFileName($fileName[$i]);
+                $image->setFileName($fileName[$i].$fileExtension);
                 $this->addReference('image'.$i, $image);
 
                 // On la persiste
