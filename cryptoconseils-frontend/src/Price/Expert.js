@@ -9,6 +9,15 @@ class Expert extends Component {
       access_token: localStorage.getItem('access_token')
     }
   }
+
+  renderButton(){
+    if(this.props.isAdmin){
+      return <button href={ "/orders/new/500?accessToken=" + this.state.access_token } className="btn btn-primary">COMMANDER</button>
+    }else {
+      return <button href={ "/orders/new/500?accessToken=" + this.state.access_token } className="btn btn-primary" disabled>COMMANDER</button>
+    }
+  }
+
   render() {
     if(this.state.premiumLevel < 5) {
       return(
@@ -25,7 +34,7 @@ class Expert extends Component {
                   </div>
                 </header>
                 <footer className="pricing-footer">
-                    <a href={ 'http://localhost/cryptoconseils/web/app_dev.php/orders/new/500?accessToken=' + this.state.access_token } className="btn btn-primary">COMMANDER</a>
+                  {this.renderButton()}
                 </footer>
               </li>
               {/* Buy Pricing Table #3 Ends */}

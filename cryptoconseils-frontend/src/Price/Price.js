@@ -12,7 +12,8 @@ class Price extends Component {
     super()
     this.state = {
       premiumLevel: null,
-      access_token: localStorage.getItem('access_token')
+      access_token: localStorage.getItem('access_token'),
+      isAdmin: false
     }
   }
   componentDidMount(){
@@ -22,6 +23,9 @@ class Price extends Component {
       };
       axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/',authorization)
       .then(response => {
+        if(response.data.roles[0] === "ROLE_ADMIN"){
+          this.setState({isAdmin: true})
+        }
         this.setState({premiumLevel: response.data.premiumLevel})
       }).catch(error => {
         console.log(error);
@@ -35,10 +39,10 @@ class Price extends Component {
     if(this.state.premiumLevel !== null) {
       return(
         <div className="Pack Component">
-          <Debutant premiumLevel={this.state.premiumLevel}/>
-          <Avance premiumLevel={this.state.premiumLevel}/>
-          <Expert premiumLevel={this.state.premiumLevel}/>
-          <Lambo premiumLevel={this.state.premiumLevel}/>
+          <Debutant isAdmin={this.state.isAdmin} premiumLevel={this.state.premiumLevel}/>
+          <Avance isAdmin={this.state.isAdmin} premiumLevel={this.state.premiumLevel}/>
+          <Expert isAdmin={this.state.isAdmin} premiumLevel={this.state.premiumLevel}/>
+          <Lambo isAdmin={this.state.isAdmin} premiumLevel={this.state.premiumLevel}/>
         </div>
       );
     }

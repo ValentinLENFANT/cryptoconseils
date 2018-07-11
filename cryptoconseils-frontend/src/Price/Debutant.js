@@ -9,6 +9,15 @@ class Debutant extends Component {
       access_token: localStorage.getItem('access_token')
     }
   }
+
+  renderButton(){
+    if(this.props.isAdmin){
+      return <button href={ "/orders/new/100?accessToken=" + this.state.access_token } className="btn btn-primary">COMMANDER</button>
+    }else {
+      return <button href={ "/orders/new/100?accessToken=" + this.state.access_token } className="btn btn-primary" disabled>COMMANDER</button>
+    }
+  }
+
   render() {
     console.log(this.state.premiumLevel);
     if(this.state.premiumLevel < 3) {
@@ -26,7 +35,7 @@ class Debutant extends Component {
                   </div>
                 </header>
                 <footer className="pricing-footer">
-                  <a href={ 'http://localhost/cryptoconseils/web/app_dev.php/orders/new/100?accessToken=' + this.state.access_token } className="btn btn-primary">COMMANDER</a>
+                  {this.renderButton()}
                 </footer>
               </li>
               {/* Buy Pricing Table #1 Ends */}
