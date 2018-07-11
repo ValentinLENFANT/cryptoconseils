@@ -27,7 +27,7 @@ class Articles extends Component {
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
-
+      
       // récupération de l'article
       axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/'+this.props.match.params.id,authorization)
       .then(response => {
