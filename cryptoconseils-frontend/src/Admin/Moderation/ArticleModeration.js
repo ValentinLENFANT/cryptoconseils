@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
+import Confirm from 'react-confirm-bootstrap';
+import Dialog from 'react-bootstrap-dialog'
 
 class ArticleModeration extends Component {
   constructor() {
@@ -190,7 +192,8 @@ class ArticleModeration extends Component {
   }
 
 
-  deleteArticle(article){
+  deleteArticle(event,article){
+    event.preventDefault();
     // check si access token
     if(localStorage.getItem('access_token')){
       var authorization = {
@@ -284,9 +287,17 @@ class ArticleModeration extends Component {
                       </a>
                     </li>
                     <li>
-                      <a href="#" className="delete-edit-button" onClick={this.deleteArticle.bind(this, article)}>
-                        <i className="fa fa-minus-square"></i>Supprimer
-                      </a>
+                      <Confirm
+                        onConfirm={this.deleteArticle.bind(this, article)}
+                        confirmText="Oui supprimer"
+                        title="Suppresion de l'article"
+                        body={"Voulez-vous vraiment supprimer l'article:"+article.title}>
+                        <button
+                          type="button"
+                          className="btn btn-danger btn-xs button-profil"
+                          title="Supprimer">Désactiver
+                        </button>
+                    </Confirm>
                     </li>
                   </ul>
                 </div>

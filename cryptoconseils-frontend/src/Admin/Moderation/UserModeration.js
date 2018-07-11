@@ -107,7 +107,7 @@ class UserModeration extends Component {
                 type="button"
                 className="btn btn-danger btn-xs button-profil"
                 title="Delete">
-                <span className="fa fa-trash"></span>
+                Désactiver
               </button>
             </Confirm>
           </td>
@@ -120,8 +120,7 @@ class UserModeration extends Component {
               <button
                 type="button"
                 className="btn btn-danger btn-xs button-profil"
-                title="Admin">
-                <span className="fa fa-pencil"></span>
+                title="Admin">Suppriler rôle admin
               </button>
             </Confirm>
             :<Confirm
@@ -132,8 +131,7 @@ class UserModeration extends Component {
               <button
                 type="button"
                 className="btn btn-success btn-xs button-profil"
-                title="Admin">
-                <span className="fa fa-pencil"></span>
+                title="Admin">Promouvoir admin
               </button>
             </Confirm>}
           </td>

@@ -104,7 +104,7 @@ class CommentModeration extends Component {
                     type="button"
                     className="btn btn-danger btn-xs button-profil"
                     title="Delete">
-                    <span className="fa fa-trash"></span>
+                    Désactiver
                   </button>
               </Confirm>
               </div>
