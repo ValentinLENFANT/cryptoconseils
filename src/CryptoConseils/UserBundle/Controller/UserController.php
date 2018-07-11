@@ -51,7 +51,7 @@ class UserController extends FOSRestController
 
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            if($id->isEnabled() == true) {
+            if ($id->isEnabled() == true) {
                 // If the user logged in request himself
                 if ($userId == $currentUserId) {
                     $data = $this->get('jms_serializer')->serialize($id, 'json');
@@ -64,7 +64,7 @@ class UserController extends FOSRestController
                     return new JsonResponse(array('error' => 'Access denied! This user is not you'), 403);
                 }
             } else {
-                return new JsonResponse(array('error'=> 'Access denied! Le compte a été supprimé.'), 404);
+                return new JsonResponse(array('error' => 'Access denied! Le compte a été supprimé.'), 404);
             }
         } else {
             $data = $this->get('jms_serializer')->serialize($id, 'json');
@@ -93,7 +93,7 @@ class UserController extends FOSRestController
     public function showUserCommentsByUsernameAction($username) // [GET] /users/comments/username/{username}
     {
         try {
-            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -122,7 +122,7 @@ class UserController extends FOSRestController
         $user = $this->getUser();
         $userId = $user->getId();
         try {
-            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -131,7 +131,7 @@ class UserController extends FOSRestController
         $comments = array();
         while ($donnees = $reponse->fetch()) {
             if ($donnees['user_id'] == $userId) {
-                $answer = $bdd->query('SELECT Title FROM article WHERE id ='.$donnees['article_id']);
+                $answer = $bdd->query('SELECT Title FROM article WHERE id =' . $donnees['article_id']);
                 $title = $answer->fetch();
                 $comments[] = ['id' => $donnees['id'],
                     'article_id' => $donnees['article_id'],
@@ -157,7 +157,7 @@ class UserController extends FOSRestController
         $data = $request->getContent();
 
         try {
-            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -187,6 +187,7 @@ class UserController extends FOSRestController
         $user->setPremiumLevel(1);
         $user->setEnabled(true);
         $user->setIsEmailValidated(false);
+        $user->setRoles(['ROLE_ADMIN']);
         $user->setUniqueTokenForEmail(md5(sha1(date("Y-m-d H:i:s"))));
 
         $em = $this->getDoctrine()->getManager();
@@ -205,16 +206,39 @@ class UserController extends FOSRestController
                         'uniqueTokenForEmail' => $user->getUniqueTokenForEmail())
                 )
             );
-            $this->get('mailer')->send($message);
+        $this->get('mailer')->send($message);
 
         return new JsonResponse(json_decode($data), 200);
+    }
+
+    public function editEnabledAction($id, Request $request) // [PUT] /users/edit/enabled/{id}
+    {
+        $data = $request->getContent();
+        $enabled = json_decode($data)->enabled;
+        try {
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+        $req = $bdd->prepare('UPDATE users SET enabled = :enabled WHERE id = :id');
+        $req->execute(array(
+            'enabled' => $enabled,
+            'id' => $id
+        ));
+
+        if ($enabled) {
+            return new JsonResponse("L'utilisateur a bien été activé", 200);
+        } else {
+            return new JsonResponse("L'utilisateur a bien été désactivé", 200);
+        }
+
     }
 
     public function validateEmailAction(Request $request) // [POST] /users/email/activate/{uniqueTokenForEmail}
     {
         $data = $request->getContent();
         try {
-            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -232,7 +256,7 @@ class UserController extends FOSRestController
         $uniqueTokenForForgottenPassword = md5(sha1(date("Y-m-d H:i:s")));
 
         try {
-            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -251,7 +275,7 @@ class UserController extends FOSRestController
                 $this->renderView(
                     'CryptoConseilsUserBundle:Emails:forgotPassword.html.twig',
                     array('uniqueTokenForForgottenPassword' => $uniqueTokenForForgottenPassword,
-                        'email' =>$email)
+                        'email' => $email)
                 )
             );
         $this->get('mailer')->send($message);
@@ -267,7 +291,7 @@ class UserController extends FOSRestController
         $email = json_decode($data)->email;
 
         try {
-            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -288,6 +312,38 @@ class UserController extends FOSRestController
             );
         $this->get('mailer')->send($message);
         return new JsonResponse("Mot de passe changé avec succès", 200);
+    }
+
+    public function editRolesAction($username) //[POST] /users/changeRoles/{username}
+    {
+        try {
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+
+        $res = $bdd->query("SELECT roles FROM users WHERE username ='" .$username."'");
+        $roles = $res->fetch()['roles'];
+
+        if(isset(explode("\"", $roles)[1]) && explode("\"", $roles)[1] == "ROLE_ADMIN")
+        {
+            $req = $bdd->prepare('UPDATE users SET roles = :roles WHERE username = :username');
+            $req->execute(array(
+                'roles' => "a:0:{}",
+                'username' => $username
+            ));
+            return new JsonResponse("L'utilisateur a été rétrogradé au rôle USER", 200);
+        } else {
+            $req = $bdd->prepare('UPDATE users SET roles = :roles WHERE username = :username');
+            $req->execute(array(
+                'roles' => 'a:1:{i:0;s:10:"ROLE_ADMIN";}',
+                'username' => $username
+            ));
+            return new JsonResponse("L'utilisateur a été promu au rôle ADMIN", 200);
+        }
+
+        var_dump(explode("\"", $roles));
+        die();
     }
 
 
@@ -472,6 +528,24 @@ class UserController extends FOSRestController
             $em->flush();
 
             return new JsonResponse(array('success' => 'User deleted'), 200);
+        }
+    }
+
+    public function isAccountEnabledAction($username) // [GET] /users/isEnabled/{email}
+    {
+        try {
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+
+        $res = $bdd->query("SELECT enabled FROM users WHERE username ='" .$username."'");
+        $enabled = $res->fetch()['enabled'];
+
+        if ($enabled == 0){
+            return new JsonResponse("L'utilisateur n'a pas son compte d'activé.", 401);
+        } else {
+            return new JsonResponse("L'utilisateur a bien son compte d'activé.", 200);
         }
     }
 }

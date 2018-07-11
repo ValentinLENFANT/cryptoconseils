@@ -65,3 +65,18 @@ cryptoconseils_users_currentConnectedUser:
     path:   /users/current/
     defaults: { _controller: CryptoConseilsUserBundle:User:getCurrentConnectedUser }
     methods:    [GET]
+
+cryptoconseils_users_edit_enabled_user:
+    path:   /users/edit/enabled/{id}
+    defaults:   { _controller: CryptoConseilsUserBundle:User:editEnabled }
+    methods:    [PUT]
+
+cryptoconseils_users_isUserEnabled:
+    path:   /users/isEnabled/{username}
+    defaults:   { _controller: CryptoConseilsUserBundle:User:isAccountEnabled }
+    methods:    [GET]
+
+cryptoconseils_users_roles:
+    path:   /users/changeRoles/{username}
+    defaults:   { _controller: CryptoConseilsUserBundle:User:editRoles }
+    methods:    [POST]

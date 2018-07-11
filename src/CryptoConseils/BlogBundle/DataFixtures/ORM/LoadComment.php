@@ -80,6 +80,7 @@ class LoadComment extends AbstractFixture implements OrderedFixtureInterface
             $comment->setContent($content[rand(0,13)]);
             $comment->setDate($date);
             $comment->setUserId($user_id+1);
+            $comment->setPublished(true);
             // On la persiste
             $manager->persist($comment);
         }
