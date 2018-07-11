@@ -23,12 +23,36 @@ class News extends Component {
     // récupère tous les articles
     axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/newest/'+this.props.nbArticle, authorization)
     .then(response => {
-      this.setState({
-        articles: response.data
-      });
+      if(this.props.idCategorie) {
+        this.setState({
+          articles: this.orderByCategorie(response.data,this.props.idCategorie)
+        });
+      } else {
+        this.setState({
+          articles: response.data
+        });
+      }
     }).catch(error => {
       console.log(error);
     });
+  }
+
+  orderByCategorie(data,idCategorie){
+    // initialisation du tableau
+    var res= []
+
+    // recherche de la catégorie dans l'article
+    for(var x in data){
+      if(typeof data[x].categories !== "undefined" && data[x].categories.length > 0 ){
+        var categories = data[x].categories[0].id;
+        console.log(categories, Number(idCategorie));
+        // si il y a la catégorie recherché dans l'article
+        if(categories === Number(idCategorie)) {
+          res = [...res, data[x]]
+        }
+      }
+    }
+    return res;
   }
 
   convertDate(date){
