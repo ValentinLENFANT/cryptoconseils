@@ -136,11 +136,15 @@ class UserModeration extends Component {
           </div>
         </div>
       </div>
-      <table>
+      <table className="better-table">
+        <thead>
         <tr>
-          <th>ID </th> <th> username </th><th> email </th> <th>Supprimer</th> <th>admin</th>
+          <th>ID</th><th>Nom</th><th>Email</th><th>Supprimer</th><th>Changer rôle</th>
         </tr>
+      </thead>
+       <tbody>
         {this.renderUserList()}
+      </tbody>
       </table>
     </section>
     );

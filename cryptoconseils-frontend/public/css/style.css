@@ -5142,3 +5142,22 @@ ul.button-edit{list-style-type: none;}
 .uppercase {
     text-transform: uppercase;
 }
+
+.better-table{
+  font-size: 15px;
+  margin: auto;
+}
+.better-table tr:nth-child(even) {background-color: #222222;}
+
+.better-table th,td{
+  padding: 5px;
+  border: 1px solid white;
+}
+.better-table th {
+    text-align: center;
+    background-color: #E78A1A;
+    color: white;
+}
+.better-table td {
+
+}
