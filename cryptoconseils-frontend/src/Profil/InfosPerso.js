@@ -7,10 +7,12 @@ class InfosPerso extends Component {
       password: '',
       password_confirmation: '',
       email: '',
-      statusMsg: null
+      statusMsg: null,
+      success: false
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
 
   // enregistre la valeur des inputs
   handleChange(event) {
@@ -20,6 +22,33 @@ class InfosPerso extends Component {
     this.setState({[name]: value});
   }
 
+  sendImage(event) {
+    let data = new FormData();
+    data.append('image', event.target.files[0]);
+    axios.post(process.env.REACT_APP_API_ADDRESS+'/images/new/',data)
+    .then(response => {
+      console.log(response.data);
+      this.setState({source_image: response.data.id})
+   });
+  }
+
+  renderStatusMsg(){
+    if(this.state.statusMsg !== null){
+      if(this.state.success){
+        return(
+          <div className="col-xs-12 text-center output_message_holder d-block">
+            <p className="output_message success">{this.state.statusMsg}</p>
+          </div>
+        );
+      } else {
+        return(
+          <div className="col-xs-12 text-center output_message_holder d-block">
+            <p className="output_message error">{this.state.statusMsg}</p>
+          </div>
+        );
+      }
+    }
+  }
   renderPremium(){
     var lvl = ["Pas inscrit","Inscrit","Débutant","Avancé","Export","Lambo"];
     return(
@@ -30,16 +59,15 @@ class InfosPerso extends Component {
     var goUpdate = false;
     if(this.state.password !== '' || this.state.password_confirmation !=='') {
       if(password === password_confirmation) {
-        this.setState({statusMsg: "Les mots de passes correspondent !"});
         goUpdate = true;
-      } else{
+      }
+      else{
         this.setState({statusMsg: "Les mots de passes ne correspondent pas"});
         goUpdate = false;
       }
     }
     if(this.state.email !== ''){
       if (this.validateEmail(email)) {
-        this.setState({statusMsg: "email valide ! "});
         goUpdate = true;
       } else {
         this.setState({statusMsg: "email non valide"});
@@ -68,10 +96,10 @@ class InfosPerso extends Component {
       email: email
     }, authorization).then(response => {
       //update de l'affichage des commentaires
-      alert("Vos infos ont été modifié !");
-      this.setState({password: '',email:'',password_confirmation:''})
+
+      this.setState({statusMsg: "Vos informations ont été mise à jour",password: '',email:'',password_confirmation:'',success: true})
     }).catch(error => {
-      this.setState({statusMsg: "l'email existe déjà ou le mot de passe est le m",
+      this.setState({statusMsg: "l'email existe déjà",
       password: '',email:'',password_confirmation:''})
       console.log(error.response);
     });
@@ -84,7 +112,7 @@ class InfosPerso extends Component {
       this.checkNewInfos(this.state.password ,this.state.password_confirmation,this.state.email);
     }else {
       this.setState({
-        statusMsg: '',
+        statusMsg: null,
         validEmail: null,
         validPassword: null
       });
@@ -104,7 +132,7 @@ class InfosPerso extends Component {
           </div>
           <div className="row text-center">
             <div className="col-xs-12 col-sm-6 col-md-7">
-              <form role="form" onSubmit={this.updateInfos.bind(this)}>
+              <form role="form" className="contact-form" onSubmit={this.updateInfos.bind(this)}>
                 <div className="row">
                   <div className="form-group">
                     <input
@@ -149,14 +177,14 @@ class InfosPerso extends Component {
                     <div className="col-xs-12 col-sm-6 col-md-4">
                       <div className="form-group">
                         <label className="avatar-change">changer votre avatar</label>
-                        <input type="file"/>
+                        <input type="file" onChange={this.sendImage.bind(this)}/>
                       </div>
                     </div>
                   </div>
                   <div className="row">
-                    <div>
-                      <p>{this.state.statusMsg}</p>
-                    </div>
+
+                      {this.renderStatusMsg()}
+
 
                     <div className="col-xs-12 col-md-12">
                       <input
