@@ -39,7 +39,7 @@ class RecentPosts extends Component {
           <li key={post.id}>
             <div className="posts-thumb pull-left">
               <a href={"/articles/"+post.id}>
-                <img alt="img" src={"/images/blog/blog-post-small-"+post.id+".jpg"}/>
+                <img alt="img" src={"/images/articles/"+post.image.file_name}/>
               </a>
             </div>
             <div className="post-info">
