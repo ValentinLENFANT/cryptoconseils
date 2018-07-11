@@ -97,6 +97,28 @@ class Comment
     private $user_id;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="published", type="boolean")
+     */
+    private $published;
+
+    /**
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return $this->published;
+    }
+
+    /**
+     * @param bool $published
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+    }
+
+    /**
      * @return int
      */
     public function getUserId()
