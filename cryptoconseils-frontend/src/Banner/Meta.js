@@ -14,6 +14,13 @@ class Meta extends Component {
       })
     }
   }
+
+  getPremium() {
+    var lvl = ["Tout le monde","Inscrit","Debutant","Avancé","Expert","Lambo"]
+    if(this.props.article.premium) {
+      return ('Premium '+lvl[this.props.article.premium])
+    }
+  }
   render() {
     if(this.props.article) {
       return(
@@ -31,6 +38,9 @@ class Meta extends Component {
           </span>
           <span>
             <i className="fa fa-tags"></i>{this.getCategories()}
+          </span>
+          <span>
+            <i className="fa fa-user"></i>{this.getPremium()}
           </span>
           {/* Meta Ends */}
         </div>
