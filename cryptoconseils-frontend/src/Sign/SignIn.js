@@ -122,20 +122,19 @@ class SignIn extends Component {
     } else if (this.state.password.length < 8) {
       this.setState({statusMsg: "Le mot de passe doit contenir 8 caractères minimum"})
     } else {
-      this.setState({success: true},() => {
-        axios.post(process.env.REACT_APP_API_ADDRESS+'/users/new/', {
-          username: this.state.username,
-          email: this.state.email.toLowerCase(),
-          password: this.state.password
-        }).then(response => {
-          localStorage.setItem('username', this.state.username);
-        }).catch(error => {
-          this.setState({
-            statusMsg: error.response.data.error
-          })
-        });
-      }
-    )}
+      axios.post(process.env.REACT_APP_API_ADDRESS+'/users/new/', {
+        username: this.state.username,
+        email: this.state.email.toLowerCase(),
+        password: this.state.password
+      }).then(response => {
+        this.setState({success: true});
+        localStorage.setItem('username', this.state.username);
+      }).catch(error => {
+        this.setState({
+          statusMsg: error.response.data.error
+        })
+      });
+    }
   }
 
   // mot de passe oublié
