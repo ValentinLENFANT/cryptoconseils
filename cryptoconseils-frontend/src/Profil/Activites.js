@@ -75,7 +75,10 @@ class Activites extends Component {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
       // delete coms
-      axios.delete(process.env.REACT_APP_API_ADDRESS+'/comments/'+item.id, authorization)
+      axios.put(process.env.REACT_APP_API_ADDRESS+'/comments/edit/enabled/'+item.id,
+      {
+        "published": 0
+      }, authorization)
       .then(response => {
         const array = this.state.comments;
         // index de l'item du com que l'on veut supprimer

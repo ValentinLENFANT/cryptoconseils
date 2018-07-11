@@ -127,7 +127,7 @@ class UserController extends FOSRestController
             die('Erreur : ' . $e->getMessage());
         }
 
-        $reponse = $bdd->query('SELECT * FROM comment');
+        $reponse = $bdd->query('SELECT * FROM comment WHERE published = 1');
         $comments = array();
         while ($donnees = $reponse->fetch()) {
             if ($donnees['user_id'] == $userId) {
