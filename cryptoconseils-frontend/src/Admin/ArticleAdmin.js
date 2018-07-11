@@ -141,6 +141,8 @@ class ArticleAdmin extends Component {
                           value={this.state.premium}
                           onChange={this.handleChange}>
                           <option value=""></option>
+                          <option value="0">Tout le monde</option>
+                          <option value="1">Inscrit</option>
                           <option value="2">Debutant</option>
                           <option value="3">Avance</option>
                           <option value="4">Expert</option>
