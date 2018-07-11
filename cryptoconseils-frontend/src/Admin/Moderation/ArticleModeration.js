@@ -197,7 +197,9 @@ class ArticleModeration extends Component {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
       // delete coms
-      axios.delete(process.env.REACT_APP_API_ADDRESS+'/articles/'+article.id, authorization)
+      axios.put(process.env.REACT_APP_API_ADDRESS+'/articles/'+article.id,{
+        "published": false
+      }, authorization)
       .then(response => {
         const array = this.state.listArticles;
         // index de l'item du com que l'on veut supprimer

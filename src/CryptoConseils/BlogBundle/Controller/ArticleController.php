@@ -250,6 +250,7 @@ class ArticleController extends FOSRestController
             $content = $article->getContent();
             $title = $article->getTitle();
             $premium = $article->getpremium();
+            $published = $article->getpublished();
 
             $data = json_decode($request->getContent(), true);
 
@@ -288,6 +289,14 @@ class ArticleController extends FOSRestController
                 $article->setImage($image);
             }
 
+            // If image_id is NULL
+            if (!isset($data['published'])) {
+
+                $article->setpublished($published);
+            } else {
+
+                $article->setpublished($data['published']);
+            }
 
             if (isset($data['category_id'])) {
                 // On boucle sur les catégories du post pour les supprimer
