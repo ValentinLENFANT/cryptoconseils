@@ -6,8 +6,6 @@ import Denied from '../Denied/Denied';
 import CallAdmin from './CallAdmin';
 import AirdropAdmin from './AirdropAdmin';
 import MenusAdmin from './MenusAdmin';
-import Moderation from './Moderation';
-import UserModeration from './UserModeration'
 import PreLoader from '../PreLoader/PreLoader';
 import axios from 'axios'
 
@@ -65,10 +63,6 @@ class Admin extends Component {
               <MenusAdmin />
             {/* Menus Ends */}
 
-            {/* Derniers commentaires Starts */}
-              <Moderation />
-            {/* Derniers commentaires Ends */}
-
             {/*Call premium Starts */}
               <CallAdmin author={this.state.username}/>
             {/*Call premiums Ends */}
@@ -84,8 +78,6 @@ class Admin extends Component {
             {/* ArticleAdmin Starts */}
              <ArticleEditAdmin listCategories={this.state.listCategories}/>
             {/* ArticleAdmin Ends */}
-
-            <UserModeration/>
           {/* Wrapper Ends */}
           </div>
         </div>

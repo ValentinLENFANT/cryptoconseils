@@ -84,6 +84,14 @@ const Call = Loadable({
   loader: () => import('./Call/Call'),
   loading: Loading,
 });
+
+const Moderation = Loadable({
+  loader: () => import('./Admin/Moderation/Moderation'),
+  loading: Loading,
+});
+
+
+
 class App extends Component {
   render() {
     return (
@@ -103,6 +111,7 @@ class App extends Component {
           <Route path="/articles/:id" component={Articles}/>
           <Route path="/categories/:id" component={Categories}/>
           <Route exact path="/admin" component={Admin}/>
+          <Route exact path="/admin/moderation" component={Moderation}/>
           <Route exact path="/team" component={Team}/>
           <Route exact path="/call" component={Call}/>
           <Route component={NotFound}/>

@@ -5158,6 +5158,9 @@ ul.button-edit{list-style-type: none;}
     background-color: #E78A1A;
     color: white;
 }
-.better-table td {
-
+.list-group-item{
+  background-color: #222222;
+}
+.list-group-moderation, .list-group-item h4{
+  color: white;
 }

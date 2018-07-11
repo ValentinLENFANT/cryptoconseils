@@ -7,11 +7,11 @@ class MenusAdmin extends Component {
           <section className="menu-dashboard section-profil">
             <div className="container">
                 <div className="text-center">
-                    <img src="images/backoffice/logo-admin.png" className="img-responsive center-block" />
+                    <img src="../images/backoffice/logo-admin.png" className="img-responsive center-block" />
                 </div>
                 <div className="row text-center">
                     <div className="col-md-3 col-sm-3 col-xs-12">
-                        <a href="#moderation">
+                        <a href="/admin/moderation">
                             <h3 className="titre-dashboard">Modération</h3>
                         </a>
                     </div>
