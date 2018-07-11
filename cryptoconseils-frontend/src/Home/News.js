@@ -59,7 +59,7 @@ class News extends Component {
                     <a href={"/articles/" + article.id}>
                       <img
                         className="img-responsive"
-                        src={"images/blog/blog-post-small-"+article.image.id+".jpg"}
+                        src={"images/articles/"+article.image.file_name}
                         alt={article.image.alt}
                         />
                     </a>
