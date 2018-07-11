@@ -92,24 +92,33 @@ class SignIn extends Component {
     }
     // connexion normal
     else {
-      axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
-        grant_type: 'password',
-        username: this.state.username,
-        password: this.state.password,
-        client_id: process.env.REACT_APP_CLIENT_ID,
-        client_secret: process.env.REACT_APP_CLIENT_SECRET,
-      }).then(response => {
-        localStorage.setItem('access_token', response.data.access_token);
-        localStorage.setItem('username', this.state.username);
-        if(this.state.previousPath ==="/signin"){
-          this.setState({previousPath: "/"})
-        }
-        window.location.href = this.state.previousPath
-      }).catch(error => {
-        this.setState({statusMsg: 'Username et/ou Mdp invalides'})
-        console.log(error.response);
-      });
-    }
+
+
+        axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
+          grant_type: 'password',
+          username: this.state.username,
+          password: this.state.password,
+          client_id: process.env.REACT_APP_CLIENT_ID,
+          client_secret: process.env.REACT_APP_CLIENT_SECRET,
+        }).then(response => {
+          axios.get(process.env.REACT_APP_API_ADDRESS+'/users/isEnabled/'+this.state.username)
+          .then(() => {
+            localStorage.setItem('access_token', response.data.access_token);
+            localStorage.setItem('username', this.state.username);
+            if(this.state.previousPath ==="/signin"){
+              this.setState({previousPath: "/"})
+            }
+            window.location.href = this.state.previousPath
+          }).catch(error => {
+            this.setState({statusMsg: "Votre compte n'est pas activé ou a été désactivé."})
+            var isEnabled = false;
+          })
+        }).catch(error => {
+          this.setState({statusMsg: 'Username et/ou Mdp invalides'})
+          console.log(error.response);
+        });
+      }
+
   }
 
   // inscription
