@@ -8,6 +8,7 @@ import PreLoader from '../../PreLoader/PreLoader'
 import Denied from '../../Denied/Denied'
 import MenusModeration from './MenusModeration'
 import UserModeration from './UserModeration'
+import ArticleModeration from './ArticleModeration'
 import CommentModeration from './CommentModeration'
 
 class Moderation extends Component {
@@ -17,10 +18,12 @@ class Moderation extends Component {
     this.state = {
       noAccess: null,
       showComments: null,
-      showUsers: null
+      showUsers: null,
+      showArticles: null
     }
     this.showUsers = this.showUsers.bind(this)
     this.showComments = this.showComments.bind(this)
+    this.showArticles = this.showArticles.bind(this)
   }
   componentWillMount(){
     // check si access token
@@ -45,20 +48,27 @@ class Moderation extends Component {
   }
   showUsers(event) {
     event.preventDefault();
-    this.setState({showUsers: true, showComments:false});
+    this.setState({showUsers: true,showArticles: false, showComments:false});
   }
   showComments(event) {
     event.preventDefault();
-    this.setState({showUsers: false, showComments:true});
+    this.setState({showUsers: false,showArticles: false, showComments:true});
+  }
+  showArticles(event) {
+    event.preventDefault();
+    this.setState({showUsers: false,showArticles: true, showComments:false});
   }
 
   renderModeration(){
     if(this.state.showUsers) {
       return <UserModeration/>
-    }else if (this.state.showComments) {
+    } else if (this.state.showComments) {
       return <CommentModeration/>
+    } else if (this.state.showArticles) {
+      return <ArticleModeration/>
     }
   }
+
   render() {
     if(this.state.noAccess ===  false) {
       return(
@@ -77,8 +87,8 @@ class Moderation extends Component {
                     </a>
                   </div>
                   <div className="col-md-4 col-sm-4 col-xs-12">
-                    <a href="/admin/">
-                      <h3 className="titre-dashboard">Admin</h3>
+                    <a href="" onClick={this.showArticles}>
+                      <h3 className="titre-dashboard">Article</h3>
                     </a>
                   </div>
                   <div className="col-md-4 col-sm-4 col-xs-12">

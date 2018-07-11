@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-class ArticleEditAdmin extends Component {
-  constructor(props) {
-    super(props);
+
+class ArticleModeration extends Component {
+  constructor() {
+    super();
     this.state = {
       listArticles: [],
       listArticlesOrder: [],
+      listCategories: [],
       categorie: null,
-      searchAuthor: null,
-      searchCategorie: null,
-      allArticles: []
+      searchAuthor: '',
+      searchCategorie: '',
+      allArticles: [],
     }
   }
 
@@ -18,10 +20,18 @@ class ArticleEditAdmin extends Component {
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
+
+      // on récupère les catégories
+      axios.get(process.env.REACT_APP_API_ADDRESS+'/categories/')
+      .then(categories => {
+        this.setState({listCategories: categories.data});
+      }).catch(error => {
+        console.log(error);
+      });
+
       // récupère tous les articles
-      axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/newest/5', authorization)
+      axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/', authorization)
       .then(response => {
-        console.log(response.data);
         this.setState({
           listArticles: response.data,
           allArticles: response.data
@@ -32,107 +42,150 @@ class ArticleEditAdmin extends Component {
     }
   }
   onChangeAuthor(event) {
+    var aute = event.target.value
     // Update de la valeur
     this.setState({
       searchAuthor: event.target.value
-    }, () => this.orderByAuthor(this.state.allArticles,this.state.searchAuthor));
+    }, () => this.orderByAuthor(this.state.listArticles,aute,this.state.searchCategorie));
   }
 
   onChangeCategorie(event) {
+    var cate = event.target.value;
     // Update de la valeur
     this.setState({
       searchCategorie: event.target.value
-    }, () => this.orderByCategorie(this.state.allArticles,this.state.searchCategorie));
+    }, () => this.orderByCategorie(this.state.listArticles,cate,this.state.searchAuthor));
   }
 
-  orderByAuthor(data,searchAuthor){
-    console.log("Recherche par auteur:", searchAuthor);
-    // initialisation du tableau
-    var res= []
+  orderByAuthor(data,searchAuthor,searchCategorie){
+    if (searchAuthor === '' && searchCategorie !== '') {
+      this.orderByCategorie(this.state.allArticles,searchCategorie,searchAuthor)
+    } else if(searchAuthor != '' && searchCategorie != '') {
+      // récupération de tous les article pour ensuite recommencer le tri
+      data = this.state.allArticles;
 
-    // recherche de la catégorie dans l'article
-    for(var x in data){
-
-      // on met le nom de l'auteur de l'article en maj
-      var author = data[x].author.toUpperCase();
-      // on met le nom de l'auteur recherché en maj
-      searchAuthor = searchAuthor.toUpperCase();
-
-      // si il y a le nom de l'auteur recherché dans l'article
-      if(author.includes(searchAuthor)){
-        res = [...res, data[x]]
-      }
-    }
-
-    // enregistrements des articles trié par auteur
-    this.setState({listArticles: res});
-
-    // si en plus de l'auteur recherché
-    // on cherche une catégorie
-    if(this.state.searchCategorie !== null) {
-      console.log("catégorie recherché:", this.state.searchCategorie);
       // initialisation du tableau
-      var res = [];
+      var res = []
 
-      // on récupère la catégorie recherché
-      var searchCategorie = this.state.searchCategorie;
-      // on récupère la liste des articles déjà trié par auteur
-      var data = this.state.listArticles;
+      // recherche de la catégorie dans l'article
+      for(var x in data){
+        if(typeof data[x].categories !== "undefined" && data[x].categories.length > 0 ){
+          var categories = data[x].categories[0].id;
 
-
-      for(var x in data) {
-        if(typeof data[x].categories !== "undefined" && data[x].categories.length > 0 ) {
-
-          var categories = data[x].categories[0].id
-          if(categories === Number(searchCategorie)){
+          // si il y a la catégorie recherché dans l'article
+          if(categories === Number(searchCategorie)) {
             res = [...res, data[x]]
           }
         }
-      }this.setState({listArticles: res});
-    }
-
-  }
-
-  orderByCategorie(data,searchCategorie){
-    console.log("Recherche par catégorie", this.state.searchCategorie);
-    // initialisation du tableau
-    var res= []
-
-    // recherche de la catégorie dans l'article
-    for(var x in data){
-      if(typeof data[x].categories !== "undefined" && data[x].categories.length > 0 ){
-        var categories = data[x].categories[0].id;
-        console.log(categories, Number(searchCategorie));
-        // si il y a la catégorie recherché dans l'article
-        if(categories === Number(searchCategorie)) {
-          res = [...res, data[x]]
-        }
       }
-    }
-    // enregistrements des articles trié par catégorie
-    this.setState({listArticles: res});
+      // sauvegarde du tableau trié
+      data = res
 
-    // si en plus de la catégorie recherché
-    // on cherche un auteur
-    if(this.state.searchAuthor !== null){
-      console.log("Auteur recherché:", this.state.searchAuthor);
       // initialisation du tableau
       var res= []
-      // on récupère le nom de l'auteur recherché
-      var searchAuthor = this.state.searchAuthor;
-      // on récupère la liste des articles déjà trié par catégorie
-      var data = this.state.listArticles
 
+      // recherche de l'autheur dans data
       for(var x in data){
+        // on met le nom de l'auteur de l'article en maj
         var author = data[x].author.toUpperCase();
+
+        // on met le nom de l'auteur recherché en maj
         searchAuthor = searchAuthor.toUpperCase();
 
-        // si le nom de l'auteur est dans l'article
-        if(author.includes(searchAuthor)){
+        // si il y a le nom de l'auteur recherché dans l'article
+        if(author === searchAuthor){
           res = [...res, data[x]]
         }
       }
+      // enregistrements des articles trié par autheur ET cathégorie
       this.setState({listArticles: res});
+    } else if(searchAuthor !== '' && searchCategorie === '') {
+      var data =this.state.allArticles
+
+      // initialisation du tableau
+      var res= []
+
+      // recherche de l'autheur dans data
+      for(var x in data){
+        // on met le nom de l'auteur de l'article en maj
+        var author = data[x].author.toUpperCase();
+        // on met le nom de l'auteur recherché en maj
+        searchAuthor = searchAuthor.toUpperCase();
+
+        // si il y a le nom de l'auteur recherché dans l'article
+        if(author === searchAuthor){
+          res = [...res, data[x]]
+        }
+      }
+      // enregistrements des articles trié par autheur
+      this.setState({listArticles: res});
+    }
+    if(searchCategorie === '' && searchAuthor === ''){
+      this.setState({listArticles: this.state.allArticles});
+    }
+  }
+
+  orderByCategorie(data,searchCategorie,searchAuthor){
+    if(searchAuthor !== '' && searchCategorie === ''){
+      this.orderByAuthor(this.state.allArticles, searchAuthor, searchCategorie)
+    } else if(searchAuthor && searchCategorie !== ''){
+      data = this.state.allArticles
+
+      // initialisation du tableau
+      var res= []
+
+      // recherche de l'autheur dans data
+      for(var x in data){
+        // on met le nom de l'auteur de l'article en maj
+        var author = data[x].author.toUpperCase();
+
+        // on met le nom de l'auteur recherché en maj
+        searchAuthor = searchAuthor.toUpperCase();
+
+        // si il y a le nom de l'auteur recherché dans l'article
+        if(author === searchAuthor){
+          res = [...res, data[x]]
+        }
+      }
+      data = res
+      // initialisation du tableau
+      var res= []
+      // recherche de la catégorie dans l'article
+      for(var x in data){
+        if(typeof data[x].categories !== "undefined" && data[x].categories.length > 0 ){
+          var categories = data[x].categories[0].id;
+
+          // si il y a la catégorie recherché dans l'article
+          if(categories === Number(searchCategorie)) {
+            res = [...res, data[x]]
+          }
+        }
+      }
+      // enregistrements des articles trié par catégorie
+      this.setState({listArticles: res});
+    }
+
+    if(searchCategorie !== '' && searchAuthor == '') {
+      data =  this.state.allArticles
+      // initialisation du tableau
+      var res= []
+      // recherche de la catégorie dans l'article
+      for(var x in data){
+        if(typeof data[x].categories !== "undefined" && data[x].categories.length > 0 ){
+          var categories = data[x].categories[0].id;
+
+          // si il y a la catégorie recherché dans l'article
+          if(categories === Number(searchCategorie)) {
+            res = [...res, data[x]]
+          }
+        }
+      }
+      // enregistrements des articles trié par catégorie
+      this.setState({listArticles: res});
+    }
+
+    if(searchCategorie === '' && searchAuthor === ''){
+      this.setState({listArticles: this.state.allArticles});
     }
   }
 
@@ -185,8 +238,8 @@ class ArticleEditAdmin extends Component {
               <div>
                 <label className="control-label" htmlFor="article_categories">Catégorie</label>
                 <select onChange={this.onChangeCategorie.bind(this)}id="article_categories" name="article_categories" className="form-control">
-                  <option value="">-</option>
-                  {this.props.listCategories.map(categorie => {
+                  <option value=""></option>
+                  {this.state.listCategories.map(categorie => {
                     return (
                       <option key={categorie.id} value={[categorie.id]}>{categorie.name}</option>
                     );
@@ -202,7 +255,7 @@ class ArticleEditAdmin extends Component {
               <label className="control-label" htmlFor="article_categories">Auteur</label>
               <div>
                 <select onChange={this.onChangeAuthor.bind(this)}id="article_categories" name="article_categories" className="form-control">
-                  <option value="0">-</option>
+                  <option value=""></option>
                   <option value="Guillaume">Guillaume</option>
                   <option value="Valentin">Valentin</option>
                   <option value="Alexandre">Alexandre</option>
@@ -261,4 +314,4 @@ class ArticleEditAdmin extends Component {
   }
 }
 
-export default ArticleEditAdmin;
+export default ArticleModeration;

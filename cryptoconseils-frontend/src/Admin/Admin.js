@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ArticleAdmin from './ArticleAdmin';
-import ArticleEditAdmin from './ArticleEditAdmin';
 import Header from '../Header/Header';
 import Denied from '../Denied/Denied';
 import CallAdmin from './CallAdmin';
@@ -73,10 +72,6 @@ class Admin extends Component {
 
             {/* ArticleAdmin Starts */}
               <ArticleAdmin listCategories={this.state.listCategories} author={this.state.username} />
-            {/* ArticleAdmin Ends */}
-
-            {/* ArticleAdmin Starts */}
-             <ArticleEditAdmin listCategories={this.state.listCategories}/>
             {/* ArticleAdmin Ends */}
           {/* Wrapper Ends */}
           </div>
