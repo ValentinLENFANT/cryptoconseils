@@ -187,7 +187,7 @@ class UserController extends FOSRestController
         $user->setPremiumLevel(1);
         $user->setEnabled(true);
         $user->setIsEmailValidated(false);
-        $user->setRoles(['ROLE_ADMIN']);
+        $user->setRoles(['ROLE_USER']);
         $user->setUniqueTokenForEmail(md5(sha1(date("Y-m-d H:i:s"))));
 
         $em = $this->getDoctrine()->getManager();

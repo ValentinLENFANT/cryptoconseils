@@ -18,7 +18,6 @@ class Admin extends Component {
     this.state = {
       noAccess: null,
       listCategories: [],
-      listUsers: [],
       username: ''
     }
   }
@@ -41,15 +40,6 @@ class Admin extends Component {
           }).catch(error => {
             console.log(error);
           });
-
-          // on récupère les users
-          axios.get(process.env.REACT_APP_API_ADDRESS+'/users/',authorization)
-          .then(user => {
-            this.setState({listUsers: user.data});
-          }).catch(error => {
-            console.log(error);
-          });
-
           this.setState({noAccess: false,username: response.data.username})
         } else {
           this.setState({noAccess: true});
@@ -95,7 +85,7 @@ class Admin extends Component {
              <ArticleEditAdmin listCategories={this.state.listCategories}/>
             {/* ArticleAdmin Ends */}
 
-            <UserModeration listUsers={this.state.listUsers}/>
+            <UserModeration/>
           {/* Wrapper Ends */}
           </div>
         </div>

@@ -93,7 +93,7 @@ class Moderation extends Component {
         <div className="row text-center">
           <h2 className="title-head" id="#moderation">Modération<span> Commentaires</span></h2>
           <div className="title-head-subtitle">
-              <p>Accepter ou supprimer les commentaires</p>
+              <p>Supprimer les commentaires</p>
           </div>
         </div>
         <div className="container bootstrap snippet">

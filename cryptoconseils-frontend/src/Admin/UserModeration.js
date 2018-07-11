@@ -1,67 +1,127 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { action } from '@storybook/addon-actions'
+import Confirm from 'react-confirm-bootstrap';
+import Dialog from 'react-bootstrap-dialog'
 
 class UserModeration extends Component {
   constructor(props){
     super(props);
     this.state = {
-      adminValue: null
+      adminValue: null,
+      listUsers: [],
+      currentUser: ''
     }
   }
 
-  changeAdmin(item) {
-    //check si access token
+
+  getAllusers() {
     var authorization = {
       headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
     };
 
-    if(typeof item.roles !== "undefined"){
-      // update user
-      axios.put(process.env.REACT_APP_API_ADDRESS+'/users/'+item.username,{
-        "roles": ['']
-      }, authorization).then(response => {
-        //update de l'affichage des commentaires
-        console.log(response.data);
-      }).catch(error => {
-        console.log(error.response);
-      });
+    // récupération user actuel
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/',authorization)
+    .then(res => {
+      this.setState({currentUser: res.data.username})
+    }).catch(err => {
+      console.log(err.response);
+    })
+
+    // on récupère les users
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/users/',authorization)
+    .then(user => {
+      this.setState({listUsers: user.data});
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+  componentWillMount() {
+    this.getAllusers();
+  }
+
+  deleteUser(item) {
+    if(item.username === this.state.currentUser){
+      alert('Vous ne pouvez pas vous supprimer')
     } else {
-      // update user
-      axios.put(process.env.REACT_APP_API_ADDRESS+'/users/'+item.username,{
-        "roles": [
-          "ROLE_ADMIN"
-        ]
-      }, authorization).then(response => {
+      axios.put(process.env.REACT_APP_API_ADDRESS+'/users/edit/enabled/'+item.id,{
+        "enabled": 0
+      }).then(() => {
+        const array = this.state.listUsers;
+        // index de l'item du com que l'on veut supprimer
+        const index = array.indexOf(item);
+        // Supprimer de l'affichage du commentaire
+        array.splice(index, 1)
         //update de l'affichage des commentaires
-        alert(response.data);
-      }).catch(error => {
-        console.log(error.response);
-      });
+        this.setState({listUsers: array});
+      })
+    }
+  }
+
+  changeAdmin(item) {
+    if(item.username === this.state.currentUser){
+      alert('Vous ne pouvez pas changer votre propre rôle')
+    } else {
+      axios.post(process.env.REACT_APP_API_ADDRESS+"/users/changeRoles/"+item.username)
+      .then(res => {
+        this.getAllusers()
+      }).catch(err => {
+        console.log(err);
+      })
     }
   }
   renderUserList() {
-    return this.props.listUsers.map((user) => {
+    return this.state.listUsers.map((user) => {
       return(
         <tr key={user.id}>
           <td>{user.id}</td>
           <td>{user.username}</td>
           <td>{user.email}</td>
           <td>
-            {typeof user.roles !== "undefined" ?
-              <input
-                type="checkbox"
-                name="onoffswitch"
-                checked
-                value={true}
-                onChange={this.changeAdmin.bind(this,user)}/>
-              :<input
-                type="checkbox"
-                name="onoffswitch"
-                value={false}
-                onChange={this.changeAdmin.bind(this, user)}/>
+            <Confirm
+              onConfirm={this.deleteUser.bind(this, user)}
+              confirmText="Oui supprimer"
+              title="Suppresion de l'utilisateur"
+              body={"Voulez-vous vraiment supprimer"}>
+              <button
+                type="button"
+                className="btn btn-danger btn-xs button-profil"
+                title="Delete">
+                <span className="fa fa-trash"></span>
+              </button>
+            </Confirm>
+          </td>
+          <td>
+            {user.roles.length > 0 ?
+              <Confirm
+                onConfirm={this.changeAdmin.bind(this, user)}
+                confirmText="Oui rétrograder en USER"
+                title={"Rétrograder "+user.username+" en USER"}
+                body={"Voulez-vous rétrograder "+user.username+" au role de USER ?"}>
+                <button
+                  type="button"
+                  className="btn btn-danger btn-xs button-profil"
+                  title="Admin">
+                  <span className="fa fa-trash"></span>
+                </button>
+              </Confirm>
+              : <Confirm
+                  onConfirm={this.changeAdmin.bind(this, user)}
+                  confirmText="Oui promouvoir en ADMIN"
+                  title={"Promouvoir "+user.username+" en ADMIN"}
+                  body={"Voulez-vous promouvoir "+user.username+" au role d'ADMIN ?"}>
+                  <button
+                    type="button"
+                    className="btn btn-success btn-xs button-profil"
+                    title="Admin">
+                    <span className="fa fa-check"></span>
+                  </button>
+                </Confirm>
             }
+
           </td>
         </tr>
+
       );
     });
   }
@@ -78,7 +138,7 @@ class UserModeration extends Component {
       </div>
       <table>
         <tr>
-        <th>ID </th> <th> username </th><th> email </th> <th>ADMIN</th>
+          <th>ID </th> <th> username </th><th> email </th> <th>Supprimer</th> <th>admin</th>
         </tr>
         {this.renderUserList()}
       </table>
