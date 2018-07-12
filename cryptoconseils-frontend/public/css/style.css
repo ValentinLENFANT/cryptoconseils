@@ -5132,6 +5132,12 @@ ul.button-edit{list-style-type: none;}
 }
 /*FIN CSS DE LA PAGE ADMIN */
 
+/* DEBUT CHATBOT */
+div#sntch_close {
+    background: transparent;
+    border: 2px solid;
+}
+/* FIN CSS CHATBOT */
 
 /* */
 .img-search {
