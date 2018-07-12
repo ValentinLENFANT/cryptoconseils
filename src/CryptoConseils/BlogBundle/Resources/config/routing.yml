@@ -216,3 +216,18 @@ cryptoconseils_blog_edit_published_comment:
     path:   /comments/edit/enabled/{id}
     defaults:   { _controller: CryptoConseilsBlogBundle:Comment:editPublished }
     methods:    [PUT]
+
+cryptoconseils_blog_airdrop_new:
+    path:   /airdrop/new/
+    defaults: { _controller: CryptoConseilsBlogBundle:Airdrop:new }
+    methods:    [POST]
+
+cryptoconseils_blog_airdrop_all:
+    path:   /airdrop/all/
+    defaults: { _controller: CryptoConseilsBlogBundle:Airdrop:allAirdrops }
+    methods:    [GET]
+
+cryptoconseils_blog_airdrop:
+    path:   /airdrop/{id}
+    defaults: { _controller: CryptoConseilsBlogBundle:Airdrop:airdrop }
+    methods:    [GET]
