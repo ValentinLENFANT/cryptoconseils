@@ -105,7 +105,7 @@ class UserModeration extends Component {
               body={"Voulez-vous vraiment supprimer"}>
               <button
                 type="button"
-                className="btn btn-danger btn-xs button-profil"
+                className="btn btn-danger button-profil"
                 title="Delete">
                 Désactiver
               </button>
@@ -119,8 +119,8 @@ class UserModeration extends Component {
               body={"Voulez-vous rétrograder "+user.username+" au role de USER ?"}>
               <button
                 type="button"
-                className="btn btn-danger btn-xs button-profil"
-                title="Admin">Suppriler rôle admin
+                className="btn btn-danger button-profil"
+                title="Admin">Rétrograder user
               </button>
             </Confirm>
             :<Confirm
@@ -130,7 +130,7 @@ class UserModeration extends Component {
               body={"Voulez-vous promouvoir "+user.username+" au role d'ADMIN ?"}>
               <button
                 type="button"
-                className="btn btn-success btn-xs button-profil"
+                className="btn btn-success button-profil"
                 title="Admin">Promouvoir admin
               </button>
             </Confirm>}

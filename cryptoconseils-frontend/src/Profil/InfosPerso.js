@@ -49,12 +49,14 @@ class InfosPerso extends Component {
       }
     }
   }
+
   renderPremium(){
     var lvl = ["Pas inscrit","Inscrit","Débutant","Avancé","Export","Lambo"];
     return(
       <p>{lvl[this.props.user.premiumLevel]}</p>
     );
   }
+
   checkNewInfos(password, password_confirmation, email){
     var goUpdate = false;
     if(this.state.password !== '' || this.state.password_confirmation !=='') {
@@ -90,19 +92,51 @@ class InfosPerso extends Component {
     var authorization = {
       headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
     };
-    // update coms
-    axios.put(process.env.REACT_APP_API_ADDRESS+'/users/'+this.props.user.username,{
-      password: password,
-      email: email
-    }, authorization).then(response => {
-      //update de l'affichage des commentaires
 
-      this.setState({statusMsg: "Vos informations ont été mise à jour",password: '',email:'',password_confirmation:'',success: true})
-    }).catch(error => {
-      this.setState({statusMsg: "l'email existe déjà",
-      password: '',email:'',password_confirmation:''})
-      console.log(error.response);
-    });
+    if(email !==''){
+      axios.put(process.env.REACT_APP_API_ADDRESS+'/users/'+this.props.user.username,{
+        email: email
+      }, authorization).then(response => {
+        console.log(response);
+        this.setState({
+          statusMsg: "l'email a été mise à jour",
+          password: '',
+          email:'',
+          password_confirmation:'',
+          success: true
+        })
+      }).catch(error => {
+        this.setState({
+          statusMsg: "l'email existe déjà",
+          password: '',
+          email:'',
+          password_confirmation:''
+        });
+        console.log(error.response);
+      });
+    }
+    if(password !== '') {
+      axios.put(process.env.REACT_APP_API_ADDRESS+'/users/'+this.props.user.username,{
+        password: password,
+      }, authorization).then(response => {
+        this.setState({
+          statusMsg: "Le mot de passe a été changé",
+          password: '',
+          email:'',
+          password_confirmation:'',
+          success: true
+        });
+      }).catch(error => {
+        this.setState({
+          statusMsg: "l'email existe déjà",
+          password: '',
+          email:'',
+          password_confirmation:''
+        });
+        console.log(error.response);
+      });
+    }
+
 
   }
   updateInfos(event){
