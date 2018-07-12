@@ -21,14 +21,17 @@ class LoadImage extends AbstractFixture implements OrderedFixtureInterface
 
         $filePath = '/cryptoconseils-frontend/public/images/articles';
 
-        $fileName = ['blog-article-1',
-            'blog-article-2',
-            'blog-article-3',
-            'blog-article-4',
-            'blog-article-5',
-            'blog-article-6',
-            'blog-article-7',
-            'blog-article-8'];
+        $fileName = [
+          'default-user'
+          'blog-article-1',
+          'blog-article-2',
+          'blog-article-3',
+          'blog-article-4',
+          'blog-article-5',
+          'blog-article-6',
+          'blog-article-7',
+          'blog-article-8'
+        ];
 
             for ($i=0; $i<count($fileName); $i++) {
                 // On crée la catégorie
