@@ -22,7 +22,7 @@ class LoadImage extends AbstractFixture implements OrderedFixtureInterface
         $filePath = '/cryptoconseils-frontend/public/images/articles';
 
         $fileName = [
-          'default-user'
+          'default-user',
           'blog-article-1',
           'blog-article-2',
           'blog-article-3',
