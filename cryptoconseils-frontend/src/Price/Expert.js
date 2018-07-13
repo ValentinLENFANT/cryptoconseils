@@ -19,7 +19,7 @@ class Expert extends Component {
   }
 
   render() {
-    if(this.state.premiumLevel < 5) {
+    if(this.state.premiumLevel < 4) {
       return(
         <div className="Price Component">
           <li className="col-xs-6 col-sm-6 col-md-3 col-lg-3">

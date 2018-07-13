@@ -104,7 +104,6 @@ class Comments extends Component {
    } else {
      return null;
    }
-
   }
 
   render() {

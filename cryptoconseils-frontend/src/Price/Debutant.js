@@ -20,7 +20,7 @@ class Debutant extends Component {
 
   render() {
     console.log(this.state.premiumLevel);
-    if(this.state.premiumLevel < 3) {
+    if(this.state.premiumLevel < 2) {
       return(
         <div className="Price Component">
           <li className="col-xs-6 col-sm-6 col-md-3 col-lg-3">
