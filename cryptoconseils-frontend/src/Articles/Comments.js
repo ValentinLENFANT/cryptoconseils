@@ -43,7 +43,7 @@ class Comments extends Component {
 
   deleteComment(item){
     // delete coms
-    axios.put(process.env.REACT_APP_API_ADDRESS+'/comments/edit/enabled/'+item.id,{
+    axios.put(process.env.REACT_APP_API_ADDRESS+'/comments/edit/enabled/'+item,{
       "published": 0
     })
     .then(response => {
@@ -95,7 +95,7 @@ class Comments extends Component {
                </div>
                <p className="comment-content">{cmt.content}</p>
              </div>
-             {this.renderDeleteButton(this,cmt)}
+             {this.renderDeleteButton(cmt.id)}
            </div>
            {/* Comment Ends */}
          </li>
