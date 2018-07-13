@@ -66,6 +66,7 @@ class Price extends Component {
               {/* Section Content Starts */}
               <div className="row pricing-tables-content">
                 <div className="pricing-container">
+                  <p><a href="/premium">Découvrez les avantages de nos pack premium</a></p>
                   {/* Pricing Tables Starts */}
                   <ul className="pricing-list bounce-invert">
                     {this.renderPack()}

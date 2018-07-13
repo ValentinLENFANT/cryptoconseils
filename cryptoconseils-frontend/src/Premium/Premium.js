@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import Header from '../Header/Header';
-import Banner from '../Banner/Banner';
 import Price from '../Price/Price'
 
 class Premium extends Component {
   render() {
     return (<div className="Faq Component">
       <Header/>
-      <Banner titlePart1="Les packs " titlePart2="Premium" pageName="PREMIUM"/> {/* Section FAQ Starts */}
       <section className="faq">
         <div className="container">
           {/* Section Title Starts */}
