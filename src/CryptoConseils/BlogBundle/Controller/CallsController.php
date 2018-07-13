@@ -104,7 +104,7 @@ class CallsController extends FOSRestController
             die('Erreur : ' . $e->getMessage());
         }
         $user = $this->getUser();
-        if ($user->getPremiumLevel() < 4) {
+        if ($user->getPremiumLevel() < 4 || !isset($user->getPremiumLevel)) {
             $reponse = $bdd->query('SELECT * FROM calls WHERE isCallFree = 1');
             while ($donnees = $reponse->fetch()) {
                 $calls[] = ['id' => $donnees['id'],
@@ -156,7 +156,7 @@ class CallsController extends FOSRestController
         }
         $user = $this->getUser();
 
-        if ($user->getPremiumLevel() < 4) {
+        if ($user->getPremiumLevel() < 4 || !isset($user->getPremiumLevel)) {
             $data = $request->getContent();
             $data = json_decode($data);
             $response = $bdd->query('SELECT * FROM calls WHERE id=' . $id);

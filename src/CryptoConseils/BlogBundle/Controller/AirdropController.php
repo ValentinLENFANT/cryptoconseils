@@ -97,7 +97,7 @@ class AirdropController extends FOSRestController
             die('Erreur : ' . $e->getMessage());
         }
         $user = $this->getUser();
-        if ($user->getPremiumLevel() < 2) {
+        if ($user->getPremiumLevel() < 2 || !isset($user->getPremiumLevel)) {
             $reponse = $bdd->query('SELECT * FROM airdrop WHERE isAirdropFree = 1');
             while ($donnees = $reponse->fetch()) {
                 $airdrops[] = ['id' => $donnees['id'],
@@ -146,7 +146,7 @@ class AirdropController extends FOSRestController
         }
         $user = $this->getUser();
 
-        if ($user->getPremiumLevel() < 2) {
+        if ($user->getPremiumLevel() < 2 || !isset($user->getPremiumLevel)) {
 
 
             $data = $request->getContent();
