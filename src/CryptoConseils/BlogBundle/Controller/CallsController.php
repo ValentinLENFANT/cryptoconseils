@@ -103,28 +103,7 @@ class CallsController extends FOSRestController
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
-        $user = $this->getUser();
-        if ($user->getPremiumLevel() < 4) {
-            $reponse = $bdd->query('SELECT * FROM calls WHERE isCallFree = 1');
-            while ($donnees = $reponse->fetch()) {
-                $calls[] = ['id' => $donnees['id'],
-                    'author' => $donnees['author'],
-                    'date' => $donnees['date'],
-                    'cryptocurrencyPair' => $donnees['cryptocurrencyPair'],
-                    'cryptocurrencyName' => $donnees['cryptocurrencyName'],
-                    'content' => $donnees['content'],
-                    'buyPrice' => $donnees['buyPrice'],
-                    'sellPrice' => $donnees['sellPrice'],
-                    'scoring' => $donnees['scoring'],
-                    'isCallFree' => $donnees['isCallFree']];
-            }
-            $data = $this->get('jms_serializer')->serialize($calls, 'json');
 
-            $response = new Response($data);
-            $response->headers->set('Content-Type', 'application/json');
-
-            return $response;
-        } else {
             $reponse = $bdd->query('SELECT * FROM calls');
             while ($donnees = $reponse->fetch()) {
                 $calls[] = ['id' => $donnees['id'],
@@ -144,7 +123,7 @@ class CallsController extends FOSRestController
             $response->headers->set('Content-Type', 'application/json');
 
             return $response;
-        }
+        
     }
 
     public function callAction(Request $request, $id) // [GET] /call/{id}

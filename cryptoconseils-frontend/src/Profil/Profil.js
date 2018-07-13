@@ -17,7 +17,7 @@ class Profil extends Component {
     super();
     this.state = {
       premium: 0,
-      user: null,
+      user: '',
       noLogged: null
     }
   }
