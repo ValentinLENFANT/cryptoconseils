@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { action } from '@storybook/addon-actions'
+import { action } from '@storybook/addon-actions';
 import Confirm from 'react-confirm-bootstrap';
-import Dialog from 'react-bootstrap-dialog'
+import Dialog from 'react-bootstrap-dialog';
+
 import Denied from '../../Denied/Denied'
+
 class UserModeration extends Component {
   constructor(){
     super();
@@ -11,7 +13,8 @@ class UserModeration extends Component {
       adminValue: null,
       listUsers: [],
       currentUser: '',
-      noAccess: null
+      noAccess: null,
+      premium_level: ["Non inscrit","Inscrit","Debutant","Avancée","Expert","Lambo"]
     }
   }
 
@@ -37,7 +40,7 @@ class UserModeration extends Component {
       this.setState({noAccess: true})
     }
   }
-
+  
   getAllusers() {
     var authorization = {
       headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
@@ -90,6 +93,59 @@ class UserModeration extends Component {
     }
   }
 
+  choosePremium (item) {
+    this.dialog.show({
+      body: 'Changer le niveau',
+      actions: [
+        Dialog.CancelAction(),
+        Dialog.Action(
+          'Inscrit',
+          () => this.changePremium(item,1),
+          'btn-danger'
+        ),
+        Dialog.Action(
+          'Debutant',
+          () => this.changePremium(item,2),
+          'btn-warning'
+        ),
+        Dialog.Action(
+          'Avancé',
+          () => this.changePremium(item,3),
+          'btn-info'
+        ),
+        Dialog.Action(
+          'Expert',
+          () => this.changePremium(item,4),
+          'btn-primary-true'
+        ),
+        Dialog.Action(
+          'Lambo',
+          () => this.changePremium(item,5),
+          'btn-success'
+        ),
+      ]
+    })
+  }
+
+  changePremium(item,lvl){
+    if(item.username === this.state.currentUser){
+      alert('Vous ne pouvez pas changer votre propre niveau')
+    } else {
+      var authorization = {
+        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
+      };
+      axios.put(process.env.REACT_APP_API_ADDRESS+"/users/"+item.username,{
+        "premiumLevel": lvl
+      }, authorization)
+      .then(res => {
+        this.getAllusers()
+        alert('Le niveau premium de '+item.username+' a été changé en: '+this.state.premium_level[lvl])
+      }).catch(err => {
+        console.log(err);
+      })
+    }
+  }
+
   renderUserList() {
     return this.state.listUsers.map((user) => {
       return(
@@ -97,6 +153,7 @@ class UserModeration extends Component {
           <td>{user.id}</td>
           <td>{user.username}</td>
           <td>{user.email}</td>
+          <td>{this.state.premium_level[user.premium_level]}</td>
           <td>
             <Confirm
               onConfirm={this.deleteUser.bind(this, user)}
@@ -133,7 +190,17 @@ class UserModeration extends Component {
                 className="btn btn-success button-profil"
                 title="Admin">Promouvoir admin
               </button>
-            </Confirm>}
+            </Confirm>
+            }
+            <Dialog ref={(el) => { this.dialog = el }} />
+          </td>
+          <td>
+            <button
+              type="button"
+              className="btn btn-info button-profil"
+              onClick={this.choosePremium.bind(this, user)}
+              title="Admin">Changer premium
+            </button>
           </td>
         </tr>
 
@@ -157,7 +224,7 @@ class UserModeration extends Component {
           <table className="better-table">
             <thead>
             <tr>
-              <th>ID</th><th>Nom</th><th>Email</th><th>Supprimer</th><th>Changer rôle</th>
+              <th>ID</th><th>Nom</th><th>Email</th><th>Niveau</th><th>Supprimer</th><th>Rôle</th><th>Premium</th>
             </tr>
           </thead>
            <tbody>

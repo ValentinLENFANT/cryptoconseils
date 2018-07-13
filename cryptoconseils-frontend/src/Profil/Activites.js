@@ -75,8 +75,7 @@ class Activites extends Component {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
       // delete coms
-      axios.put(process.env.REACT_APP_API_ADDRESS+'/comments/edit/enabled/'+item.id,
-      {
+      axios.put(process.env.REACT_APP_API_ADDRESS+'/comments/edit/enabled/'+item.id,{
         "published": 0
       }, authorization)
       .then(response => {
@@ -130,10 +129,10 @@ class Activites extends Component {
                     title="Delete">
                     <span className="fa fa-trash"></span>
                   </button>
-              </Confirm>
-              <div>
-                <Dialog ref={(el) => { this.dialog = el }} />
-              </div>
+                </Confirm>
+                <div>
+                  <Dialog ref={(el) => { this.dialog = el }} />
+                </div>
               </div>
             </div>
           </div>
