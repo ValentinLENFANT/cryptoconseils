@@ -16,7 +16,8 @@ class ArticleAdmin extends Component {
       statusMsg: '',
       published: false,
       article_id: '',
-      selectedFile: null
+      selectedFile: null,
+      newCategory: ''
     }
     this.handleChange = this.handleChange.bind(this);
   }
@@ -55,6 +56,24 @@ class ArticleAdmin extends Component {
    });
   }
 
+  addNewCategory(){
+    if(this.state.newCategory.length <= 0){
+      this.setState({statusMsg: "Nom de la categorie invalide"})
+    } else {
+      var authorization = {
+        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
+      };
+      axios.post(process.env.REACT_APP_API_ADDRESS+"/categories/new/",{
+        "name": this.state.newCategory
+      },authorization)
+      .then(res => {
+        this.props.listCategories.push(res.data)
+        this.setState({statusMsg: "Categorie ajouté","newCategory": ''})
+      }).catch(err => {
+        console.log(err);
+      })
+    }
+  }
   sendArticle(event){
     // pour éviter le rechargement de la page
     event.preventDefault();
@@ -243,6 +262,54 @@ class ArticleAdmin extends Component {
 
             </div>
           </form>
+
+          <div className="row text-center">
+            <h2 className="title-head" id="creer-article">Ajouter une <span>
+                Categorie</span>
+            </h2>
+            <div className="title-head-subtitle">
+              <p>Ajouter une nouvelle categorie</p>
+            </div>
+            {this.renderStatusMsg()}
+          </div>
+
+          {/* <!-- Titre --> */}
+          <div className="row">
+            <div className="col-xs-6 col-sm-6 col-md-6">
+              <div className="form-group">
+                <label className="control-label" htmlFor="article_title">Titre</label>
+                <div>
+                  <input
+                    id="newCategory"
+                    name="newCategory"
+                    type="text"
+                    placeholder="Nom de la catégorie"
+                    className="form-control input-md"
+                    value={this.state.newCategory}
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-xs-6 col-sm-6 col-md-6">
+              <div className="form-group">
+                <div>
+                  <button
+                    type="submit"
+                    id="submit-article"
+                    name="submit-article"
+                    className="btn btn-primary pull-right"
+                    onClick={this.addNewCategory.bind(this)}>
+                    AJOUTER
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
     );
