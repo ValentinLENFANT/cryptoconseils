@@ -123,7 +123,7 @@ class CallsController extends FOSRestController
             $response->headers->set('Content-Type', 'application/json');
 
             return $response;
-        
+
     }
 
     public function callAction(Request $request, $id) // [GET] /call/{id}
@@ -135,7 +135,7 @@ class CallsController extends FOSRestController
         }
         $user = $this->getUser();
 
-        if ($user->getPremiumLevel() < 4) {
+        if (!isset($user) || $user->getPremiumLevel() < 4) {
             $data = $request->getContent();
             $data = json_decode($data);
             $response = $bdd->query('SELECT * FROM calls WHERE id=' . $id);
