@@ -104,25 +104,25 @@ class CallsController extends FOSRestController
             die('Erreur : ' . $e->getMessage());
         }
 
-            $reponse = $bdd->query('SELECT * FROM calls');
-            while ($donnees = $reponse->fetch()) {
-                $calls[] = ['id' => $donnees['id'],
-                    'author' => $donnees['author'],
-                    'date' => $donnees['date'],
-                    'cryptocurrencyPair' => $donnees['cryptocurrencyPair'],
-                    'cryptocurrencyName' => $donnees['cryptocurrencyName'],
-                    'content' => $donnees['content'],
-                    'buyPrice' => $donnees['buyPrice'],
-                    'sellPrice' => $donnees['sellPrice'],
-                    'scoring' => $donnees['scoring'],
-                    'isCallFree' => $donnees['isCallFree']];
-            }
-            $data = $this->get('jms_serializer')->serialize($calls, 'json');
+        $reponse = $bdd->query('SELECT * FROM calls');
+        while ($donnees = $reponse->fetch()) {
+            $calls[] = ['id' => $donnees['id'],
+                'author' => $donnees['author'],
+                'date' => $donnees['date'],
+                'cryptocurrencyPair' => $donnees['cryptocurrencyPair'],
+                'cryptocurrencyName' => $donnees['cryptocurrencyName'],
+                'content' => $donnees['content'],
+                'buyPrice' => $donnees['buyPrice'],
+                'sellPrice' => $donnees['sellPrice'],
+                'scoring' => $donnees['scoring'],
+                'isCallFree' => $donnees['isCallFree']];
+        }
+        $data = $this->get('jms_serializer')->serialize($calls, 'json');
 
-            $response = new Response($data);
-            $response->headers->set('Content-Type', 'application/json');
+        $response = new Response($data);
+        $response->headers->set('Content-Type', 'application/json');
 
-            return $response;
+        return $response;
 
     }
 
