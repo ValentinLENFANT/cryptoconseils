@@ -47,6 +47,28 @@ class Calls
     private $author;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="isCallFree", type="boolean")
+     */
+    private $isCallFree;
+
+    /**
+     * @return bool
+     */
+    public function isCallFree()
+    {
+        return $this->isCallFree;
+    }
+
+    /**
+     * @param bool $isCallFree
+     */
+    public function setIsCallFree($isCallFree)
+    {
+        $this->isCallFree = $isCallFree;
+    }
+
+    /**
      * @return string
      */
     public function getAuthor()

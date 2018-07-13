@@ -67,6 +67,11 @@ class AirdropController extends FOSRestController
             $airdrop->setType($data->type);
             $airdrop->setCryptocurrencyName($data->cryptocurrencyName);
             $airdrop->setContent($data->content);
+            if (null === $data->isAirdropFree) {
+                $airdrop->setIsAirdropFree(0);
+            } else {
+                $airdrop->setIsAirdropFree($data->isAirdropFree);
+            }
 
 
             // Analyse si les conditions sur les champs sont respectées //
@@ -86,44 +91,92 @@ class AirdropController extends FOSRestController
 
     public function allAirdropsAction() // [GET] airdrop/
     {
-        $user = $this->getUser();
-        if ($user->getPremiumLevel() < 2) {
-            return new JsonResponse(array('error' => 'Vous n\'avez pas le niveau premium suffisant'), 403);
-        }
         try {
             $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
-        $reponse = $bdd->query('SELECT * FROM airdrop');
-        while ($donnees = $reponse->fetch()) {
-            $airdrops[] = ['id' => $donnees['id'],
-                'author' => $donnees['author'],
-                'beginDate' => $donnees['beginDate'],
-                'endDate' => $donnees['endDate'],
-                'type' => $donnees['type'],
-                'cryptocurrencyName' => $donnees['cryptocurrencyName'],
-                'content' => $donnees['content']];
+        $user = $this->getUser();
+        if ($user->getPremiumLevel() < 2) {
+            $reponse = $bdd->query('SELECT * FROM airdrop WHERE isAirdropFree = 1');
+            while ($donnees = $reponse->fetch()) {
+                $airdrops[] = ['id' => $donnees['id'],
+                    'author' => $donnees['author'],
+                    'beginDate' => $donnees['beginDate'],
+                    'endDate' => $donnees['endDate'],
+                    'type' => $donnees['type'],
+                    'cryptocurrencyName' => $donnees['cryptocurrencyName'],
+                    'content' => $donnees['content'],
+                    'isAirdropFree' => $donnees['isAirdropFree']];
+            }
+            $data = $this->get('jms_serializer')->serialize($airdrops, 'json');
+
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
+        } else {
+
+            $reponse = $bdd->query('SELECT * FROM airdrop');
+            while ($donnees = $reponse->fetch()) {
+                $airdrops[] = ['id' => $donnees['id'],
+                    'author' => $donnees['author'],
+                    'beginDate' => $donnees['beginDate'],
+                    'endDate' => $donnees['endDate'],
+                    'type' => $donnees['type'],
+                    'cryptocurrencyName' => $donnees['cryptocurrencyName'],
+                    'content' => $donnees['content'],
+                    'isAirdropFree' => $donnees['isAirdropFree']];
+            }
+            $data = $this->get('jms_serializer')->serialize($airdrops, 'json');
+
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
         }
-        $data = $this->get('jms_serializer')->serialize($airdrops, 'json');
-
-        $response = new Response($data);
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
     }
 
     public function airdropAction(Request $request, $id) // [GET] /airdrop/{id}
     {
-        $user = $this->getUser();
-        if ($user->getPremiumLevel() < 2) {
-            return new JsonResponse(array('error' => 'You can not get the article. You do not have the premium level needed.'), 403);
-        }
         try {
             $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
+        $user = $this->getUser();
+
+        if ($user->getPremiumLevel() < 2) {
+
+
+            $data = $request->getContent();
+            $data = json_decode($data);
+            $response = $bdd->query('SELECT * FROM airdrop WHERE id=' . $id);
+
+            while ($donnees = $response->fetch()) {
+                $airdrop[] = ['id' => $donnees['id'],
+                    'author' => $donnees['author'],
+                    'beginDate' => $donnees['beginDate'],
+                    'endDate' => $donnees['endDate'],
+                    'type' => $donnees['type'],
+                    'cryptocurrencyName' => $donnees['cryptocurrencyName'],
+                    'content' => $donnees['content'],
+                    'isAirdropFree' => $donnees['isAirdropFree']];
+            }
+            if (!isset($airdrop)) {
+                return new JsonResponse(array('error' => 'The call does not exist'), 404);
+            }
+            if ($donnees['isAirdropFree'] != 1) {
+                return new JsonResponse(array('error' => 'You can not get the airdrop. You do not have the premium level needed.'), 403);
+            }
+            $data = $this->get('jms_serializer')->serialize($airdrop, 'json');
+
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
+        }
+
         $data = $request->getContent();
         $data = json_decode($data);
         $response = $bdd->query('SELECT * FROM airdrop WHERE id=' . $id);
