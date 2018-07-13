@@ -90,6 +90,11 @@ const Moderation = Loadable({
   loading: Loading,
 });
 
+const Premium = Loadable({
+  loader: () => import('./Premium/Premium'),
+  loading: Loading,
+});
+
 
 
 class App extends Component {
@@ -114,6 +119,7 @@ class App extends Component {
           <Route exact path="/admin/moderation" component={Moderation}/>
           <Route exact path="/team" component={Team}/>
           <Route exact path="/call" component={Call}/>
+          <Route exact path="/premium" component={Premium}/>
           <Route component={NotFound}/>
         </Switch>
       </Router>

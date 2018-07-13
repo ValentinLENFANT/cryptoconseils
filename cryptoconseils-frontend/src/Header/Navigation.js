@@ -53,7 +53,7 @@ class Navigation extends Component {
                   <li><a href="/articles">News</a></li>
                   <li><a href="/call">Analyses & calls</a></li>
                   <li><a href="airdrops.html">Airdrops</a></li>
-                  <li><a href="#pricing">Accès Prémium</a></li>
+                  <li><a href="/premium">Accès Prémium</a></li>
                   <li><a href="/team">Team</a></li>
                   <li><a href="/contact">Contact</a></li>
                   <li><a href="/faq">Faq</a></li>
