@@ -35,7 +35,7 @@ class WhoAreWe extends Component {
                     <p>Le Bitcoin et les crypto-monnaies sont des protocols basés sur la Blockchain, ce qui permet entre autre de transférer des données financières de façon ultra-sécurisées sans partie tierce.</p>
                   </div>
                   <div id="menu2" className="tab-pane fade">
-                    <p>Nous proposons une plateforme vous permettant de mieux appréhender le monde des crypto-monnaies en suivant nos conseils de trading et pour un cout bien inférieur à la conccurence.</p>
+                    <p>Nous proposons une plateforme vous permettant de mieux appréhender le monde des crypto-monnaies en suivant nos conseils de trading et pour un cout bien inférieur à la concurrence.</p>
                   </div>
                   <div id="menu3" className="tab-pane fade">
                     <p>Nous garantissons à tous nos investisseurs une grande sécurité sur leur investissement</p>
