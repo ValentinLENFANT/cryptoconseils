@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Categories from './Categories';
-import Archives from './Archives';
+//import Archives from './Archives';
 import RecentPosts from './RecentPosts';
-import Tag from './Tag';
+//import Tag from './Tag';
 class Sidebar extends Component {
 
   render() {
@@ -14,13 +14,13 @@ class Sidebar extends Component {
             <Categories/>
           {/* Categories Widget Ends */}
           {/* Archives Widget Starts */}
-            <Archives/>
+            {/*<Archives/>*/}
           {/* Archives Widget Ends */}
           {/* Latest Posts Widget Ends */}
             <RecentPosts/>
           {/* Latest Posts Widget Ends */}
           {/* Tags Widget Starts */}
-            <Tag/>
+            {/*<Tag/>*/}
           {/* Tags Widget Ends */}
         </div>
         {/* Sidebar Ends */}
