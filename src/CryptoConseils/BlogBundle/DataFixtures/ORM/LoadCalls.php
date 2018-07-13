@@ -96,6 +96,7 @@ class LoadCalls extends AbstractFixture
             $call->setBuyPrice($buyPrice[$i]);
             $call->setSellPrice($sellPrice[$i]);
             $call->setScoring($scoring[$i]);
+            $call->setIsCallFree(rand(0, 1));
 
             // On la persiste
             $manager->persist($call);

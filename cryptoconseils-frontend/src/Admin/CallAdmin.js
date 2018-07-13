@@ -150,7 +150,7 @@ class CallAdmin extends Component {
         <div className="container">
 
           <div className="row text-center">
-            <h2 className="title-head" id="call-premium">Call<span>
+            <h2 className="title-head" id="call-premium">Call <span>
                 du jour
               </span>
             </h2>

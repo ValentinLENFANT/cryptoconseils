@@ -74,6 +74,28 @@ class Airdrop
     private $content;
 
     /**
+     * @var boolean
+     * @ORM\Column(name="isAirdropFree", type="boolean")
+     */
+    private $isAirdropFree;
+
+    /**
+     * @return bool
+     */
+    public function isAirdropFree()
+    {
+        return $this->isAirdropFree;
+    }
+
+    /**
+     * @param bool $isAirdropFree
+     */
+    public function setIsAirdropFree($isAirdropFree)
+    {
+        $this->isAirdropFree = $isAirdropFree;
+    }
+
+    /**
      * @return int
      */
     public function getId()

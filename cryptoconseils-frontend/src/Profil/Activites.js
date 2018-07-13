@@ -145,7 +145,7 @@ class Activites extends Component {
       <div className="container bootstrap snippet">
         <div className="row text-center">
           <h2 className="title-head" id="commentaires">Dernières
-            <span>Activités</span>
+            <span> Activités</span>
           </h2>
           <div className="title-head-subtitle">
             <p>Un rapide coup d'oeil de votre activité sur le site</p>
