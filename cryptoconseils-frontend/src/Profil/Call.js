@@ -16,7 +16,7 @@ class Call extends Component {
         <div className="calls-premium">
           <div className="container">
             <div className="row text-center">
-              <h2 className="title-head" id="call-premium">Call<span> du jour </span></h2>
+              <h2 className="title-head" id="call-premium">Call <span> du jour </span></h2>
               <div className="title-head-subtitle">
                   <p>Call pour membre premium en avant-première !</p>
               </div>

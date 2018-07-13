@@ -95,7 +95,7 @@ class ArticleAdmin extends Component {
       <section>
         <div className="container">
           <div className="row text-center">
-            <h2 className="title-head" id="creer-article">Créer<span>
+            <h2 className="title-head" id="creer-article">Créer <span>
                 Article</span>
             </h2>
             <div className="title-head-subtitle">
