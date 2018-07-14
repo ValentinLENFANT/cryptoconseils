@@ -194,7 +194,7 @@ class OrdersController extends Controller
         } else {
             echo "Error.";
         }
-        echo "Cliquez <a href='http://http://90.90.204.101:81/' target='_blank'>ici</a> pour retourner à la page d'accueil. </br>";
+        echo "Cliquez <a href='http://www.cryptoconseils.fr/' target='_blank'>ici</a> pour retourner à la page d'accueil. </br>";
         return new Response('Payment complete');
     }
 

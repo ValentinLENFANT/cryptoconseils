@@ -11,9 +11,9 @@ class Avance extends Component {
   }
   renderButton(){
     if(this.props.isAdmin){
-      return <button href={ "cryptoconseils.fr:8000/orders/new/300?accessToken=" + this.state.access_token } className="btn btn-primary">COMMANDER</button>
+      return <button href={ "90.90.185.202:8000/orders/new/300?accessToken=" + this.state.access_token } className="btn btn-primary">COMMANDER</button>
     }else {
-      return <button href={ "cryptoconseils.fr:8000/orders/new/300?accessToken=" + this.state.access_token } className="btn btn-primary" disabled>COMMANDER</button>
+      return <button href={ "90.90.185.202:8000/orders/new/300?accessToken=" + this.state.access_token } className="btn btn-primary" disabled>COMMANDER</button>
     }
   }
 
