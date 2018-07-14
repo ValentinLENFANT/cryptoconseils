@@ -82,7 +82,7 @@ class CommentModeration extends Component {
         <li key={item.id} className="list-group-item">
           <div className="row">
             <div className="col-xs-2 col-md-1">
-              <img src="./images/team/member1.jpg" className="img-circle img-responsive" alt="avatar" />
+              <img src="/images/articles/default-user.jpg" className="img-circle img-responsive" alt="avatar" />
             </div>
             <div className="col-xs-10 col-md-11">
               <div>

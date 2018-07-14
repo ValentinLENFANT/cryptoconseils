@@ -9,9 +9,10 @@ class CallAdmin extends Component {
       ticker: '',
       name: '',
       analyse: '',
-      achat: 0,
-      vente: 0,
-      score: 0,
+      achat: '',
+      vente: '',
+      score: '',
+      isCallFree: null,
       statusMsg: null,
       published: false
     }
@@ -22,12 +23,13 @@ class CallAdmin extends Component {
   handleChange(event) {
 
     let target = event.target;
-    let value = target.value
+    let value = target.type === 'checkbox' ? target.checked : target.value;
     let name = target.id;
     this.setState({[name]: value}, () => {
-      if(name === "achat" || name ==="vente") {
+      console.log(value);
+      /*if(name === "achat" || name ==="vente") {
         this.calculateScore(this.state.achat,this.state.vente);
-      }
+      }*/
     });
   }
   renderStatusMsg(){
@@ -45,14 +47,14 @@ class CallAdmin extends Component {
       );
     }
   }
-  calculateScore(achat,vente) {
+  /*calculateScore(achat,vente) {
     var x = Number(achat);
     var y = Number(vente);
     var score = (y - x) / x * 100;
     if(typeof score !== "NaN"){
       this.setState({score: score})
     }
-  }
+  }*/
   sendCall(event){
     // pour éviter le rechargement de la page
     event.preventDefault();
@@ -86,11 +88,22 @@ class CallAdmin extends Component {
         content: this.state.analyse,
         buyPrice: this.state.achat,
         sellPrice: this.state.vente,
-        scoring: this.state.score
+        scoring: this.state.score,
+        isCallFree: this.state.isCallFree
       },authorization)
       .then(response => {
         console.log(response);
-        this.setState({published: true,statusMsg: "Le call du jour a été publié !"})
+        this.setState({
+          published: true,
+          statusMsg: "Le call du jour a été publié !",
+          ticker: '',
+          name: '',
+          analyse: '',
+          achat: '',
+          vente: '',
+          score: '',
+          isCallFree: null
+        })
       }).catch(error => {
         console.log(error.response);
       });
@@ -111,6 +124,7 @@ class CallAdmin extends Component {
         <div className="col-xs-12 col-sm-12 col-md-6">
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12">
+              <p id="airdrop-ticker">{this.state.name}</p>
               <p className="desciption-call-premium">
                 {this.state.analyse}
               </p>
@@ -248,6 +262,16 @@ class CallAdmin extends Component {
                         <span className="help-block">
                           <p id="characterLeft" className="help-block ">Score en %, ex : 80</p>
                         </span>
+                    </div>
+                    <div className="form-group">
+                      <label>
+                        Call is free
+                        <input
+                          name="isCallFree"
+                          type="checkbox"
+                          checked={this.state.isCallFree}
+                          onChange={this.handleChange} />
+                      </label>
                     </div>
                   </div>
                   <div className="col-md-12 form-group">

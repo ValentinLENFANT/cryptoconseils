@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import News from '../Home/News';
+import ListArticle from '../News/News';
 import Sidebar from '../Sidebar/Sidebar'
 import Header from '../Header/Header'
 class LatestArticles extends Component {
@@ -17,7 +17,7 @@ class LatestArticles extends Component {
       <div className="LatestArticles Component">
         <div>
           <Header/>
-          <News nbArticle="9"/>
+          <ListArticle nbArticle="9"/>
         </div>
         <Sidebar/>
       </div>

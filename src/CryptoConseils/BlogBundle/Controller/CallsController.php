@@ -156,8 +156,6 @@ class CallsController extends FOSRestController
             $data = $this->get('jms_serializer')->serialize($calls, 'json');
             $response = new Response($data);
             $response->headers->set('Content-Type', 'application/json');
-
-            return $response;
         }
     }
 

@@ -191,9 +191,7 @@ class ArticleModeration extends Component {
     }
   }
 
-
-  deleteArticle(event,article){
-    event.preventDefault();
+  deleteArticle(article){
     // check si access token
     if(localStorage.getItem('access_token')){
       var authorization = {
@@ -231,7 +229,7 @@ class ArticleModeration extends Component {
               Articles</span>
           </h2>
           <div className="title-head-subtitle">
-            <p>Modifier et/ou supprimer les articles</p>
+            <p>Chercher et/ou désactiver des articles</p>
           </div>
         </div>
         {/* <!-- FIN TITRE DE SECTION  --> */}
@@ -277,43 +275,33 @@ class ArticleModeration extends Component {
           return(
             <div key={article.id} className="panel panel-default container-article">
               <div className="panel-heading text-left">
-                <a href={"/articles/"+article.id} className="auteur">{article.author}</a>
+              <h4 className="media-heading">{article.author}</h4>
                 <div className="btn-group boutton-supp-modif">
-                  <ul className="button-edit">
-                    <li>
-                      <a href="#" className="editer-edit-button">
-                        <i className="fa fa-pencil-square"></i>
-                        Editer
-                      </a>
-                    </li>
-                    <li>
-                      <Confirm
-                        onConfirm={this.deleteArticle.bind(this, article)}
-                        confirmText="Oui supprimer"
-                        title="Suppresion de l'article"
-                        body={"Voulez-vous vraiment supprimer l'article:"+article.title}>
-                        <button
-                          type="button"
-                          className="btn btn-danger btn-xs button-profil"
-                          title="Supprimer">Désactiver
-                        </button>
-                    </Confirm>
-                    </li>
-                  </ul>
+                  <Confirm
+                    onConfirm={this.deleteArticle.bind(this, article)}
+                    confirmText="Oui supprimer"
+                    title="Suppresion de l'article"
+                    body={"Voulez-vous vraiment supprimer l'article:"+article.title}>
+                    <button
+                      type="button"
+                      className="btn btn-danger btn-xs button-profil"
+                      title="Supprimer">Désactiver
+                    </button>
+                  </Confirm>
                 </div>
                 <div className="clearfix"></div>
               </div>
               <div className="panel-body">
                 <div className="row">
                   <div className="col-xs-12 col-sm-12 col-md-3">
-                    <a href={"/articles/"+article.id} >
-                      <img className="image-article-admin" src="images/blog/blog-post-1.jpg" alt="cover"/>
+                    <a href={"/articles/"+article.id}>
+                      <img className="image-article-admin" src={"/images/articles/"+article.image.file_name} alt="cover"/>
                     </a>
                   </div>
                   <div className="col-xs-12 col-sm-12 col-md-9 text-justify">
-                    <a href={"/articles/"+article.id} >
-                      <h4 className="media-heading">{article.title}</h4>
-                    </a>
+                    <h4 className="media-heading">
+                      <a href={"/articles/"+article.id}>{article.title}</a>
+                    </h4>
                     {article.content}
                   </div>
                 </div>

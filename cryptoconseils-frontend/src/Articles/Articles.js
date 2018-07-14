@@ -4,11 +4,11 @@ import Banner from '../Banner/Banner';
 import Meta from './Meta';
 import Denied from '../Denied/Denied'
 import Comments from './Comments'
-import Reply from './Reply'
 
 import Sidebar from '../Sidebar/Sidebar';
 import Header from '../Header/Header';
 import PreLoader from '../PreLoader/PreLoader';
+import NotFound from '../NotFound/NotFound';
 
 class Articles extends Component {
 
@@ -18,7 +18,8 @@ class Articles extends Component {
       article: [],
       image: [],
       noAccess: null,
-      noLogged: null
+      noLogged: null,
+      notFound: null
     };
   }
   componentDidMount(){
@@ -27,7 +28,7 @@ class Articles extends Component {
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
-      
+
       // récupération de l'article
       axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/'+this.props.match.params.id,authorization)
       .then(response => {
@@ -38,9 +39,11 @@ class Articles extends Component {
           noLogged: false
         });
       }).catch(error => {
-        this.setState({
-          noAccess: true
-        })
+        if(error.response.status === 403) {
+          this.setState({noAccess: true})
+        } else{
+          this.setState({notFound: true})
+        }
       });
     } else {
       this.setState({noLogged: true})
@@ -72,8 +75,7 @@ class Articles extends Component {
                     {/* Meta Starts */}
                     <Meta article={this.state.article}/>
                     {/* Meta Ends */}
-                    <Comments comments={this.state.article.comments}/>
-                    <Reply article={this.state.article}/>
+                    <Comments article={this.state.article} comments={this.state.article.comments}/>
                   </div>
                 </div>
                 <Sidebar/>
@@ -86,6 +88,8 @@ class Articles extends Component {
       return (<Denied noAccess={this.state.noAccess}/>);
     } else if(this.state.noLogged === true){
       return (<Denied noLogged={this.state.noLogged}/>);
+    } else if (this.state.notFound) {
+      return <NotFound/>
     } else return (<PreLoader/>);
   }
 }

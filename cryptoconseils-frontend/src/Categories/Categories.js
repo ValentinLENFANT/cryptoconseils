@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import News from '../Home/News';
+import ListArticle from '../News/ListArticle';
 import Sidebar from '../Sidebar/Sidebar'
 import Banner from '../Banner/Banner';
 import Header from '../Header/Header'
 import PreLoader from '../PreLoader/PreLoader';
-class LatestArticles extends Component {
+class Categories extends Component {
 
   constructor(props) {
     super(props);
@@ -32,19 +32,19 @@ class LatestArticles extends Component {
   render() {
     if(this.state.success ===  true) {
       return(
-        <div className="LatestArticles Component">
+        <div className="Categorie Component">
           <Header/>
           <Banner
             titlePart1="Categorie"
             titlePart2={this.state.categorieName}
             pageName={"categorie - "+this.state.categorieName}/>
-          <News nbArticle="20" idCategorie={this.state.categoriesId}/>
+          <ListArticle nbArticle="20" idCategorie={this.state.categoriesId}/>
           <Sidebar/>
         </div>
       );
     } else if (this.state.success === false) {
       return (
-        <div className="LatestArticles Component">
+        <div className="Categorie Component">
           <Header/>
           <Banner
             titlePart1="Categorie"
@@ -62,4 +62,4 @@ class LatestArticles extends Component {
   }
 }
 
-export default LatestArticles;
+export default Categories;

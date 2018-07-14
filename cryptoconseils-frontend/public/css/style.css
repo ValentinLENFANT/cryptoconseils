@@ -5230,3 +5230,42 @@ div#sntch_close {
 .btn-primary2 {
   .button-variant(@btn-primary-color; @btn-primary-bg; @btn-primary-border);
 }
+
+.news-article-img{
+  width: 350px;
+  height: 170px;
+}
+.news-article{
+  width: 390px;
+}
+
+.new-article-content{
+  height: 150px;
+}
+.confirm{
+  width: 100%;
+}
+.niveau{
+  color:white;
+  text-align: center;
+}
+.Inscrit-color{
+  background-color: #D9534F;
+
+}
+.Debutant-color{
+  background-color: #F0AD4E;
+
+}
+.Avancé-color{
+  background-color: #5BC0DE;
+
+}
+.Expert-color{
+  background-color: #337AB7;
+
+}
+.Lambo-color{
+  background-color: #5CB85C;
+
+}

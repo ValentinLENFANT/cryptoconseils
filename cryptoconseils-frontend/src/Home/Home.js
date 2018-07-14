@@ -3,7 +3,7 @@ import Header from '../Header/Header';
 
 import Carousel from './Caroussel';
 import WhoAreWe from '../Team/WhoAreWe';
-import News from './News';
+import ListArticle from '../News/ListArticle';
 import Features from './Features';
 import Price from '../Price/Price';
 import BitcoinCalculator from '../BitcoinCalculator/BitcoinCalculator';
@@ -28,7 +28,7 @@ class Home extends Component {
           {/* Slider Ends */}
 
           {/* Blog Section Starts */}
-            <News nbArticle="3"/>
+            <ListArticle nbArticle="3"/>
           {/* Blog Section Ends */}
 
           {/* About Section Starts */}

@@ -4,8 +4,8 @@ import axios from 'axios'
 
 class CallOfDay extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       allCalls: [],
       noAccess: false,
@@ -37,11 +37,10 @@ class CallOfDay extends Component {
     });
   }
 
-  renderLatestCall(){
-    var listCalls = this.sortArray(this.state.allCalls);
-    return listCalls.slice(0,1).map(calls => {
-      return(
-        <div key={calls.id} className="row">
+  renderCall(calls) {
+    return(
+      <div>
+        <div className="row">
           <div className="col-xs-12 col-sm-12 col-md-6">
             {/* TradingView REACT BEGIN */}
             <div className="tradingview-widget-container">
@@ -85,25 +84,63 @@ class CallOfDay extends Component {
             </div>
           </div>
         </div>
-      );
+      </div>
+    );
+  }
+  renderLatestCall(){
+    var listCalls = this.sortArray(this.state.allCalls);
+    return listCalls.slice(0,1).map(calls => {
+      if(this.props.premium_level=== false && calls.isCallFree ===  "1"){
+        return (
+          <div key={calls.id}>
+            <div className="row text-center">
+              <h2 className="title-head" id="call-premium">Call <span> du jour GRATUIT </span></h2>
+              <div className="title-head-subtitle">
+                  <p>Ce Call est GRATUIT pour tous les membres non-premium & premium !</p>
+              </div>
+            </div>
+            {this.renderCall(calls)}
+          </div>
+        );
+      } else if (this.props.premium_level === true) {
+        return(
+          <div key={calls.id}>
+            <div  className="row text-center">
+              <h2 className="title-head" id="call-premium">Call <span> du jour</span></h2>
+              <div className="title-head-subtitle">
+                  <p>Call pour membre premium en avant-première !</p>
+              </div>
+            </div>
+            {this.renderCall(calls)}
+          </div>
+        )
+      }
+      else{
+        return(
+          <div className="row">
+            <div  className="row text-center">
+              <h2 className="title-head" id="call-premium">Call <span> du jour</span></h2>
+              <div className="title-head-subtitle">
+                  <p>Call pour membre premium en avant-première !</p>
+              </div>
+            </div>
+            <div className="col-xs-12 col-sm-12 col-md-12">
+              <a href="/premium">
+                <img src="/images/backoffice/call-no-premium.jpg" className="premium-image" alt="call premium" />
+              </a>
+            </div>
+          </div>
+        );
+      }
     })
   }
 
   render() {
     return (
-      <div>
+      <div className="calls-premium">
         <section className="calls-premium section-profil">
           <div className="container">
-            <div className="row text-center">
-              <h2 className="title-head" id="call-premium">Call <span>
-                du jour
-                </span>
-              </h2>
-              <div className="title-head-subtitle">
-                <p>Création du call premium</p>
-              </div>
-            </div>
-              {this.renderLatestCall()}
+            {this.renderLatestCall()}
           </div>
         </section>
       </div>
