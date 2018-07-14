@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Header from '../Header/Header';
 
 import Carousel from './Caroussel';
-import WhoAreWe from '../Team/WhoAreWe';
 import ListArticle from '../News/ListArticle';
+import WhoAreWe from '../Team/WhoAreWe';
 import Features from './Features';
 import Price from '../Price/Price';
 import BitcoinCalculator from '../BitcoinCalculator/BitcoinCalculator';
@@ -11,7 +11,6 @@ import Expert from '../Team/Expert';
 import Quote from './Quote';
 import BitcoinChart from './BitcoinChart';
 import BeginTrade from '../BeginTrade/BeginTrade';
-
 
 class Home extends Component {
   render() {
@@ -28,7 +27,9 @@ class Home extends Component {
           {/* Slider Ends */}
 
           {/* Blog Section Starts */}
-            <ListArticle nbArticle="3"/>
+            <div className="container">
+              <ListArticle nbArticle="3"/>
+            </div>
           {/* Blog Section Ends */}
 
           {/* About Section Starts */}

@@ -50,22 +50,13 @@ class News extends Component {
         <Header/>
         <section className="blog">
           <div className="container">
-            {/* Section Title Starts */}
             <div className="row text-center">
               <h2 className="title-head">Dernières <span>Actualités</span></h2>
               <div className="title-head-subtitle">
                 <p>Découvrez les dernières actualités cryptos à la une ! <a> {this.state.pack}</a></p>
               </div>
             </div>
-            {/* Section Title Ends */}
-            {/* Section Content Starts */}
-            <div className="row latest-posts-content">
-              {/* Article Starts */}
-              {/* slice(0,3) pour limiter à trois articles */}
-              <ListArticle nbArticle={this.props.nbArticle}/>
-              {/* Article Ends */}
-            </div>
-            {/* Section Content Ends */}
+            <ListArticle nbArticle={this.props.nbArticle}/>
           </div>
         </section>
         {this.renderPremiumPrice()}
