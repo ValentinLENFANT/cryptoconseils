@@ -4,7 +4,6 @@ import Banner from '../Banner/Banner';
 import Meta from './Meta';
 import Denied from '../Denied/Denied'
 import Comments from './Comments'
-import Reply from './Reply'
 
 import Sidebar from '../Sidebar/Sidebar';
 import Header from '../Header/Header';
@@ -76,8 +75,7 @@ class Articles extends Component {
                     {/* Meta Starts */}
                     <Meta article={this.state.article}/>
                     {/* Meta Ends */}
-                    <Comments comments={this.state.article.comments}/>
-                    <Reply article={this.state.article}/>
+                    <Comments article={this.state.article} comments={this.state.article.comments}/>
                   </div>
                 </div>
                 <Sidebar/>
