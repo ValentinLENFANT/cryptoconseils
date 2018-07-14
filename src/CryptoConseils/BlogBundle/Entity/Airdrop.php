@@ -80,6 +80,28 @@ class Airdrop
     private $isAirdropFree;
 
     /**
+     * @var integer
+     * @ORM\Column(name="reward", type="integer")
+     */
+    private $reward;
+
+    /**
+     * @return int
+     */
+    public function getReward()
+    {
+        return $this->reward;
+    }
+
+    /**
+     * @param int $reward
+     */
+    public function setReward($reward)
+    {
+        $this->reward = $reward;
+    }
+
+    /**
      * @return bool
      */
     public function isAirdropFree()

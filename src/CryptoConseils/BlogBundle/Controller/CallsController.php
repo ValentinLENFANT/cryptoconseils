@@ -118,8 +118,15 @@ class CallsController extends FOSRestController
                     'scoring' => $donnees['scoring'],
                     'isCallFree' => $donnees['isCallFree']];
             }
-            $data = $this->get('jms_serializer')->serialize($calls, 'json');
 
+            for ($i = 0; $i < count($calls); $i++) {
+                $date = $calls[$i]['date'];
+                $date = explode(' ', $date);
+                $date = $date[0] . 'T' . $date[1] . '+02:00';
+                $calls[$i]['date'] = $date;
+            }
+
+            $data = $this->get('jms_serializer')->serialize($calls, 'json');
             $response = new Response($data);
             $response->headers->set('Content-Type', 'application/json');
 
@@ -138,8 +145,15 @@ class CallsController extends FOSRestController
                     'scoring' => $donnees['scoring'],
                     'isCallFree' => $donnees['isCallFree']];
             }
-            $data = $this->get('jms_serializer')->serialize($calls, 'json');
 
+            for ($i = 0; $i < count($calls); $i++) {
+                $date = $calls[$i]['date'];
+                $date = explode(' ', $date);
+                $date = $date[0] . 'T' . $date[1] . '+02:00';
+                $calls[$i]['date'] = $date;
+            }
+
+            $data = $this->get('jms_serializer')->serialize($calls, 'json');
             $response = new Response($data);
             $response->headers->set('Content-Type', 'application/json');
 
@@ -179,6 +193,14 @@ class CallsController extends FOSRestController
             if ($donnees['isCallFree'] != 1) {
                 return new JsonResponse(array('error' => 'You can not get the call. You do not have the premium level needed.'), 403);
             }
+
+            for ($i = 0; $i < count($call); $i++) {
+                $date = $call[$i]['date'];
+                $date = explode(' ', $date);
+                $date = $date[0] . 'T' . $date[1] . '+02:00';
+                $call[$i]['date'] = $date;
+            }
+
             $data = $this->get('jms_serializer')->serialize($call, 'json');
 
             $response = new Response($data);
@@ -206,8 +228,15 @@ class CallsController extends FOSRestController
         if (!isset($call)) {
             return new JsonResponse(array('error' => 'The call does not exist'), 404);
         }
-        $data = $this->get('jms_serializer')->serialize($call, 'json');
 
+        for ($i = 0; $i < count($call); $i++) {
+            $date = $call[$i]['date'];
+            $date = explode(' ', $date);
+            $date = $date[0] . 'T' . $date[1] . '+02:00';
+            $call[$i]['date'] = $date;
+        }
+
+        $data = $this->get('jms_serializer')->serialize($call, 'json');
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');
 

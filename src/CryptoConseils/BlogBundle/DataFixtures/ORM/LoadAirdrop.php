@@ -66,7 +66,8 @@ class LoadAirdrop extends AbstractFixture
             $airdrop->setType($type[rand(0, 4)]);
             $airdrop->setBeginDate($beginDate);
             $airdrop->setEndDate($endDate);
-            $airdrop->setIsAirdropFree(rand(0,1));
+            $airdrop->setIsAirdropFree(rand(0,1),
+            $airdrop->setReward(rand(1, 50)));
 
             // On la persiste
             $manager->persist($airdrop);
