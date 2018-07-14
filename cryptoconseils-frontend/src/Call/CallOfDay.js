@@ -9,12 +9,18 @@ class CallOfDay extends Component {
     this.state = {
       allCalls: [],
       noAccess: false,
-      noLogged: false
+      noLogged: false,
+      premium_level: null
     }
   }
+
   componentWillMount() {
-    // check si access token
-    if (localStorage.getItem('access_token')) {
+    if(this.props.premium < 4){
+      this.setState({premium_level: false});
+    } else if(this.props.premium >= 4){
+      this.setState({premium_level: true});
+    }
+    if(localStorage.getItem('access_token')) {
       var authorization = {
         headers: {
           'Authorization': "Bearer " + localStorage.getItem('access_token')
@@ -24,10 +30,10 @@ class CallOfDay extends Component {
       .then(response => {
         this.setState({allCalls: response.data})
       }).catch(error => {
-        this.setState({noAccess: true})
+        this.setState({premium_level: false})
       });
     } else {
-      this.setState({noLogged: true})
+      this.setState({premium_level: false})
     }
   }
 
@@ -37,6 +43,23 @@ class CallOfDay extends Component {
     });
   }
 
+  renderNoAccess(){
+    return(
+      <div className="row" key="noAccess">
+        <div  className="row text-center">
+          <h2 className="title-head" id="call-premium">Call <span> du jour</span></h2>
+          <div className="title-head-subtitle">
+              <p>Call pour membre premium en avant-première !</p>
+          </div>
+        </div>
+        <div className="col-xs-12 col-sm-12 col-md-12">
+          <a href="/premium">
+            <img src="/images/backoffice/call-no-premium.jpg" className="premium-image" alt="call premium" />
+          </a>
+        </div>
+      </div>
+    );
+  }
   renderCall(calls) {
     return(
       <div>
@@ -89,50 +112,36 @@ class CallOfDay extends Component {
   }
   renderLatestCall(){
     var listCalls = this.sortArray(this.state.allCalls);
-    return listCalls.slice(0,1).map(calls => {
-      if(this.props.premium_level=== false && calls.isCallFree ===  "1"){
-        return (
-          <div key={calls.id}>
-            <div className="row text-center">
-              <h2 className="title-head" id="call-premium">Call <span> du jour GRATUIT </span></h2>
-              <div className="title-head-subtitle">
-                  <p>Ce Call est GRATUIT pour tous les membres non-premium & premium !</p>
+    if(localStorage.getItem('access_token')) {
+      return listCalls.slice(0,1).map(calls => {
+        if(this.state.premium_level=== false && calls.isCallFree ===  "1"){
+          return (
+            <div key={calls.id}>
+              <div className="row text-center">
+                <h2 className="title-head" id="call-premium">Call <span> du jour GRATUIT </span></h2>
+                <div className="title-head-subtitle">
+                    <p>Ce Call est GRATUIT pour tous les membres non-premium & premium !</p>
+                </div>
               </div>
+              {this.renderCall(calls)}
             </div>
-            {this.renderCall(calls)}
-          </div>
-        );
-      } else if (this.props.premium_level === true) {
-        return(
-          <div key={calls.id}>
-            <div  className="row text-center">
-              <h2 className="title-head" id="call-premium">Call <span> du jour</span></h2>
-              <div className="title-head-subtitle">
-                  <p>Call pour membre premium en avant-première !</p>
+          );
+        } else if (this.state.premium_level === true) {
+          return(
+            <div key={calls.id}>
+              <div  className="row text-center">
+                <h2 className="title-head" id="call-premium">Call <span> du jour</span></h2>
+                <div className="title-head-subtitle">
+                    <p>Call pour membre premium en avant-première !</p>
+                </div>
               </div>
+              {this.renderCall(calls)}
             </div>
-            {this.renderCall(calls)}
-          </div>
-        )
-      }
-      else{
-        return(
-          <div className="row">
-            <div  className="row text-center">
-              <h2 className="title-head" id="call-premium">Call <span> du jour</span></h2>
-              <div className="title-head-subtitle">
-                  <p>Call pour membre premium en avant-première !</p>
-              </div>
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-12">
-              <a href="/premium">
-                <img src="/images/backoffice/call-no-premium.jpg" className="premium-image" alt="call premium" />
-              </a>
-            </div>
-          </div>
-        );
-      }
-    })
+          )
+        }
+        else return this.renderNoAccess();
+      })
+    } else return this.renderNoAccess();
   }
 
   render() {

@@ -3,7 +3,7 @@ import Price from '../Price/Price';
 import Menus from './Menus';
 
 import Activites from './Activites';
-import Call from './Call';
+import CallOfDay from '../Call/CallOfDay';
 import Airdrop from './Airdrop';
 import InfosPerso from './InfosPerso';
 import Header from '../Header/Header';
@@ -61,7 +61,7 @@ class Profil extends Component {
             {/* Derniers commentaires Ends */}
 
             {/*Call premium Starts */}
-              <Call premium={this.state.premium} />
+              <CallOfDay premium={this.state.premium} />
             {/*Call premiums Ends */}
 
             {/*Airdrop premium Starts */}
