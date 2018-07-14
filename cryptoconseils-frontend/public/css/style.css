@@ -5242,3 +5242,30 @@ div#sntch_close {
 .new-article-content{
   height: 150px;
 }
+.confirm{
+  width: 100%;
+}
+.niveau{
+  color:white;
+  text-align: center;
+}
+.Inscrit-color{
+  background-color: #D9534F;
+
+}
+.Debutant-color{
+  background-color: #F0AD4E;
+
+}
+.Avancé-color{
+  background-color: #5BC0DE;
+
+}
+.Expert-color{
+  background-color: #337AB7;
+
+}
+.Lambo-color{
+  background-color: #5CB85C;
+
+}

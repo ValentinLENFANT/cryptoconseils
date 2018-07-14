@@ -14,7 +14,7 @@ class UserModeration extends Component {
       listUsers: [],
       currentUser: '',
       noAccess: null,
-      premium_level: ["Non inscrit","Inscrit","Debutant","Avancée","Expert","Lambo"]
+      premium_level: ["Non inscrit","Inscrit","Debutant","Avancé","Expert","Lambo"]
     }
   }
 
@@ -40,7 +40,7 @@ class UserModeration extends Component {
       this.setState({noAccess: true})
     }
   }
-  
+
   getAllusers() {
     var authorization = {
       headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
@@ -61,24 +61,19 @@ class UserModeration extends Component {
       console.log(error);
     });
   }
-
-  deleteUser(item) {
+  
+  changeEnabledUser(item,action) {
     if(item.username === this.state.currentUser){
-      alert('Vous ne pouvez pas vous supprimer')
+      alert('Vous ne pouvez pas vous désactiver ou vous activer')
     } else {
       axios.put(process.env.REACT_APP_API_ADDRESS+'/users/edit/enabled/'+item.id,{
-        "enabled": 0
+        "enabled": action
       }).then(() => {
-        const array = this.state.listUsers;
-        // index de l'item du com que l'on veut supprimer
-        const index = array.indexOf(item);
-        // Supprimer de l'affichage du commentaire
-        array.splice(index, 1)
-        //update de l'affichage des commentaires
-        this.setState({listUsers: array});
+        this.getAllusers()
       })
     }
   }
+
 
   changeAdmin(item) {
     if(item.username === this.state.currentUser){
@@ -153,20 +148,36 @@ class UserModeration extends Component {
           <td>{user.id}</td>
           <td>{user.username}</td>
           <td>{user.email}</td>
-          <td>{this.state.premium_level[user.premium_level]}</td>
+          <td className={this.state.premium_level[user.premium_level]+"-color niveau"}>
+            {this.state.premium_level[user.premium_level]}
+          </td>
           <td>
+            {user.enabled ?
             <Confirm
-              onConfirm={this.deleteUser.bind(this, user)}
-              confirmText="Oui supprimer"
-              title="Suppresion de l'utilisateur"
-              body={"Voulez-vous vraiment supprimer"}>
+
+              onConfirm={this.changeEnabledUser.bind(this, user, false)}
+              confirmText="Désactiver"
+              title="Désactivation de l'utilisateur"
+              body={"Voulez-vous vraiment désactiver "+user.username+" ?"}>
               <button
                 type="button"
-                className="btn btn-danger button-profil"
+                className="btn btn-success button-profil confirm"
                 title="Delete">
-                Désactiver
+                Activé
               </button>
             </Confirm>
+            : <Confirm
+                onConfirm={this.changeEnabledUser.bind(this, user, true)}
+                confirmText="Activer"
+                title="Activation de l'utilisateur"
+                body={"Voulez-vous vraiment activer "+user.username+" ?"}>
+                <button
+                  type="button"
+                  className="btn btn-danger button-profil confirm"
+                  title="Activate">
+                  Désactivé
+                </button>
+              </Confirm>}
           </td>
           <td>
             {user.roles.length > 0 ? <Confirm
@@ -176,7 +187,7 @@ class UserModeration extends Component {
               body={"Voulez-vous rétrograder "+user.username+" au role de USER ?"}>
               <button
                 type="button"
-                className="btn btn-danger button-profil"
+                className="btn btn-danger button-profil confirm"
                 title="Admin">Rétrograder user
               </button>
             </Confirm>
@@ -187,7 +198,7 @@ class UserModeration extends Component {
               body={"Voulez-vous promouvoir "+user.username+" au role d'ADMIN ?"}>
               <button
                 type="button"
-                className="btn btn-success button-profil"
+                className="btn btn-success button-profil confirm"
                 title="Admin">Promouvoir admin
               </button>
             </Confirm>
@@ -197,7 +208,7 @@ class UserModeration extends Component {
           <td>
             <button
               type="button"
-              className="btn btn-info button-profil"
+              className="btn btn-info button-profil confirm"
               onClick={this.choosePremium.bind(this, user)}
               title="Admin">Changer premium
             </button>
@@ -221,10 +232,16 @@ class UserModeration extends Component {
               </div>
             </div>
           </div>
-          <table className="better-table">
+          <table className="better-table sortable" id="userTable">
             <thead>
             <tr>
-              <th>ID</th><th>Nom</th><th>Email</th><th>Niveau</th><th>Supprimer</th><th>Rôle</th><th>Premium</th>
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Niveau</th>
+              <th>État</th>
+              <th>Rôle</th>
+              <th>Premium</th>
             </tr>
           </thead>
            <tbody>
