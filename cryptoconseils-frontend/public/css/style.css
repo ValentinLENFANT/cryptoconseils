@@ -5230,3 +5230,15 @@ div#sntch_close {
 .btn-primary2 {
   .button-variant(@btn-primary-color; @btn-primary-bg; @btn-primary-border);
 }
+
+.news-article-img{
+  width: 350px;
+  height: 170px;
+}
+.news-article{
+  width: 390px;
+}
+
+.new-article-content{
+  height: 150px;
+}

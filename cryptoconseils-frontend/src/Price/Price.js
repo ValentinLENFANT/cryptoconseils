@@ -3,7 +3,7 @@ import Debutant from './Debutant'
 import Avance from './Avance'
 import Expert from './Expert'
 import Lambo from './Lambo'
-
+import Avantages from '../Premium/Avantages'
 import axios from 'axios'
 
 class Price extends Component {
@@ -13,7 +13,8 @@ class Price extends Component {
     this.state = {
       premiumLevel: null,
       access_token: localStorage.getItem('access_token'),
-      isAdmin: false
+      isAdmin: false,
+      avantages: false
     }
   }
   componentDidMount(){
@@ -35,6 +36,9 @@ class Price extends Component {
     }
   }
 
+  toggleAvantage() {
+    this.setState({avantages: !this.state.avantages})
+  }
   renderPack(){
     if(this.state.premiumLevel !== null) {
       return(
@@ -47,6 +51,18 @@ class Price extends Component {
       );
     }
   }
+
+  renderTitle() {
+    if(this.props.titlePart1 && this.props.titlePart2) {
+      return (<h2 className="title-head">{this.props.titlePart1} <span>{this.props.titlePart2}</span></h2>)
+    }else return(<h2 className="title-head">Abonnement <span>premium</span></h2>)
+  }
+
+  renderAvantages(){
+    if(this.state.avantages){
+      return <Avantages/>
+    } else return null
+  }
   render() {
     if(this.state.premiumLevel === 5) {
       return null
@@ -57,7 +73,7 @@ class Price extends Component {
             <div className="container">
               {/* Section Title Starts */}
               <div className="row text-center">
-                <h2 className="title-head">Abonnement <span>premium</span></h2>
+                {this.renderTitle()}
                 <div className="title-head-subtitle">
                   <p>Souscrivez à un abonnement premium adapté à vos besoins parmis nos différentes offres</p>
                 </div>
@@ -66,7 +82,8 @@ class Price extends Component {
               {/* Section Content Starts */}
               <div className="row pricing-tables-content">
                 <div className="pricing-container">
-                  <p><a href="/premium">Découvrez les avantages de nos pack premium</a></p>
+                  <button className="btn-primary" onClick={this.toggleAvantage.bind(this)}>Découvrez les avantages de nos pack premium</button>
+                  {this.renderAvantages()}
                   {/* Pricing Tables Starts */}
                   <ul className="pricing-list bounce-invert">
                     {this.renderPack()}
