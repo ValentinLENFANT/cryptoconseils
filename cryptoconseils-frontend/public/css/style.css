@@ -894,7 +894,7 @@ ul.nav.nav-tabs li a:hover, ul.nav.nav-tabs li.active a:hover {
 
 .site-search {
   text-align: center;
-  background: rgba(0,0,0,.7);
+  background: rgba(0,0,0,.9);
   position: absolute;
   top: 49px;
   z-index: 100;
@@ -5139,39 +5139,24 @@ div#sntch_close {
 }
 /* FIN CSS CHATBOT */
 
-/* */
-.img-search {
-  width: 50px;
-  height: 50px;
-}
 
+.res-search{
+  text-align: center;
+  background: rgba(0,0,0,1);
+  position: absolute;
+  top: 100px;
+  z-index: 200;
+  width: 100%;
+}
+.res-search li{
+  padding: 5px;
+  list-style-type:none;
+}
 .uppercase {
     text-transform: uppercase;
 }
 
-.better-table{
-  font-size: 15px;
-  margin: auto;
-}
-.better-table tr:nth-child(even) {background-color: #222222;}
-
-.better-table th,td{
-  padding: 5px;
-  border: 1px solid white;
-}
-.better-table th {
-    text-align: center;
-    background-color: #E78A1A;
-    color: white;
-}
-.list-group-item{
-  background-color: #222222;
-}
-.list-group-moderation, .list-group-item h4{
-  color: white;
-}
-
-
+/* POUR ADMIN CHANGE PREMIUM LVL USER*/
 .btn-primary-true {
   background-color: #337ab7;
   color:white;
@@ -5231,6 +5216,8 @@ div#sntch_close {
   .button-variant(@btn-primary-color; @btn-primary-bg; @btn-primary-border);
 }
 
+
+/*CSS POUR LES NEWS DANS LA HOMEPAGE*/
 .news-article-img{
   width: 350px;
   height: 170px;
@@ -5241,6 +5228,30 @@ div#sntch_close {
 
 .new-article-content{
   height: 150px;
+}
+
+
+/* POUR TABLEAU ADMIN USER*/
+.better-table{
+  font-size: 15px;
+  margin: auto;
+}
+.better-table tr:nth-child(even) {background-color: #222222;}
+
+.better-table th,td{
+  padding: 5px;
+  border: 1px solid white;
+}
+.better-table th {
+    text-align: center;
+    background-color: #E78A1A;
+    color: white;
+}
+.list-group-item{
+  background-color: #222222;
+}
+.list-group-moderation, .list-group-item h4{
+  color: white;
 }
 .confirm{
   width: 100%;

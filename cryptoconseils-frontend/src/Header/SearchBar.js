@@ -53,7 +53,7 @@ class SearchBar extends Component {
       return this.state.results.map((item)=> {
         return(
           <li key={item.id}>
-            <img src="/images/blog/blog-post-1.jpg" className="img-search"/>
+            {/*<img src="/images/blog/blog-post-1.jpg" className="img-search"/>*/}
             <a href={"/articles/" + item.id}>{item.title}</a>
           </li>
         );
@@ -99,7 +99,7 @@ class SearchBar extends Component {
             <span className="close">×</span>
           </div>
         </div>
-        <div>
+        <div className="res-search">
           <ul>
             {this.renderSearchResults()}
           </ul>
