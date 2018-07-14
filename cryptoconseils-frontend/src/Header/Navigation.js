@@ -52,8 +52,8 @@ class Navigation extends Component {
                   <li className="active"><a href="/">Accueil</a></li>
                   <li><a href="/articles">News</a></li>
                   <li><a href="/categories/7">Analyses</a></li>
-                  <li><a href="/call">Calls</a></li>
-                  <li><a href="airdrops.html">Airdrops</a></li>
+                  <li><a href="/call">Call</a></li>
+                  <li><a href="/airdrop">Airdrop</a></li>
                   <li><a href="/premium">Accès Prémium</a></li>
                   <li><a href="/team">Team</a></li>
                   <li><a href="/contact">Contact</a></li>
