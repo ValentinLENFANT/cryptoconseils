@@ -188,7 +188,8 @@ class CallsController extends FOSRestController
             if (!isset($call)) {
                 return new JsonResponse(array('error' => 'The call does not exist'), 404);
             }
-            if ($donnees['isCallFree'] != 1) {
+
+            if ($call[0]['isCallFree'] != 1) {
                 return new JsonResponse(array('error' => 'You can not get the call. You do not have the premium level needed.'), 403);
             }
 
