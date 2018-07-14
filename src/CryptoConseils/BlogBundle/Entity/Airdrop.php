@@ -80,8 +80,8 @@ class Airdrop
     private $isAirdropFree;
 
     /**
-     * @var integer
-     * @ORM\Column(name="reward", type="integer")
+     * @var string
+     * @ORM\Column(name="reward", type="string")
      */
     private $reward;
 

@@ -53,6 +53,15 @@ class LoadAirdrop extends AbstractFixture
             "Autre"
         );
 
+        $reward = array(
+            "1 BTC",
+            "10 ETH",
+            "200 XRP",
+            "10 NEO",
+            "200 TRX",
+            "140 GAS",
+        );
+
         $beginDate = new \Datetime();
 
         $endDate = new \DateTime();
@@ -66,8 +75,8 @@ class LoadAirdrop extends AbstractFixture
             $airdrop->setType($type[rand(0, 4)]);
             $airdrop->setBeginDate($beginDate);
             $airdrop->setEndDate($endDate);
-            $airdrop->setIsAirdropFree(rand(0,1),
-            $airdrop->setReward(rand(1, 50)));
+            $airdrop->setIsAirdropFree(rand(0,1));
+            $airdrop->setReward($reward[$i]);
 
             // On la persiste
             $manager->persist($airdrop);
