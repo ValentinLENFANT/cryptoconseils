@@ -111,6 +111,7 @@ class AirdropController extends FOSRestController
 
           $reponse = $bdd->query('SELECT * FROM airdrop');
           while ($donnees = $reponse->fetch()) {
+              $imagesInfos = $bdd->query('SELECT fileName FROM image where id ='.$donnees['imageId'])->fetch();
               $airdrops[] = ['id' => $donnees['id'],
                   'author' => $donnees['author'],
                   'beginDate' => $donnees['beginDate'],
@@ -120,7 +121,9 @@ class AirdropController extends FOSRestController
                   'content' => $donnees['content'],
                   'isAirdropFree' => $donnees['isAirdropFree'],
                   'reward' => $donnees['reward'],
-                  'imageId' => $donnees['imageId']
+                  'imageId' => $donnees['imageId'],
+                  'image' => $imagesInfos["fileName"]
+
               ];
           }
 

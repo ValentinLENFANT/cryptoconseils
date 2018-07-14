@@ -65,7 +65,7 @@ class AirdropOfDay extends Component {
         <div className="row">
           <div className="col-xs-12 col-sm-12 col-md-6">
             <a href="#premium">
-              <img src={"/images/articles/blog-article-"+airdrop.imageId+".png"} alt="call premium" className="image-airdrop-premium"/>
+              <img src={"/images/articles/"+airdrop.image} alt="call premium" className="image-airdrop-premium"/>
             </a>
           </div>
           <div className="col-xs-12 col-sm-12 col-md-6">
