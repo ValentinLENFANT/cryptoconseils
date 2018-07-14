@@ -3,6 +3,7 @@ import Header from '../Header/Header'
 import PreLoader from '../PreLoader/PreLoader';
 import CallOfDay from './CallOfDay';
 import axios from 'axios'
+
 class Call extends Component {
   constructor(){
     super();

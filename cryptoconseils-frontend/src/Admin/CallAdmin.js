@@ -64,8 +64,8 @@ class CallAdmin extends Component {
       this.setState({statusMsg: "Le ticker doit contenir 6 caractères"})
     } else if (this.state.name.length <= 0) {
       this.setState({statusMsg: "Le nom est requis"})
-    } else if (this.state.analyse.length < 30 || this.state.analyse.length > 300) {
-      this.setState({statusMsg: "L'analyse doit faire entre 30 et 300 caractères"})
+    } else if (this.state.analyse.length < 20 || this.state.analyse.length > 400) {
+      this.setState({statusMsg: "L'analyse doit faire entre 20 et 400 caractères"})
     } else if (Number(this.state.achat) <= 0) {
       this.setState({statusMsg: "Le prix d'achat doit être supérieur à 0"})
     } else if (Number(this.state.vente) <= 0) {
@@ -209,13 +209,13 @@ class CallAdmin extends Component {
                         id="analyse"
                         name="analyse"
                         placeholder="Analyse technique"
-                        maxLength="300"
+                        maxLength="400"
                         rows="7"
                         value={this.state.analyse}
                         onChange={this.handleChange}>
                       </textarea>
                       <span className="help-block">
-                        <p id="characterLeft" className="help-block ">{300 - this.state.analyse.length} caractères restant</p>
+                        <p id="characterLeft" className="help-block ">{400 - this.state.analyse.length} caractères restant</p>
                       </span>
                     </div>
                   </div>
@@ -265,7 +265,7 @@ class CallAdmin extends Component {
                     </div>
                     <div className="form-group">
                       <label>
-                        Call is free
+                        Call gratuit
                         <input
                           name="isCallFree"
                           type="checkbox"
