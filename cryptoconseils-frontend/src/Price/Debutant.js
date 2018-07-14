@@ -12,14 +12,21 @@ class Debutant extends Component {
 
   renderButton(){
     if(this.props.isAdmin){
-      return <button href={ "90.90.185.202:8000/orders/new/100?accessToken=" + this.state.access_token } className="btn btn-primary">COMMANDER</button>
+      return (
+        <a href={"http://90.90.185.202:8000/orders/new/100?accessToken=" + this.state.access_token } className="btn btn-primary">
+          COMMANDER
+        </a>
+      );
     }else {
-      return <button href={ "90.90.185.202:8000/orders/new/100?accessToken=" + this.state.access_token } className="btn btn-primary" disabled>COMMANDER</button>
+      return (
+        <a href={"http://90.90.185.202:8000/orders/new/100?accessToken=" + this.state.access_token } className="btn btn-primary" disabled>
+          COMMANDER
+        </a>
+      );
     }
   }
 
   render() {
-    console.log(this.state.premiumLevel);
     if(this.state.premiumLevel < 2) {
       return(
         <div className="Price Component">
