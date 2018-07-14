@@ -13,21 +13,15 @@ class Debutant extends Component {
   renderButton(){
     if(this.props.isAdmin){
       return (
-
-          <a href={ "cryptoconseils.fr:8000/orders/new/100?accessToken=" + this.state.access_token } className="btn btn-primary">
-
-            COMMANDER
-
-          </a>
-
+        <a href={ "cryptoconseils.fr:8000/orders/new/100?accessToken=" + this.state.access_token } className="btn btn-primary">
+          COMMANDER
+        </a>
       );
     }else {
       return (
-
-          <a href={ "cryptoconseils.fr:8000/orders/new/100?accessToken=" + this.state.access_token } className="btn btn-primary" disabled>
-            COMMANDER
-          </a>
-        
+        <a href={ "cryptoconseils.fr:8000/orders/new/100?accessToken=" + this.state.access_token } className="btn btn-primary" disabled>
+          COMMANDER
+        </a>
       );
     }
   }
