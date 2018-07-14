@@ -14,10 +14,13 @@ class Price extends Component {
       premiumLevel: null,
       access_token: localStorage.getItem('access_token'),
       isAdmin: false,
-      avantages: false
+      showAvantages: false
     }
   }
   componentDidMount(){
+    if(this.props.showAvantages) {
+      this.setState({showAvantages: this.props.showAvantages })
+    }
     if(localStorage.getItem('access_token')){
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
@@ -37,7 +40,7 @@ class Price extends Component {
   }
 
   toggleAvantage() {
-    this.setState({avantages: !this.state.avantages})
+    this.setState({showAvantages: !this.state.showAvantages})
   }
   renderPack(){
     if(this.state.premiumLevel !== null) {
@@ -59,7 +62,7 @@ class Price extends Component {
   }
 
   renderAvantages(){
-    if(this.state.avantages){
+    if(this.state.showAvantages){
       return <Avantages/>
     } else return null
   }
