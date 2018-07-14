@@ -67,7 +67,7 @@ class Admin extends Component {
             {/*Call premiums Ends */}
 
             {/*Airdrop premium Starts */}
-              <AirdropAdmin />
+              <AirdropAdmin author={this.state.username} />
             {/*Airdrop premiums Ends */}
 
             {/* ArticleAdmin Starts */}

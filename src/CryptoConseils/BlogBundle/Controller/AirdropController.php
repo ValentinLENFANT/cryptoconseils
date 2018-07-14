@@ -55,6 +55,10 @@ class AirdropController extends FOSRestController
                 return new JsonResponse(array('error' => 'Reward cannot be null.'), 403);
             }
 
+            if (null === $data->imageId) {
+                return new JsonResponse(array('error' => 'Image_id cannot be null.'), 403);
+            }
+
             $airdrop = $this->get('jms_serializer')->deserialize(json_encode($data), 'CryptoConseils\BlogBundle\Entity\Airdrop', 'json');
 
             $airdrop->setAuthor($data->author);
@@ -77,6 +81,7 @@ class AirdropController extends FOSRestController
                 $airdrop->setIsAirdropFree($data->isAirdropFree);
             }
             $airdrop->setReward($data->reward);
+            $airdrop->setImageId($data->imageId);
 
 
             // Analyse si les conditions sur les champs sont respectées //
@@ -94,80 +99,50 @@ class AirdropController extends FOSRestController
         }
     }
 
-    public function allAirdropsAction() // [GET] airdrop/
+    public function allAirdropsAction() // [GET] airdrop/all
     {
         try {
             $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
-        $user = $this->getUser();
-        if (!isset($user) || $user->getPremiumLevel() < 2) {
-            $reponse = $bdd->query('SELECT * FROM airdrop WHERE isAirdropFree = 1');
-            while ($donnees = $reponse->fetch()) {
-                $airdrops[] = ['id' => $donnees['id'],
-                    'author' => $donnees['author'],
-                    'beginDate' => $donnees['beginDate'],
-                    'endDate' => $donnees['endDate'],
-                    'type' => $donnees['type'],
-                    'cryptocurrencyName' => $donnees['cryptocurrencyName'],
-                    'content' => $donnees['content'],
-                    'isAirdropFree' => $donnees['isAirdropFree'],
-                    'reward' => $donnees['reward']];
-            }
 
-            for ($i = 0; $i < count($airdrops); $i++) {
-                $date = $airdrops[$i]['beginDate'];
-                $date = explode(' ', $date);
-                $date = $date[0] . 'T' . $date[1] . '+02:00';
-                $airdrops[$i]['beginDate'] = $date;
-            }
-            for ($i = 0; $i < count($airdrops); $i++) {
-                $date = $airdrops[$i]['endDate'];
-                $date = explode(' ', $date);
-                $date = $date[0] . 'T' . $date[1] . '+02:00';
-                $airdrops[$i]['endDate'] = $date;
-            }
 
-            $data = $this->get('jms_serializer')->serialize($airdrops, 'json');
-            $response = new Response($data);
-            $response->headers->set('Content-Type', 'application/json');
 
-            return $response;
-        } else {
+          $reponse = $bdd->query('SELECT * FROM airdrop');
+          while ($donnees = $reponse->fetch()) {
+              $airdrops[] = ['id' => $donnees['id'],
+                  'author' => $donnees['author'],
+                  'beginDate' => $donnees['beginDate'],
+                  'endDate' => $donnees['endDate'],
+                  'type' => $donnees['type'],
+                  'cryptocurrencyName' => $donnees['cryptocurrencyName'],
+                  'content' => $donnees['content'],
+                  'isAirdropFree' => $donnees['isAirdropFree'],
+                  'reward' => $donnees['reward'],
+                  'imageId' => $donnees['imageId']
+              ];
+          }
 
-            $reponse = $bdd->query('SELECT * FROM airdrop');
-            while ($donnees = $reponse->fetch()) {
-                $airdrops[] = ['id' => $donnees['id'],
-                    'author' => $donnees['author'],
-                    'beginDate' => $donnees['beginDate'],
-                    'endDate' => $donnees['endDate'],
-                    'type' => $donnees['type'],
-                    'cryptocurrencyName' => $donnees['cryptocurrencyName'],
-                    'content' => $donnees['content'],
-                    'isAirdropFree' => $donnees['isAirdropFree'],
-                    'reward' => $donnees['reward']];
-            }
+          for ($i = 0; $i < count($airdrops); $i++) {
+              $date = $airdrops[$i]['beginDate'];
+              $date = explode(' ', $date);
+              $date = $date[0] . 'T' . $date[1] . '+02:00';
+              $airdrops[$i]['beginDate'] = $date;
+          }
+          for ($i = 0; $i < count($airdrops); $i++) {
+              $date = $airdrops[$i]['endDate'];
+              $date = explode(' ', $date);
+              $date = $date[0] . 'T' . $date[1] . '+02:00';
+              $airdrops[$i]['endDate'] = $date;
+          }
 
-            for ($i = 0; $i < count($airdrops); $i++) {
-                $date = $airdrops[$i]['beginDate'];
-                $date = explode(' ', $date);
-                $date = $date[0] . 'T' . $date[1] . '+02:00';
-                $airdrops[$i]['beginDate'] = $date;
-            }
-            for ($i = 0; $i < count($airdrops); $i++) {
-                $date = $airdrops[$i]['endDate'];
-                $date = explode(' ', $date);
-                $date = $date[0] . 'T' . $date[1] . '+02:00';
-                $airdrops[$i]['endDate'] = $date;
-            }
+          $data = $this->get('jms_serializer')->serialize($airdrops, 'json');
+          $response = new Response($data);
+          $response->headers->set('Content-Type', 'application/json');
 
-            $data = $this->get('jms_serializer')->serialize($airdrops, 'json');
-            $response = new Response($data);
-            $response->headers->set('Content-Type', 'application/json');
-
-            return $response;
-        }
+          return $response;
+      
     }
 
     public function airdropAction(Request $request, $id) // [GET] /airdrop/{id}
@@ -193,7 +168,9 @@ class AirdropController extends FOSRestController
                     'cryptocurrencyName' => $donnees['cryptocurrencyName'],
                     'content' => $donnees['content'],
                     'isAirdropFree' => $donnees['isAirdropFree'],
-                    'reward' => $donnees['reward']];
+                    'reward' => $donnees['reward'],
+                  'imageId' => $donnees['imageId']
+                ];
             }
             if (!isset($airdrop)) {
                 return new JsonResponse(array('error' => 'The call does not exist'), 404);
@@ -235,7 +212,8 @@ class AirdropController extends FOSRestController
                 'cryptocurrencyName' => $donnees['cryptocurrencyName'],
                 'content' => $donnees['content'],
                 'isAirdropFree' => $donnees['isAirdropFree'],
-                'reward' => $donnees['reward']];
+                'reward' => $donnees['reward'],
+              'imageId' => $donnees['imageId']];
         }
         if (!isset($airdrop)) {
             return new JsonResponse(array('error' => 'The call does not exist'), 404);

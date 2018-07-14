@@ -5,50 +5,35 @@ class AirdropAdmin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      crypto: '',
+      cryptocurrency_name: '',
       analyse: '',
-      step: [],
-      gift: '',
+      type: '',
+      reward: '',
+      isAirdropFree: null,
       statusMsg: null,
-      published: false
+      published: false,
+      source_image: '',
+      image_name: ''
     }
     this.handleChange = this.handleChange.bind(this);
   }
 
   // enregistre la valeur des inputs
   handleChange(event) {
-
     let target = event.target;
     let value = target.value
     let name = target.id;
-    this.setState({[name]: value}, () => {
-      if(name === "achat" || name ==="vente") {
-        this.calculateScore(this.state.achat,this.state.vente);
-      }
-    });
-  }
-
-  addStep(event) {
-    // Permet de ne pas recharger la page
-    event.preventDefault();
-
-    this.setState({
-      // renit après ajout d'un item
-      userInput: null,
-      // On reprend le tableau à l'origine, et ajout du nouvel item
-      items: [...this.state.items, this.state.userInput]
-    },() => console.log(this.state.items));
-  }
-
-  renderStep() {
-    return this.state.step
+    this.setState({[name]: value});
   }
 
   renderStatusMsg(){
     if (this.state.published === true) {
       return(
         <div className="col-md-10 text-center output_message_holder d-block">
-        <a href="/call">  <p className="output_message success">{this.state.statusMsg}</p></a>
+          <a href="/airdrop">
+            <p className="output_message success">{this.state.statusMsg}
+            </p>
+          </a>
         </div>
       );
     }else if(this.state.statusMsg !== null && this.state.published === false ) {
@@ -59,37 +44,57 @@ class AirdropAdmin extends Component {
       );
     }
   }
+  sendImage(event) {
+    event.preventDefault();
+    let data = new FormData();
+    data.append('image', event.target.files[0]);
+    axios.post(process.env.REACT_APP_API_ADDRESS+'/images/new/',data)
+    .then(response => {
+      console.log(response.data);
+      this.setState({source_image: response.data.id,image_name: response.data.fileName})
+   });
+  }
 
-  sendCall(event){
+  sendAirdrop(event){
     // pour éviter le rechargement de la page
     event.preventDefault();
-    console.log(this.state);
     // vérification des champs
-    if(this.state.crypto.length < 3 ) {
+    if(this.state.cryptocurrency_name.length < 3 ) {
       this.setState({statusMsg: "Le nom doit 3 caractères"})
-    }else if (this.state.analyse.length < 20 || this.state.analyse.length > 400) {
-      this.setState({statusMsg: "L'analyse doit faire entre 20 et 400 caractères"})
-    } else if (this.state.step.length <= 0) {
-      this.setState({statusMsg: "Vous devez remplir une étape"})
-    } else if (this.state.gift.length <= 0) {
+    }else if (this.state.analyse.length < 20 || this.state.analyse.length > 500) {
+      this.setState({statusMsg: "L'analyse doit faire entre 20 et 500 caractères"})
+    } else if (this.state.type.length <= 0) {
+      this.setState({statusMsg: "Vous devez remplir un type"})
+    } else if (this.state.reward.length <= 0) {
       this.setState({statusMsg: "Vous devez remplir une récompense"})
+    } else if (this.state.source_image.length <= 0) {
+      this.setState({statusMsg: "Une image est requise"})
     } else {
       console.log("TENTAVIE DE PUBLICATION");
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
       axios.post(process.env.REACT_APP_API_ADDRESS+'/airdrop/new/',{
-        cryptocurrencyPair: this.state.ticker,
-        cryptocurrencyName: this.state.name,
         author: this.props.author,
         content: this.state.analyse,
-        buyPrice: this.state.achat,
-        sellPrice: this.state.vente,
-        scoring: this.state.score
+        reward: this.state.reward,
+        type: this.state.type,
+        cryptocurrencyName: this.state.cryptocurrency_name,
+        isAirdropFree: this.state.isAirdropFree,
+        imageId: this.state.source_image
       },authorization)
       .then(response => {
-        console.log(response);
-        this.setState({published: true,statusMsg: "Le call du jour a été publié !"})
+        this.setState({
+          published: true,
+          statusMsg: "L'Airdrop a été publié !",
+          cryptocurrency_name: '',
+          analyse: '',
+          type: '',
+          reward: '',
+          isAirdropFree: null,
+          source_image: '',
+          image_name: ''
+        })
       }).catch(error => {
         console.log(error.response);
       });
@@ -101,13 +106,13 @@ class AirdropAdmin extends Component {
       <div className="row">
         <div className="col-xs-12 col-sm-12 col-md-6">
           <a href="#premium">
-            <img src="/images/backoffice/airdrop-premium.jpg" alt="call premium" className="image-airdrop-premium"/>
+            <img src={"/images/articles/"+this.state.image_name} alt="call premium" className="image-airdrop-premium"/>
           </a>
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6">
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12">
-              <p id="airdrop-ticker">{this.state.crypto}</p>
+              <p id="airdrop-ticker">{this.state.cryptocurrency_name}</p>
               <p className="texte-airdrop-premium">
                 {this.state.analyse}
               </p>
@@ -116,7 +121,7 @@ class AirdropAdmin extends Component {
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12">
               <p className="etape-airdrop">
-                {this.renderStep()}
+                {"Type "+this.state.type}
               </p>
             </div>
           </div>
@@ -125,7 +130,7 @@ class AirdropAdmin extends Component {
               <div className="btn btn-success btn-lg">RECOMPENSE</div>
             </div>
             <div className="col-xs-6 col-sm-6 col-md-8 prix-call">
-              <div className="recompense-airdrop">{this.state.gift}</div>
+              <div className="recompense-airdrop">{this.state.reward}</div>
             </div>
           </div>
         </div>
@@ -151,18 +156,18 @@ class AirdropAdmin extends Component {
           <div className="row">
             <div className="col-md-12">
               <div className="form-area">
-                <form className="contact-form" role="form">
+                <form onSubmit={this.sendAirdrop.bind(this)}className="contact-form" role="form">
                   <div className="col-md-6">
                     <div className="form-group">
                       <input
                         type="text"
                         className="form-control"
-                        id="crypto"
-                        name="crypto"
-                        placeholder="BTC"
+                        id="cryptocurrency_name"
+                        name="cryptocurrency_name"
+                        placeholder="Nom de la crypto, exemple : BTC"
                         required="required"
                         onChange={this.handleChange}
-                        vlaue={this.state.crypto}/>
+                        value={this.state.cryptocurrency_name}/>
                     </div>
                     <div className="form-group">
                       <textarea
@@ -170,13 +175,14 @@ class AirdropAdmin extends Component {
                         type="textarea"
                         id="analyse"
                         placeholder="Analyse technique"
-                        maxLength="400"
+                        maxLength="500"
                         rows="7"
                         onChange={this.handleChange}
-                        value={this.state.analyse}>
+                        value={this.state.analyse}
+                        required>
                       </textarea>
                       <span className="help-block">
-                        <p id="characterLeft" className="help-block ">Limite de charactères atteintes</p>
+                        <p id="characterLeft" className="help-block ">{500 - this.state.analyse.length} caractères restant</p>
                       </span>
                     </div>
                   </div>
@@ -186,30 +192,47 @@ class AirdropAdmin extends Component {
                       <input
                         type="text"
                         className="form-control"
-                        id="step"
-                        name="step"
-                        placeholder="Etape 1: suivre le facebook"
+                        id="type"
+                        name="type"
+                        placeholder="Type, exemple: Wallet"
                         required="required"
                         onChange={this.handleChange}
-                        value={this.state.step}/>
+                        value={this.state.type}/>
                     </div>
                     <div className="form-group">
                       <input
                         type="text"
                         className="form-control"
-                        id="gift"
-                        name="gift"
-                        placeholder="Recompense"
+                        id="reward"
+                        name="reward"
+                        placeholder="Recompense, exemple: 100 APIS"
                         required="required"
                         onChange={this.handleChange}
-                        value={this.state.gift}/>
+                        value={this.state.reward}/>
                     </div>
                     <div className="form-group">
                       <label className="control-label" htmlFor="source_image">Airdrop image (max height:400px)
                         <i className="fa fa-picture-o" aria-hidden="true"></i>
                       </label>
-                      <input id="source_image" name="source_image" className="input-file" type="file"/>
+                      <input
+                        id="source_image"
+                        name="source_image"
+                        className="input-file"
+                        type="file"
+                        onChange={this.sendImage.bind(this)}
+                        />
                     </div>
+                    <div className="form-group">
+                      <label>
+                        Airdrop gratuit
+                        <input
+                          name="isAirdropFree"
+                          type="checkbox"
+                          checked={this.state.isAirdropFree}
+                          onChange={this.handleChange} />
+                      </label>
+                    </div>
+                  </div>
                     <div className="col-md-12 form-group">
                       {this.renderStatusMsg()}
                       <button className="col-md-2"
@@ -219,7 +242,7 @@ class AirdropAdmin extends Component {
                         className="btn btn-primary pull-right">PUBLIER
                       </button>
                     </div>
-                  </div>
+
                 </form>
               </div>
             </div>

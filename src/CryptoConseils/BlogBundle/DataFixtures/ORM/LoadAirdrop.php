@@ -77,6 +77,7 @@ class LoadAirdrop extends AbstractFixture
             $airdrop->setEndDate($endDate);
             $airdrop->setIsAirdropFree(rand(0,1));
             $airdrop->setReward($reward[$i]);
+            $airdrop->setImageId(rand(0,7));
 
             // On la persiste
             $manager->persist($airdrop);

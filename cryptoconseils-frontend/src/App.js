@@ -90,6 +90,11 @@ const Call = Loadable({
   loading: Loading,
 });
 
+const Airdrop = Loadable({
+  loader: () => import('./Airdrop/Airdrop'),
+  loading: Loading,
+});
+
 const Moderation = Loadable({
   loader: () => import('./Admin/Moderation/Moderation'),
   loading: Loading,
@@ -125,6 +130,7 @@ class App extends Component {
           <Route exact path="/admin/moderation" component={Moderation}/>
           <Route exact path="/team" component={Team}/>
           <Route exact path="/call" component={Call}/>
+          <Route exact path="/airdrop" component={Airdrop}/>
           <Route exact path="/premium" component={Premium}/>
           <Route component={NotFound}/>
         </Switch>

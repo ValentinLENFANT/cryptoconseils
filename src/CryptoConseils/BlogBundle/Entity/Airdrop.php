@@ -86,7 +86,29 @@ class Airdrop
     private $reward;
 
     /**
+     * @var string
+     * @ORM\Column(name="imageId", type="string", nullable=true)
+     */
+    private $imageId;
+
+    /**
      * @return int
+     */
+    public function getImageId()
+    {
+        return $this->imageId;
+    }
+
+    /**
+     * @param int $imageId
+     */
+    public function setImageId($imageId)
+    {
+        $this->imageId = $imageId;
+    }
+
+    /**
+     * @return string
      */
     public function getReward()
     {
@@ -94,7 +116,7 @@ class Airdrop
     }
 
     /**
-     * @param int $reward
+     * @param string $reward
      */
     public function setReward($reward)
     {
