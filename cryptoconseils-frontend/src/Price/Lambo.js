@@ -12,9 +12,17 @@ class Lambo extends Component {
 
   renderButton(){
     if(this.props.isAdmin){
-      return <button href={ "cryptoconseils.fr:8000/orders/new/1000?accessToken=" + this.state.access_token } className="btn btn-primary">COMMANDER</button>
+      return (
+        <a href={ "cryptoconseils.fr:8000/orders/new/1000?accessToken=" + this.state.access_token } className="btn btn-primary">
+          COMMANDER
+        </a>
+      );
     }else {
-      return <button href={ "cryptoconseils.fr:8000/orders/new/1000?accessToken=" + this.state.access_token } className="btn btn-primary" disabled>COMMANDER</button>
+      return (
+        <a href={ "cryptoconseils.fr:8000/orders/new/1000?accessToken=" + this.state.access_token } className="btn btn-primary" disabled>
+          COMMANDER
+        </a>
+      );
     }
   }
 
