@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Price from '../Price/Price'
-class News extends Component {
+
+class ListArticle extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       articles: [],
-      newDate: null,
-      pack: '',
-      premium : null
+      newDate: null
     };
   }
 
@@ -21,23 +19,12 @@ class News extends Component {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
     }
-
-    // on récupère l'utilisateur courant
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/',authorization)
-    .then(response => {
-      var lvl = ["", "Inscrit","Debutant","Avancé","Expert","Lambo"];
-      var pack;
-      console.log(response.data);
-      if(response.data.premiumLevel >=2) {
-        pack = "Pack "+ lvl[response.data.premiumLevel]
-      }
-      this.setState({pack: pack, premium: response.data.premiumLevel})
-    }).catch(error => {
-    console.log(error);
-    });
-
+    var nbArticle;
+    if(this.props.nbArticle){
+      nbArticle = this.props.nbArticle;
+    } else nbArticle = 9
     // récupère tous les articles
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/newest/'+this.props.nbArticle, authorization)
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/newest/'+nbArticle, authorization)
     .then(response => {
       if(this.props.idCategorie) {
         this.setState({
@@ -73,14 +60,8 @@ class News extends Component {
     return new Date(date);
   }
 
-  renderPremiumPrice(){
-    if (this.state.premium < 5) {
-      return <Price titlePart1="Vous souhaitez lire" titlePart2="plus d'article ?"/>
-    } else return null
-  }
   renderArticles() {
     return this.state.articles.map(article => {
-
       return(
         <div className="col-sm-4 col-md-4 col-xs-12 news-article" key={article.id}>
           <div className="latest-post">
@@ -119,31 +100,13 @@ class News extends Component {
   }
   render() {
     return(
-      <div className="News Component">
-        <section className="blog">
-          <div className="container">
-            {/* Section Title Starts */}
-            <div className="row text-center">
-              <h2 className="title-head">Dernières <span>Actualités</span></h2>
-              <div className="title-head-subtitle">
-                <p>Découvrez les dernières actualités cryptos à la une ! <a> {this.state.premium}</a></p>
-              </div>
-            </div>
-            {/* Section Title Ends */}
-            {/* Section Content Starts */}
-            <div className="row latest-posts-content">
-              {/* Article Starts */}
-              {/* slice(0,3) pour limiter à trois articles */}
-              {this.renderArticles()}
-              {/* Article Ends */}
-            </div>
-            {/* Section Content Ends */}
-          </div>
-        </section>
-        {this.renderPremiumPrice()}
+      <div className="ListArticle Component">
+        <div className="row latest-posts-content">
+          {this.renderArticles()}
+        </div>
       </div>
     );
   }
 }
 
-export default News;
+export default ListArticle;

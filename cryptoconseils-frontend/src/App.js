@@ -30,8 +30,13 @@ const Articles = Loadable({
   loading: Loading,
 });
 
-const LatestArticles = Loadable({
-  loader: () => import('./LatestArticles/LatestArticles'),
+const News = Loadable({
+  loader: () => import('./News/News'),
+  loading: Loading,
+});
+
+const AllArticles = Loadable({
+  loader: () => import('./News/AllArticles'),
   loading: Loading,
 });
 
@@ -112,7 +117,8 @@ class App extends Component {
           <Route exact path="/signin/token/:token" component={SignIn}/>
           <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/newpassword/:token" component={NewPassword}/>
-          <Route exact path="/articles" component={LatestArticles}/>
+          <Route exact path="/articles" component={News}/>
+          <Route exact path="/articles/all" component={AllArticles}/>
           <Route path="/articles/:id" component={Articles}/>
           <Route path="/categories/:id" component={Categories}/>
           <Route exact path="/admin" component={Admin}/>
