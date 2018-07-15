@@ -98,7 +98,7 @@ class CommentModeration extends Component {
                   Par: <a href="#">{item.author}</a> {this.convertDate(item.date)}
                 </div>
               </div>
-              <div className="comment-text">
+              <div className="comment-text white-space-pre">
                 <h4>{item.content}</h4>
               </div>
               <div className="action">

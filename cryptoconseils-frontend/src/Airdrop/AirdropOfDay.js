@@ -89,7 +89,7 @@ class AirdropOfDay extends Component {
             <div className="row">
               <div className="col-xs-12 col-sm-12 col-md-12">
                 <p id="airdrop-ticker">{airdrop.cryptocurrencyName}</p>
-                <p className="texte-airdrop-premium">
+                <p className="texte-airdrop-premium white-space-pre">
                   {airdrop.content}
                 </p>
               </div>

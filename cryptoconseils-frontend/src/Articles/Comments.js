@@ -229,7 +229,7 @@ class Comments extends Component {
                     <span className="comment-author">{cmt.author}</span>
                     <span className="comment-date pull-right"> {this.convertDate(cmt.date)}</span>
                   </div>
-                  <p className="comment-content">{cmt.content}</p>
+                  <p className="comment-content white-space-pre">{cmt.content}</p>
                 </div>
                 {this.renderDeleteButton(cmt.id)}
               </div>

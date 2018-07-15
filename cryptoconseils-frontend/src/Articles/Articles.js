@@ -67,7 +67,7 @@ class Articles extends Component {
                     </div>
                     {/* Figure Ends */}
                     {/* Content Starts */}
-                    <p className="content-article">
+                    <p className="content-article white-space-pre">
                       {this.state.article.content}
                     </p>
                     {/* Content Ends */}

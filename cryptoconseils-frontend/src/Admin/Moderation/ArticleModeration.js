@@ -299,7 +299,7 @@ class ArticleModeration extends Component {
                           <img className="image-article-admin" src={"/images/articles/"+article.image.file_name} alt="cover"/>
                         </a>
                       </div>
-                      <div className="col-xs-12 col-sm-12 col-md-9 text-justify">
+                      <div className="col-xs-12 col-sm-12 col-md-9 text-justify white-space-pre">
                         <h4 className="media-heading">
                           <a href={"/articles/"+article.id}>{article.title}</a>
                         </h4>

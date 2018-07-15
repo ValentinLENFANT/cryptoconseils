@@ -5306,3 +5306,6 @@ div#sntch_close {
 .Cgu h1 {
   color: white;
 }
+.white-space-pre {
+    white-space: pre-wrap;
+}

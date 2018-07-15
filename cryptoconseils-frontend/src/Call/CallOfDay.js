@@ -86,7 +86,7 @@ class CallOfDay extends Component {
 
             <div className="row">
               <div className="col-xs-12 col-sm-12 col-md-12">
-                <p className="desciption-call-premium">
+                <p className="desciption-call-premium white-space-pre">
                   {calls.content}
                 </p>
               </div>

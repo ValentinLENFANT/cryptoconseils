@@ -89,7 +89,7 @@ class ListArticle extends Component {
               <h4 className="post-title">
                 <a href={"/articles/" + article.id}>{article.title}</a>
               </h4>
-              <div className="post-text">
+              <div className="post-text white-space-pre">
                 <p>
                   {article.content.split(" ").splice(0,20).join(" ")+" ..."}
                 </p>
