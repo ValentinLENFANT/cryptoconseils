@@ -49,41 +49,62 @@ class Profil extends Component {
         {/* Wrapper Starts */}
           <div className="wrapper">
             {/* Header Starts */}
+            <div>
               <Header/>
+            </div>
             {/* Header Ends */}
 
             {/* Menus Starts */}
+            <div>
               <Menus premium={this.state.premium} />
+            </div>
             {/* Menus Ends */}
 
             {/* Derniers commentaires Starts */}
+            <div>
               <Activites />
+            </div>
             {/* Derniers commentaires Ends */}
 
             {/*Call premium Starts */}
+            <div>
               <CallOfDay premium={this.state.premium} />
+            </div>
             {/*Call premiums Ends */}
 
             {/*Airdrop premium Starts */}
+            <div>
               <AirdropOfDay premium={this.state.premium} />
+            </div>
             {/*Airdrop premiums Ends */}
 
             {/*InfosPerso Starts */}
+            <div>
               <InfosPerso user={this.state.user}/>
+            </div>
             {/*InfosPerso Ends */}
 
             {/* Pricing Starts */}
+            <div>
               <Price/>
+            </div>
             {/* Pricing Ends */}
-
           {/* Wrapper Ends */}
           </div>
         </div>
       );
     } else if(this.state.noLogged === true){
-      return <Denied noLogged={true}/>
+      return (
+        <div>
+          <Denied noLogged={true}/>
+        </div>
+      )
     } else {
-      return <PreLoader/>
+      return (
+        <div>
+          <PreLoader/>
+        </div>
+      )
     }
   }
 }
