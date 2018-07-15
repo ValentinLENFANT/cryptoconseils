@@ -293,7 +293,7 @@ class SignIn extends Component {
               </div>
               <div className="form-group">
                 <Recaptcha
-                  sitekey="6LfdTWQUAAAAAEmlz2WxS1YOcVpLaXvKO61m_W4s"
+                  sitekey="6LfDUGQUAAAAAAB-hyv9XUf520-2hbHQEw3stwWP"
                   render="explicit"
                   verifyCallback={this.verifyCallback}
                   onloadCallback={this.loadCapcha}
@@ -355,7 +355,7 @@ class SignIn extends Component {
               </div>
               <div className="form-group">
                 <Recaptcha
-                  sitekey="6LfdTWQUAAAAAEmlz2WxS1YOcVpLaXvKO61m_W4s"
+                  sitekey="6LfDUGQUAAAAAAB-hyv9XUf520-2hbHQEw3stwWP"
                   render="explicit"
                   verifyCallback={this.verifyCallback}
                   onloadCallback={this.loadCapcha}
