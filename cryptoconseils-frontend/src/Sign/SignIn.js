@@ -80,7 +80,7 @@ class SignIn extends Component {
       axios.post(process.env.REACT_APP_API_ADDRESS+'/users/email/activate/',{
         "uniqueTokenForEmail": this.props.match.params.token
       }).then(response => {
-
+        if(this.state.isVerified) {
           // auto connexion
           axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
             grant_type: 'password',
@@ -98,6 +98,9 @@ class SignIn extends Component {
             this.setState({statusMsg: 'Username et/ou Mdp invalides'})
             console.log(error.response);
           });
+        } else {
+          this.setState({statusMsg: 'Capcha invalide'})
+        }
       }).catch(error => {
         console.log(error.reponse);
       });
@@ -105,7 +108,7 @@ class SignIn extends Component {
 
     // connexion normal
     else {
-      if(this.state.isVerified){
+      if(this.state.isVerified) {
         axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
           grant_type: 'password',
           username: this.state.username,
@@ -144,6 +147,8 @@ class SignIn extends Component {
       this.setState({statusMsg: "L'email n'est pas valide"})
     } else if (this.state.password.length < 8) {
       this.setState({statusMsg: "Le mot de passe doit contenir 8 caractères minimum"})
+    } else if(this.state.isVerified !== true) {
+      this.setState({statusMsg: 'Capcha invalide'})
     } else {
       axios.post(process.env.REACT_APP_API_ADDRESS+'/users/new/', {
         username: this.state.username,
@@ -174,7 +179,6 @@ class SignIn extends Component {
 
   // choix du form
   formRender(){
-
     // si le user vient d'activer son compte
     if(this.state.activated === true){
       return <Success activated={this.state.activated}/>
@@ -287,6 +291,15 @@ class SignIn extends Component {
                   required
                 />
               </div>
+              <div className="form-group">
+                <Recaptcha
+                  sitekey="6LfdTWQUAAAAAEmlz2WxS1YOcVpLaXvKO61m_W4s"
+                  render="explicit"
+                  verifyCallback={this.verifyCallback}
+                  onloadCallback={this.loadCapcha}
+                  theme="dark"
+                />
+              </div>
               {/* Input Field Ends */}
               {/* Submit Form Button Starts */}
               <div className="form-group">
@@ -340,22 +353,15 @@ class SignIn extends Component {
                   required
                 />
               </div>
-
-              <Recaptcha
-                sitekey="6LfdTWQUAAAAAEmlz2WxS1YOcVpLaXvKO61m_W4s"
-                render="explicit"
-                verifyCallback={this.verifyCallback}
-                onloadCallback={this.loadCapcha}
-              />
-
-
-
-
-
-
-
-
-
+              <div className="form-group">
+                <Recaptcha
+                  sitekey="6LfdTWQUAAAAAEmlz2WxS1YOcVpLaXvKO61m_W4s"
+                  render="explicit"
+                  verifyCallback={this.verifyCallback}
+                  onloadCallback={this.loadCapcha}
+                  theme="dark"
+                />
+              </div>
 
               {/*Input Field Ends */}
               {/*Submit Form Button Starts */}
