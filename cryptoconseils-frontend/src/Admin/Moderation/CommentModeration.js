@@ -52,6 +52,13 @@ class CommentModeration extends Component {
     var minutes = date.getMinutes();
     return 'le '+day+' '+month+', '+year+' à '+hours+':'+minutes;
   }
+
+  sortArray(array) {
+    return array.sort(function (a, b) {
+      return b.id - a.id;
+    });
+  }
+
   deleteComment(item){
     // delete coms
     axios.put(process.env.REACT_APP_API_ADDRESS+'/comments/edit/enabled/'+item.id,{
@@ -75,9 +82,9 @@ class CommentModeration extends Component {
 
   }
 
-
   renderListComment(){
-    return this.state.listComment.map(item => {
+    var listComment = this.sortArray(this.state.listComment);
+    return listComment.map(item => {
       return (
         <li key={item.id} className="list-group-item">
           <div className="row">
@@ -97,9 +104,9 @@ class CommentModeration extends Component {
               <div className="action">
                 <Confirm
                   onConfirm={this.deleteComment.bind(this, item)}
-                  confirmText="Oui supprimer"
+                  confirmText="Oui désactiver"
                   title="Suppresion de commentaire"
-                  body={"Voulez-vous vraiment supprimer le commentaire:"+item.content.split(" ").splice(0,20).join(" ")+" ... ?"}>
+                  body={"Voulez-vous vraiment désactivé le commentaire:"+item.content.split(" ").splice(0,20).join(" ")+" ... ?"}>
                   <button
                     type="button"
                     className="btn btn-danger btn-xs button-profil"
@@ -125,7 +132,7 @@ class CommentModeration extends Component {
             <div className="row text-center">
               <h2 className="title-head" id="#moderation">Modération<span> Commentaires</span></h2>
               <div className="title-head-subtitle">
-                  <p>Supprimer les commentaires</p>
+                  <p>Désactiver les commentaires</p>
               </div>
             </div>
             <div className="container bootstrap snippet">
