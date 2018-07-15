@@ -115,7 +115,11 @@ class Activites extends Component {
                 {item.content}
               </div>
               <div className="action">
-                <button  onClick={this.editComment.bind(this,item)} type="button" className="btn btn-info btn-xs button-profil" title="Edit">
+                <button
+                  onClick={this.editComment.bind(this,item)}
+                  type="button"
+                  className="btn btn-info button-profil"
+                  title="Edit">
                   <span className="fa fa-pencil"></span>
                 </button>
                 <Confirm
@@ -125,7 +129,7 @@ class Activites extends Component {
                   body={"Voulez-vous vraiment supprimer votre commentaire:"+item.content.split(" ").splice(0,20).join(" ")+" ... ?"}>
                   <button
                     type="button"
-                    className="btn btn-danger btn-xs button-profil"
+                    className="btn btn-danger button-profil"
                     title="Delete">
                     <span className="fa fa-trash"></span>
                   </button>
