@@ -13,15 +13,17 @@ class ArticleAdmin extends Component {
       article_title: '',
       article_date: '',
       article_author: this.props.username,
-      article_categories: [],
+      article_categories: '',
       source_image: '',
       source_description: '',
       article_premium: '',
       statusMsg: '',
-      published: false,
+      published: null,
       article_id: '',
       selectedFile: null,
-      newCategory: ''
+      newCategory: '',
+      categoryPublished: null,
+      statusCategoryMsg: ''
     }
     this.handleChange = this.handleChange.bind(this);
   }
@@ -35,15 +37,37 @@ class ArticleAdmin extends Component {
   renderStatusMsg() {
     if(this.state.published === true) {
       return(
-        <div>
-          <p>L'article a été publié !</p>
-          <a href={"/articles/"+this.state.article_id}>Acceder à l'article</a>
+        <div className="col-md-12 text-center output_message_holder d-block">
+          <a href={"/articles/"+this.state.article_id}>
+            <p className="output_message success">
+              L'article a été publié ! Acceder à l'article
+            </p>
+          </a>
         </div>
       );
-    } else {
+    } else if(this.state.published === false){
       return(
-        <div>
-          <p>{this.state.statusMsg}</p>
+        <div className="col-md-12 text-center output_message_holder d-block">
+          <a href="/airdrop">
+            <p className="output_message error">{this.state.statusMsg}
+            </p>
+          </a>
+        </div>
+      );
+    }
+  }
+
+  renderStatusCategoryMsg() {
+    if(this.state.categoryPublished === true) {
+      return(
+        <div className="col-md-12 text-center output_message_holder d-block">
+          <p className="output_message success">{this.state.statusCategoryMsg}</p>
+        </div>
+      );
+    } else if(this.state.categoryPublished === false){
+      return(
+        <div className="col-md-12 text-center output_message_holder d-block">
+          <p className="output_message error">{this.state.statusCategoryMsg}</p>
         </div>
       );
     }
@@ -54,14 +78,14 @@ class ArticleAdmin extends Component {
     data.append('image', event.target.files[0]);
     axios.post(process.env.REACT_APP_API_ADDRESS+'/images/new/',data)
     .then(response => {
-      console.log(response.data);
+      console.log(response.data.id);
       this.setState({source_image: response.data.id})
    });
   }
 
   addNewCategory(){
     if(this.state.newCategory.length <= 0){
-      this.setState({statusMsg: "Nom de la categorie invalide"})
+      this.setState({categoryPublished: false, statusCategoryMsg: "Nom de la categorie invalide"})
     } else {
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
@@ -71,7 +95,7 @@ class ArticleAdmin extends Component {
       },authorization)
       .then(res => {
         this.props.listCategories.push(res.data)
-        this.setState({statusMsg: "Categorie ajouté","newCategory": ''})
+        this.setState({categoryPublished: true, statusCategoryMsg: "Categorie ajouté", "newCategory": ''})
       }).catch(err => {
         console.log(err);
       })
@@ -109,15 +133,15 @@ class ArticleAdmin extends Component {
 
     // vérification des champs
     if(this.state.article_title.length < 10) {
-      this.setState({statusMsg: "Le titre doit contenir au moins 10 charactères"})
-    } else if (this.state.source_description.length < 10) {
-      this.setState({statusMsg: "Le contenu doit contenir au moins 10 charactères"})
+      this.setState({published: false, statusMsg: "Le titre doit contenir au moins 10 charactères"})
     } else if (this.state.article_premium === '') {
-      this.setState({statusMsg: "Le niveau premium est requis"})
-    } else if (this.state.source_image === '') {
-      this.setState({statusMsg: "Une image est requise"})
+      this.setState({published: false, statusMsg: "Le niveau premium est requis"})
     } else if (this.state.article_categories === '') {
-      this.setState({statusMsg: "Une catégorie est requise"})
+      this.setState({published: false, statusMsg: "Une catégorie est requise"})
+    } else if (this.state.source_description.length < 10) {
+      this.setState({published: false, statusMsg: "Le contenu doit contenir au moins 10 charactères"})
+    } else if (this.state.source_image === '') {
+      this.setState({published: false, statusMsg: "Une image est requise"})
     } else {
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
@@ -142,7 +166,7 @@ class ArticleAdmin extends Component {
     return (
       <section>
         <div className="container">
-          <div className="row text-center">
+          <div className="row text-center contact-form">
             <h2 className="title-head" id="creer-article">Créer <span>
                 Article</span>
             </h2>
@@ -248,7 +272,6 @@ class ArticleAdmin extends Component {
                     </div>
                   </div>
                 </div>
-
               </div>
 
               <div className="col-xs-12 col-sm-12 col-md-6">
@@ -292,14 +315,14 @@ class ArticleAdmin extends Component {
             </div>
           </form>
 
-          <div className="row text-center">
+          <div className="row text-center contact-form">
             <h2 className="title-head" id="creer-article">Ajouter une <span>
                 Categorie</span>
             </h2>
             <div className="title-head-subtitle">
               <p>Ajouter une nouvelle categorie</p>
             </div>
-            {this.renderStatusMsg()}
+            {this.renderStatusCategoryMsg()}
           </div>
 
           {/* <!-- Titre --> */}
