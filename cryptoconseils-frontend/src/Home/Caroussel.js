@@ -36,7 +36,7 @@ class Carousel extends Component {
                     <div className="slider-text text-center">
                       <h3 className="slide-title">Suivez nos <span>Experts</span> Traders <br/> de classe <span>Mondiale</span> </h3>
                       <p>
-                        <a href="pricing.html" className="slider btn btn-primary">Nos offres</a>
+                        <a href="/premium" className="slider btn btn-primary">Nos offres</a>
                       </p>
                     </div>
                   </div>
