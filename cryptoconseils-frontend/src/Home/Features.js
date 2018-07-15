@@ -44,7 +44,7 @@ class Features extends Component {
                         <img src="images/icons/orange/payment-options.png" alt="payment options"/>
                       </span>
                       <h3 className="feature-title">Options de paiements</h3>
-                      <p>Visa, MasterCard, <br/>transfer bancaire, crypto-monnaies</p>
+                      <p>Paypal</p>
                     </div>
                   </div>
                   {/* Feature Ends */}

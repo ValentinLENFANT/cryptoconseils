@@ -5318,3 +5318,7 @@ ul li {
 .white-space-pre {
     white-space: pre-wrap;
 }
+
+.Denied h1 {
+  color: white;
+}

@@ -216,10 +216,7 @@ class InfosPerso extends Component {
                     </div>
                   </div>
                   <div className="row">
-
-                      {this.renderStatusMsg()}
-
-
+                    {this.renderStatusMsg()}
                     <div className="col-xs-12 col-md-12">
                       <input
                         type="submit"

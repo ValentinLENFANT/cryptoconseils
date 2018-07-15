@@ -91,10 +91,11 @@ class Footer extends Component {
                     {/* Supported Payment Cards Logo Starts */}
                     <div className="payment-logos">
                       <h4 className="payment-title">Méthodes de paiement supportées</h4>
+                      <img src="/images/icons/payment/paypal.png" alt="paypal"/>
+                      <h4 className="payment-title">Méthodes de paiement à venir</h4>
                       <img src="/images/icons/payment/american-express.png" alt="american-express"/>
                       <img src="/images/icons/payment/mastercard.png" alt="mastercard"/>
                       <img src="/images/icons/payment/visa.png" alt="visa"/>
-                      <img src="/images/icons/payment/paypal.png" alt="paypal"/>
                       <img className="last" src="/images/icons/payment/maestro.png" alt="maestro"/>
                     </div>
                     {/* Supported Payment Cards Logo Ends */}
