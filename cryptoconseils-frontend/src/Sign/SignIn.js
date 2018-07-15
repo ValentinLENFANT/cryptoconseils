@@ -90,10 +90,9 @@ class SignIn extends Component {
         console.log(error.reponse);
       });
     }
+
     // connexion normal
     else {
-
-
         axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
           grant_type: 'password',
           username: this.state.username,
@@ -238,7 +237,7 @@ class SignIn extends Component {
                   className="form-control"
                   name="username"
                   id="username"
-                  placeholder="NOM"
+                  placeholder="PSEUDONYME"
                   type="text"
                   onChange={this.handleChange}
                   value={this.state.username}
@@ -305,7 +304,7 @@ class SignIn extends Component {
                   className="form-control"
                   name="username"
                   id="username"
-                  placeholder="USERNAME"
+                  placeholder="PSEUDONYME"
                   type="text"
                   value={this.state.username}
                   onChange={this.handleChange}
