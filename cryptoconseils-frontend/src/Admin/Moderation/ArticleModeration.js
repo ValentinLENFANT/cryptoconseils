@@ -221,97 +221,100 @@ class ArticleModeration extends Component {
 
   render() {
     return (
-    <section>
-      <div className="container">
-        {/* <!--DEBUT TITRE DE SECTION  --> */}
-        <div className="row text-center">
-          <h2 className="title-head" id="creer-article">Gérer<span>
-              Articles</span>
-          </h2>
-          <div className="title-head-subtitle">
-            <p>Chercher et/ou désactiver des articles</p>
-          </div>
-        </div>
-        {/* <!-- FIN TITRE DE SECTION  --> */}
-
-        {/* <!-- FILTRES CATEGORIE & AUTEUR --> */}
-        <div className="row">
-          <div className="col-xs-12 col-sm-12 col-md-6">
-            <div className="form-group">
-              <div>
-                <label className="control-label" htmlFor="article_categories">Catégorie</label>
-                <select onChange={this.onChangeCategorie.bind(this)}id="article_categories" name="article_categories" className="form-control">
-                  <option value=""></option>
-                  {this.state.listCategories.map(categorie => {
-                    return (
-                      <option key={categorie.id} value={[categorie.id]}>{categorie.name}</option>
-                    );
-                  })}
-                </select>
+      <div>
+          <section className="section-profil">
+          <div className="container">
+            {/* <!--DEBUT TITRE DE SECTION  --> */}
+            <div className="row text-center">
+              <h2 className="title-head" id="creer-article">Moderation <span>
+                  Articles</span>
+              </h2>
+              <div className="title-head-subtitle">
+                <p>Chercher et/ou désactiver des articles</p>
               </div>
             </div>
-          </div>
+            {/* <!-- FIN TITRE DE SECTION  --> */}
 
-          {/* <!-- Auteur --> */}
-          <div className="col-xs-12 col-sm-12 col-md-6">
-            <div className="form-group">
-              <label className="control-label" htmlFor="article_categories">Auteur</label>
-              <div>
-                <select onChange={this.onChangeAuthor.bind(this)}id="article_categories" name="article_categories" className="form-control">
-                  <option value=""></option>
-                  <option value="Guillaume">Guillaume</option>
-                  <option value="Valentin">Valentin</option>
-                  <option value="Alexandre">Alexandre</option>
-                  <option value="Aurélien">Aurélien</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        {/* <!--DEBUT REQUETE ARTICLE  --> */}
-        {this.state.listArticles.map(article => {
-          return(
-            <div key={article.id} className="panel panel-default container-article">
-              <div className="panel-heading text-left">
-              <h4 className="media-heading">{article.author}</h4>
-                <div className="btn-group boutton-supp-modif">
-                  <Confirm
-                    onConfirm={this.deleteArticle.bind(this, article)}
-                    confirmText="Oui supprimer"
-                    title="Suppresion de l'article"
-                    body={"Voulez-vous vraiment supprimer l'article:"+article.title}>
-                    <button
-                      type="button"
-                      className="btn btn-danger btn-xs button-profil"
-                      title="Supprimer">Désactiver
-                    </button>
-                  </Confirm>
-                </div>
-                <div className="clearfix"></div>
-              </div>
-              <div className="panel-body">
-                <div className="row">
-                  <div className="col-xs-12 col-sm-12 col-md-3">
-                    <a href={"/articles/"+article.id}>
-                      <img className="image-article-admin" src={"/images/articles/"+article.image.file_name} alt="cover"/>
-                    </a>
-                  </div>
-                  <div className="col-xs-12 col-sm-12 col-md-9 text-justify">
-                    <h4 className="media-heading">
-                      <a href={"/articles/"+article.id}>{article.title}</a>
-                    </h4>
-                    {article.content}
+            {/* <!-- FILTRES CATEGORIE & AUTEUR --> */}
+            <div className="row">
+              <div className="col-xs-12 col-sm-12 col-md-6">
+                <div className="form-group">
+                  <div>
+                    <label className="control-label" htmlFor="article_categories">Catégorie</label>
+                    <select onChange={this.onChangeCategorie.bind(this)}id="article_categories" name="article_categories" className="form-control">
+                      <option value=""></option>
+                      {this.state.listCategories.map(categorie => {
+                        return (
+                          <option key={categorie.id} value={[categorie.id]}>{categorie.name}</option>
+                        );
+                      })}
+                    </select>
                   </div>
                 </div>
               </div>
+
+              {/* <!-- Auteur --> */}
+              <div className="col-xs-12 col-sm-12 col-md-6">
+                <div className="form-group">
+                  <label className="control-label" htmlFor="article_categories">Auteur</label>
+                  <div>
+                    <select onChange={this.onChangeAuthor.bind(this)}id="article_categories" name="article_categories" className="form-control">
+                      <option value=""></option>
+                      <option value="Guillaume">Guillaume</option>
+                      <option value="Valentin">Valentin</option>
+                      <option value="Alexandre">Alexandre</option>
+                      <option value="Aurélien">Aurélien</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
             </div>
-          );
-        })}
-        {/* <!--FIN REQUETE ARTICLE  --> */}
+
+            {/* <!--DEBUT REQUETE ARTICLE  --> */}
+            {this.state.listArticles.map(article => {
+              return(
+                <div key={article.id} className="panel panel-default container-article">
+                  <div className="panel-heading text-left">
+                  <h4 className="media-heading">{article.author}</h4>
+                    <div className="btn-group boutton-supp-modif">
+                      <Confirm
+                        onConfirm={this.deleteArticle.bind(this, article)}
+                        confirmText="Oui supprimer"
+                        title="Suppresion de l'article"
+                        body={"Voulez-vous vraiment supprimer l'article:"+article.title}>
+                        <button
+                          type="button"
+                          className="btn btn-danger btn-xs button-profil"
+                          title="Supprimer">Désactiver
+                        </button>
+                      </Confirm>
+                    </div>
+                    <div className="clearfix"></div>
+                  </div>
+                  <div className="panel-body">
+                    <div className="row">
+                      <div className="col-xs-12 col-sm-12 col-md-3">
+                        <a href={"/articles/"+article.id}>
+                          <img className="image-article-admin" src={"/images/articles/"+article.image.file_name} alt="cover"/>
+                        </a>
+                      </div>
+                      <div className="col-xs-12 col-sm-12 col-md-9 text-justify">
+                        <h4 className="media-heading">
+                          <a href={"/articles/"+article.id}>{article.title}</a>
+                        </h4>
+                        {article.content}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            {/* <!--FIN REQUETE ARTICLE  --> */}
+          </div>
+        </section>
       </div>
-    </section>);
+    );
   }
 }
 
