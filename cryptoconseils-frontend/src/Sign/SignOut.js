@@ -14,7 +14,7 @@ class SignOut extends Component {
         title="Déconnexion"
         body="Voulez-vous vraiment vous déconnecter ?">
         <a className="btn btn-primary">
-          <i className="fa fa-user-plus"></i> Déconnexion
+          <i className="fa fa-user-times"></i> Déconnexion
         </a>
     </Confirm>
     );

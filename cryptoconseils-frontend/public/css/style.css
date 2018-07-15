@@ -5278,5 +5278,21 @@ div#sntch_close {
 }
 .Lambo-color{
   background-color: #5CB85C;
+}
 
+
+.latest-post .post-premium {
+  width: 100px;
+  height: 35px;
+  background: #1d1d1d;
+  position: absolute;
+  right: 25px;
+  top: 0;
+  text-align: center;
+  padding-top: 1px;
+}
+
+.latest-post .post-premium span {
+  display: block;
+  color: #fff;
 }

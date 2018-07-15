@@ -7,7 +7,8 @@ class ListArticle extends Component {
     super(props);
     this.state = {
       articles: [],
-      newDate: null
+      newDate: null,
+      premiumLvl: ["Tous le monde","Inscrit","Debutant","Avancé","Expert","Lambo"]
     };
   }
 
@@ -59,9 +60,18 @@ class ListArticle extends Component {
   convertDate(date){
     return new Date(date);
   }
-
+  renderPremiumLogo(lvl){
+    if(lvl >=2){
+      return (
+        <div className="post-premium">
+          <span><i className="fa fa-diamond"></i> {this.state.premiumLvl[lvl]}</span>
+        </div>
+      )
+    }
+  }
   renderArticles() {
     return this.state.articles.map(article => {
+      console.log(article.premium);
       return(
         <div className="col-sm-4 col-md-4 col-xs-12 news-article" key={article.id}>
           <div className="latest-post">
@@ -91,6 +101,7 @@ class ListArticle extends Component {
                 {this.convertDate(article.date).toLocaleString('fr', { month: "short" })}
               </span>
             </div>
+            {this.renderPremiumLogo(article.premium)}
             <a href={"/articles/" + article.id} className="btn btn-primary">Lire plus</a>
             {/* Article Content Ends */}
           </div>
