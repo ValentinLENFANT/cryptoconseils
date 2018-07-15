@@ -33,9 +33,6 @@ class Expert extends Component {
                       <li>
                         <a href="" className="fa fa-twitter"> </a>
                       </li>
-                      <li>
-                        <a href="" className="fa fa-google-plus"> </a>
-                      </li>
                     </ul>
                   </div>
                   {/* Team Member Details Ends */}
@@ -54,13 +51,10 @@ class Expert extends Component {
                     <p>Consultant expert en crypto-monnaies</p>
                     <ul className="list list-inline social">
                       <li>
-                        <a href="" className="fa fa-facebook"> </a>
+                        <a href="https://www.facebook.com/valentin.lenfant" className="fa fa-facebook"> </a>
                       </li>
                       <li>
-                        <a href="" className="fa fa-twitter"> </a>
-                      </li>
-                      <li>
-                        <a href="" className="fa fa-google-plus"> </a>
+                        <a href="https://twitter.com/Cryptoval" className="fa fa-twitter"> </a>
                       </li>
                     </ul>
                   </div>
@@ -81,13 +75,10 @@ class Expert extends Component {
                     <p>Crypto Analyste</p>
                     <ul className="list list-inline social">
                       <li>
-                        <a href="" className="fa fa-facebook"> </a>
+                        <a href="https://www.facebook.com/aurelien.beranger" className="fa fa-facebook"> </a>
                       </li>
                       <li>
-                        <a href="" className="fa fa-twitter"> </a>
-                      </li>
-                      <li>
-                        <a href="" className="fa fa-google-plus"> </a>
+                        <a href="https://twitter.com/Aurerianusu" className="fa fa-twitter"> </a>
                       </li>
                     </ul>
                   </div>
@@ -107,13 +98,10 @@ class Expert extends Component {
                     <p>Expert Trader</p>
                     <ul className="list list-inline social">
                       <li>
-                        <a href="" className="fa fa-facebook"> </a>
+                        <a href="https://www.facebook.com/alexandre.dubois.5817" className="fa fa-facebook"> </a>
                       </li>
                       <li>
                         <a href="" className="fa fa-twitter"> </a>
-                      </li>
-                      <li>
-                        <a href="" className="fa fa-google-plus"> </a>
                       </li>
                     </ul>
                   </div>
