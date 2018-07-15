@@ -33,7 +33,7 @@ class Categories extends Component {
     return(
       <div className="Categories Component">
         <div className="widget">
-          <h3 className="widget-title">Catégories</h3>
+          <h3 className="widget-title">Catégories Articles</h3>
           <ul className="arrow nav nav-tabs second-font uppercase">
             {this.renderCategories()}
           </ul>
