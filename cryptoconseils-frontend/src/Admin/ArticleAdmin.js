@@ -155,7 +155,6 @@ class ArticleAdmin extends Component {
         "category_id": [this.state.article_categories]
       },authorization)
       .then(response => {
-        console.log(response.data);
         this.setState({published: true,article_id: response.data.id})
       }).catch(error => {
         console.log(error.response);

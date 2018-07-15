@@ -28,7 +28,9 @@ class Articles extends Component {
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
-
+    } else {
+      var authorization = null;
+    }
       // récupération de l'article
       axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/'+this.props.match.params.id,authorization)
       .then(response => {
@@ -45,9 +47,6 @@ class Articles extends Component {
           this.setState({notFound: true})
         }
       });
-    } else {
-      this.setState({noLogged: true})
-    }
   }
   render() {
     if(this.state.noAccess === false && this.state.noLogged === false){
