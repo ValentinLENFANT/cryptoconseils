@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import TradingViewWidget from 'react-tradingview-widget';
+import PreLoader from '../PreLoader/PreLoader';
 import axios from 'axios'
 
 class CallOfDay extends Component {
@@ -15,17 +16,25 @@ class CallOfDay extends Component {
   }
 
   componentWillMount() {
-    if(this.props.premium < 4){
-      this.setState({premium_level: false});
-    } else if(this.props.premium >= 4){
-      this.setState({premium_level: true});
-    }
+
     if(localStorage.getItem('access_token')) {
       var authorization = {
         headers: {
           'Authorization': "Bearer " + localStorage.getItem('access_token')
         }
       };
+      axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/', authorization)
+      .then(res => {
+        if(res.data.premiumLevel < 4){
+          this.setState({premium_level: false});
+        } else if(res.data.premiumLevel >= 4){
+          this.setState({premium_level: true});
+        }
+      }).catch(error => {
+        console.log(error);
+        this.setState({premium_level: false})
+      });
+
       axios.get(process.env.REACT_APP_API_ADDRESS + '/call/all/', authorization)
       .then(response => {
         this.setState({allCalls: response.data})
@@ -51,6 +60,7 @@ class CallOfDay extends Component {
           <div className="title-head-subtitle">
               <p>Call pour membre premium en avant-première !</p>
           </div>
+          <p>Un call est un conseils d’investissement composé d’un prix d'achat et d’un prix de vente</p>
         </div>
         <div className="col-xs-12 col-sm-12 col-md-12">
           <a href="/premium">
@@ -99,7 +109,7 @@ class CallOfDay extends Component {
             </div>
             <div className="row">
               <div className="col-xs-4 col-sm-4 col-md-4  button-call">
-                <div className="btn btn-success btn-lg">SCORE</div>
+                <div className="btn btn-success btn-lg">FIABILITÉ</div>
               </div>
               <div className="col-xs-8 col-sm-8 col-md-8 prix-call">
                 <div>{calls.scoring+"%"}</div>
@@ -122,6 +132,7 @@ class CallOfDay extends Component {
                 <div className="title-head-subtitle">
                     <p>Ce Call est GRATUIT pour tous les membres non-premium & premium !</p>
                 </div>
+                <p>Un call est un conseils d’investissement composé d’un prix d'achat et d’un prix de vente</p>
               </div>
               {this.renderCall(calls)}
             </div>
@@ -134,14 +145,15 @@ class CallOfDay extends Component {
                 <div className="title-head-subtitle">
                     <p>Call pour membre premium en avant-première !</p>
                 </div>
+                <p>Un call est un conseils d’investissement composé d’un prix d'achat et d’un prix de vente</p>
               </div>
               {this.renderCall(calls)}
             </div>
           )
         }
-        else return this.renderNoAccess();
+        else return (<div>{this.renderNoAccess()}</div>)
       })
-    } else return this.renderNoAccess();
+    } else return (<div>{this.renderNoAccess()}</div>)
   }
 
   render() {
