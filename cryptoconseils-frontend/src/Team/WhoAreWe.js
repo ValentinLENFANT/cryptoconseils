@@ -41,7 +41,7 @@ class WhoAreWe extends Component {
                     <p>Nous garantissons à tous nos investisseurs une grande sécurité sur leur investissement</p>
                   </div>
                 </div>
-                <a className="btn btn-primary" href="about.html">En savoir plus</a>
+                <a className="btn btn-primary" href="/faq">En savoir plus</a>
               </div>
               {/* Content Ends */}
             </div>
