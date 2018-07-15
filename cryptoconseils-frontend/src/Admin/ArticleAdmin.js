@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 
+import { action } from '@storybook/addon-actions'
+import Confirm from 'react-confirm-bootstrap';
+import Dialog from 'react-bootstrap-dialog'
+
 class ArticleAdmin extends Component {
 
   constructor(props) {
@@ -28,7 +32,6 @@ class ArticleAdmin extends Component {
     let name = target.id;
     this.setState({[name]: value});
   }
-
   renderStatusMsg() {
     if(this.state.published === true) {
       return(
@@ -73,6 +76,32 @@ class ArticleAdmin extends Component {
         console.log(err);
       })
     }
+  }
+
+  editCategory() {
+    this.dialog.show({
+      body: 'Editer categorie',
+      prompt: Dialog.TextPrompt({placeholder: 'Nom', initialValue: ''}),
+      actions: [
+        Dialog.CancelAction(),
+        Dialog.OKAction((dialog) => {
+          const result = dialog.value
+          var authorization = {
+            headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
+          };
+          // update coms
+          axios.put(process.env.REACT_APP_API_ADDRESS+'/categories/'+this.state.selected_edit_category,{
+            name: result
+          }, authorization).then(response => {
+            //update de l'affichage des commentaires
+            alert("La catégorie a été modifié !");
+          }).catch(error => {
+            alert("Une erreur s'est produite");
+            console.log(error.response);
+          });
+        })
+      ]
+    })
   }
   sendArticle(event){
     // pour éviter le rechargement de la page
@@ -291,7 +320,30 @@ class ArticleAdmin extends Component {
                 </div>
               </div>
             </div>
+            <div className="col-xs-6 col-sm-6 col-md-6">
+              <div className="form-group">
+                <label className="control-label" htmlFor="article_title">Titre</label>
+                <div>
+                  <select
+                    id="selected_edit_category"
+                    name="selected_edit_category"
+                    className="form-control"
+                    value={this.state.selected_edit_category}
+                    onChange={this.handleChange}>
+                    <option value=""></option>
+                    {this.props.listCategories.map(categorie => {
+                      return (
+                        <option key={categorie.id} value={[categorie.id]}>{categorie.name}</option>
+                      );
+                    })}
+                  </select>
+              </div>
+            </div>
+            <div>
+              <Dialog ref={(el) => { this.dialog = el }} />
+            </div>
           </div>
+        </div>
 
           <div className="row">
             <div className="col-xs-6 col-sm-6 col-md-6">
@@ -308,7 +360,25 @@ class ArticleAdmin extends Component {
                 </div>
               </div>
             </div>
+            <div className="col-xs-6 col-sm-6 col-md-6">
+              <div className="form-group">
+                <div>
+                  <button
+                    type="submit"
+                    id="submit-article"
+                    name="submit-article"
+                    className="btn btn-primary pull-right"
+                    onClick={this.editCategory.bind(this)}>
+                    EDITER
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
+
+
+
+
 
         </div>
       </section>
