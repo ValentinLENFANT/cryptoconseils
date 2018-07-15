@@ -5300,6 +5300,15 @@ div#sntch_close {
   color: #fff;
 }
 
+#decouvrirPackPremium {
+  margin-left: 197px;
+  margin-top: 25px;
+  list-style-type: none;
+}
+ul li {
+  list-style-type: none;
+}
+
 .Cgu h2 {
   color: #E78A1A;
 }
