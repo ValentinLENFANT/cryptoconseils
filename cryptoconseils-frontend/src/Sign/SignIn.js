@@ -3,6 +3,7 @@ import Carousel from './Caroussel';
 import AlreadyLogin from './AlreadyLogin'
 import Success from '../Success/Success'
 import axios from 'axios'
+import Recaptcha from 'react-recaptcha'
 
 class SignIn extends Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class SignIn extends Component {
       activated: null,
       forgotPassword: false,
       previousPath: document.referrer,
-      showForgotPassword: false
+      showForgotPassword: false,
+      isVerified: false
     };
     this.changeForm = this.changeForm.bind(this);
     this.forgotPasswordForm = this.forgotPasswordForm.bind(this);
@@ -26,6 +28,8 @@ class SignIn extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
+    this.verifyCallback = this.verifyCallback.bind(this)
+    this.loadCapcha = this.loadCapcha.bind(this)
   }
 
   // switch entre les deux form
@@ -49,6 +53,14 @@ class SignIn extends Component {
     return re.test(email);
   }
 
+  verifyCallback(response) {
+    if (response) {
+      this.setState({isVerified: true})
+    }
+  }
+  loadCapcha() {
+    console.log("reCapcha loaded");
+  }
   // affichage des messages d'erreurs
   renderStatusMsg() {
     if(this.state.statusMsg !== null) {
@@ -93,6 +105,7 @@ class SignIn extends Component {
 
     // connexion normal
     else {
+      if(this.state.isVerified){
         axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
           grant_type: 'password',
           username: this.state.username,
@@ -116,8 +129,10 @@ class SignIn extends Component {
           this.setState({statusMsg: 'Username et/ou Mdp invalides'})
           console.log(error.response);
         });
+      } else {
+        this.setState({statusMsg: 'Capcha invalide'})
       }
-
+    }
   }
 
   // inscription
@@ -325,6 +340,23 @@ class SignIn extends Component {
                   required
                 />
               </div>
+
+              <Recaptcha
+                sitekey="6LfdTWQUAAAAAEmlz2WxS1YOcVpLaXvKO61m_W4s"
+                render="explicit"
+                verifyCallback={this.verifyCallback}
+                onloadCallback={this.loadCapcha}
+              />
+
+
+
+
+
+
+
+
+
+
               {/*Input Field Ends */}
               {/*Submit Form Button Starts */}
               <div className="form-group">
