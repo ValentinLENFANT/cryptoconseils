@@ -43,9 +43,10 @@ class Footer extends Component {
                     <div>
                       <span><a href="mailto:cryptoconseilsfr@gmail.com" target="_top">cryptoconseilsfr@gmail.com</a></span>
                     </div>
-                    <div>
+                    {/*<div>
                       <span><a href="tel:+33637751315">06 37 75 13 15</a></span>
                     </div>
+                    */}
                     <div>
                       <span>Paris, France</span>
                     </div>

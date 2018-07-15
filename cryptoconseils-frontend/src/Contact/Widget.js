@@ -21,13 +21,14 @@ class Widget extends Component {
               </div>
               {/* Contact Info Box Ends */}
               {/* Contact Info Box Starts */}
+              {/*
               <div className="contact-info-box">
                 <i className="fa fa-phone big-icon"></i>
                 <div className="contact-info-box-content">
                   <h4>Numéro de téléphone</h4>
                   <p><a href="tel:+33681758319"></a>06 95 10 52 02</p>
                 </div>
-              </div>
+              </div>*/}
               {/* Contact Info Box Ends */}
               {/* Contact Info Box Starts */}
               <div className="contact-info-box">
