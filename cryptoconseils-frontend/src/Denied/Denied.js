@@ -16,7 +16,7 @@ class Denied extends Component {
       return (
         <div className="Denied">
           <h1>
-            vous n'avez pas le niveau <a href="/premium">premium </a>suffisant
+            Vous n'avez pas le niveau <a href="/premium">premium </a>suffisant
           </h1>
           <h2><a href="/signin">Se connecter</a></h2>
           <h2><a href="/signup">S'inscrire</a></h2>
@@ -26,7 +26,7 @@ class Denied extends Component {
     } else {
       return (
         <div className="Denied">
-          <h1>Pas accès</h1>
+          <h1>Vous n'avez pas accès à cette page</h1>
           <h2><a href="/signin">Se connecter</a></h2>
           <h2><a href="/signup">S'inscrire</a></h2>
           <h2><a href="/">Retour à l'acceuil</a></h2>
