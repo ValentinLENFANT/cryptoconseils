@@ -44,6 +44,16 @@ class AirdropAdmin extends Component {
       );
     }
   }
+
+  renderImage(imageName){
+    if(imageName != '') {
+      return (
+        <img src={"/images/articles/"+imageName} alt="call premium" className="image-airdrop-premium"/>
+      );
+    } else {
+      return null
+    }
+  }
   sendImage(event) {
     event.preventDefault();
     let data = new FormData();
@@ -105,8 +115,8 @@ class AirdropAdmin extends Component {
     return(
       <div className="row">
         <div className="col-xs-12 col-sm-12 col-md-6">
-          <a href="#premium">
-            <img src={"/images/articles/"+this.state.image_name} alt="call premium" className="image-airdrop-premium"/>
+          <a href="#premium" >
+            {this.renderImage(this.state.image_name)}
           </a>
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6">
@@ -251,9 +261,11 @@ class AirdropAdmin extends Component {
 
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 text-center">
-              <p className="apercu-admin">Aperçu
-                <i className="fa fa-chevron-down" aria-hidden="true"></i>
-              </p>
+              <a href="#live-airdrop">
+                <p className="apercu-admin">Aperçu
+                  <i className="fa fa-chevron-down" aria-hidden="true"  id="live-airdrop"></i>
+                </p>
+              </a>
             </div>
           </div>
           <div>

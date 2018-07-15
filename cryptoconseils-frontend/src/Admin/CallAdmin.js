@@ -75,7 +75,7 @@ class CallAdmin extends Component {
     } else if (Number(this.state.achat) > Number(this.state.vente)) {
       this.setState({statusMsg: "Le prix d'achat doit être inférieur au prix de vente"})
     } else if (Number(this.state.score) <= 0) {
-      this.setState({statusMsg: "Le score doit être supérieux à 0 %"})
+      this.setState({statusMsg: "La fiabilité doit être supérieux à 0 %"})
     }else {
       console.log("TENTAVIE DE PUBLICATION");
       var authorization = {
@@ -111,7 +111,7 @@ class CallAdmin extends Component {
   }
   renderLiveCall() {
     return(
-      <div className="row">
+      <div className="row" >
         <div className="col-xs-12 col-sm-12 col-md-6">
           {/* TradingView REACT BEGIN */}
           <div className="tradingview-widget-container">
@@ -148,7 +148,7 @@ class CallAdmin extends Component {
           </div>
           <div className="row">
             <div className="col-xs-4 col-sm-4 col-md-4  button-call">
-              <div className="btn btn-success btn-lg">SCORE</div>
+              <div className="btn btn-success btn-lg">FIABILITÉ</div>
             </div>
             <div className="col-xs-8 col-sm-8 col-md-8 prix-call">
               <div>{this.state.score+"%"}</div>
@@ -291,9 +291,11 @@ class CallAdmin extends Component {
 
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 text-center">
-              <p className="apercu-admin">Aperçu
-                <i className="fa fa-chevron-down" aria-hidden="true"></i>
-              </p>
+              <a href="#live-call">
+                <p className="apercu-admin">Aperçu
+                  <i className="fa fa-chevron-down" aria-hidden="true" id="live-call"></i>
+                </p>
+              </a>
             </div>
           </div>
           {this.renderLiveCall()}
