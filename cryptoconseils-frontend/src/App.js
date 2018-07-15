@@ -105,6 +105,10 @@ const Premium = Loadable({
   loading: Loading,
 });
 
+const Cgu = Loadable({
+  loader: () => import('./Cgu/Cgu'),
+  loading: Loading,
+});
 
 
 class App extends Component {
@@ -132,6 +136,7 @@ class App extends Component {
           <Route exact path="/call" component={Call}/>
           <Route exact path="/airdrop" component={Airdrop}/>
           <Route exact path="/premium" component={Premium}/>
+          <Route exact path="/cgu" component={Cgu}/>
           <Route component={NotFound}/>
         </Switch>
       </Router>

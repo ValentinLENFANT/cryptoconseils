@@ -16,7 +16,7 @@ class Footer extends Component {
                   <div className="menu">
                     <ul>
                       <li><a href="/">Accueil</a></li>
-                      <li><a href="/#team">Team</a></li>
+                      <li><a href="/team">Team</a></li>
                       <li><a href="/contact">Contact</a></li>
                     </ul>
                   </div>
@@ -28,10 +28,9 @@ class Footer extends Component {
                   <div className="menu">
                     <ul>
                       <li><a href="/faq">FAQ</a></li>
-                      <li><a href="terms-of-services.html">Conditions & utilisations</a></li>
+                      <li><a href="/cgu">Conditions & utilisations</a></li>
                       <li><a href="/signup">Inscription</a></li>
                       <li><a href="/signin">Connexion</a></li>
-                      <li><a href="coming-soon.html">Coming Soon</a></li>
                     </ul>
                   </div>
                 </div>
