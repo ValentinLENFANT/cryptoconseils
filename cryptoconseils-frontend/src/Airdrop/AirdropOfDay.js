@@ -116,7 +116,7 @@ class AirdropOfDay extends Component {
   }
   renderLatestAirdrop(){
     var listAirdop = this.sortArray(this.state.allAirdrop);
-    if(this.state.premium_level !== null) {
+    if(localStorage.getItem('access_token')) {
       return listAirdop.slice(0,1).map(airdrop => {
         if(this.state.premium_level=== false && airdrop.isAirdropFree ===  "1") {
           return (
