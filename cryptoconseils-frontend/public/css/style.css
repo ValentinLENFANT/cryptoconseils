@@ -5299,3 +5299,12 @@ div#sntch_close {
   display: block;
   color: #fff;
 }
+
+#decouvrirPackPremium {
+  margin-left: 197px;
+  margin-top: 25px;
+  list-style-type: none;
+}
+ul li {
+  list-style-type: none;
+}

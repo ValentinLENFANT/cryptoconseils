@@ -5,7 +5,7 @@ class Avantages extends Component {
     return (
       <div className="Avantage Component">
         <div className="row">
-          <div className="col-xs-12 col-md-8">
+          <div className="col-xs-12 col-md-8" id="decouvrirPackPremium">
             {/* Panel Group Starts */}
             <div className="panel-group" id="accordion">
               {/* Panel Starts */}
