@@ -13,7 +13,25 @@ class Activites extends Component {
       msg: null,
     }
   }
-  componentDidMount(){
+  componentWillMount(){
+    // check si access token
+    var authorization = {
+      headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
+    };
+
+    // get tous les coms, le "/1" est nécéssaire pour l'api,
+    // la récupération de l'utilisateur courant se fait dans l'api
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/users/comments/id/1', authorization)
+    .then(response => {
+      this.setState({
+        comments: response.data
+      })
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+  
+  getComments(){
     // check si access token
     var authorization = {
       headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
@@ -31,7 +49,6 @@ class Activites extends Component {
     });
 
   }
-
   convertDate(date){
     date = new Date(date);
     var month = date.toLocaleString('fr', { month: "long" });
@@ -58,6 +75,7 @@ class Activites extends Component {
             content:result
           }, authorization).then(response => {
             //update de l'affichage des commentaires
+            this.getComments();
             alert("Votre commenaitre a été modifié !");
           }).catch(error => {
             alert("Une erreur s'est produite");
