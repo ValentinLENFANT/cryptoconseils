@@ -30,7 +30,7 @@ class Activites extends Component {
       console.log(error);
     });
   }
-  
+
   getComments(){
     // check si access token
     var authorization = {
@@ -120,7 +120,7 @@ class Activites extends Component {
         <li className="list-group-item list-comment" key={item.id}>
           <div className="row">
             <div className="col-xs-2 col-md-1">
-              <img src="images/team/member1.jpg" className="img-circle img-responsive" alt="avatar"/>
+              <img src="/images/articles/default-user.jpg" className="img-circle img-responsive" alt="avatar"/>
             </div>
             <div className="col-xs-10 col-md-11">
               <div>
@@ -129,7 +129,7 @@ class Activites extends Component {
                   {this.convertDate(item.date)}
                 </div>
               </div>
-              <div className="comment-text">
+              <div className="comment-text white-space-pre">
                 {item.content}
               </div>
               <div className="action">
