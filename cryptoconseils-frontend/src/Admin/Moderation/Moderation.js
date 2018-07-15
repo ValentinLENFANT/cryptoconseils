@@ -66,6 +66,15 @@ class Moderation extends Component {
       return <CommentModeration/>
     } else if (this.state.showArticles) {
       return <ArticleModeration/>
+    } else {
+      return (
+        <div className="row text-center">
+          <h2 className="title-head" id="#moderation">Modération</h2>
+          <div className="title-head-subtitle">
+              <p>Choisissez dans le menu du haut le type de modération</p>
+          </div>
+        </div>
+      );
     }
   }
 
@@ -96,7 +105,6 @@ class Moderation extends Component {
                       <h3 className="titre-dashboard">Commentaires</h3>
                     </a>
                   </div>
-
                 </div>
               </div>
             </section>
