@@ -41,6 +41,7 @@ class Comments extends Component {
   handleChange(event) {
     this.setState({comment: event.target.value});
   }
+
   renderStatusMsg(){
     if (this.state.published === true) {
       return(
@@ -222,7 +223,7 @@ class Comments extends Component {
             <li key={cmt.id}>
               {/* Comment Starts */}
               <div className="comment" >
-                <img className="comment-avatar pull-left" alt="" src={"/images/blog/user0.jpg"}/>
+                <img className="comment-avatar pull-left" alt="" src={"/images/articles/default-user.jpg"}/>
                 <div className="comment-body">
                   <div className="meta-data">
                     <span className="comment-author">{cmt.author}</span>

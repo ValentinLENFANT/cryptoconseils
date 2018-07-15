@@ -48,7 +48,7 @@ class LoadComment extends AbstractFixture implements OrderedFixtureInterface
             "Alexandre",
             "Guillaume",
             "Aurélien",
-            "Satoshi Nakamoto"
+            "Satoshi"
         );
 
         $content = array(

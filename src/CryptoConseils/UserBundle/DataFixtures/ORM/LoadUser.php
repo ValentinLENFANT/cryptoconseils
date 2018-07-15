@@ -31,7 +31,9 @@ class LoadUser implements FixtureInterface, ContainerAwareInterface
             $user->setEnabled(1);
             $user->setPremiumLevel(rand(1,5));
             $user->setIsEmailValidated(1);
+            $user->setImageId(rand(1,7));
             $manager->persist($user);
+
         }
         $manager->flush();
     }

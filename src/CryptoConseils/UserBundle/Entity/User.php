@@ -105,4 +105,28 @@ class User extends BaseUser
     {
         return $this->id;
     }
+
+
+    /**
+     * @var string
+     * @ORM\Column(name="imageId", type="string", nullable=true)
+     */
+    private $imageId;
+
+    /**
+     * @return int
+     */
+    public function getImageId()
+    {
+        return $this->imageId;
+    }
+
+    /**
+     * @param int $imageId
+     */
+    public function setImageId($imageId)
+    {
+        $this->imageId = $imageId;
+    }
+
 }
