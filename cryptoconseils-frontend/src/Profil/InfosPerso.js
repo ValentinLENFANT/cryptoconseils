@@ -234,7 +234,7 @@ class InfosPerso extends Component {
             </div>
             <div className="col-xs-12 col-sm-6 col-md-3">
               <div className="team-member">
-                <img src="/images/blog/default.jpg" className="img-responsive" alt="team member"/>
+                <img src="/images/articles/default-user.jpg" className="img-responsive" alt="team member"/>
                 <div className="team-member-caption social-icons">
                   <h4>{this.props.user.username}</h4>
                   {this.renderPremium()}
