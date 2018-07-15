@@ -9,7 +9,7 @@ class Avance extends Component {
       access_token: localStorage.getItem('access_token')
     }
   }
-  
+
   renderButton(){
     if(this.props.isAdmin){
       return (
@@ -19,7 +19,7 @@ class Avance extends Component {
       );
     }else {
       return (
-        <a href={"http://90.90.185.202:8000/orders/new/300?accessToken=" + this.state.access_token } className="btn btn-primary" disabled>
+        <a href="#"className="btn btn-primary" disabled>
           COMMANDER
         </a>
       );

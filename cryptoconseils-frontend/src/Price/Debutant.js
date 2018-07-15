@@ -19,7 +19,7 @@ class Debutant extends Component {
       );
     }else {
       return (
-        <a href={"http://90.90.185.202:8000/orders/new/100?accessToken=" + this.state.access_token } className="btn btn-primary" disabled>
+        <a href="#"className="btn btn-primary" disabled>
           COMMANDER
         </a>
       );
