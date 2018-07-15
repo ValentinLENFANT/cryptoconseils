@@ -894,11 +894,12 @@ ul.nav.nav-tabs li a:hover, ul.nav.nav-tabs li.active a:hover {
 
 .site-search {
   text-align: center;
-  background: rgba(0,0,0,.9);
+  background: rgba(20, 20, 20,1);
   position: absolute;
   top: 49px;
   z-index: 100;
   width: 100%;
+  border-bottom: 5px solid #E78A1A;
 }
 
 .navbar-nav .fa-search {
@@ -5142,11 +5143,13 @@ div#sntch_close {
 
 .res-search{
   text-align: center;
-  background: rgba(0,0,0,1);
+  background: rgba(20, 20, 20,1);
   position: absolute;
-  top: 100px;
+  top: 125px;
   z-index: 200;
   width: 100%;
+  border-bottom: 5px solid #E78A1A;
+
 }
 .res-search li{
   padding: 5px;

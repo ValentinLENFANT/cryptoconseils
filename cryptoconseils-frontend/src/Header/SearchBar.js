@@ -90,7 +90,7 @@ class SearchBar extends Component {
           <div className="container">
             <input
               type="text"
-              placeholder="type your keyword and hit enter ..."
+              placeholder="Entrez un mot clé pour rechercher un article"
               value={this.state.search}
               onChange={this.onChange}
               name="search"
