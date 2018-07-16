@@ -47,25 +47,74 @@ class Calls
     private $author;
 
     /**
+     * @var datetime_immutable
+     * @ORM\Column(name="date", type="datetime", nullable=true)
+     * @Assert\DateTime()
+     */
+    private $date;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cryptocurrencyPair", type="string")
+     */
+    private $cryptocurrencyPair;
+
+    /**
+     * @var string
+     * @ORM\Column(name="cryptocurrencyName", type="string")
+     */
+    private $cryptocurrencyName;
+
+    /**
+     * @var string
+     * @ORM\Column(name="content", type="string", length=300)
+     * @Assert\Length(max=300)
+     */
+    private $content;
+
+    /**
+     * @var float
+     * @ORM\Column(name="buyPrice", type="float")
+     */
+    private $buyPrice;
+
+    /**
+     * @var float
+     * @ORM\Column(name="sellPrice", type="float")
+     */
+    private $sellPrice;
+
+    /**
+     * @return int
+     */
+
+    /**
+     * @var int
+     * @ORM\Column(name="scoring", type="integer")
+     */
+    private $scoring;
+
+    /**
      * @var boolean
      * @ORM\Column(name="isCallFree", type="boolean")
      */
     private $isCallFree;
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isCallFree()
+    public function getId()
     {
-        return $this->isCallFree;
+        return $this->id;
     }
 
     /**
-     * @param bool $isCallFree
+     * @param int $id
      */
-    public function setIsCallFree($isCallFree)
+    public function setId($id)
     {
-        $this->isCallFree = $isCallFree;
+        $this->id = $id;
     }
 
     /**
@@ -98,61 +147,6 @@ class Calls
     public function setDate($date)
     {
         $this->date = $date;
-    }
-
-    /**
-     * @var datetime_immutable
-     * @ORM\Column(name="date", type="datetime", nullable=true)
-     * @Assert\DateTime()
-     */
-    private $date;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="cryptocurrencyPair", type="string")
-     */
-    private $cryptocurrencyPair;
-
-    /**
-     * @var string
-     * @ORM\Column(name="cryptocurrencyName", type="string")
-     */
-    private $cryptocurrencyName;
-
-    /**
-     * @var string
-     * @ORM\Column(name="content", type="string", length=300)
-     * @Assert\Length(max=300)
-     */
-    private $content;
-
-    /**
-     * @var int
-     * @ORM\Column(name="buyPrice", type="integer")
-     */
-    private $buyPrice;
-
-    /**
-     * @var int
-     * @ORM\Column(name="sellPrice", type="integer")
-     */
-    private $sellPrice;
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**
@@ -204,7 +198,7 @@ class Calls
     }
 
     /**
-     * @return int
+     * @return float
      */
     public function getBuyPrice()
     {
@@ -212,7 +206,7 @@ class Calls
     }
 
     /**
-     * @param int $buyPrice
+     * @param float $buyPrice
      */
     public function setBuyPrice($buyPrice)
     {
@@ -220,7 +214,7 @@ class Calls
     }
 
     /**
-     * @return int
+     * @return float
      */
     public function getSellPrice()
     {
@@ -228,7 +222,7 @@ class Calls
     }
 
     /**
-     * @param int $sellPrice
+     * @param float $sellPrice
      */
     public function setSellPrice($sellPrice)
     {
@@ -252,8 +246,18 @@ class Calls
     }
 
     /**
-     * @var int
-     * @ORM\Column(name="scoring", type="integer")
+     * @return bool
      */
-    private $scoring;
+    public function isCallFree()
+    {
+        return $this->isCallFree;
+    }
+
+    /**
+     * @param bool $isCallFree
+     */
+    public function setIsCallFree($isCallFree)
+    {
+        $this->isCallFree = $isCallFree;
+    }
 }

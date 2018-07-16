@@ -108,7 +108,7 @@ class AirdropController extends FOSRestController
         }
       $user = $this->getUser();
         if (!isset($user) || $user->getPremiumLevel() < 2) {
-            $reponse = $bdd->query('SELECT * FROM airdrop WHERE isAirdropFree = 1');
+            $reponse = $bdd->query('SELECT * FROM airdrop WHERE isAirdropFree = 1 ORDER BY endDate ASC');
             while ($donnees = $reponse->fetch()) {
               $dataImage = $bdd->query('SELECT fileName from image WHERE id ='.$donnees['imageId'])->fetch();
                 $airdrops[] = ['id' => $donnees['id'],
@@ -145,7 +145,7 @@ class AirdropController extends FOSRestController
             return $response;
         } else {
 
-            $reponse = $bdd->query('SELECT * FROM airdrop');
+            $reponse = $bdd->query('SELECT * FROM airdrop ORDER BY endDate ASC');
             while ($donnees = $reponse->fetch()) {
                 $dataImage = $bdd->query('SELECT fileName from image WHERE id ='.$donnees['imageId'])->fetch();
                 $airdrops[] = ['id' => $donnees['id'],
@@ -181,7 +181,7 @@ class AirdropController extends FOSRestController
 
             return $response;
         }
-          $reponse = $bdd->query('SELECT * FROM airdrop');
+          $reponse = $bdd->query('SELECT * FROM airdrop ORDER BY endDate ASC');
           while ($donnees = $reponse->fetch()) {
               $dataImage = $bdd->query('SELECT fileName from image WHERE id ='.$donnees['imageId'])->fetch();
               $airdrops[] = ['id' => $donnees['id'],

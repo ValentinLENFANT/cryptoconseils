@@ -33,6 +33,7 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
 
         $qb->where('a.premium <= :premium')
             ->setParameter('premium', $premium)
+            ->orderBy('a.date', 'DESC')
         ;
 
         return $qb
@@ -49,6 +50,7 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('published', $published)
             ->andWhere('a.premium <= :premium')
             ->setParameter('premium', $premium)
+            ->orderBy('a.date', 'DESC')
         ;
 
         return $qb
