@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="ui.ArticleDetailsActivity"
+    >
+
+
+<android.support.v7.widget.Toolbar android:id="@+id/back_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:elevation="4dp"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    xmlns:app="http://schemas.android.com/apk/res-auto" />
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+            android:id="@+id/activity_main"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="fr.cryptoconseils.ui.ArticleDetailsActivity"
+            android:orientation="vertical"
+            android:padding="10pt"
+            android:layout_marginTop="50dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/article_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textColor="@color/colorWhite"
+                android:gravity="center">
+            </TextView>
+
+            <FrameLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                >
+
+                    <ImageView
+                        android:id="@+id/image_article"
+                        android:layout_width="300dp"
+                        android:layout_height="220dp"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginVertical="-10pt"
+                        android:paddingHorizontal="10dp"/>
+
+                    <ImageView
+                        android:id="@+id/image_premium"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitEnd"
+                        android:layout_marginTop="5dp"/>
+
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:id="@+id/bloc_call"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+
+                    <ImageView
+                        android:id="@+id/call_premium"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginVertical="7dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/contentCall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:layout_marginVertical="5dp"
+                        android:gravity="center"
+                        />
+
+                    <TextView
+                        android:id="@+id/scoringCall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_marginVertical="5dp"
+                        android:gravity="center"
+                        android:textStyle="italic"
+                        />
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:columnCount="3"
+                        android:layout_marginVertical="10pt"
+                        >
+
+                            <ImageView
+                                android:src="@mipmap/ic_buy_cryptoconseils"
+                                android:layout_columnWeight="1"
+                                android:layout_rowWeight="1"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <ImageView
+                                android:src="@mipmap/ic_next_cryptoconseils"
+                                android:layout_columnWeight="1"
+                                android:layout_rowWeight="1"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <ImageView
+                                android:src="@mipmap/ic_sell_cryptoconseils"
+                                android:layout_columnWeight="1"
+                                android:layout_rowWeight="1"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Achat"
+                                android:textSize="15sp"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="4pt"
+                                android:textColor="@color/colorWhite"
+                                android:layout_gravity="center_horizontal"
+
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Target"
+                                android:textSize="15sp"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="4pt"
+                                android:textColor="@color/colorWhite"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Vente"
+                                android:textSize="15sp"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="4pt"
+                                android:textColor="@color/colorWhite"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:id="@+id/buy_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4pt"
+                                android:gravity="center"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:id="@+id/target"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="4pt"
+                                android:layout_gravity="center_horizontal"
+                                android:textColor="@color/colorGreen"
+                                />
+
+                            <TextView
+                                android:id="@+id/sell_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4pt"
+                                android:gravity="center"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                    </GridLayout>
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:id="@+id/bloc_airdrop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+
+                    <ImageView
+                        android:id="@+id/airdrop_premium"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginVertical="7dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/contentAirdrop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:layout_marginVertical="5dp"
+                        android:gravity="center"
+                        />
+
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:columnCount="3"
+                        android:layout_marginVertical="10pt"
+                        >
+
+                            <ImageView
+                                android:src="@mipmap/ic_date_cryptoconseils"
+                                android:layout_columnWeight="1"
+                                android:layout_rowWeight="1"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <ImageView
+                                android:src="@mipmap/ic_next_cryptoconseils"
+                                android:layout_columnWeight="1"
+                                android:layout_rowWeight="1"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <ImageView
+                                android:src="@mipmap/ic_date_cryptoconseils"
+                                android:layout_columnWeight="1"
+                                android:layout_rowWeight="1"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Debut"
+                                android:textSize="15sp"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="4pt"
+                                android:textColor="@color/colorWhite"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Récompense"
+                                android:textSize="15sp"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="4pt"
+                                android:textColor="@color/colorWhite"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Fin"
+                                android:textSize="15sp"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="4pt"
+                                android:textColor="@color/colorWhite"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:id="@+id/begin_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4pt"
+                                android:gravity="center"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:id="@+id/reward"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="4pt"
+                                android:textColor="@color/colorGreen"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:id="@+id/end_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4pt"
+                                android:gravity="center"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                    </GridLayout>
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/article_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:gravity="center">
+            </TextView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#a7a7a7"
+                android:layout_marginVertical="10pt" />
+
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="fr.cryptoconseils.ui.ArticleDetailsActivity"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="40dp">
+
+                    <TextView
+                        android:id="@+id/article_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="@color/CryptoconseilsColor"
+                        android:textStyle="italic" >
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/article_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="@color/CryptoconseilsColor"
+                        android:textStyle="italic" >
+                    </TextView>
+
+            </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

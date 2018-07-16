@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">CryptoConseils</string>
+    <string name="article_title">Articles</string>
+    <string name="title_activity_login">Connexion</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_username">Nom d\'utilisateur</string>
+    <string name="prompt_password">Mot de passe</string>
+    <string name="prompt_password_confirm">Confirmer le mot de passe</string>
+    <string name="prompt_email">Email</string>
+    <string name="action_sign_in">Connexion</string>
+    <string name="action_login">Vous êtes déja membre? Se connecter.</string>
+    <string name="action_register">Vous n\'avez pas de compte? S\'inscrire.</string>
+    <string name="button_register">Inscription</string>
+    <string name="action_sign_in_short">Connexion</string>
+    <string name="error_invalid_email">Adresse email invalide</string>
+    <string name="error_invalid_length">Trop court (6 caractères min.)</string>
+    <string name="error_incorrect_password">Le mot de passe doit contenir 6 caractères min, 1 majuscule, 1 chiffre, 1 caractère spécial, pas d\'espace</string>
+    <string name="error_password_dont_match">Les mots de passes ne correspondent pas</string>
+    <string name="error_field_required">Ce champ est requis</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+</resources>

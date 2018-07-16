@@ -1,0 +1,1733 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/drawer_layout"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:id="@+id/activity_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_alignParentTop="true"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/sv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10pt"
+                    android:gravity="center">
+
+
+                    <LinearLayout
+                        android:id="@+id/bloc-premium"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Abonnement "
+                                android:textColor="@color/colorWhite"
+                                android:textAllCaps="true"
+                                android:textSize="23sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Premium"
+                                android:textColor="@color/CryptoconseilsColor"
+                                android:textSize="23sp"
+                                android:textAllCaps="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Souscrivez à un abonnement premium adapté à vos besoins parmis nos différentes offres"
+                            android:textStyle="italic"
+                            android:gravity="center"
+                            />
+
+                        <View
+                            android:layout_width="180dp"
+                            android:layout_height="1dp"
+                            android:background="#a7a7a7"
+                            android:layout_marginVertical="10pt" />
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="5pt"
+                            android:layout_marginVertical="5pt"
+                            app:cardCornerRadius="2pt">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="PACK "
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:layout_marginTop="10pt"
+                                        android:layout_marginBottom="5pt"
+                                        android:gravity="center"
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="DEBUTANT"
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:layout_marginTop="10pt"
+                                        android:layout_marginBottom="5pt"
+                                        android:gravity="center"
+                                        android:textColor="@color/CryptoconseilsColor"
+                                        />
+                                </LinearLayout>
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="POUR"
+                                    android:textSize="15sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="100€"
+                                    android:textSize="30sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_marginHorizontal="3dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:text="- Acces aux articles de niveau Débutant\n- Acces complet aux Airdrops"/>
+
+                                <android.support.v7.widget.AppCompatButton
+                                    android:id="@+id/button_pack_debutant2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="COMMANDER"
+                                    android:clickable="true"
+                                    android:background="@color/CryptoconseilsColor"/>
+
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="5pt"
+                            android:layout_marginVertical="5pt"
+                            app:cardCornerRadius="2pt">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="PACK "
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:layout_marginTop="10pt"
+                                        android:layout_marginBottom="5pt"
+                                        android:gravity="center"
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Avancé"
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:layout_marginTop="10pt"
+                                        android:layout_marginBottom="5pt"
+                                        android:gravity="center"
+                                        android:textColor="@color/CryptoconseilsColor"
+                                        />
+                                </LinearLayout>
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="POUR"
+                                    android:textSize="15sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="300€"
+                                    android:textSize="30sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_marginHorizontal="3dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:text="- Avantages du pack Debutant\n- Acces aux articles de niveau Avancé\n- Acces à la messagerie Telegram"/>
+
+                                <android.support.v7.widget.AppCompatButton
+                                    android:id="@+id/button_pack_avance2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="COMMANDER"
+                                    android:clickable="true"
+                                    android:background="@color/CryptoconseilsColor"/>
+
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="5pt"
+                            android:layout_marginVertical="5pt"
+                            app:cardCornerRadius="2pt">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="PACK "
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:layout_marginTop="10pt"
+                                        android:layout_marginBottom="5pt"
+                                        android:gravity="center"
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Expert"
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:layout_marginTop="10pt"
+                                        android:layout_marginBottom="5pt"
+                                        android:gravity="center"
+                                        android:textColor="@color/CryptoconseilsColor"
+                                        />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="POUR"
+                                    android:textSize="15sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="500€"
+                                    android:textSize="30sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_marginHorizontal="3dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:text="- Avantages du pack Avancé\n- Acces aux articles de niveau Expert\n- Acces à l'emsemble des réseaux sociaux dont le groupe Facebook\n- Acces complet aux Calls"/>
+
+                                <android.support.v7.widget.AppCompatButton
+                                    android:id="@+id/button_pack_expert2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="COMMANDER"
+                                    android:clickable="true"
+                                    android:background="@color/CryptoconseilsColor"/>
+
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="5pt"
+                            android:layout_marginVertical="5pt"
+                            app:cardCornerRadius="2pt">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="PACK "
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:layout_marginTop="10pt"
+                                        android:layout_marginBottom="5pt"
+                                        android:gravity="center"
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Lambo"
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:layout_marginTop="10pt"
+                                        android:layout_marginBottom="5pt"
+                                        android:gravity="center"
+                                        android:textColor="@color/CryptoconseilsColor"
+                                        />
+                                </LinearLayout>
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="POUR"
+                                    android:textSize="15sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="1000€"
+                                    android:textSize="30sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_marginHorizontal="3dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:text="- Avantages du pack Expert\n- Conseils particuliers en direct avec nos experts"/>
+
+                                <android.support.v7.widget.AppCompatButton
+                                    android:id="@+id/button_pack_lambo2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="COMMANDER"
+                                    android:clickable="true"
+                                    android:background="@color/CryptoconseilsColor"/>
+
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/bloc-expert"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nos "
+                                android:textColor="@color/colorWhite"
+                                android:textAllCaps="true"
+                                android:textSize="23sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Experts"
+                                android:textColor="@color/CryptoconseilsColor"
+                                android:textSize="23sp"
+                                android:textAllCaps="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Une équipe d'expert en crypto-monnaies et de la blockchain située à Paris"
+                            android:textStyle="italic"
+                            android:gravity="center"
+                            />
+
+                        <View
+                            android:layout_width="180dp"
+                            android:layout_height="1dp"
+                            android:background="#a7a7a7"
+                            android:layout_marginVertical="10pt"
+                            android:gravity="center"/>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="5pt"
+                            android:layout_marginVertical="5pt"
+                            app:cardBackgroundColor="@android:color/transparent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@mipmap/valentin"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center"
+                                    android:layout_marginTop="4pt">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Valentin "
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:gravity="center"
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Lenfant"
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:gravity="center"
+                                        android:textColor="@color/CryptoconseilsColor"
+                                        />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Consultant expert en crypto-monnaies"
+                                    android:textStyle="italic"
+                                    android:gravity="center"
+                                    android:layout_marginBottom="10dp"
+                                    />
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="5pt"
+                            android:layout_marginVertical="5pt"
+                            app:cardBackgroundColor="@android:color/transparent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@mipmap/alexandre"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center"
+                                    android:layout_marginTop="4pt">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Alexandre "
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:gravity="center"
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Dubois"
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:gravity="center"
+                                        android:textColor="@color/CryptoconseilsColor"
+                                        />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Expert Trader"
+                                    android:textStyle="italic"
+                                    android:gravity="center"
+                                    android:layout_marginBottom="10dp"
+                                    />
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="5pt"
+                            android:layout_marginVertical="5pt"
+                            app:cardBackgroundColor="@android:color/transparent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@mipmap/guigui"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center"
+                                    android:layout_marginTop="4pt">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Guillaume "
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:gravity="center"
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Jean"
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:gravity="center"
+                                        android:textColor="@color/CryptoconseilsColor"
+                                        />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Ingénieur Blockchain"
+                                    android:textStyle="italic"
+                                    android:gravity="center"
+                                    android:layout_marginBottom="10dp"
+                                    />
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="5pt"
+                            android:layout_marginVertical="5pt"
+                            app:cardBackgroundColor="@android:color/transparent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@mipmap/aurelien"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center"
+                                    android:layout_marginTop="4pt">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Aurélien "
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:gravity="center"
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Beranger"
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:gravity="center"
+                                        android:textColor="@color/CryptoconseilsColor"
+                                        />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Crypto Analyste"
+                                    android:textStyle="italic"
+                                    android:gravity="center"
+                                    android:layout_marginBottom="10dp"
+                                    />
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/main_title_part_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dernières "
+                            android:textColor="@color/colorWhite"
+                            android:textSize="23sp"
+                            android:textAllCaps="true"/>
+
+                        <TextView
+                            android:id="@+id/main_title_part_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="actualités"
+                            android:textColor="@color/CryptoconseilsColor"
+                            android:textSize="23sp"
+                            android:textAllCaps="true"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/main_sub_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Découvrez les dernières actualités cryptos à la une !"
+                        android:textStyle="italic"
+                        android:gravity="center"/>
+
+                    <View
+                        android:id="@+id/line_sub_title"
+                        android:layout_width="180dp"
+                        android:layout_height="1dp"
+                        android:background="#a7a7a7"
+                        android:layout_marginTop="10pt" />
+
+                    <ListView
+                        android:id="@+id/pagination_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:id="@+id/next_main_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="30dp"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:id="@+id/second_title_part_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Qui "
+                                android:textColor="@color/colorWhite"
+                                android:textAllCaps="true"
+                                android:textSize="23sp" />
+
+                            <TextView
+                                android:id="@+id/second_title_part_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Sommes-nous ?"
+                                android:textColor="@color/CryptoconseilsColor"
+                                android:textSize="23sp"
+                                android:textAllCaps="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/second_sub_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Un site de conseils et de coaching personnalisé dans le trading de crypto-monnaies"
+                            android:textStyle="italic"
+                            android:gravity="center"
+                            />
+
+                        <View
+                            android:layout_width="180dp"
+                            android:layout_height="1dp"
+                            android:background="#a7a7a7"
+                            android:layout_marginVertical="10pt" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cryptoconseils"
+                            android:textSize="18sp"
+                            android:textAllCaps="true"
+                            android:layout_marginBottom="5pt"
+                            android:textColor="@color/colorWhite"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Le site francophone pour tous ceux qui souhaitent optimiser leurs investissements, approfondir leurs connaissances ou s'initier à l'univers des crypto-monnaies. \n\nRejoignez une communauté grandissante et prenez part à la grande odyssée du XXIème siècle."
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Objectif"
+                            android:textSize="15sp"
+                            android:textAllCaps="true"
+                            android:layout_marginTop="10pt"
+                            android:layout_marginBottom="5pt"
+                            android:textColor="@color/CryptoconseilsColor"
+                            android:gravity="center"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Nous croyons sincèrement à la révolution crypto-monnaie. C'est pourquoi nous voulons rendre cette dernière accessible au plus grand nombre en la démocratisant à travers des cours clairs et concis."
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Avantages"
+                            android:textSize="15sp"
+                            android:textAllCaps="true"
+                            android:layout_marginTop="10pt"
+                            android:layout_marginBottom="5pt"
+                            android:textColor="@color/CryptoconseilsColor"
+                            android:gravity="center"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Nous vous offrons une plateforme vous permettant de mieux appréhender l'univers des crypto-monnaies grâce à nos conseils en trading et à nos cours rédigés par des professionnels."
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Garantie"
+                            android:textSize="15sp"
+                            android:textAllCaps="true"
+                            android:layout_marginTop="10pt"
+                            android:layout_marginBottom="5pt"
+                            android:gravity="center"
+                            android:textColor="@color/CryptoconseilsColor"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Nous vous garantissons les meilleurs conseils possible en fonction de la situation du marché."
+                            />
+
+
+                        <GridLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:columnCount="2"
+                            android:layout_marginTop="10pt"
+                            >
+
+                            <ImageView
+                                android:src="@mipmap/ic_secu_cryptoconseils"
+                                android:layout_columnWeight="1"
+                                android:layout_rowWeight="1"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <ImageView
+                                android:src="@mipmap/ic_world_coverage_cryptoconseils"
+                                android:layout_columnWeight="1"
+                                android:layout_rowWeight="1"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Forte sécurité"
+                                android:textSize="15sp"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="4pt"
+                                android:textColor="@color/colorWhite"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Couverture"
+                                android:textSize="15sp"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="4pt"
+                                android:textColor="@color/colorWhite"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Protection contre\nles attaques Ddos,\nDonnées encryptées"
+                                android:layout_marginTop="4pt"
+                                android:gravity="center"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nos services sont\nutilisables dans 99%\n des pays du monde"
+                                android:layout_marginTop="4pt"
+                                android:gravity="center"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <ImageView
+                                android:src="@mipmap/ic_payment_options_cryptoconseils"
+                                android:layout_columnWeight="1"
+                                android:layout_rowWeight="1"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="6pt"
+                                />
+
+                            <ImageView
+                                android:src="@mipmap/ic_mobile_app_cryptoconseils"
+                                android:layout_columnWeight="1"
+                                android:layout_rowWeight="1"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="6pt"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="paiements"
+                                android:textSize="15sp"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="4pt"
+                                android:textColor="@color/colorWhite"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="App Mobile"
+                                android:textSize="15sp"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="4pt"
+                                android:textColor="@color/colorWhite"
+                                android:gravity="center"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Paypal"
+                                android:layout_marginTop="4pt"
+                                android:gravity="center"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Sipmlicité, rapidité\nNe ratez aucune news !"
+                                android:layout_marginTop="4pt"
+                                android:gravity="center"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+
+                            <ImageView
+                                android:src="@mipmap/ic_cost_efficiency_cryptoconseils"
+                                android:layout_columnWeight="1"
+                                android:layout_rowWeight="1"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="6pt"
+                                />
+                            <ImageView
+                                android:src="@mipmap/ic_high_liquidity_cryptoconseils"
+                                android:layout_columnWeight="1"
+                                android:layout_rowWeight="1"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="6pt"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Abonnement"
+                                android:textSize="15sp"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="4pt"
+                                android:textColor="@color/colorWhite"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Disponiblité"
+                                android:textSize="15sp"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="4pt"
+                                android:textColor="@color/colorWhite"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Abonnement unique\nprofitez d'un un rapport\n qualité prix imbatable"
+                                android:layout_marginTop="4pt"
+                                android:gravity="center"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Traders disponibles h24\n 7j/7 pour répondre à\n toutes vos questions"
+                                android:layout_marginTop="4pt"
+                                android:gravity="center"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                        </GridLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:layout_marginTop="40dp">
+
+                            <TextView
+                                android:id="@+id/third_title_part_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Abonnement "
+                                android:textColor="@color/colorWhite"
+                                android:textAllCaps="true"
+                                android:textSize="23sp" />
+
+                            <TextView
+                                android:id="@+id/third_title_part_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Premium"
+                                android:textColor="@color/CryptoconseilsColor"
+                                android:textSize="23sp"
+                                android:textAllCaps="true"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/third_sub_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Souscrivez à un abonnement premium adapté à vos besoins parmis nos différentes offres"
+                            android:textStyle="italic"
+                            android:gravity="center"
+                            />
+
+                        <View
+                            android:layout_width="180dp"
+                            android:layout_height="1dp"
+                            android:background="#a7a7a7"
+                            android:layout_marginVertical="10pt" />
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="5pt"
+                            android:layout_marginVertical="5pt"
+                            app:cardCornerRadius="2pt">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="PACK "
+                                    android:textSize="25sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginTop="10pt"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="DEBUTANT"
+                                    android:textSize="25sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginTop="10pt"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    android:textColor="@color/CryptoconseilsColor"
+                                    />
+                            </LinearLayout>
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="POUR"
+                                    android:textSize="15sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="100€"
+                                    android:textSize="30sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_marginHorizontal="3dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:text="- Acces aux articles de niveau Débutant\n- Acces complet aux Airdrops"/>
+
+                                <android.support.v7.widget.AppCompatButton
+                                    android:id="@+id/button_pack_debutant"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="COMMANDER"
+                                    android:clickable="true"
+                                    android:background="@color/CryptoconseilsColor"/>
+
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="5pt"
+                            android:layout_marginVertical="5pt"
+                            app:cardCornerRadius="2pt">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="PACK "
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:layout_marginTop="10pt"
+                                        android:layout_marginBottom="5pt"
+                                        android:gravity="center"
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Avancé"
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:layout_marginTop="10pt"
+                                        android:layout_marginBottom="5pt"
+                                        android:gravity="center"
+                                        android:textColor="@color/CryptoconseilsColor"
+                                        />
+                                </LinearLayout>
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="POUR"
+                                    android:textSize="15sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="300€"
+                                    android:textSize="30sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_marginHorizontal="3dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:text="- Avantages du pack Debutant\n- Acces aux articles de niveau Avancé\n- Acces à la messagerie Telegram"/>
+
+                                <android.support.v7.widget.AppCompatButton
+                                    android:id="@+id/button_pack_avance"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="COMMANDER"
+                                    android:clickable="true"
+                                    android:background="@color/CryptoconseilsColor"/>
+
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="5pt"
+                            android:layout_marginVertical="5pt"
+                            app:cardCornerRadius="2pt">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="PACK "
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:layout_marginTop="10pt"
+                                        android:layout_marginBottom="5pt"
+                                        android:gravity="center"
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Expert"
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:layout_marginTop="10pt"
+                                        android:layout_marginBottom="5pt"
+                                        android:gravity="center"
+                                        android:textColor="@color/CryptoconseilsColor"
+                                        />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="POUR"
+                                    android:textSize="15sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="500€"
+                                    android:textSize="30sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_marginHorizontal="3dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:text="- Avantages du pack Avancé\n- Acces aux articles de niveau Expert\n- Acces à l'emsemble des réseaux sociaux dont le groupe Facebook\n- Acces complet aux Calls"/>
+
+                                <android.support.v7.widget.AppCompatButton
+                                    android:id="@+id/button_pack_expert"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="COMMANDER"
+                                    android:clickable="true"
+                                    android:background="@color/CryptoconseilsColor"/>
+
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="5pt"
+                            android:layout_marginVertical="5pt"
+                            app:cardCornerRadius="2pt">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="PACK "
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:layout_marginTop="10pt"
+                                        android:layout_marginBottom="5pt"
+                                        android:gravity="center"
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Lambo"
+                                        android:textSize="25sp"
+                                        android:textAllCaps="true"
+                                        android:layout_marginTop="10pt"
+                                        android:layout_marginBottom="5pt"
+                                        android:gravity="center"
+                                        android:textColor="@color/CryptoconseilsColor"
+                                        />
+                                </LinearLayout>
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="POUR"
+                                    android:textSize="15sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="1000€"
+                                    android:textSize="30sp"
+                                    android:textAllCaps="true"
+                                    android:layout_marginBottom="5pt"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:layout_marginHorizontal="3dp"
+                                    android:layout_marginBottom="15dp"
+                                    android:text="- Avantages du pack Expert\n- Conseils particuliers en direct avec nos experts"/>
+
+                                <android.support.v7.widget.AppCompatButton
+                                    android:id="@+id/button_pack_lambo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="COMMANDER"
+                                    android:clickable="true"
+                                    android:background="@color/CryptoconseilsColor"/>
+
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center"
+                                android:layout_marginTop="40dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Nos "
+                                    android:textColor="@color/colorWhite"
+                                    android:textAllCaps="true"
+                                    android:textSize="23sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Experts"
+                                    android:textColor="@color/CryptoconseilsColor"
+                                    android:textSize="23sp"
+                                    android:textAllCaps="true"/>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Une équipe d'expert en crypto-monnaies et de la blockchain située à Paris"
+                                android:textStyle="italic"
+                                android:gravity="center"
+                                />
+
+                            <View
+                                android:layout_width="180dp"
+                                android:layout_height="1dp"
+                                android:background="#a7a7a7"
+                                android:layout_marginVertical="10pt"
+                                android:gravity="center"/>
+
+
+
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_marginHorizontal="5pt"
+                                android:layout_marginVertical="5pt"
+                                app:cardBackgroundColor="@android:color/transparent">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@mipmap/valentin"/>
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:gravity="center"
+                                        android:layout_marginTop="4pt">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Valentin "
+                                            android:textSize="25sp"
+                                            android:textAllCaps="true"
+                                            android:gravity="center"
+                                            />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Lenfant"
+                                            android:textSize="25sp"
+                                            android:textAllCaps="true"
+                                            android:gravity="center"
+                                            android:textColor="@color/CryptoconseilsColor"
+                                            />
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Consultant expert en crypto-monnaies"
+                                        android:textStyle="italic"
+                                        android:gravity="center"
+                                        android:layout_marginBottom="10dp"
+                                        />
+                                </LinearLayout>
+                            </android.support.v7.widget.CardView>
+
+
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_marginHorizontal="5pt"
+                                android:layout_marginVertical="5pt"
+                                app:cardBackgroundColor="@android:color/transparent">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@mipmap/alexandre"/>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:gravity="center"
+                                        android:layout_marginTop="4pt">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Alexandre "
+                                            android:textSize="25sp"
+                                            android:textAllCaps="true"
+                                            android:gravity="center"
+                                            />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Dubois"
+                                            android:textSize="25sp"
+                                            android:textAllCaps="true"
+                                            android:gravity="center"
+                                            android:textColor="@color/CryptoconseilsColor"
+                                            />
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Expert Trader"
+                                        android:textStyle="italic"
+                                        android:gravity="center"
+                                        android:layout_marginBottom="10dp"
+                                        />
+                                </LinearLayout>
+                            </android.support.v7.widget.CardView>
+
+
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_marginHorizontal="5pt"
+                                android:layout_marginVertical="5pt"
+                                app:cardBackgroundColor="@android:color/transparent">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@mipmap/guigui"/>
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:gravity="center"
+                                        android:layout_marginTop="4pt">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Guillaume "
+                                            android:textSize="25sp"
+                                            android:textAllCaps="true"
+                                            android:gravity="center"
+                                            />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Jean"
+                                            android:textSize="25sp"
+                                            android:textAllCaps="true"
+                                            android:gravity="center"
+                                            android:textColor="@color/CryptoconseilsColor"
+                                            />
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Ingénieur Blockchain"
+                                        android:textStyle="italic"
+                                        android:gravity="center"
+                                        android:layout_marginBottom="10dp"
+                                        />
+                                </LinearLayout>
+                            </android.support.v7.widget.CardView>
+
+
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_marginHorizontal="5pt"
+                                android:layout_marginVertical="5pt"
+                                app:cardBackgroundColor="@android:color/transparent">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:gravity="center">
+
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@mipmap/aurelien"/>
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:gravity="center"
+                                        android:layout_marginTop="4pt">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Aurélien "
+                                            android:textSize="25sp"
+                                            android:textAllCaps="true"
+                                            android:gravity="center"
+                                            />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Beranger"
+                                            android:textSize="25sp"
+                                            android:textAllCaps="true"
+                                            android:gravity="center"
+                                            android:textColor="@color/CryptoconseilsColor"
+                                            />
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Crypto Analyste"
+                                        android:textStyle="italic"
+                                        android:gravity="center"
+                                        android:layout_marginBottom="10dp"
+                                        />
+                                </LinearLayout>
+                            </android.support.v7.widget.CardView>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </LinearLayout>
+
+<!-- Container for contents of drawer - use NavigationView to make configuration easier -->
+<android.support.design.widget.NavigationView
+    android:id="@+id/nav_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:fitsSystemWindows="true"
+    app:menu="@menu/menu"
+    app:headerLayout="@layout/nav_header" />
+
+</android.support.v4.widget.DrawerLayout>
