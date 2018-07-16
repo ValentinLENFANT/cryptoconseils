@@ -231,3 +231,8 @@ cryptoconseils_blog_airdrop:
     path:   /airdrop/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Airdrop:airdrop }
     methods:    [GET]
+
+cryptoconseils_blog_get_all_call:
+    path:   /articles/all/
+    defaults: { _controller: CryptoConseilsBlogBundle:Article:allArticles }
+    methods:    [GET]

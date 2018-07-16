@@ -55,8 +55,8 @@ class Features extends Component {
                       <span className="feature-icon">
                         <img src="images/icons/orange/mobile-app.png" alt="mobile app"/>
                       </span>
-                      <h3 className="feature-title">App Mobile</h3>
-                      <p>Gérez vos trades avec notre application mobile<br/>Disponible sur Play Store & App Store</p>
+                      <h3 className="feature-title">Application Mobile</h3>
+                      <p>Pour que vous restiez constamment informé<br/>des dernières actualités</p>
                     </div>
                   </div>
                   {/* Feature Ends */}
@@ -70,7 +70,7 @@ class Features extends Component {
                         <img src="images/icons/orange/cost-efficiency.png" alt="cost efficiency"/>
                       </span>
                       <h3 className="feature-title">Abonnement Premium</h3>
-                      <p>Payez par mois ou par an<br/>un rapport qualité prix imbattable</p>
+                      <p>Payez mensuellement et profitez<br/>d'un rapport qualité prix imbattable</p>
                     </div>
                   </div>
                   {/* Feature Ends */}
