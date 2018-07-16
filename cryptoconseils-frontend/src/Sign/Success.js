@@ -10,7 +10,7 @@ class Success extends Component {
             <div className="col-sm-12 col-md-12 col-xs-12">
               <p>Votre inscription a été prise en compte !</p>
               <p> Un email vous a été envoyé à l'adresse {this.props.email}</p>
-              <a href="/">Retour à la page d'acceuil</a>
+              <a href="/">Retour à la page d'accueil</a>
             </div>
           </div>
         </div>
