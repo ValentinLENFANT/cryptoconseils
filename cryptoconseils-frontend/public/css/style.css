@@ -5341,3 +5341,8 @@ a.lwc-chat-button.bubble{margin-bottom:30px;}
 .call, .airdrop{
   margin-bottom: 40px;
 }
+
+.read-more {
+  right: 0;
+  margin: auto;
+}
