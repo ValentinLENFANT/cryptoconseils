@@ -5364,6 +5364,15 @@ a.btn.btn-primary.btn-connex-accueil {
   margin-bottom: 50px;
 }
 
+p.fix-text-no-article {
+  color: white;
+  text-transform: uppercase;
+  border: 1px solid white;
+  padding-top: 7px;
+  padding-bottom: 9px;
+  text-align: center;
+}
+
 .search-user input{
   width: 30%;
   height: 50px;
