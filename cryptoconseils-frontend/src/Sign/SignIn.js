@@ -57,7 +57,7 @@ class SignIn extends Component {
     return /\d/.test(myString);
   }
   hasUpperCase(str) {
-    if(str.toLowerCase() != str) {
+    if(str.toLowerCase() !== str) {
       return true;
     } return false;
   }
@@ -138,8 +138,7 @@ class SignIn extends Component {
             window.location.href = this.state.previousPath
           }).catch(error => {
             console.log(error.response);
-            this.setState({statusMsg: "Votre compte n'est pas activé ou a été désactivé."})
-            var isEnabled = false;
+            this.setState({isEnabled: false,statusMsg: "Votre compte n'est pas activé ou a été désactivé."})
           })
         }).catch(error => {
           this.setState({statusMsg: 'Username et/ou Mdp invalides'})
@@ -240,9 +239,9 @@ class SignIn extends Component {
               <div className="form-group">
                 <button className="btn btn-primary" type="submit">Envoyer</button>
                 <p className="text-center">Pas de compte ?
-                  <a href="#" onClick={() => this.setState({showSignUp: true,showForgotPassword:false})}> Inscription</a>
+                  <a href="" onClick={() => this.setState({showSignUp: true,showForgotPassword:false})}> Inscription</a>
                     ou
-                  <a href="#" onClick={() => this.setState({showSignUp: false,showForgotPassword:false})}>Connexion</a>
+                  <a href="" onClick={() => this.setState({showSignUp: false,showForgotPassword:false})}>Connexion</a>
                 </p>
               </div>
               {/*Submit Form Button Ends */}
@@ -318,7 +317,7 @@ class SignIn extends Component {
               <div className="form-group">
                 <button className="btn btn-primary" type="submit">créer un compte</button>
                 <p className="text-center">déjà un compte ?
-                  <a href="#" onClick={this.changeForm}> Connexion</a>
+                  <a href="" onClick={this.changeForm}> Connexion</a>
                 </p>
               </div>
               {/* Submit Form Button Ends */}
@@ -381,10 +380,10 @@ class SignIn extends Component {
               <div className="form-group">
                 <button className="btn btn-primary" type="submit">Connexion</button>
                 <p className="text-center">Pas de compte ?
-                  <a href="#" onClick={this.changeForm}> Inscription</a>
+                  <a href="" onClick={this.changeForm}> Inscription</a>
                 </p>
                 <p className="text-center">Mot de passe oublié ?
-                  <a href="#" onClick={this.forgotPasswordForm}> Renitialiser mot de passe</a>
+                  <a href="" onClick={this.forgotPasswordForm}> Renitialiser mot de passe</a>
                 </p>
               </div>
               {/*Submit Form Button Ends */}

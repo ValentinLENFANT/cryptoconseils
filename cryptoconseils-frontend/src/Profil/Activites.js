@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import { action } from '@storybook/addon-actions'
 import Confirm from 'react-confirm-bootstrap';
 import Dialog from 'react-bootstrap-dialog'
 

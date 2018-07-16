@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Confirm from 'react-confirm-bootstrap';
-import Dialog from 'react-bootstrap-dialog'
 import axios from 'axios'
 class Comments extends Component {
 
@@ -69,7 +68,7 @@ class Comments extends Component {
 
   countComment() {
     var nbComments = 0;
-    this.state.comments.map(cmt => {
+    this.state.comments.forEach(cmt => {
       if(cmt.published){
         nbComments = nbComments + 1
       }

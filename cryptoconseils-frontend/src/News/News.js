@@ -21,21 +21,19 @@ class News extends Component {
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
+      // on récupère l'utilisateur courant
+      axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/',authorization)
+      .then(response => {
+        var lvl = ["", "Inscrit","Debutant","Avancé","Expert","Lambo"];
+        var pack;
+        if(response.data.premiumLevel >=2) {
+          pack = "Pack "+ lvl[response.data.premiumLevel]
+        }
+        this.setState({pack: pack, premium: response.data.premiumLevel})
+      }).catch(error => {
+        console.log(error);
+      });
     }
-
-    // on récupère l'utilisateur courant
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/',authorization)
-    .then(response => {
-      var lvl = ["", "Inscrit","Debutant","Avancé","Expert","Lambo"];
-      var pack;
-      console.log(response.data);
-      if(response.data.premiumLevel >=2) {
-        pack = "Pack "+ lvl[response.data.premiumLevel]
-      }
-      this.setState({pack: pack, premium: response.data.premiumLevel})
-    }).catch(error => {
-    console.log(error);
-    });
   }
 
   renderPremiumPrice(){

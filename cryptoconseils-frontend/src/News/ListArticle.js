@@ -37,7 +37,6 @@ class ListArticle extends Component {
   }
 
   renderReadMoreButton(){
-    console.log(this.state.nbArticle, this.state.articles.length);
     if(this.state.nbArticle === this.state.articles.length){
       return (
         <a className="btn btn-primary" onClick={this.readMore.bind(this)}>Afficher plus d'articles...</a>
@@ -98,7 +97,6 @@ class ListArticle extends Component {
 
   renderArticles() {
     return this.state.articles.map(article => {
-      console.log(article);
       return(
         <div className="col-sm-4 col-md-4 col-xs-12 news-article" key={article.id}>
           <div className="latest-post">

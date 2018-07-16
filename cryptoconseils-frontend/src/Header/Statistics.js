@@ -15,7 +15,6 @@ class Statistics extends Component {
     axios.get('https://api.coinmarketcap.com/v2/ticker/1/?convert=EUR')
     .then(response => {
       var btc = response.data.data.quotes.EUR;
-      console.log(btc);
       this.setState({
         price: btc.price.toLocaleString() + " €",
         percent_change_24h: btc.percent_change_24h +" %",
@@ -30,7 +29,7 @@ class Statistics extends Component {
     return (
       <div className="Statistics Component">
         <div className="col-md-6 col-lg-6">
-          <ul className="unstyled bitcoin-stats text-center">
+          <ul className="unstyled bitcoin-stats">
             <li><h6>{this.state.percent_change_24h}</h6><span>Prix en 24H </span></li>
             <li><h6>{this.state.volume_24h}</h6><span>Volume 24H </span></li>
             <li><h6 className="btc-price">{this.state.price}</h6><span>Prix actuel du Bitcoin</span></li>

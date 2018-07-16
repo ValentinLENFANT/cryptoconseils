@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PreLoader from '../PreLoader/PreLoader';
 import axios from 'axios'
 
 class AirdropOfDay extends Component {

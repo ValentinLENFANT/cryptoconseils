@@ -57,7 +57,7 @@ class AirdropAdmin extends Component {
   }
 
   renderImage(imageName){
-    if(imageName != '') {
+    if(imageName !== '') {
       return (
         <img src={"/images/articles/"+imageName} alt="call premium" className="image-airdrop-premium"/>
       );
@@ -203,7 +203,7 @@ class AirdropAdmin extends Component {
           <div className="row">
             <div className="col-md-12">
               <div className="form-area">
-                <form onSubmit={this.sendAirdrop.bind(this)}className="contact-form" role="form">
+                <form onSubmit={this.sendAirdrop.bind(this)} className="contact-form">
                   <div className="col-md-6">
                     <div className="form-group">
                       <input

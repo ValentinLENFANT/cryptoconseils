@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { action } from '@storybook/addon-actions'
 import Confirm from 'react-confirm-bootstrap';
-import Dialog from 'react-bootstrap-dialog'
 import Denied from '../../Denied/Denied'
 
 class CommentModeration extends Component {
@@ -95,7 +93,7 @@ class CommentModeration extends Component {
               <div>
                 <a href={"/articles/"+item.article.id}>{item.article.title}</a>
                 <div className="mic-info">
-                  Par: <a href="#">{item.author}</a> {this.convertDate(item.date)}
+                  Par: <a href="">{item.author}</a> {this.convertDate(item.date)}
                 </div>
               </div>
               <div className="comment-text white-space-pre">

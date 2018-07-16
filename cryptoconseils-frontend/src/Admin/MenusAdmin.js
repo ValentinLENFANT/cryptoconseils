@@ -7,7 +7,7 @@ class MenusAdmin extends Component {
           <section className="menu-dashboard section-profil">
             <div className="container">
                 <div className="text-center">
-                    <img src="../images/backoffice/logo-admin.png" className="img-responsive center-block" />
+                    <img src="../images/backoffice/logo-admin.png" className="img-responsive center-block" alt="logo-admin" />
                 </div>
                 <div className="row text-center">
                     <div className="col-md-3 col-sm-3 col-xs-12">

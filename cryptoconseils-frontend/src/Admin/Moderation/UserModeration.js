@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { action } from '@storybook/addon-actions';
 import Confirm from 'react-confirm-bootstrap';
 import Dialog from 'react-bootstrap-dialog';
 
@@ -134,7 +133,7 @@ class UserModeration extends Component {
       }, authorization)
       .then(res => {
         this.getAllusers()
-        alert('Le niveau premium de '+item.username+' a été changé en: '+this.state.premium_level[lvl])
+        //alert('Le niveau premium de '+item.username+' a été changé en: '+this.state.premium_level[lvl])
       }).catch(err => {
         console.log(err);
       })

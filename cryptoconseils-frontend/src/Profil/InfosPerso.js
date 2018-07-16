@@ -95,7 +95,7 @@ class InfosPerso extends Component {
     return /\d/.test(myString);
   }
   hasUpperCase(str) {
-    if(str.toLowerCase() != str) {
+    if(str.toLowerCase() !== str) {
       return true;
     } return false;
   }
@@ -178,7 +178,7 @@ class InfosPerso extends Component {
           </div>
           <div className="row text-center">
             <div className="col-xs-12 col-sm-6 col-md-7">
-              <form role="form" className="contact-form" onSubmit={this.updateInfos.bind(this)}>
+              <form className="contact-form" onSubmit={this.updateInfos.bind(this)}>
                 <div className="row">
                   <div className="form-group">
                     <input

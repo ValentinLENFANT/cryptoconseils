@@ -177,7 +177,7 @@ class CallAdmin extends Component {
           <div className="row">
             <div className="col-md-12">
               <div className="form-area">
-                <form role="form" className="contact-form" onSubmit={this.sendCall.bind(this)}>
+                <form className="contact-form" onSubmit={this.sendCall.bind(this)}>
                   <div className="col-md-6">
                     <div className="form-group">
                       <input

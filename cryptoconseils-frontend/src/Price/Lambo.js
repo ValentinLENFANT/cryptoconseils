@@ -19,7 +19,7 @@ class Lambo extends Component {
       );
     }else {
       return (
-        <a href="#"className="btn btn-primary" disabled>
+        <a className="btn btn-primary" disabled>
           COMMANDER
         </a>
       );

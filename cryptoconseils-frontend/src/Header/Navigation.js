@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Logo from '../Logo/Logo';
 import SearchBar from './SearchBar'
-import axios from 'axios'
 
 class Navigation extends Component {
 
