@@ -43,11 +43,14 @@ class AirdropOfDay extends Component {
       console.log(error);
     });
   }
-
-  sortArray(array) {
-    return array.sort(function (a, b) {
-      return b.id - a.id;
-    });
+  convertDate(date){
+    date = new Date(date);
+    var month = date.getMonth();
+    var day = date.getDate();
+    var year = date.getFullYear();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    return day+'-'+month+'-'+year+' '+hours+':'+minutes;
   }
 
   renderNoAccess(){
@@ -74,14 +77,14 @@ class AirdropOfDay extends Component {
     );
   }
   renderAirdrops() {
-    var listAirdops = this.sortArray(this.state.allAirdrop);
+    var listAirdops = this.state.allAirdrop;
     if(this.props.profile){
       listAirdops = listAirdops.slice(0,1)
     }
     return listAirdops.map(airdrop => {
       console.log(airdrop);
       return(
-        <div className="row" key={airdrop.id}>
+        <div className="row airdrop" key={airdrop.id}>
           <div className="col-xs-12 col-sm-12 col-md-6">
             <a href="#premium">
               <img src={"/images/articles/"+airdrop.fileName} alt="call premium" className="image-airdrop-premium"/>
@@ -99,7 +102,22 @@ class AirdropOfDay extends Component {
             <div className="row">
               <div className="col-xs-12 col-sm-12 col-md-12">
                 <p className="etape-airdrop">
-                  {"Type "+airdrop.type}
+                  <a>Type: </a>{airdrop.type}
+                </p>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-xs-12 col-sm-12 col-md-12">
+                <p className="etape-airdrop">
+                  <a>Date de début: </a>{this.convertDate(airdrop.beginDate)}
+                </p>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-xs-12 col-sm-12 col-md-12">
+                <p className="etape-airdrop">
+                  <a>Date de fin: </a>{this.convertDate(airdrop.endDate)}
                 </p>
               </div>
             </div>

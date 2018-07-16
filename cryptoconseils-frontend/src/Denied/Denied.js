@@ -24,9 +24,9 @@ class Denied extends Component {
               <br/>
               Vous n'avez pas le niveau <a href="/premium">premium </a>suffisant
             </h1>
-            <h2><a href="/signin">Se connecter</a></h2>
-            <h2><a href="/signup">S'inscrire</a></h2>
-            <h2><a href="/">Retour à l'acceuil</a></h2>
+            <h2><a href="/signin" className="btn btn-primary">Se connecter</a></h2>
+            <h2><a href="/signup" className="btn btn-primary">S'inscrire</a></h2>
+            <h2><a href="/" className="btn btn-primary">Retour à l'acceuil</a></h2>
           </div>
         )
       } else {
@@ -36,9 +36,9 @@ class Denied extends Component {
             <h1>
               <h1>Vous n'êtes pas connecté</h1>
             </h1>
-            <h2><a href="/signin">Se connecter</a></h2>
-            <h2><a href="/signup">S'inscrire</a></h2>
-            <h2><a href="/">Retour à l'acceuil</a></h2>
+            <h2><a href="/signin" className="btn btn-primary">Se connecter</a></h2>
+            <h2><a href="/signup" className="btn btn-primary">S'inscrire</a></h2>
+            <h2><a href="/" className="btn btn-primary">Retour à l'acceuil</a></h2>
           </div>
         );
       }
@@ -47,9 +47,9 @@ class Denied extends Component {
         <div className="Denied">
           <Header/>
           <h1>Vous n'avez pas accès à cette page</h1>
-          <h2><a href="/signin">Se connecter</a></h2>
-          <h2><a href="/signup">S'inscrire</a></h2>
-          <h2><a href="/">Retour à l'acceuil</a></h2>
+          <h2><a href="/signin" className="btn btn-primary">Se connecter</a></h2>
+          <h2><a href="/signup" className="btn btn-primary">S'inscrire</a></h2>
+          <h2><a href="/"className="btn btn-primary" >Retour à l'acceuil</a></h2>
         </div>
       );
     }

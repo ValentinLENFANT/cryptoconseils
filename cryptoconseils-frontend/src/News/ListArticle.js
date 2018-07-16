@@ -65,16 +65,25 @@ class ListArticle extends Component {
       )
     }
   }
+  renderCategoryLogo(article){
+    if(article.categories[0]){
+      return (
+        <div className="post-category">
+          <span><i className="fa fa-diamond"></i> {article.categories[0].name}</span>
+        </div>
+      )
+    }
+  }
   renderArticles() {
     return this.state.articles.map(article => {
-      console.log(article.premium);
+      console.log(article);
       return(
         <div className="col-sm-4 col-md-4 col-xs-12 news-article" key={article.id}>
           <div className="latest-post">
             {/* Featured Image Starts */}
-            <a href={"/articles/" + article.id}>
+            <a href={"/articles/" + article.id} className="">
               <img
-                className="img-responsive news-article-img"
+                className="img-responsive news-article-img "
                 src={"../images/articles/"+article.image.file_name}
                 alt={article.image.alt}
                 />
@@ -97,7 +106,9 @@ class ListArticle extends Component {
                 {this.convertDate(article.date).toLocaleString('fr', { month: "short" })}
               </span>
             </div>
+          
             {this.renderPremiumLogo(article.premium)}
+            {this.renderCategoryLogo(article)}
             <a href={"/articles/" + article.id} className="btn btn-primary">Lire plus</a>
             {/* Article Content Ends */}
           </div>

@@ -125,7 +125,7 @@ class CallAdmin extends Component {
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12">
               <p id="airdrop-ticker">{this.state.name}</p>
-              <p className="desciption-call-premium">
+              <p className="desciption-call-premium white-space-pre">
                 {this.state.analyse}
               </p>
             </div>
@@ -226,12 +226,12 @@ class CallAdmin extends Component {
                         className="form-control"
                         id="achat"
                         name="achat"
-                        placeholder="Prix achat en €, ex : 6101"
+                        placeholder="Prix achat en BTC, ex : 1.2"
                         required="required"
                         value={this.state.achat}
                         onChange={this.handleChange}/>
                         <span className="help-block">
-                          <p id="characterLeft" className="help-block ">Prix achat en €, ex : 6101</p>
+                          <p id="characterLeft" className="help-block ">Prix achat en BTC, ex : 1.2</p>
                         </span>
                     </div>
                     <div className="form-group">
@@ -240,12 +240,12 @@ class CallAdmin extends Component {
                         className="form-control"
                         id="vente"
                         name="vente"
-                        placeholder="Prix vente en €, ex : 7101€"
+                        placeholder="Prix vente en BTC, ex : 1.5"
                         required="required"
                         value={this.state.vente}
                         onChange={this.handleChange}/>
                         <span className="help-block">
-                          <p id="characterLeft" className="help-block ">Prix vente en €, ex : 7101€</p>
+                          <p id="characterLeft" className="help-block ">Prix vente en BTC, ex : 1.5</p>
                         </span>
                     </div>
                     <div className="form-group">
@@ -265,8 +265,7 @@ class CallAdmin extends Component {
                     </div>
                     <div className="form-group">
                       <label>
-                        Call gratuit
-                        <input
+                        Call gratuit <input
                           name="isCallFree"
                           type="checkbox"
                           checked={this.state.isCallFree}

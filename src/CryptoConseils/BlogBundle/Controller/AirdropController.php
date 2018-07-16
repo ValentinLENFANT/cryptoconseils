@@ -63,12 +63,12 @@ class AirdropController extends FOSRestController
 
             $airdrop->setAuthor($data->author);
             if (isset($data->beginDate)) {
-                $airdrop->setBeginDate($data->beginDate);
+                $airdrop->setBeginDate(new \DateTime($data->beginDate));
             } else {
                 $airdrop->setBeginDate(new \DateTime());
             }
             if (isset($data->endDate)) {
-                $airdrop->setBeginDate($data->endDate);
+                $airdrop->setEndDate(new \DateTime($data->endDate));
             } else {
                 $airdrop->setEndDate(new \DateTime());
             }

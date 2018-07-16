@@ -31,10 +31,8 @@ class Statistics extends Component {
       <div className="Statistics Component">
         <div className="col-md-6 col-lg-6">
           <ul className="unstyled bitcoin-stats text-center">
-            <li><h6>9,450 USD</h6><span>Dernier trade</span></li>
             <li><h6>{this.state.percent_change_24h}</h6><span>Prix en 24H </span></li>
             <li><h6>{this.state.volume_24h}</h6><span>Volume 24H </span></li>
-            <li><h6>2,231,775</h6><span>Traders actifs</span></li>
             <li><h6 className="btc-price">{this.state.price}</h6><span>Prix actuel du Bitcoin</span></li>
           </ul>
         </div>

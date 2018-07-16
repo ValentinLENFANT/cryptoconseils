@@ -70,7 +70,7 @@ class Features extends Component {
                         <img src="images/icons/orange/cost-efficiency.png" alt="cost efficiency"/>
                       </span>
                       <h3 className="feature-title">Abonnement Premium</h3>
-                      <p>Payez mensuellement et profitez<br/>d'un rapport qualité prix imbattable</p>
+                      <p>Payez un abonnement unique et profitez<br/>d'un rapport qualité prix imbattable</p>
                     </div>
                   </div>
                   {/* Feature Ends */}

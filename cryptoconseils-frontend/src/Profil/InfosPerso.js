@@ -60,12 +60,16 @@ class InfosPerso extends Component {
   checkNewInfos(password, password_confirmation, email){
     var goUpdate = false;
     if(this.state.password !== '' || this.state.password_confirmation !=='') {
-      if(password === password_confirmation) {
-        goUpdate = true;
-      }
-      else{
-        this.setState({statusMsg: "Les mots de passes ne correspondent pas"});
-        goUpdate = false;
+      if(this.state.password.length < 8 || !this.hasNumber(this.state.password) || !this.hasUpperCase(this.state.password)) {
+        this.setState({password:"",statusMsg: "Le mot de passe doit contenir 8 caractères, 1 chiffre et 1 majuscule"})
+      } else {
+        if(password === password_confirmation) {
+          goUpdate = true;
+        }
+        else{
+          this.setState({statusMsg: "Les mots de passes ne correspondent pas"});
+          goUpdate = false;
+        }
       }
     }
     if(this.state.email !== ''){
@@ -87,6 +91,14 @@ class InfosPerso extends Component {
     return re.test(email);
   }
 
+  hasNumber(myString) {
+    return /\d/.test(myString);
+  }
+  hasUpperCase(str) {
+    if(str.toLowerCase() != str) {
+      return true;
+    } return false;
+  }
   sendInfos(password,email){
     //check si access token
     var authorization = {
@@ -208,12 +220,12 @@ class InfosPerso extends Component {
                         />
                       </div>
                     </div>
-                    <div className="col-xs-12 col-sm-6 col-md-4">
+                    {/*<div className="col-xs-12 col-sm-6 col-md-4">
                       <div className="form-group">
                         <label className="avatar-change">changer votre avatar</label>
                         <input type="file" onChange={this.sendImage.bind(this)}/>
                       </div>
-                    </div>
+                    </div>*/}
                   </div>
                   <div className="row">
                     {this.renderStatusMsg()}

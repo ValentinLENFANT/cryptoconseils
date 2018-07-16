@@ -68,33 +68,43 @@ class Price extends Component {
   }
   render() {
     if(this.state.premiumLevel === 5) {
-      return null
+      return (
+        <div>
+          <Avantages/>
+        </div>
+      )
     } else {
       return(
         <div className="Price Component">
-          <section className="pricing" id="pricing">
-            <div className="container">
-              {/* Section Title Starts */}
-              <div className="row text-center">
-                {this.renderTitle()}
-                <div className="title-head-subtitle">
-                  <p>Souscrivez à un abonnement premium adapté à vos besoins parmis nos différentes offres</p>
+          <div className="row">
+            <div className="col-sm-12 col-md-12 col-xs-12">
+              <section className="pricing" id="pricing">
+                <div className="container">
+                  {/* Section Title Starts */}
+                  <div className="row text-center">
+                    {this.renderTitle()}
+                    <div className="title-head-subtitle">
+                      <p>Souscrivez à un abonnement premium adapté à vos besoins parmis nos différentes offres</p>
+                    </div>
+                  </div>
+                  {/* Section Title Ends */}
+                  {/* Section Content Starts */}
+                  <div className="row pricing-tables-content">
+                    <div className="pricing-container">
+                      <div className="text-center">
+                        <button className="btn-primary" onClick={this.toggleAvantage.bind(this)}>Découvrez ci-dessous les avantages de nos pack premium</button>
+                      </div>
+                      {this.renderAvantages()}
+                      {/* Pricing Tables Starts */}
+                      <ul className="pricing-list bounce-invert">
+                        {this.renderPack()}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              {/* Section Title Ends */}
-              {/* Section Content Starts */}
-              <div className="row pricing-tables-content">
-                <div className="pricing-container">
-                  <button className="btn-primary" onClick={this.toggleAvantage.bind(this)}>Découvrez les avantages de nos pack premium</button>
-                  {this.renderAvantages()}
-                  {/* Pricing Tables Starts */}
-                  <ul className="pricing-list bounce-invert">
-                    {this.renderPack()}
-                  </ul>
-                </div>
-              </div>
+              </section>
             </div>
-          </section>
+          </div>
         </div>
       );
     }

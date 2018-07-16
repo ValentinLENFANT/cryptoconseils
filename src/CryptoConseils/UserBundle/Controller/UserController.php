@@ -539,10 +539,12 @@ class UserController extends FOSRestController
             die('Erreur : ' . $e->getMessage());
         }
 
-        $res = $bdd->query("SELECT enabled FROM users WHERE username ='" .$username."'");
-        $enabled = $res->fetch()['enabled'];
+        $res = $bdd->query("SELECT enabled, isEmailValidated FROM users WHERE username ='" .$username."'");
+        $data = $res->fetch();
+        $enabled = $data['enabled'];
+        $isEmailValidated = $data['isEmailValidated'];
 
-        if ($enabled == 0){
+        if ($enabled == "0" || $isEmailValidated == "0" ){
             return new JsonResponse("L'utilisateur n'a pas son compte d'activé.", 401);
         } else {
             return new JsonResponse("L'utilisateur a bien son compte d'activé.", 200);
