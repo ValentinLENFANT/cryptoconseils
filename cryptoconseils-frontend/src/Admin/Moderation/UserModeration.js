@@ -13,7 +13,9 @@ class UserModeration extends Component {
       listUsers: [],
       currentUser: '',
       noAccess: null,
-      premium_level: ["Non inscrit","Inscrit","Debutant","Avancé","Expert","Lambo"]
+      premium_level: ["Non inscrit","Inscrit","Debutant","Avancé","Expert","Lambo"],
+      search:'',
+      results: []
     }
   }
 
@@ -55,12 +57,41 @@ class UserModeration extends Component {
     // on récupère les users
     axios.get(process.env.REACT_APP_API_ADDRESS+'/users/',authorization)
     .then(user => {
-      this.setState({listUsers: user.data});
+      this.setState({listUsers: user.data, results: user.data});
     }).catch(error => {
       console.log(error);
     });
   }
+  searchUser(data, search){
+    if(search === '') {
+      this.setState({
+        results: null
+      })
+    }
+    var res = [];
+    for(var x in data){
+      var email = data[x].email.toUpperCase();
+      search = search.toUpperCase();
 
+      if(email.includes(search)){
+        res = [...res, data[x]]
+      }
+    }
+    console.log(res);
+    this.setState({
+      results: res
+    })
+  }
+
+  onChange(event) {
+    // Apercu temps réel quand on tape
+    console.log(event.target.value);
+
+    // Update de la valeur
+    this.setState({
+      search: event.target.value
+    }, () => this.searchUser(this.state.listUsers,this.state.search));
+  }
   changeEnabledUser(item,action) {
     if(item.username === this.state.currentUser){
       alert('Vous ne pouvez pas vous désactiver ou vous activer')
@@ -141,7 +172,10 @@ class UserModeration extends Component {
   }
 
   renderUserList() {
-    return this.state.listUsers.map((user) => {
+    if(this.state.results !== null){
+      var listUsers = this.state.results;
+    } else listUsers = this.state.listUsers
+    return listUsers.map((user) => {
       return(
         <tr key={user.id}>
           <td>{user.id}</td>
@@ -231,6 +265,19 @@ class UserModeration extends Component {
               </div>
             </div>
           </div>
+          <div className="container">
+            <div className="row text-center search-user">
+              <input
+                type="text"
+                placeholder="Rechercher un utilisateur"
+                value={this.state.search}
+                onChange={this.onChange.bind(this)}
+                name="search"
+                id="search"
+              />
+            </div>
+          </div>
+
           <table className="better-table sortable" id="userTable">
             <thead>
             <tr>
