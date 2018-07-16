@@ -39,8 +39,12 @@ class News extends Component {
   }
 
   renderPremiumPrice(){
-    if (this.state.premium < 5) {
-      return <Price titlePart1="Vous souhaitez lire" titlePart2="plus d'article ?"/>
+    if (this.state.premium && this.state.premium < 5) {
+      return (
+        <div>
+          <Price titlePart1="Vous souhaitez lire" titlePart2="plus d'article ?"/>
+        </div>
+      )
     } else return null
   }
 
