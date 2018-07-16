@@ -15,24 +15,20 @@ class ListArticle extends Component {
   // éxécuté à la fin
   componentWillMount() {
     // check si access token
-    if(localStorage.getItem('access_token')){
-      var authorization = {
-        headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
-      };
-    }
+
     var nbArticle;
     if(this.props.nbArticle){
       nbArticle = this.props.nbArticle;
     } else nbArticle = 9
     // récupère tous les articles
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/newest/'+nbArticle, authorization)
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/all/')
     .then(response => {
       if(this.props.idCategorie) {
         this.setState({
           articles: this.orderByCategorie(response.data,this.props.idCategorie)
         });
       } else {
-        this.setState({articles: response.data});
+        this.setState({articles: response.data.slice(0,nbArticle)});
       }
     }).catch(error => {
       console.log(error);

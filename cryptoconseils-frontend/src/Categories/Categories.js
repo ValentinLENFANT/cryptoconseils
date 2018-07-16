@@ -38,7 +38,9 @@ class Categories extends Component {
             titlePart1="Categorie"
             titlePart2={this.state.categorieName}
             pageName={"categorie - "+this.state.categorieName}/>
+            <div className="container">
           <ListArticle nbArticle="20" idCategorie={this.state.categoriesId}/>
+          </div>
           <Sidebar/>
         </div>
       );
