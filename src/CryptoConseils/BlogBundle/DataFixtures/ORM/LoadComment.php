@@ -37,10 +37,7 @@ class LoadComment extends AbstractFixture implements OrderedFixtureInterface
             $this->getReference('article15'),
             $this->getReference('article16'),
             $this->getReference('article17'),
-            $this->getReference('article18'),
-            $this->getReference('article19'),
-            $this->getReference('article20'),
-            $this->getReference('article21')
+            $this->getReference('article18')
         );
 
         $author = array(

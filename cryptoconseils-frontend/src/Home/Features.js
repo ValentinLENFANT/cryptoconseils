@@ -8,7 +8,7 @@ class Features extends Component {
           <div className="container-fluid">
             <div className="row">
               {/* Features Starts */}
-              <div className="col-md-8 ts-padding img-block-left">
+              <div className="col-md-12 ts-padding img-block-left">
                 <div className="gap-20"></div>
                 <div className="row">
                   {/* Feature Starts */}
@@ -70,7 +70,7 @@ class Features extends Component {
                         <img src="images/icons/orange/cost-efficiency.png" alt="cost efficiency"/>
                       </span>
                       <h3 className="feature-title">Abonnement Premium</h3>
-                      <p>Payez mensuellement et profitez<br/>d'un rapport qualité prix imbattable</p>
+                      <p>Payez un abonnement unique et profitez<br/>d'un rapport qualité prix imbattable</p>
                     </div>
                   </div>
                   {/* Feature Ends */}
@@ -89,8 +89,10 @@ class Features extends Component {
                 </div>
               </div>
               {/* Features Ends */}
-              {/* Video Starts */}
-              <div className="col-md-4 ts-padding bg-image-1">
+            </div>
+            <div className="row">
+               {/* Video Starts */}
+               <div className="col-md-12 ts-padding bg-image-1">
                 <div>
                   <div className="text-center">
                     <a className="button-video mfp-youtube" href="https://www.youtube.com/watch?v=YoFCB0P3OZc"> </a>
