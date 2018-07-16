@@ -15,6 +15,17 @@ class Meta extends Component {
       })
     }
   }
+
+  countComment() {
+    var nbComments = 0;
+    this.props.article.comments.map(cmt => {
+      if(cmt.published){
+        nbComments = nbComments + 1
+      }
+    });
+    return nbComments+" commentaires";
+  }
+
   render() {
     return(
       <div className="Meta Component">
@@ -25,7 +36,7 @@ class Meta extends Component {
               {this.convertDate(this.props.article.date)}
             </span>
           <span><i className="fa fa-commenting"> </i>
-            <a href="blog-post.html"> {this.props.article.comments?this.props.article.comments.length+ " commentaires" : "0 commentaires"} </a>
+            <a href="blog-post.html"> {this.countComment()} </a>
           </span>
           <span>
             <i className="fa fa-tags"></i>

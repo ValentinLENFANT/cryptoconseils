@@ -72,14 +72,14 @@ class SearchBar extends Component {
 
     axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/', config)
     .then(response => {
-      console.log(response.error_description);
+      //console.log(response.error_description);
       this.setState({
         articles: response.data
       });
     }).catch(error => {
-      if(error.response.data.error_description === "The access token provided has expired."){
+      //if(error.response.data.error_description === "The access token provided has expired."){
         localStorage.clear();
-      }
+      //}
     });
   }
   render() {

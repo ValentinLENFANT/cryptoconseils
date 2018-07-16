@@ -21,6 +21,16 @@ class Meta extends Component {
       return ('Premium '+lvl[this.props.article.premium])
     }
   }
+
+  countComment() {
+    var nbComments = 0;
+    this.props.article.comments.map(cmt => {
+      if(cmt.published){
+        nbComments = nbComments + 1
+      }
+    });
+    return nbComments+" commentaires";
+  }
   render() {
     if(this.props.article) {
       return(
@@ -34,7 +44,7 @@ class Meta extends Component {
           </span>
           <span>
             <i className="fa fa-commenting"></i>
-              {this.props.article.comments? this.props.article.comments.length+ " commentaires" : "0 commentaires"}
+              {this.countComment()}
           </span>
           <span>
             <i className="fa fa-tags"></i>{this.getCategories()}
