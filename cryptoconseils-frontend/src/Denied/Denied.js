@@ -14,23 +14,38 @@ class Denied extends Component {
         </div>
       );
     } else if(this.props.noAccess){
-      return (
-        <div className="Denied">
-          <Header/>
-
-          <h1>
-            Vous n'avez pas le niveau <a href="/premium">premium </a>suffisant
-          </h1>
-          <h2><a href="/signin">Se connecter</a></h2>
-          <h2><a href="/signup">S'inscrire</a></h2>
-          <h2><a href="/">Retour à l'acceuil</a></h2>
-        </div>
-      );
+      if(this.props.userPremium && this.props.articlePremium) {
+        var lvl = ["Non inscrit","Inscrit","Débutant","Avancé","Expert","Lambo"]
+        return(
+          <div className="Denied">
+            <Header/>
+            <h1>
+              L’article est de niveau <a>{lvl[this.props.articlePremium]}</a> et vous avez le niveau <a>{lvl[this.props.userPremium]}</a>
+              <br/>
+              Vous n'avez pas le niveau <a href="/premium">premium </a>suffisant
+            </h1>
+            <h2><a href="/signin">Se connecter</a></h2>
+            <h2><a href="/signup">S'inscrire</a></h2>
+            <h2><a href="/">Retour à l'acceuil</a></h2>
+          </div>
+        )
+      } else {
+        return (
+          <div className="Denied">
+            <Header/>
+            <h1>
+              <h1>Vous n'ètes pas connecté</h1>
+            </h1>
+            <h2><a href="/signin">Se connecter</a></h2>
+            <h2><a href="/signup">S'inscrire</a></h2>
+            <h2><a href="/">Retour à l'acceuil</a></h2>
+          </div>
+        );
+      }
     } else {
       return (
         <div className="Denied">
           <Header/>
-
           <h1>Vous n'avez pas accès à cette page</h1>
           <h2><a href="/signin">Se connecter</a></h2>
           <h2><a href="/signup">S'inscrire</a></h2>

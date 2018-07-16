@@ -19,7 +19,9 @@ class Articles extends Component {
       image: [],
       noAccess: null,
       noLogged: null,
-      notFound: null
+      notFound: null,
+      articlePremium: null,
+      userPremium: null
     };
   }
   componentDidMount(){
@@ -42,7 +44,13 @@ class Articles extends Component {
         });
       }).catch(error => {
         if(error.response.status === 403) {
-          this.setState({noAccess: true})
+          console.log(error.response);
+          this.setState({
+
+            userPremium: error.response.data.userPremiumLevel,
+            articlePremium: error.response.data.articlePremiumLevel,
+            noAccess: true
+          })
         } else{
           this.setState({notFound: true})
         }
@@ -84,7 +92,12 @@ class Articles extends Component {
         </div>
       );
     } else if(this.state.noAccess === true) {
-      return (<Denied noAccess={this.state.noAccess}/>);
+      return (
+        <Denied
+        noAccess={this.state.noAccess}
+        userPremium={this.state.userPremium}
+        articlePremium={this.state.articlePremium}/>
+    );
     } else if(this.state.noLogged === true){
       return (<Denied noLogged={this.state.noLogged}/>);
     } else if (this.state.notFound) {
