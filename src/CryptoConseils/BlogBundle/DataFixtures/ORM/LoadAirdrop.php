@@ -33,16 +33,16 @@ class LoadAirdrop extends AbstractFixture
             "Ripple",
             "Neo",
             "Tron",
-            "Gas"
+            "EOS"
         );
 
         $content = array(
             "Il est rare de voir un airdrop de Bitcoin. Nous vous recommandons vivement d'y participer.",
-            "De même que pour le Bitcoin, l'Ethereum réalise rarement des airdrops. Participez y !",
+            "De même que pour le Bitcoin, l'Ethereum réalise rarement des airdrops. Participez y car nous prévoyons une hausse fulgurante d'ici à la fin de l'année. !",
             "Il est toujours bon de remplir ses bags de Ripple afin de pouvoir aller sur le terrain de jeu des whales.",
-            "Tu es l'élu, Neo.",
-            "Qui voudrait du Tron ? Probablement vous.",
-            "Fundafu are safu"
+            "Tu es l'élu, Neo. Plus sérieusement, Neo a montré sa robustesse, même pendant cette période de forte instabilité. Nous vous recommandons vivement de participer à l'airdrop.",
+            "Qui voudrait du Tron ? Probablement vous car malgré les nombreux déboirs de cette crypto-monnaie cette dernière a su maintenir le cap.",
+            "Malgré les supposées vulnérabilités de la monnaie phare de 2018 cet airdrop pourrait bien redonner de bonnes couleurs vertes à EOS."
         );
 
         $type = array(
@@ -59,7 +59,7 @@ class LoadAirdrop extends AbstractFixture
             "200 XRP",
             "10 NEO",
             "200 TRX",
-            "140 GAS",
+            "140 EOS",
         );
 
         $beginDate = new \Datetime();

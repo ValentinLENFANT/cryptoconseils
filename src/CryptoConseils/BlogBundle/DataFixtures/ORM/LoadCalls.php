@@ -30,57 +30,56 @@ class LoadCalls extends AbstractFixture
 
         $cryptocurrencyPair = array(
             "BTCUSD",
-            "BTCETH",
-            "LOCETH",
+            "ETHBTC",
             "XRPBTC",
+            "EOSBRC",
             "TRXBTC",
-            "EOSBTC"
+            "NEOBTC"
         );
 
         $cryptocurrencyName = array(
             "Bitcoin/Dollar",
             "Bitcoin/Ethereum",
-            "Ethereum/Lockchain",
             "Bitcoin/Ripple",
+            "Bitcoin/EOS",
             "Bitcoin/Tron",
-            "Ethereum/Flik",
-            "Bitcoin/EOS"
+            "Bitcoin/Neo",
         );
 
         $content = array(
             "On constate actuellement un très bon point d'entrée pour le Bitcoin. Acheter maintenant semble être une bonne idée.",
             "L'Ethereum, suite à sa très forte perte de valeur, peut être acheté bas pour une revente sûre à un prix beaucoup plus élevé d'ici à la fin de l'année",
-            "Margin trading conseillé sur cette paire. Les variations sont importantes mais des profits de l'ordre de 10% sont à attendre.",
             "Ripple, l'éternel outsider centralisé pourrait avoir un bon point d'entrée en raison de l'explosion récente du volume.",
+            "Des gains de l'ordre de 20% sont à prevoir grâce au margin trading.",
             "Tron, l'éternel terrain de jeu des whales est idéal pour du margin trading.",
-            "EOS, malgré les supposées vulnérabilités, reste toujours un investissement judicieux."
+            "Neo a prouvé sa fiabilité et sa place dans le top 10. Nous recommandons un investissement de moyen terme."
         );
 
         $buyPrice = array(
-            "6000",
-            "400",
-            "0.05",
-            "0.0002",
-            "0.003",
-            "4.5"
+            "6600",
+            "470",
+            "0.47",
+            "8",
+            "0.036",
+            "36"
         );
 
         $sellPrice = array(
-            "6700",
+            "7100",
             "550",
-            "0.1",
-            "0.0004",
-            "0.004",
-            "12"
+            "0.55",
+            "12",
+            "0.0040",
+            "80"
         );
 
         $scoring = array(
-            "70",
+            "88",
             "93",
-            "81",
-            "75",
-            "79",
-            "88"
+            "70",
+            "80",
+            "65",
+            "95"
         );
 
         $date = new \Datetime();
