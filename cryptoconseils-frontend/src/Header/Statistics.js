@@ -28,7 +28,7 @@ class Statistics extends Component {
   render() {
     return (
       <div className="Statistics Component">
-        <div className="col-md-6 col-lg-6">
+        <div className="col-md-4 col-lg-4">
           <ul className="unstyled bitcoin-stats">
             <li><h6>{this.state.percent_change_24h}</h6><span>Prix en 24H </span></li>
             <li><h6>{this.state.volume_24h}</h6><span>Volume 24H </span></li>
