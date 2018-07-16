@@ -8,18 +8,19 @@ class ListArticle extends Component {
     this.state = {
       articles: [],
       newDate: null,
-      premiumLvl: ["Tous le monde","Inscrit","Debutant","Avancé","Expert","Lambo"]
+      premiumLvl: ["Tous le monde","Inscrit","Debutant","Avancé","Expert","Lambo"],
+      nbArticle: 0
     };
   }
 
-  // éxécuté à la fin
-  componentWillMount() {
-    // check si access token
-
+  // éxécuté au début
+  componentDidMount() {
     var nbArticle;
     if(this.props.nbArticle){
       nbArticle = this.props.nbArticle;
     } else nbArticle = 9
+
+    this.setState({nbArticle: nbArticle})
     // récupère tous les articles
     axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/all/')
     .then(response => {
@@ -28,13 +29,30 @@ class ListArticle extends Component {
           articles: this.orderByCategorie(response.data,this.props.idCategorie)
         });
       } else {
-        this.setState({articles: response.data.slice(0,nbArticle)});
+        this.setState({articles: response.data.slice(0,this.state.nbArticle)});
       }
     }).catch(error => {
       console.log(error);
     });
   }
 
+  renderReadMoreButton(){
+    if(this.state.nbArticle === this.state.articles.length){
+      return (
+        <a className="btn btn-primary" onClick={this.readMore.bind(this)}>Afficher plus d'articles...</a>
+      );
+    } else return (
+      <p>Il n'y a plus d'articles à lire !</p>
+    )
+  }
+  readMore() {
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/all/')
+    .then(response => {
+      this.setState({articles: response.data.slice(0,this.state.nbArticle+6),nbArticle: this.state.nbArticle+6});
+    }).catch(error => {
+      console.log(error);
+    });
+  }
   orderByCategorie(data,idCategorie){
     // initialisation du tableau
     var res= []
@@ -56,6 +74,7 @@ class ListArticle extends Component {
   convertDate(date){
     return new Date(date);
   }
+
   renderPremiumLogo(lvl){
     if(lvl >=2){
       return (
@@ -65,6 +84,7 @@ class ListArticle extends Component {
       )
     }
   }
+
   renderCategoryLogo(article){
     if(article.categories[0]){
       return (
@@ -74,9 +94,9 @@ class ListArticle extends Component {
       )
     }
   }
+
   renderArticles() {
     return this.state.articles.map(article => {
-      console.log(article);
       return(
         <div className="col-sm-4 col-md-4 col-xs-12 news-article" key={article.id}>
           <div className="latest-post">
@@ -106,7 +126,7 @@ class ListArticle extends Component {
                 {this.convertDate(article.date).toLocaleString('fr', { month: "short" })}
               </span>
             </div>
-          
+
             {this.renderPremiumLogo(article.premium)}
             {this.renderCategoryLogo(article)}
             <a href={"/articles/" + article.id} className="btn btn-primary">Lire plus</a>
@@ -116,11 +136,17 @@ class ListArticle extends Component {
       );
     })
   }
+
   render() {
     return(
       <div className="ListArticle Component">
         <div className="row latest-posts-content">
           {this.renderArticles()}
+        </div>
+        <div className="row">
+          <div className="col-sm-4 col-md-4 col-xs-12">
+            {this.renderReadMoreButton()}
+          </div>
         </div>
       </div>
     );

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import TradingViewWidget from 'react-tradingview-widget';
-import PreLoader from '../PreLoader/PreLoader';
 import axios from 'axios'
 
 class CallOfDay extends Component {
@@ -13,7 +12,7 @@ class CallOfDay extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if(localStorage.getItem('access_token')) {
       var authorization = {
         headers: {

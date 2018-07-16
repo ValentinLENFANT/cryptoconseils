@@ -6,7 +6,7 @@ class NotFound extends Component {
       <div className="NotFound Component">
         <Header/>
       <div align="center">
-        <img src="/images/backgrounds/404-error.jpg" alt="The not found image is not found... lol"/>
+        <img src="/images/backgrounds/404-error.jpg" alt="404"/>
       </div>
     </div>
     );

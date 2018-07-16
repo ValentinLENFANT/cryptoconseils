@@ -26,12 +26,13 @@ class Articles extends Component {
   }
   componentDidMount(){
     // check si access token
+    var authorization;
     if(localStorage.getItem('access_token')){
-      var authorization = {
+      authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
     } else {
-      var authorization = null;
+      authorization = null;
     }
       // récupération de l'article
       axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/'+this.props.match.params.id,authorization)
@@ -44,9 +45,7 @@ class Articles extends Component {
         });
       }).catch(error => {
         if(error.response.status === 403) {
-          console.log(error.response);
           this.setState({
-
             userPremium: error.response.data.userPremiumLevel,
             articlePremium: error.response.data.articlePremiumLevel,
             noAccess: true

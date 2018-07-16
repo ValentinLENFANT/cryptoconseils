@@ -593,7 +593,7 @@ ul.bitcoin-stats li:last-child {
 
 ul.bitcoin-stats h6 {
   font-weight: 800;
-  color: #eee;
+  color: #FD961A;
   margin: 0;
   font-size: 13px;
   text-align: left;
@@ -1390,7 +1390,7 @@ ul.nav.nav-tabs li a:hover, ul.nav.nav-tabs li.active a:hover {
   background-image: url(../images/backgrounds/bg-video.jpg);
   background-size: cover;
   background-position: center center;
-  height: 625px;
+  height:300px;
 }
 
 .bg-image-1:after {
@@ -5340,4 +5340,9 @@ a.lwc-chat-button.bubble{margin-bottom:30px;}
 
 .call, .airdrop{
   margin-bottom: 40px;
+}
+
+.read-more {
+  right: 0;
+  margin: auto;
 }

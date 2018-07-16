@@ -34,7 +34,7 @@ class Denied extends Component {
           <div className="Denied">
             <Header/>
             <h1>
-              <h1>Vous n'êtes pas connecté</h1>
+              Vous n'êtes pas connecté
             </h1>
             <h2><a href="/signin" className="btn btn-primary">Se connecter</a></h2>
             <h2><a href="/signup" className="btn btn-primary">S'inscrire</a></h2>

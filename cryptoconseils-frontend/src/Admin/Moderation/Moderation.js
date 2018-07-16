@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import { action } from '@storybook/addon-actions'
-import Confirm from 'react-confirm-bootstrap';
-import Dialog from 'react-bootstrap-dialog'
 import Header from '../../Header/Header'
 import PreLoader from '../../PreLoader/PreLoader'
 import Denied from '../../Denied/Denied'
-import MenusModeration from './MenusModeration'
 import UserModeration from './UserModeration'
 import ArticleModeration from './ArticleModeration'
 import CommentModeration from './CommentModeration'
+import axios from 'axios'
 
 class Moderation extends Component {
 
@@ -25,7 +21,7 @@ class Moderation extends Component {
     this.showComments = this.showComments.bind(this)
     this.showArticles = this.showArticles.bind(this)
   }
-  componentWillMount(){
+  componentDidMount(){
     // check si access token
     if(localStorage.getItem('access_token')){
       var authorization = {
@@ -87,7 +83,7 @@ class Moderation extends Component {
             <section className="menu-dashboard section-profil">
               <div className="container">
                 <div className="text-center">
-                  <img src="../images/backoffice/logo-admin.png" className="img-responsive center-block" />
+                  <img src="../images/backoffice/logo-admin.png" className="img-responsive center-block" alt="logo-admin" />
                 </div>
                 <div className="row text-center">
                   <div className="col-md-4 col-sm-4 col-xs-12">

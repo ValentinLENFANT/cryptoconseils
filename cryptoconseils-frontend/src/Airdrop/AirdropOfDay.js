@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PreLoader from '../PreLoader/PreLoader';
 import axios from 'axios'
 
 class AirdropOfDay extends Component {
@@ -12,7 +11,7 @@ class AirdropOfDay extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if(localStorage.getItem('access_token')) {
       var authorization = {
         headers: {

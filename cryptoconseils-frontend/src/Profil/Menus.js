@@ -6,7 +6,7 @@ class Menus extends Component {
     if(this.props.premium >= 2){
       return(
         <div className="text-center">
-          <img src="images/backoffice/logo-premium.png" className="img-responsive center-block premium-logo"/>
+          <img src="images/backoffice/logo-premium.png" className="img-responsive center-block premium-logo" alt="logo-premium"/>
         </div>
       );
     }else {

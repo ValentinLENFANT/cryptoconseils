@@ -109,7 +109,7 @@ class Footer extends Component {
           </div>
 
           {/* Back To Top Starts  */}
-          <a href="#" id="back-to-top" className="back-to-top fa fa-arrow-up"></a>
+          <button id="back-to-top" className="back-to-top fa fa-arrow-up"></button>
           {/* Back To Top Ends  */}
         </div>
         {/*Footer Bottom Area Starts */}
@@ -118,7 +118,7 @@ class Footer extends Component {
             <div className="row">
               <div className="col-xs-12">
                 {/*Copyright Text Starts */}
-                <p className="text-center">Copyright © 2018 CryptoConseils | <a href="https://www.esgi.fr/ecole-informatique.html" target="_blank">ESGI</a></p>
+                <p className="text-center">Copyright © 2018 CryptoConseils | <a href="https://www.esgi.fr/ecole-informatique.html">ESGI</a></p>
                 {/*Copyright Text Ends */}
               </div>
             </div>

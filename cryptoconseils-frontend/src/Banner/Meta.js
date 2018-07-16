@@ -24,7 +24,7 @@ class Meta extends Component {
 
   countComment() {
     var nbComments = 0;
-    this.props.article.comments.map(cmt => {
+    this.props.article.comments.forEach(cmt => {
       if(cmt.published){
         nbComments = nbComments + 1
       }
