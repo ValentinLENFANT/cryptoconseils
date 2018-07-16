@@ -94,8 +94,8 @@ class Avantages extends Component {
                 <div id="collapse5" className="panel-collapse collapse">
                   <div className="panel-body">
                     <ul>
-                      <li>Les avantages du pack expert</li>
-                      <li>Une <a>Lambo</a></li>
+                      <li>Les avantages du pack <a>Expert</a></li>
+                      <li>Vous obtiendrez en plus un <a>suivi personnalisé</a> par nos experts traders qui répondront à toutes vos questions.</li>
                     </ul>
                   </div>
                 </div>
