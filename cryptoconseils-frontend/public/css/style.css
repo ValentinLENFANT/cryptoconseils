@@ -580,6 +580,7 @@ body.light .shop-checkout .table tbody > tr {
 
 ul.bitcoin-stats {
   padding-top: 28px;
+    text-align: left;
 }
 
 ul.bitcoin-stats li {
