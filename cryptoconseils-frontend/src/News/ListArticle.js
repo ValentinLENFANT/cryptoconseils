@@ -41,10 +41,12 @@ class ListArticle extends Component {
       return (
         <a className="btn btn-primary" onClick={this.readMore.bind(this)}>Afficher plus d'articles...</a>
       );
-    } else return (
-      <p className="fix-text-no-article">Il n'y a plus d'articles à lire ! <i class="fa fa-times fa-lg" aria-hidden="true"></i>
+    } else if(this.state.nbArticle > this.state.articles.length) {
+
+      return (
+      <p className="fix-text-no-article">Il n'y a plus d'articles à lire ! <i className="fa fa-times fa-lg" aria-hidden="true"></i>
       </p>
-    )
+    )}
   }
   readMore() {
     axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/all/')
