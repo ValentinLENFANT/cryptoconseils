@@ -24,7 +24,7 @@ class WhoAreWe extends Component {
               {/* Content Starts */}
               <div className="col-sm-12 col-md-7 col-lg-6">
                 <h3 className="title-about">CryptoConseils</h3>
-                <p className="about-text">Une place pour tous ceux qui souhaitent optimiser leurs investissements ou approfondir leur connaissances. Vous pouvez aussi acheter du Bitcoin directement depuis notre plateforme avec votre carte de crédit. Rejoignez les 13.300 utilisateurs satisfaits d'utiliser nos services au quotidien</p>
+                <p className="about-text">Le site francophone pour tous ceux qui souhaitent optimiser leurs investissements, approfondir leurs connaissances ou s'initier à l'univers des crypto-monnaies. Rejoignez une communauté grandissante et prenez part à la grande odyssée du XXIème siècle.</p>
                 <ul className="nav nav-tabs">
                   <li className="active"><a data-toggle="tab" href="#menu1">Notre objectif</a></li>
                   <li><a data-toggle="tab" href="#menu2">Nos avantages</a></li>
@@ -32,13 +32,13 @@ class WhoAreWe extends Component {
                 </ul>
                 <div className="tab-content">
                   <div id="menu1" className="tab-pane fade in active">
-                    <p>Le Bitcoin et les crypto-monnaies sont des protocols basés sur la Blockchain, ce qui permet entre autre de transférer des données financières de façon ultra-sécurisées sans partie tierce.</p>
+                    <p>Nous croyons sincèrement à la révolution crypto-monnaie. C'est pourquoi nous voulons rendre cette dernière accessible au plus grand nombre en la démocratisant à travers des cours clairs et concis.</p>
                   </div>
                   <div id="menu2" className="tab-pane fade">
-                    <p>Nous proposons une plateforme vous permettant de mieux appréhender le monde des crypto-monnaies en suivant nos conseils de trading et pour un cout bien inférieur à la concurrence.</p>
+                    <p>Nous vous offrons une plateforme vous permettant de mieux appréhender l'univers des crypto-monnaies grâce à nos conseils en trading et à nos cours rédigés par des professionnels.</p>
                   </div>
                   <div id="menu3" className="tab-pane fade">
-                    <p>Nous garantissons à tous nos investisseurs une grande sécurité sur leur investissement</p>
+                    <p>Nous vous garantissons les meilleurs conseils possible en fonction de la situation du marché.</p>
                   </div>
                 </div>
                 <a className="btn btn-primary" href="/faq">En savoir plus</a>

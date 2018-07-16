@@ -69,6 +69,17 @@ class ArticleController extends FOSRestController
         return $response;
     }
 
+    public function allArticlesAction() // [GET] /articles
+    {
+        $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findAll();
+        $data = $this->get('jms_serializer')->serialize($articles, 'json');
+
+        $response = new Response($data);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
 
     public function showAction(Article $id) // [GET] /articles/8
     {
