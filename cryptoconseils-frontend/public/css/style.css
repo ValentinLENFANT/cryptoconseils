@@ -5347,3 +5347,10 @@ a.lwc-chat-button.bubble{margin-bottom:30px;}
   right: 0;
   margin: auto;
 }
+
+
+p.fondateur {
+  color: white;
+  font-size: 25px;
+  text-transform: capitalize;
+}

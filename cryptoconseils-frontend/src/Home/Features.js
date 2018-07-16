@@ -92,6 +92,11 @@ class Features extends Component {
             </div>
             <div className="row">
                {/* Video Starts */}
+               <div className="col-sm-12 col-md-12 col-xs-12">
+                <p className="fondateur">Fondateurs de la célèbre cryptomonnaie <a href="http://ethereumx.io/" target="_blank">EthereumX</a></p>
+               </div>
+            </div>
+            <div className="row">
                <div className="col-md-12 ts-padding bg-image-1">
                 <div>
                   <div className="text-center">
