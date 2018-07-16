@@ -71,7 +71,7 @@ class CallAdmin extends Component {
     } else if (Number(this.state.vente) <= 0) {
       this.setState({statusMsg: "Le prix de vente doit être supérieur à 0"})
     } else if (Number(this.state.vente) < Number(this.state.achat)) {
-      this.setState({statusMsg: "Le prix de vente doit être supérieux au prix d'achat"})
+      this.setState({statusMsg: "Le prix de vente doit être supérieur au prix d'achat"})
     } else if (Number(this.state.achat) > Number(this.state.vente)) {
       this.setState({statusMsg: "Le prix d'achat doit être inférieur au prix de vente"})
     } else if (Number(this.state.score) <= 0) {
