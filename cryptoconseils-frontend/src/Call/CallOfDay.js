@@ -13,6 +13,8 @@ class CallOfDay extends Component {
   }
 
   componentDidMount() {
+
+    // check user
     if(localStorage.getItem('access_token')) {
       var authorization = {
         headers: {
@@ -31,12 +33,13 @@ class CallOfDay extends Component {
         console.log(error);
         this.setState({isPremium: false})
       });
-    } else {
-      this.setState({isPremium: false})
+    }else {
+      authorization = null;
+      this.setState({isPremium: false});
     }
 
     // get calls
-    axios.get(process.env.REACT_APP_API_ADDRESS + '/call/all/', authorization)
+    axios.get(process.env.REACT_APP_API_ADDRESS + '/call/all/')
     .then(response => {
       this.setState({allCalls: response.data})
     }).catch(error => {
@@ -44,6 +47,7 @@ class CallOfDay extends Component {
     });
   }
 
+  // tri par DESC
   sortArray(array) {
     return array.sort(function (a, b) {
       return b.id - a.id;
@@ -69,6 +73,7 @@ class CallOfDay extends Component {
     );
   }
   renderCalls() {
+    // on récupère le dernier call
     var listCalls = this.sortArray(this.state.allCalls);
     if(this.props.profile){
       listCalls = listCalls.slice(0,1)
