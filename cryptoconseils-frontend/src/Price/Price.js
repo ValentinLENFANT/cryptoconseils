@@ -8,8 +8,8 @@ import axios from 'axios'
 
 class Price extends Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       premiumLevel: null,
       access_token: localStorage.getItem('access_token'),
@@ -17,10 +17,11 @@ class Price extends Component {
       showAvantages: false
     }
   }
-  componentDidMount(){
+  componentWillMount(){
     if(this.props.showAvantages) {
       this.setState({showAvantages: this.props.showAvantages })
     }
+
     if(localStorage.getItem('access_token')){
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
@@ -35,8 +36,9 @@ class Price extends Component {
         console.log(error);
       });
     } else {
-      this.setState({premiumLevel: 0})
+        this.setState({premiumLevel: 0})
     }
+
   }
 
   toggleAvantage() {
