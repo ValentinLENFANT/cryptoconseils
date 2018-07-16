@@ -12,7 +12,7 @@ class Features extends Component {
                 <div className="gap-20"></div>
                 <div className="row">
                   {/* Feature Starts */}
-                  <div className="col-sm-6 col-md-6 col-xs-12">
+                  <div className="col-sm-4 col-md-4 col-xs-12">
                     <div className="feature text-center">
                       <span className="feature-icon">
                         <img src="images/icons/orange/strong-security.png" alt="strong security"/>
@@ -24,7 +24,7 @@ class Features extends Component {
                   {/* Feature Ends */}
                   <div className="gap-20-mobile"></div>
                   {/* Feature Starts */}
-                  <div className="col-sm-6 col-md-6 col-xs-12">
+                  <div className="col-sm-4 col-md-4 col-xs-12">
                     <div className="feature text-center">
                       <span className="feature-icon">
                         <img src="images/icons/orange/world-coverage.png" alt="world coverage"/>
@@ -34,23 +34,23 @@ class Features extends Component {
                     </div>
                   </div>
                   {/* Feature Ends */}
-                </div>
-                <div className="gap-20"></div>
-                <div className="row">
+                  <div className="gap-20-mobile"></div>
                   {/* Feature Starts */}
-                  <div className="col-sm-6 col-md-6 col-xs-12">
+                  <div className="col-sm-4 col-md-4 col-xs-12">
                     <div className="feature text-center">
                       <span className="feature-icon">
                         <img src="images/icons/orange/payment-options.png" alt="payment options"/>
                       </span>
                       <h3 className="feature-title">Options de paiements</h3>
-                      <p>Paypal</p>
+                      <p>Service de paiement en ligne mondial<br/> Paypal</p>
                     </div>
                   </div>
                   {/* Feature Ends */}
-                  <div className="gap-20-mobile"></div>
+                </div>
+                <div className="gap-20"></div>
+                <div className="row">
                   {/* Feature Starts */}
-                  <div className="col-sm-6 col-md-6 col-xs-12">
+                  <div className="col-sm-4 col-md-4 col-xs-12">
                     <div className="feature text-center">
                       <span className="feature-icon">
                         <img src="images/icons/orange/mobile-app.png" alt="mobile app"/>
@@ -60,11 +60,9 @@ class Features extends Component {
                     </div>
                   </div>
                   {/* Feature Ends */}
-                </div>
-                <div className="gap-20"></div>
-                <div className="row">
+                  
                   {/* Feature Starts */}
-                  <div className="col-sm-6 col-md-6 col-xs-12">
+                   <div className="col-sm-4 col-md-4 col-xs-12">
                     <div className="feature text-center">
                       <span className="feature-icon">
                         <img src="images/icons/orange/cost-efficiency.png" alt="cost efficiency"/>
@@ -74,9 +72,9 @@ class Features extends Component {
                     </div>
                   </div>
                   {/* Feature Ends */}
-                  <div className="gap-20-mobile"></div>
+                  
                   {/* Feature Starts */}
-                  <div className="col-sm-6 col-md-6 col-xs-12">
+                  <div className="col-sm-4 col-md-4 col-xs-12">
                     <div className="feature text-center">
                       <span className="feature-icon">
                         <img src="images/icons/orange/high-liquidity.png" alt="high liquidity"/>
@@ -93,7 +91,7 @@ class Features extends Component {
             <div className="row">
                {/* Video Starts */}
                <div className="col-sm-12 col-md-12 col-xs-12">
-                <p className="fondateur">Fondateurs de la célèbre cryptomonnaie <a href="http://ethereumx.io/" target="_blank">EthereumX</a></p>
+                <p className="fondateur">Crypto<a>Conseils</a> créateur de la cryptomonnaie <a href="http://ethereumx.io/" target="_blank">EthereumX</a></p>
                </div>
             </div>
             <div className="row">
