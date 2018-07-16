@@ -13,7 +13,9 @@ class AirdropAdmin extends Component {
       statusMsg: null,
       published: false,
       source_image: '',
-      image_name: ''
+      image_name: '',
+      beginDate: new Date(),
+      endDate: new Date()
     }
     this.handleChange = this.handleChange.bind(this);
   }
@@ -26,6 +28,15 @@ class AirdropAdmin extends Component {
     this.setState({[name]: value});
   }
 
+  convertDate(date){
+    date = new Date(date);
+    var month = date.getMonth();
+    var day = date.getDate();
+    var year = date.getFullYear();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    return day+'-'+month+'-'+year+' '+hours+':'+minutes;
+  }
   renderStatusMsg(){
     if (this.state.published === true) {
       return(
@@ -66,6 +77,9 @@ class AirdropAdmin extends Component {
   }
 
   sendAirdrop(event){
+    var date = "2018-07-20 00:03:19"
+    //date = new Date(date)
+    console.log(date);
     // pour éviter le rechargement de la page
     event.preventDefault();
     // vérification des champs
@@ -91,7 +105,8 @@ class AirdropAdmin extends Component {
         type: this.state.type,
         cryptocurrencyName: this.state.cryptocurrency_name,
         isAirdropFree: this.state.isAirdropFree,
-        imageId: this.state.source_image
+        imageId: this.state.source_image,
+        "beginDate": date
       },authorization)
       .then(response => {
         this.setState({
@@ -103,7 +118,9 @@ class AirdropAdmin extends Component {
           reward: '',
           isAirdropFree: null,
           source_image: '',
-          image_name: ''
+          image_name: '',
+          beginDate:'',
+          endDate:''
         })
       }).catch(error => {
         console.log(error.response);
@@ -120,14 +137,16 @@ class AirdropAdmin extends Component {
           </a>
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6">
+
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12">
               <p id="airdrop-ticker">{this.state.cryptocurrency_name}</p>
-              <p className="texte-airdrop-premium">
+              <p className="texte-airdrop-premium white-space-pre">
                 {this.state.analyse}
               </p>
             </div>
           </div>
+
           <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12">
               <p className="etape-airdrop">
@@ -135,6 +154,23 @@ class AirdropAdmin extends Component {
               </p>
             </div>
           </div>
+
+          <div className="row">
+            <div className="col-xs-12 col-sm-12 col-md-12">
+              <p className="etape-airdrop">
+                {"Date de début: "+this.convertDate(this.state.beginDate)}
+              </p>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-xs-12 col-sm-12 col-md-12">
+              <p className="etape-airdrop">
+                {"Date de fin: "+this.convertDate(this.state.endDate)}
+              </p>
+            </div>
+          </div>
+
           <div className="row">
             <div className="col-xs-6 col-sm-6 col-md-4  button-call">
               <div className="btn btn-success btn-lg">RECOMPENSE</div>
@@ -143,6 +179,7 @@ class AirdropAdmin extends Component {
               <div className="recompense-airdrop">{this.state.reward}</div>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -211,6 +248,28 @@ class AirdropAdmin extends Component {
                     </div>
                     <div className="form-group">
                       <input
+                        type="datetime-local"
+                        className="form-control"
+                        id="beginDate"
+                        name="beginDate"
+                        placeholder="Date de début, exemple:"
+                        required="required"
+                        onChange={this.handleChange}
+                        value={this.state.beginDate}/>
+                    </div>
+                    <div className="form-group">
+                      <input
+                        type="datetime-local"
+                        className="form-control"
+                        id="endDate"
+                        name="endDate"
+                        placeholder="Date de fin, exemple:"
+                        required="required"
+                        onChange={this.handleChange}
+                        value={this.state.endDate}/>
+                    </div>
+                    <div className="form-group">
+                      <input
                         type="text"
                         className="form-control"
                         id="reward"
@@ -234,8 +293,7 @@ class AirdropAdmin extends Component {
                     </div>
                     <div className="form-group">
                       <label>
-                        Airdrop gratuit
-                        <input
+                        Airdrop gratuit <input
                           name="isAirdropFree"
                           type="checkbox"
                           checked={this.state.isAirdropFree}

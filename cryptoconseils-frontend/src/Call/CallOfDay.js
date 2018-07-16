@@ -76,7 +76,7 @@ class CallOfDay extends Component {
     }
     return listCalls.map(calls => {
       return(
-        <div className="row" key={calls.id}>
+        <div className="row call" key={calls.id}>
           <div className="col-xs-12 col-sm-12 col-md-6">
             {/* TradingView REACT BEGIN */}
             <div className="tradingview-widget-container">

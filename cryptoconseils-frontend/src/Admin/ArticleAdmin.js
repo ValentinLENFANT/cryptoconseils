@@ -325,10 +325,11 @@ class ArticleAdmin extends Component {
           </div>
 
           {/* <!-- Titre --> */}
+
           <div className="row">
             <div className="col-xs-6 col-sm-6 col-md-6">
               <div className="form-group">
-                <label className="control-label" htmlFor="article_title">Titre</label>
+                <label className="control-label" htmlFor="article_title">Titre de la nouvelle catégorie</label>
                 <div>
                   <input
                     id="newCategory"
@@ -342,9 +343,38 @@ class ArticleAdmin extends Component {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="row">
             <div className="col-xs-6 col-sm-6 col-md-6">
               <div className="form-group">
-                <label className="control-label" htmlFor="article_title">Titre</label>
+                <div>
+                  <button
+                    type="submit"
+                    id="submit-article"
+                    name="submit-article"
+                    className="btn btn-primary pull-right"
+                    onClick={this.addNewCategory.bind(this)}>
+                    AJOUTER
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="row text-center contact-form">
+            <h2 className="title-head" id="creer-article">Éditer une <span>
+                Categorie</span>
+            </h2>
+            <div className="title-head-subtitle">
+              <p>Éditer une categorie</p>
+            </div>
+            {this.renderStatusCategoryMsg()}
+          </div>
+          <div className="row">
+            <div className="col-xs-6 col-sm-6 col-md-6">
+              <div className="form-group">
+                <label className="control-label" htmlFor="article_title">Sélectionnez une catégorie</label>
                 <div>
                   <select
                     id="selected_edit_category"
@@ -368,20 +398,7 @@ class ArticleAdmin extends Component {
         </div>
 
           <div className="row">
-            <div className="col-xs-6 col-sm-6 col-md-6">
-              <div className="form-group">
-                <div>
-                  <button
-                    type="submit"
-                    id="submit-article"
-                    name="submit-article"
-                    className="btn btn-primary pull-right"
-                    onClick={this.addNewCategory.bind(this)}>
-                    AJOUTER
-                  </button>
-                </div>
-              </div>
-            </div>
+
             <div className="col-xs-6 col-sm-6 col-md-6">
               <div className="form-group">
                 <div>

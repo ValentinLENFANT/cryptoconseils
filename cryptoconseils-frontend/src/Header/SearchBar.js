@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-
+import Navigation from './Navigation'
 class SearchBar extends Component {
 
   constructor(){
@@ -16,7 +16,9 @@ class SearchBar extends Component {
   componentDidMount(){
     this.getAllArticles();
   }
-
+  close(){
+    <Navigation showSearchBar={false}/>
+  }
   onChange(event) {
     // Apercu temps réel quand on tape
     console.log(event.target.value);
@@ -70,7 +72,7 @@ class SearchBar extends Component {
       };
     }
 
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/', config)
+    axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/all', config)
     .then(response => {
       //console.log(response.error_description);
       this.setState({
@@ -96,7 +98,7 @@ class SearchBar extends Component {
               name="search"
               id="search"
             />
-            <span className="close">×</span>
+          <span className="close" onClick={this.close.bind(this)}>×</span>
           </div>
         </div>
         <div className="res-search">

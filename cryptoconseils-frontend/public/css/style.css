@@ -5295,6 +5295,17 @@ div#sntch_close {
   padding-top: 1px;
 }
 
+.latest-post .post-category {
+  width: 170px;
+  height: 35px;
+  background: #1d1d1d;
+  position: absolute;
+  right: 25px;
+  top: 130px;
+  text-align: center;
+  padding-top: 1px;
+}
+
 .latest-post .post-premium span {
   display: block;
   color: #fff;
@@ -5324,3 +5335,9 @@ ul li {
 }
 
 a.lwc-chat-button.bubble{margin-bottom:30px;}
+
+/* margin for airdrop and calls*/
+
+.call, .airdrop{
+  margin-bottom: 40px;
+}

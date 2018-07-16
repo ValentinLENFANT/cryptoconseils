@@ -29,7 +29,7 @@ class SignIn extends Component {
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
     this.verifyCallback = this.verifyCallback.bind(this)
-    this.loadCapcha = this.loadCapcha.bind(this)
+    this.loadCaptcha = this.loadCaptcha.bind(this)
   }
 
   // switch entre les deux form
@@ -53,13 +53,22 @@ class SignIn extends Component {
     return re.test(email);
   }
 
+  hasNumber(myString) {
+    return /\d/.test(myString);
+  }
+  hasUpperCase(str) {
+    if(str.toLowerCase() != str) {
+      return true;
+    } return false;
+  }
+
   verifyCallback(response) {
     if (response) {
       this.setState({isVerified: true})
     }
   }
-  loadCapcha() {
-    console.log("reCapcha loaded");
+  loadCaptcha() {
+    console.log("reCaptcha loaded");
   }
   // affichage des messages d'erreurs
   renderStatusMsg() {
@@ -99,7 +108,7 @@ class SignIn extends Component {
             console.log(error.response);
           });
         } else {
-          this.setState({statusMsg: 'Capcha invalide'})
+          this.setState({statusMsg: 'Captcha invalide'})
         }
       }).catch(error => {
         console.log(error.reponse);
@@ -116,8 +125,11 @@ class SignIn extends Component {
           client_id: process.env.REACT_APP_CLIENT_ID,
           client_secret: process.env.REACT_APP_CLIENT_SECRET,
         }).then(response => {
+          // if emailActivated
+          // renvoyer bouler afficher message qu'l ne peux pas
+          // netoyer la session
           axios.get(process.env.REACT_APP_API_ADDRESS+'/users/isEnabled/'+this.state.username)
-          .then(() => {
+          .then((res) => {
             localStorage.setItem('access_token', response.data.access_token);
             localStorage.setItem('username', this.state.username);
             if(this.state.previousPath ==="/signin"){
@@ -125,6 +137,7 @@ class SignIn extends Component {
             }
             window.location.href = this.state.previousPath
           }).catch(error => {
+            console.log(error.response);
             this.setState({statusMsg: "Votre compte n'est pas activé ou a été désactivé."})
             var isEnabled = false;
           })
@@ -133,7 +146,7 @@ class SignIn extends Component {
           console.log(error.response);
         });
       } else {
-        this.setState({statusMsg: 'Capcha invalide'})
+        this.setState({statusMsg: 'Captcha invalide'})
       }
     }
   }
@@ -141,14 +154,14 @@ class SignIn extends Component {
   // inscription
   handleSignUp(event){
     event.preventDefault();
-    if(this.state.username.length < 4) {
-      this.setState({statusMsg: "Le nom d'utilisateur doit contenir 4 caractères minimum"})
+    if(this.state.username.length < 6) {
+      this.setState({statusMsg: "Le nom d'utilisateur doit contenir 6 caractères minimum"})
     } else if(!this.validateEmail(this.state.email)){
       this.setState({statusMsg: "L'email n'est pas valide"})
-    } else if (this.state.password.length < 8) {
-      this.setState({statusMsg: "Le mot de passe doit contenir 8 caractères minimum"})
+    } else if (this.state.password.length < 8 || !this.hasNumber(this.state.password) || !this.hasUpperCase(this.state.password)) {
+      this.setState({password:"",statusMsg: "Le mot de passe doit contenir 8 caractères, 1 chiffre et 1 majuscule"})
     } else if(this.state.isVerified !== true) {
-      this.setState({statusMsg: 'Capcha invalide'})
+      this.setState({statusMsg: 'Captcha invalide'})
     } else {
       axios.post(process.env.REACT_APP_API_ADDRESS+'/users/new/', {
         username: this.state.username,
@@ -296,7 +309,7 @@ class SignIn extends Component {
                   sitekey="6LfDUGQUAAAAAAB-hyv9XUf520-2hbHQEw3stwWP"
                   render="explicit"
                   verifyCallback={this.verifyCallback}
-                  onloadCallback={this.loadCapcha}
+                  onloadCallback={this.loadCaptcha}
                   theme="dark"
                 />
               </div>
@@ -358,7 +371,7 @@ class SignIn extends Component {
                   sitekey="6LfDUGQUAAAAAAB-hyv9XUf520-2hbHQEw3stwWP"
                   render="explicit"
                   verifyCallback={this.verifyCallback}
-                  onloadCallback={this.loadCapcha}
+                  onloadCallback={this.loadCaptcha}
                   theme="dark"
                 />
               </div>

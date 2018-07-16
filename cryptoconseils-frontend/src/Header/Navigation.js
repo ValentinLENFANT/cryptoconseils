@@ -5,10 +5,10 @@ import axios from 'axios'
 
 class Navigation extends Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      showSearchBar: false
+      showSearchBar: this.props.showSearchBar
     }
   }
 
@@ -20,7 +20,11 @@ class Navigation extends Component {
 
   renderSearchBar(){
     if(this.state.showSearchBar){
-      return <SearchBar/>
+      return (
+        <div>
+          <SearchBar/>
+        </div>
+      )
     }else return null
   }
 
@@ -51,7 +55,6 @@ class Navigation extends Component {
                 <ul className="nav navbar-nav">
                   <li className="active"><a href="/">Accueil</a></li>
                   <li><a href="/articles">News</a></li>
-                  <li><a href="/categories/7">Analyses</a></li>
                   <li><a href="/call">Call</a></li>
                   <li><a href="/airdrop">Airdrop</a></li>
                   <li><a href="/premium">Accès Prémium</a></li>

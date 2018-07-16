@@ -69,12 +69,14 @@ class Profil extends Component {
             {/*Call premium Starts */}
             <div>
               <CallOfDay profile={true} premium={this.state.premium} />
+              <h2><a href="/call">Afficher tous les Calls</a></h2>
             </div>
             {/*Call premiums Ends */}
 
             {/*Airdrop premium Starts */}
             <div>
               <AirdropOfDay profile={true} premium={this.state.premium} />
+                <h2><a href="/airdrop">Afficher tous les Airdrops</a></h2>
             </div>
             {/*Airdrop premiums Ends */}
 

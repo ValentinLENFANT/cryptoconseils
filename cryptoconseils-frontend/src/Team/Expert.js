@@ -28,10 +28,7 @@ class Expert extends Component {
                     <p>Ingénieur Blockchain</p>
                     <ul className="list list-inline social">
                       <li>
-                        <a href="" className="fa fa-facebook"> </a>
-                      </li>
-                      <li>
-                        <a href="" className="fa fa-twitter"> </a>
+                        <a href="https://github.com/Barbe-Bleue" className="fa fa-github"> </a>
                       </li>
                     </ul>
                   </div>
@@ -51,7 +48,7 @@ class Expert extends Component {
                     <p>Consultant expert en crypto-monnaies</p>
                     <ul className="list list-inline social">
                       <li>
-                        <a href="https://www.facebook.com/valentin.lenfant" className="fa fa-facebook"> </a>
+                        <a href="https://fr.linkedin.com/in/valentinlenfant" className="fa fa-linkedin"> </a>
                       </li>
                       <li>
                         <a href="https://twitter.com/Cryptoval" className="fa fa-twitter"> </a>
@@ -75,7 +72,7 @@ class Expert extends Component {
                     <p>Crypto Analyste</p>
                     <ul className="list list-inline social">
                       <li>
-                        <a href="https://www.facebook.com/aurelien.beranger" className="fa fa-facebook"> </a>
+                        <a href="https://fr.linkedin.com/in/aurélien-beranger-792480100" className="fa fa-linkedin"> </a>
                       </li>
                       <li>
                         <a href="https://twitter.com/Aurerianusu" className="fa fa-twitter"> </a>
@@ -98,10 +95,10 @@ class Expert extends Component {
                     <p>Expert Trader</p>
                     <ul className="list list-inline social">
                       <li>
-                        <a href="https://www.facebook.com/alexandre.dubois.5817" className="fa fa-facebook"> </a>
+                        <a href="https://fr.linkedin.com/in/alexandre-dubois-france?trk=pub-pbmap" className="fa fa-linkedin"> </a>
                       </li>
                       <li>
-                        <a href="" className="fa fa-twitter"> </a>
+                        <a href="https://twitter.com/cryptoelix" className="fa fa-twitter"> </a>
                       </li>
                     </ul>
                   </div>

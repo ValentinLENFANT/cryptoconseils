@@ -68,7 +68,11 @@ class Price extends Component {
   }
   render() {
     if(this.state.premiumLevel === 5) {
-      return null
+      return (
+        <div>
+          <Avantages/>
+        </div>
+      )
     } else {
       return(
         <div className="Price Component">

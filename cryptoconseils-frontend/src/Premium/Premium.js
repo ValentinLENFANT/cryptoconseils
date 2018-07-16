@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Header from '../Header/Header';
 import Price from '../Price/Price'
 import Avantages from './Avantages'
+
 class Premium extends Component {
   render() {
     return (
