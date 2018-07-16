@@ -5,45 +5,44 @@ import axios from 'axios'
 
 class CallOfDay extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       allCalls: [],
-      noAccess: false,
-      noLogged: false,
-      premium_level: null
+      isPremium: null
     }
   }
 
   componentWillMount() {
-
     if(localStorage.getItem('access_token')) {
       var authorization = {
         headers: {
           'Authorization': "Bearer " + localStorage.getItem('access_token')
         }
       };
+      // get current user
       axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/', authorization)
       .then(res => {
         if(res.data.premiumLevel < 4){
-          this.setState({premium_level: false});
+          this.setState({isPremium: false});
         } else if(res.data.premiumLevel >= 4){
-          this.setState({premium_level: true});
+          this.setState({isPremium: true})
         }
       }).catch(error => {
         console.log(error);
-        this.setState({premium_level: false})
-      });
-
-      axios.get(process.env.REACT_APP_API_ADDRESS + '/call/all/', authorization)
-      .then(response => {
-        this.setState({allCalls: response.data})
-      }).catch(error => {
-        this.setState({premium_level: false})
+        this.setState({isPremium: false})
       });
     } else {
-      this.setState({premium_level: false})
+      this.setState({isPremium: false})
     }
+
+    // get calls
+    axios.get(process.env.REACT_APP_API_ADDRESS + '/call/all/', authorization)
+    .then(response => {
+      this.setState({allCalls: response.data})
+    }).catch(error => {
+      console.log(error);
+    });
   }
 
   sortArray(array) {
@@ -56,9 +55,9 @@ class CallOfDay extends Component {
     return(
       <div className="row" key="noAccess">
         <div  className="row text-center">
-          <h2 className="title-head" id="call-premium">Call <span> du jour</span></h2>
+          <h2 className="title-head" id="call-premium">Calls <span> Premium</span></h2>
           <div className="title-head-subtitle">
-              <p>Call pour membre premium en avant-première !</p>
+            <p>Calls pour membre premium en avant-première !</p>
           </div>
           <p>Un call est un conseils d’investissement composé d’un prix d'achat et d’un prix de vente</p>
         </div>
@@ -70,10 +69,14 @@ class CallOfDay extends Component {
       </div>
     );
   }
-  renderCall(calls) {
-    return(
-      <div>
-        <div className="row">
+  renderCalls() {
+    var listCalls = this.sortArray(this.state.allCalls);
+    if(this.props.profile){
+      listCalls = listCalls.slice(0,1)
+    }
+    return listCalls.map(calls => {
+      return(
+        <div className="row" key={calls.id}>
           <div className="col-xs-12 col-sm-12 col-md-6">
             {/* TradingView REACT BEGIN */}
             <div className="tradingview-widget-container">
@@ -96,7 +99,7 @@ class CallOfDay extends Component {
                 <div className="btn btn-info btn-lg">ACHAT</div>
               </div>
               <div className="col-xs-8 col-sm-8 col-md-8 prix-call">
-                <div>{calls.buyPrice+"€"}</div>
+                <div>{calls.buyPrice+" BTC"}</div>
               </div>
             </div>
             <div className="row">
@@ -104,7 +107,7 @@ class CallOfDay extends Component {
                 <div className="btn btn-warning btn-lg">VENTE</div>
               </div>
               <div className="col-xs-8 col-sm-8 col-md-8 prix-call">
-                <div>{calls.sellPrice+"€"}</div>
+                <div>{calls.sellPrice+" BTC"}</div>
               </div>
             </div>
             <div className="row">
@@ -117,43 +120,45 @@ class CallOfDay extends Component {
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    })
   }
-  renderLatestCall(){
-    var listCalls = this.sortArray(this.state.allCalls);
-    if(localStorage.getItem('access_token')) {
-      return listCalls.slice(0,1).map(calls => {
-        if(this.state.premium_level=== false && calls.isCallFree ===  "1"){
-          return (
-            <div key={calls.id}>
-              <div className="row text-center">
-                <h2 className="title-head" id="call-premium">Call <span> du jour GRATUIT </span></h2>
-                <div className="title-head-subtitle">
-                    <p>Ce Call est GRATUIT pour tous les membres non-premium & premium !</p>
-                </div>
-                <p>Un call est un conseils d’investissement composé d’un prix d'achat et d’un prix de vente</p>
-              </div>
-              {this.renderCall(calls)}
+
+  renderAllCalls(){
+    if(this.state.isPremium){
+      return(
+        <div>
+          <div  className="row text-center">
+            <h2 className="title-head" id="call-premium">Call <span> Premium</span></h2>
+            <div className="title-head-subtitle">
+              <p>Calls pour membre premium en avant-première !</p>
             </div>
-          );
-        } else if (this.state.premium_level === true) {
-          return(
-            <div key={calls.id}>
-              <div  className="row text-center">
-                <h2 className="title-head" id="call-premium">Call <span> du jour</span></h2>
-                <div className="title-head-subtitle">
-                    <p>Call pour membre premium en avant-première !</p>
-                </div>
-                <p>Un call est un conseils d’investissement composé d’un prix d'achat et d’un prix de vente</p>
+            <p>Un call est un conseils d’investissement composé d’un prix d'achat et d’un prix de vente</p>
+          </div>
+          <div>
+            {this.renderCalls()}
+          </div>
+        </div>
+      )
+    } else if(this.state.isPremium === false) {
+        return(
+          <div className="row text-center">
+            <div>
+              <h2 className="title-head" id="call-premium">Calls <span> GRATUITS </span></h2>
+              <div className="title-head-subtitle">
+                  <p>Ces Calls sont GRATUITS pour tous les membres non-premium & premium !</p>
               </div>
-              {this.renderCall(calls)}
+              <p>Un call est un conseils d’investissement composé d’un prix d'achat et d’un prix de vente</p>
             </div>
-          )
-        }
-        else return (<div>{this.renderNoAccess()}</div>)
-      })
-    } else return (<div>{this.renderNoAccess()}</div>)
+            <div>
+              {this.renderCalls()}
+            </div>
+            <div>
+              {this.renderNoAccess()}
+            </div>
+          </div>
+      )
+    } else return null
   }
 
   render() {
@@ -161,7 +166,7 @@ class CallOfDay extends Component {
       <div className="calls-premium">
         <section className="calls-premium section-profil">
           <div className="container">
-            {this.renderLatestCall()}
+            {this.renderAllCalls()}
           </div>
         </section>
       </div>

@@ -68,13 +68,13 @@ class Profil extends Component {
 
             {/*Call premium Starts */}
             <div>
-              <CallOfDay premium={this.state.premium} />
+              <CallOfDay profile={true} premium={this.state.premium} />
             </div>
             {/*Call premiums Ends */}
 
             {/*Airdrop premium Starts */}
             <div>
-              <AirdropOfDay premium={this.state.premium} />
+              <AirdropOfDay profile={true} premium={this.state.premium} />
             </div>
             {/*Airdrop premiums Ends */}
 

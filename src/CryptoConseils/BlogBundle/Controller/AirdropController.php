@@ -106,12 +106,84 @@ class AirdropController extends FOSRestController
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
+      $user = $this->getUser();
+        if (!isset($user) || $user->getPremiumLevel() < 2) {
+            $reponse = $bdd->query('SELECT * FROM airdrop WHERE isAirdropFree = 1');
+            while ($donnees = $reponse->fetch()) {
+              $dataImage = $bdd->query('SELECT fileName from image WHERE id ='.$donnees['imageId'])->fetch();
+                $airdrops[] = ['id' => $donnees['id'],
+                    'author' => $donnees['author'],
+                    'beginDate' => $donnees['beginDate'],
+                    'endDate' => $donnees['endDate'],
+                    'type' => $donnees['type'],
+                    'cryptocurrencyName' => $donnees['cryptocurrencyName'],
+                    'content' => $donnees['content'],
+                    'isAirdropFree' => $donnees['isAirdropFree'],
+                    'reward' => $donnees['reward'],
+                    'imageId' => $donnees['imageId'],
+                    'fileName' => $dataImage['fileName'],
+                  ];
+            }
 
+            for ($i = 0; $i < count($airdrops); $i++) {
+                $date = $airdrops[$i]['beginDate'];
+                $date = explode(' ', $date);
+                $date = $date[0] . 'T' . $date[1] . '+02:00';
+                $airdrops[$i]['beginDate'] = $date;
+            }
+            for ($i = 0; $i < count($airdrops); $i++) {
+                $date = $airdrops[$i]['endDate'];
+                $date = explode(' ', $date);
+                $date = $date[0] . 'T' . $date[1] . '+02:00';
+                $airdrops[$i]['endDate'] = $date;
+            }
 
+            $data = $this->get('jms_serializer')->serialize($airdrops, 'json');
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
 
+            return $response;
+        } else {
+
+            $reponse = $bdd->query('SELECT * FROM airdrop');
+            while ($donnees = $reponse->fetch()) {
+                $dataImage = $bdd->query('SELECT fileName from image WHERE id ='.$donnees['imageId'])->fetch();
+                $airdrops[] = ['id' => $donnees['id'],
+                    'author' => $donnees['author'],
+                    'beginDate' => $donnees['beginDate'],
+                    'endDate' => $donnees['endDate'],
+                    'type' => $donnees['type'],
+                    'cryptocurrencyName' => $donnees['cryptocurrencyName'],
+                    'content' => $donnees['content'],
+                    'isAirdropFree' => $donnees['isAirdropFree'],
+                    'reward' => $donnees['reward'],
+                    'imageId' => $donnees['imageId'],
+                    'fileName' => $dataImage['fileName']
+                ];
+            }
+
+            for ($i = 0; $i < count($airdrops); $i++) {
+                $date = $airdrops[$i]['beginDate'];
+                $date = explode(' ', $date);
+                $date = $date[0] . 'T' . $date[1] . '+02:00';
+                $airdrops[$i]['beginDate'] = $date;
+            }
+            for ($i = 0; $i < count($airdrops); $i++) {
+                $date = $airdrops[$i]['endDate'];
+                $date = explode(' ', $date);
+                $date = $date[0] . 'T' . $date[1] . '+02:00';
+                $airdrops[$i]['endDate'] = $date;
+            }
+
+            $data = $this->get('jms_serializer')->serialize($airdrops, 'json');
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            return $response;
+        }
           $reponse = $bdd->query('SELECT * FROM airdrop');
           while ($donnees = $reponse->fetch()) {
-              $imagesInfos = $bdd->query('SELECT fileName FROM image where id ='.$donnees['imageId'])->fetch();
+              $dataImage = $bdd->query('SELECT fileName from image WHERE id ='.$donnees['imageId'])->fetch();
               $airdrops[] = ['id' => $donnees['id'],
                   'author' => $donnees['author'],
                   'beginDate' => $donnees['beginDate'],
@@ -122,8 +194,7 @@ class AirdropController extends FOSRestController
                   'isAirdropFree' => $donnees['isAirdropFree'],
                   'reward' => $donnees['reward'],
                   'imageId' => $donnees['imageId'],
-                  'image' => $imagesInfos["fileName"]
-
+                  'fileName' => $dataImage['fileName']
               ];
           }
 
@@ -144,8 +215,9 @@ class AirdropController extends FOSRestController
           $response = new Response($data);
           $response->headers->set('Content-Type', 'application/json');
 
-          return $response;
-      
+           return $response;
+
+
     }
 
     public function airdropAction(Request $request, $id) // [GET] /airdrop/{id}
@@ -163,6 +235,7 @@ class AirdropController extends FOSRestController
             $response = $bdd->query('SELECT * FROM airdrop WHERE id=' . $id);
 
             while ($donnees = $response->fetch()) {
+                $dataImage = $bdd->query('SELECT fileName from image WHERE id ='.$donnees['imageId'])->fetch();
                 $airdrop[] = ['id' => $donnees['id'],
                     'author' => $donnees['author'],
                     'beginDate' => $donnees['beginDate'],
@@ -172,7 +245,8 @@ class AirdropController extends FOSRestController
                     'content' => $donnees['content'],
                     'isAirdropFree' => $donnees['isAirdropFree'],
                     'reward' => $donnees['reward'],
-                  'imageId' => $donnees['imageId']
+                    'imageId' => $donnees['imageId'],
+                    'fileName' => $dataImage['fileName']
                 ];
             }
             if (!isset($airdrop)) {
@@ -207,6 +281,7 @@ class AirdropController extends FOSRestController
         $response = $bdd->query('SELECT * FROM airdrop WHERE id=' . $id);
 
         while ($donnees = $response->fetch()) {
+            $dataImage = $bdd->query('SELECT fileName from image WHERE id ='.$donnees['imageId'])->fetch();
             $airdrop[] = ['id' => $donnees['id'],
                 'author' => $donnees['author'],
                 'beginDate' => $donnees['beginDate'],
@@ -216,7 +291,9 @@ class AirdropController extends FOSRestController
                 'content' => $donnees['content'],
                 'isAirdropFree' => $donnees['isAirdropFree'],
                 'reward' => $donnees['reward'],
-              'imageId' => $donnees['imageId']];
+                'imageId' => $donnees['imageId'],
+              'fileName' => $dataImage['fileName']
+            ];
         }
         if (!isset($airdrop)) {
             return new JsonResponse(array('error' => 'The call does not exist'), 404);

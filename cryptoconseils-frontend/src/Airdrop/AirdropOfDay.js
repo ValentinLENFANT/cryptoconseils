@@ -1,16 +1,14 @@
 import React, {Component} from 'react';
-import axios from 'axios'
 import PreLoader from '../PreLoader/PreLoader';
+import axios from 'axios'
 
 class AirdropOfDay extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       allAirdrop: [],
-      noAccess: false,
-      noLogged: false,
-      premium_level: null
+      isPremium:  null
     }
   }
 
@@ -21,30 +19,29 @@ class AirdropOfDay extends Component {
           'Authorization': "Bearer " + localStorage.getItem('access_token')
         }
       };
-
       // get current user
       axios.get(process.env.REACT_APP_API_ADDRESS+'/users/current/', authorization)
       .then(res => {
         if(res.data.premiumLevel < 2){
-          this.setState({premium_level: false});
+          this.setState({isPremium: false});
         } else if(res.data.premiumLevel >= 2){
-          this.setState({premium_level: true});
+          this.setState({isPremium: true});
         }
       }).catch(error => {
         console.log(error);
-        this.setState({premium_level: false})
-      });
-
-      // get airdrop
-      axios.get(process.env.REACT_APP_API_ADDRESS + '/airdrop/all/', authorization)
-      .then(response => {
-        this.setState({allAirdrop: response.data})
-      }).catch(error => {
-        this.setState({premium_level: false})
+        this.setState({isPremium: false})
       });
     } else {
-      this.setState({premium_level: false})
+      this.setState({isPremium: false})
     }
+
+    // get airdrops
+    axios.get(process.env.REACT_APP_API_ADDRESS + '/airdrop/all/', authorization)
+    .then(response => {
+      this.setState({allAirdrop: response.data})
+    }).catch(error => {
+      console.log(error);
+    });
   }
 
   sortArray(array) {
@@ -57,7 +54,7 @@ class AirdropOfDay extends Component {
     return(
       <div className="row" key="noAccess">
         <div  className="row text-center">
-          <h2 className="title-head" id="airdrop-premium">Airdrop <span> du jour</span></h2>
+          <h2 className="title-head" id="airdrop-premium">Airdrop <span> Premium</span></h2>
           <div className="title-head-subtitle">
             <p>Airdrop pour membre premium en avant-première !</p>
           </div>
@@ -76,13 +73,18 @@ class AirdropOfDay extends Component {
       </div>
     );
   }
-  renderAirdrop(airdrop) {
-    return(
-      <div>
-        <div className="row">
+  renderAirdrops() {
+    var listAirdops = this.sortArray(this.state.allAirdrop);
+    if(this.props.profile){
+      listAirdops = listAirdops.slice(0,1)
+    }
+    return listAirdops.map(airdrop => {
+      console.log(airdrop);
+      return(
+        <div className="row" key={airdrop.id}>
           <div className="col-xs-12 col-sm-12 col-md-6">
             <a href="#premium">
-              <img src={"/images/articles/"+airdrop.image} alt="call premium" className="image-airdrop-premium"/>
+              <img src={"/images/articles/"+airdrop.fileName} alt="call premium" className="image-airdrop-premium"/>
             </a>
           </div>
           <div className="col-xs-12 col-sm-12 col-md-6">
@@ -111,52 +113,55 @@ class AirdropOfDay extends Component {
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    });
   }
-  renderLatestAirdrop(){
-    var listAirdop = this.sortArray(this.state.allAirdrop);
-    if(localStorage.getItem('access_token')) {
-      return listAirdop.slice(0,1).map(airdrop => {
-        if(this.state.premium_level=== false && airdrop.isAirdropFree ===  "1") {
-          return (
-            <div key={airdrop.id}>
-              <div className="row text-center">
-                <h2 className="title-head" id="call-premium">Airdrop <span> du jour GRATUIT </span></h2>
-                <div className="title-head-subtitle">
-                    <p>Cet Airdop est GRATUIT pour tous les membres non-premium & premium !</p>
-                </div>
-                <p>
-                  Un Airdrop se produit lorsqu’une équipe souhaite promouvoir
-                  le lancement d’une nouvelle crypto-monnaie.
-                  Ils vont alors offrir des tokens de façon périodique et contrôlée
-                  à des personnes qui remplissent un ensemble spécifique de caractéristiques
-                  </p>
-              </div>
-              {this.renderAirdrop(airdrop)}
+
+  renderAllAirdrops(){
+    if(this.state.isPremium) {
+      return (
+        <div className="row text-center">
+          <div>
+            <h2 className="title-head" id="call-premium">Airdrop <span> Premium </span></h2>
+            <div className="title-head-subtitle">
+              <p>Cet Airdop est GRATUIT pour tous les membres non-premium & premium !</p>
             </div>
-          );
-        } else if (this.state.premium_level === true) {
-          return(
-            <div key={airdrop.id}>
-              <div  className="row text-center">
-                <h2 className="title-head" id="call-premium">Airdrop <span> du jour</span></h2>
-                <div className="title-head-subtitle">
-                    <p>Airdrop pour membre premium en avant-première !</p>
-                </div>
-                <p>
-                  Un Airdrop se produit lorsqu’une équipe souhaite promouvoir
-                  le lancement d’une nouvelle crypto-monnaie.
-                  Ils vont alors offrir des tokens de façon périodique et contrôlée
-                  à des personnes qui remplissent un ensemble spécifique de caractéristiques
-                  </p>
-              </div>
-              {this.renderAirdrop(airdrop)}
+            <p>
+              Un Airdrop se produit lorsqu’une équipe souhaite promouvoir
+              le lancement d’une nouvelle crypto-monnaie.
+              Ils vont alors offrir des tokens de façon périodique et contrôlée
+              à des personnes qui remplissent un ensemble spécifique de caractéristiques
+              </p>
+          </div>
+          <div>
+            {this.renderAirdrops()}
+          </div>
+        </div>
+      );
+    } else if(this.state.isPremium ===  false) {
+        return(
+        <div className="row text-center">
+          <div>
+            <h2 className="title-head" id="call-premium">Airdrop <span> Gratuit</span></h2>
+            <div className="title-head-subtitle">
+              <p>Airdrop pour membre premium en avant-première !</p>
             </div>
-          )
-        } else return(<div>{this.renderNoAccess()}</div>)
-      })
-    } else return(<div>{this.renderNoAccess()}</div>)
+            <p>
+              Un Airdrop se produit lorsqu’une équipe souhaite promouvoir
+              le lancement d’une nouvelle crypto-monnaie.
+              Ils vont alors offrir des tokens de façon périodique et contrôlée
+              à des personnes qui remplissent un ensemble spécifique de caractéristiques
+            </p>
+          </div>
+          <div>
+            {this.renderAirdrops()}
+          </div>
+          <div>
+            {this.renderNoAccess()}
+          </div>
+        </div>
+      )
+    } else return null
   }
 
   render() {
@@ -164,7 +169,7 @@ class AirdropOfDay extends Component {
       <div className="calls-premium">
         <section className="calls-premium section-profil">
           <div className="container">
-            {this.renderLatestAirdrop()}
+            {this.renderAllAirdrops()}
           </div>
         </section>
       </div>
