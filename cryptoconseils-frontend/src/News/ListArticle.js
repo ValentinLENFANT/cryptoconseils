@@ -42,7 +42,8 @@ class ListArticle extends Component {
         <a className="btn btn-primary" onClick={this.readMore.bind(this)}>Afficher plus d'articles...</a>
       );
     } else return (
-      <p>Il n'y a plus d'articles à lire !</p>
+      <p className="fix-text-no-article">Il n'y a plus d'articles à lire ! <i class="fa fa-times fa-lg" aria-hidden="true"></i>
+      </p>
     )
   }
   readMore() {
