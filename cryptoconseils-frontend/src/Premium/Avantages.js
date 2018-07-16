@@ -23,7 +23,7 @@ class Avantages extends Component {
                   <div className="panel-body">
                     <ul>
                       <li>Vous aurez acces aux articles de niveaux <a>Débutant</a> sur Cryptoconseils.fr</li>
-                      <li>Un acces complet aux <a>Airdrop</a> du jour sélectionné par Cryptoconseils.fr</li>
+                      <li>Un acces complet à tous les <a>Airdrop</a> sélectionnés par Cryptoconseils.fr</li>
                     </ul>
                   </div>
                 </div>
@@ -47,7 +47,6 @@ class Avantages extends Component {
                       <li>Les avantages du pack <a>Debutant</a></li>
                       <li>Vous aurez acces aux articles de niveaux <a>Avancé</a> sur Cryptoconseils.fr</li>
                       <li>Un acces à la messagerie <a>Telegram</a></li>
-                      <li>Un acces aux <a>Analyses</a> de Cryptoconseils.fr</li>
                     </ul>
                   </div>
                 </div>
