@@ -23,14 +23,14 @@ class WhoAreWe extends Component {
               {/* Image Ends */}
               {/* Content Starts */}
               <div className="col-sm-12 col-md-7 col-lg-6">
-                <h3 className="title-about">CryptoConseils</h3>
-                <p className="about-text">Le site francophone pour tous ceux qui souhaitent optimiser leurs investissements, approfondir leurs connaissances ou s'initier à l'univers des crypto-monnaies. Rejoignez une communauté grandissante et prenez part à la grande odyssée du XXIème siècle.</p>
+                <h3 className="title-about">Crypto<a>Conseils</a></h3>
+                <p className="about-text text-justify">Le site francophone pour tous ceux qui souhaitent optimiser leurs investissements, approfondir leurs connaissances ou s'initier à l'univers des crypto-monnaies. Rejoignez une communauté grandissante et prenez part à la grande odyssée du XXIème siècle.</p>
                 <ul className="nav nav-tabs">
                   <li className="active"><a data-toggle="tab" href="#menu1">Notre objectif</a></li>
                   <li><a data-toggle="tab" href="#menu2">Nos avantages</a></li>
                   <li><a data-toggle="tab" href="#menu3">Notre garantie</a></li>
                 </ul>
-                <div className="tab-content">
+                <div className="tab-content text-justify">
                   <div id="menu1" className="tab-pane fade in active">
                     <p>Nous croyons sincèrement à la révolution crypto-monnaie. C'est pourquoi nous voulons rendre cette dernière accessible au plus grand nombre en la démocratisant à travers des cours clairs et concis.</p>
                   </div>
