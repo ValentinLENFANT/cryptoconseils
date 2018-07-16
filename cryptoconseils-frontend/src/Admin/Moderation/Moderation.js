@@ -25,7 +25,7 @@ class Moderation extends Component {
     this.showComments = this.showComments.bind(this)
     this.showArticles = this.showArticles.bind(this)
   }
-  componentWillMount(){
+  componentDidMount(){
     // check si access token
     if(localStorage.getItem('access_token')){
       var authorization = {

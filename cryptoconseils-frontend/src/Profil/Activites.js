@@ -13,23 +13,6 @@ class Activites extends Component {
       msg: null,
     }
   }
-  componentWillMount(){
-    // check si access token
-    var authorization = {
-      headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
-    };
-
-    // get tous les coms, le "/1" est nécéssaire pour l'api,
-    // la récupération de l'utilisateur courant se fait dans l'api
-    axios.get(process.env.REACT_APP_API_ADDRESS+'/users/comments/id/1', authorization)
-    .then(response => {
-      this.setState({
-        comments: response.data
-      })
-    }).catch(error => {
-      console.log(error);
-    });
-  }
 
   getComments(){
     // check si access token
@@ -115,6 +98,7 @@ class Activites extends Component {
   }
 
   renderComments(){
+    this.getComments();
     return this.state.comments.map(item => {
       return(
         <li className="list-group-item list-comment" key={item.id}>

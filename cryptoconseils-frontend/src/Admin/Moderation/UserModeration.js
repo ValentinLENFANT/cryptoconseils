@@ -18,7 +18,7 @@ class UserModeration extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // check si access token
     if(localStorage.getItem('access_token')){
       var authorization = {
@@ -61,7 +61,7 @@ class UserModeration extends Component {
       console.log(error);
     });
   }
-  
+
   changeEnabledUser(item,action) {
     if(item.username === this.state.currentUser){
       alert('Vous ne pouvez pas vous désactiver ou vous activer')

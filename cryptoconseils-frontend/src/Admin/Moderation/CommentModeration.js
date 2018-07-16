@@ -14,7 +14,7 @@ class CommentModeration extends Component {
       noAccess: null
     }
   }
-  componentWillMount(){
+  componentDidMount(){
     // check si access token
     if(localStorage.getItem('access_token')){
       var authorization = {

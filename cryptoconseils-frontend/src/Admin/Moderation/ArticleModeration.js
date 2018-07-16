@@ -17,7 +17,7 @@ class ArticleModeration extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if(localStorage.getItem('access_token')){
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}

@@ -20,7 +20,7 @@ class Comments extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillMount(){
+  componentDidMount(){
     if(localStorage.getItem('access_token')){
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}

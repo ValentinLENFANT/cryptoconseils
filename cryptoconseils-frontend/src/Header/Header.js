@@ -11,7 +11,7 @@ class Header extends Component {
       isAdmin: false
     }
   }
-  componentWillMount(){
+  componentDidMount(){
     if(localStorage.getItem('access_token')){
       var authorization = {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}

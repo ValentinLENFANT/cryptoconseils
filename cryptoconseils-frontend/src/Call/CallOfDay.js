@@ -13,7 +13,7 @@ class CallOfDay extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if(localStorage.getItem('access_token')) {
       var authorization = {
         headers: {

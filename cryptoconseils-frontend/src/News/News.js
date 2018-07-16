@@ -15,7 +15,7 @@ class News extends Component {
   }
 
   // éxécuté à la fin
-  componentWillMount() {
+  componentDidMount() {
     // check si access token
     if(localStorage.getItem('access_token')){
       var authorization = {
