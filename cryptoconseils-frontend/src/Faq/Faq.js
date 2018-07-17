@@ -26,7 +26,7 @@ class Faq extends Component {
                     {/* Panel Heading Ends */}
                     {/* Panel Content Starts */}
                     <div id="collapse1" className="panel-collapse collapse in">
-                      <div className="panel-body">Il existe 4 catégories de membre premium : DEBUTANT (niveau 1), AVANCÉ (niveau 2), EXPERT (niveau 3), LAMBO (niveau 4). Ces catégories offrent chacune des fonctionnalités liés au site en fonction du niveau premium de l'utilisateur. Plus l'utilisateur a un niveau premium élevé plus il aura accès à de nouvelles fonctionnalités.
+                      <div className="panel-body">Il existe pack premium : <a href="/premium">DEBUTANT</a> (niveau 2), <a href="/premium">AVANCÉ</a> (niveau 3), <a href="/premium">EXPERT</a> (niveau 4), <a href="/premium">LAMBO</a> (niveau 5). Ces catégories offrent chacune des fonctionnalités liés au site en fonction du niveau premium de l'utilisateur. Plus l'utilisateur a un niveau premium élevé plus il aura accès à de nouvelles fonctionnalités.
                     </div>
                     {/* Panel Content Starts */}
                   </div>
@@ -36,13 +36,13 @@ class Faq extends Component {
                     <div className="panel-heading">
                       <h4 className="panel-title">
                       <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse11">
-                          Le pack PREMIUM Débutant - niveau 1</a>
+                          Le pack PREMIUM <a>Débutant</a> - niveau 2</a>
                       </h4>
                     </div>
                     {/* Panel Heading Ends */}
                     {/* Panel Content Starts */}
                     <div id="collapse11" className="panel-collapse collapse">
-                      <div className="panel-body">Le pack DEBUTANT permettra de vous donner accès aux articles de niveaux "Débutant" sur Cryptoconseils.fr + Un acces complet aux Airdrop du jour</div>
+                      <div className="panel-body">Le pack <a href="/premium">DEBUTANT</a> permettra de vous donner accès aux articles de niveaux <a>Débutant</a> sur Cryptoconseils.fr + Un acces complet aux <a>Airdrop</a> du jour</div>
                     </div>
                     {/* Panel Content Starts */}
                   </div>
@@ -52,13 +52,13 @@ class Faq extends Component {
                     <div className="panel-heading">
                       <h4 className="panel-title">
                       <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse12">
-                          Le pack PREMIUM AVANCEE - niveau 2</a>
+                          Le pack PREMIUM <a>AVANCÉ</a> - niveau 2</a>
                       </h4>
                     </div>
                     {/* Panel Heading Ends */}
                     {/* Panel Content Starts */}
                     <div id="collapse12" className="panel-collapse collapse">
-                      <div className="panel-body">Le pack AVANCEE donnera accès aux articles de niveaux Avancé sur Cryptoconseils.fr + Un accès à la messagerie Telegram + Un accès aux Analyses de Cryptoconseils.fr</div>
+                      <div className="panel-body">Le pack <a href="/premium">AVANCÉ</a> donnera accès aux articles de niveaux <a>Avancé</a> sur Cryptoconseils.fr + Un accès à la messagerie <a>Telegram</a></div>
                     </div>
                     {/* Panel Content Starts */}
                   </div>
@@ -70,13 +70,13 @@ class Faq extends Component {
                     <div className="panel-heading">
                       <h4 className="panel-title">
                       <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse13">
-                          Le pack PREMIUM EXPERT - niveau 3</a>
+                          Le pack PREMIUM <a>EXPERT</a> - niveau 3</a>
                       </h4>
                     </div>
                     {/* Panel Heading Ends */}
                     {/* Panel Content Starts */}
                     <div id="collapse13" className="panel-collapse collapse">
-                      <div className="panel-body">Le pack EXPERT donnera accès aux articles de niveaux Expert sur Cryptoconseils.fr + Un accès à l'ensemble des réseaux sociaux dont le groupe Facebook + accès aux Calls de Cryptoconseils.fr<br /></div>
+                      <div className="panel-body">Le pack <a href="/premium">EXPERT</a> donnera accès aux articles de niveaux <a>Expert</a> sur Cryptoconseils.fr + Un accès à l'ensemble des réseaux sociaux dont le groupe <a>Facebook</a> + accès aux <a>Calls</a> de Cryptoconseils.fr<br /></div>
                     </div>
                     {/* Panel Content Starts */}
                   </div>
@@ -88,13 +88,13 @@ class Faq extends Component {
                     <div className="panel-heading">
                       <h4 className="panel-title">
                       <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse14">
-                          Le pack PREMIUM LAMBO - niveau 4</a>
+                          Le pack PREMIUM <a>LAMBO</a> - niveau 4</a>
                       </h4>
                     </div>
                     {/* Panel Heading Ends */}
                     {/* Panel Content Starts */}
                     <div id="collapse14" className="panel-collapse collapse">
-                      <div className="panel-body">Le pack LAMBO donnera accès à tous les avantages des packs précédents + suivi personnalisé par nos experts traders qui répondront à toutes vos questions.</div>
+                      <div className="panel-body">Le pack <a href="/premium">LAMBO</a> donnera accès à tous les avantages des packs précédents + <a>suivi personnalisé</a> par nos experts traders qui répondront à toutes vos questions.</div>
                     </div>
                     </div>
                     {/* Panel Content Starts */}
@@ -106,13 +106,13 @@ class Faq extends Component {
                     <div className="panel-heading">
                       <h4 className="panel-title">
                         <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse15">
-                          Qu'est-ce qu'un call</a>
+                          Qu'est-ce qu'un <a>Call</a> ?</a>
                       </h4>
                     </div>
                     {/* Panel Heading Ends */}
                     {/* Panel Content Starts */}
                     <div id="collapse15" className="panel-collapse collapse">
-                      <div className="panel-body">Un call est une indication de notre part concernant l'achat d'une cryptomonnaie. Nous détaillons très simplement pourquoi il est intéressant d'acheter maintenant cette cryptomonnaie, son prix d'achat ainsi que le prix de revente estimé. Nos calls premiums sont uniquement accessibles pour les utilisateurs premiums EXPERTS (niveau 3). Vous aurez quelques heures à l'avance nos calls avant publication sur le site.</div>
+                      <div className="panel-body">Un <a href="/call">Call</a> est une indication de notre part concernant l'achat d'une cryptomonnaie. Nous détaillons très simplement pourquoi il est intéressant d'acheter maintenant cette cryptomonnaie, son prix d'achat ainsi que le prix de revente estimé. Nos calls premiums sont uniquement accessibles pour les utilisateurs premiums EXPERTS (niveau 4).</div>
                     {/* Panel Content Starts */}
                     </div>
                   </div>
@@ -122,13 +122,13 @@ class Faq extends Component {
                     <div className="panel-heading">
                       <h4 className="panel-title">
                         <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse16">
-                          Qu'est-ce qu'un airdrop premium ?</a>
+                          Qu'est-ce qu'un <a>Airdrop</a> ?</a>
                       </h4>
                     </div>
                     {/* Panel Heading Ends */}
                     {/* Panel Content Starts */}
                     <div id="collapse16" className="panel-collapse collapse">
-                      <div className="panel-body">Un airdrop premium est un renseignement de notre part pour obtenir des cryptomonnaies gratuitements. Nous sélectionnons et auditons les différentes cryptomonnaies disponible en Airdrop pour uniquement vous offrir celles qui ont le meilleurs potentiel d'évolution au cours du temps.</div>
+                      <div className="panel-body">Un <a href="/airdrop">Airdrop</a> premium est un renseignement de notre part pour obtenir des cryptomonnaies gratuitements. Nous sélectionnons et auditons les différentes cryptomonnaies disponible en Airdrop pour uniquement vous offrir celles qui ont le meilleurs potentiel d'évolution au cours du temps.</div>
                     {/* Panel Content Starts */}
                     </div>
                   </div>
@@ -138,8 +138,130 @@ class Faq extends Component {
                     {/* Panel Heading Starts */}
                     <div className="panel-heading">
                       <h4 className="panel-title">
+                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse17">
+                          Pourquoi je ne vois plus mon/mes <a>commentaire(s)</a> ?</a>
+                      </h4>
+                    </div>
+                    {/* Panel Heading Ends */}
+                    {/* Panel Content Starts */}
+                    <div id="collapse17" className="panel-collapse collapse">
+                      <div className="panel-body">
+                        Si vous remarquez que votre commentaire sur un article a disparu, c'est parce que l'quipe de <a>CryptoConseils.fr</a> a décidé de le modérer.
+                        Si vous n'êtes pas d'accord avec ce changement, vous pouvez <a href="/contact"> nous contacter</a>.
+                      </div>
+                    </div>
+                    {/* Panel Content Starts */}
+                  </div>
+                  {/* Panel Ends */}
+
+                  {/* Panel Starts */}
+                  <div className="panel panel-default">
+                    {/* Panel Heading Starts */}
+                    <div className="panel-heading">
+                      <h4 className="panel-title">
+                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse18">
+                          Pourquoi je ne peux pas acheter un <a>pack premium</a> avec ma <a>carte bleue</a> ?</a>
+                      </h4>
+                    </div>
+                    {/* Panel Heading Ends */}
+                    {/* Panel Content Starts */}
+                    <div id="collapse18" className="panel-collapse collapse">
+                      <div className="panel-body">
+                        <a>Cryptoconseils.fr</a> utilise uniquement (pour l'instant) <a>Paypal</a> comme moyen de paiement.
+                      </div>
+                    </div>
+                    {/* Panel Content Starts */}
+                  </div>
+                  {/* Panel Ends */}
+
+                  {/* Panel Starts */}
+                  <div className="panel panel-default">
+                    {/* Panel Heading Starts */}
+                    <div className="panel-heading">
+                      <h4 className="panel-title">
+                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse19">
+                          Comment dois-je faire pour accéder à des <a>articles</a> d'un niveau <a>premium</a> supérieur ?</a>
+                      </h4>
+                    </div>
+                    {/* Panel Heading Ends */}
+                    {/* Panel Content Starts */}
+                    <div id="collapse19" className="panel-collapse collapse">
+                      <div className="panel-body">
+                        Il vous suffit de vous rendre sur la page <a href="/premium">premium</a> et de commander un de nos pack.
+                      </div>
+                    </div>
+                    {/* Panel Content Starts */}
+                  </div>
+                  {/* Panel Ends */}
+
+
+                  {/* Panel Starts */}
+                  <div className="panel panel-default">
+                    {/* Panel Heading Starts */}
+                    <div className="panel-heading">
+                      <h4 className="panel-title">
+                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse20">
+                          Comment puis-je <a>rechercher</a> un article ? </a>
+                      </h4>
+                    </div>
+                    {/* Panel Heading Ends */}
+                    {/* Panel Content Starts */}
+                    <div id="collapse20" className="panel-collapse collapse">
+                      <div className="panel-body">
+                        En cliquant sur la <a>loupe</a> dans la barre de navigation.
+                      </div>
+                    </div>
+                    {/* Panel Content Starts */}
+                  </div>
+                  {/* Panel Ends */}
+
+                  {/* Panel Starts */}
+                  <div className="panel panel-default">
+                    {/* Panel Heading Starts */}
+                    <div className="panel-heading">
+                      <h4 className="panel-title">
+                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse21">
+                          Je suis niveau <a>Lambo</a>, comment puis-je avoir un <a>suivi personnalisé</a> par vos experts traders ? </a>
+                      </h4>
+                    </div>
+                    {/* Panel Heading Ends */}
+                    {/* Panel Content Starts */}
+                    <div id="collapse21" className="panel-collapse collapse">
+                      <div className="panel-body">
+                        <a href="/contact/">Contactez-nous</a> tout simplement et nous vérifierons dans un premier temps si vous êtes titulaire d'un pack <a>Lambo</a>,
+                        puis dans un deuxième temps nous répondrons à vos moindres questions.
+                      </div>
+                    </div>
+                    {/* Panel Content Starts */}
+                  </div>
+                  {/* Panel Ends */}
+
+                  {/* Panel Starts */}
+                  <div className="panel panel-default">
+                    {/* Panel Heading Starts */}
+                    <div className="panel-heading">
+                      <h4 className="panel-title">
+                        <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse22">
+                          Comment puis-je rejoindre le groupe <a>Télégram</a> ?</a>
+                      </h4>
+                    </div>
+                    {/* Panel Heading Ends */}
+                    {/* Panel Content Starts */}
+                    <div id="collapse22" className="panel-collapse collapse">
+                      <div className="panel-body">
+                        Tout d'abord vous devez être titutaire du pack <a href="/premium">Avancé</a>, puis une fois sur votre profil, le lien du groupe <a>Télégram</a> apparaitra.
+                      </div>
+                    </div>
+                    {/* Panel Content Starts */}
+                  </div>
+                {/* Panel Ends */}
+                  {/* Panel Starts */}
+                  <div className="panel panel-default">
+                    {/* Panel Heading Starts */}
+                    <div className="panel-heading">
+                      <h4 className="panel-title">
                       <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse10">
-                          Qu'est ce que le Bitcoin ?</a>
+                          Qu'est ce que le <a>Bitcoin</a> ?</a>
                       </h4>
                     </div>
                     {/* Panel Content Starts */}
@@ -155,7 +277,7 @@ class Faq extends Component {
                     <div className="panel-heading">
                       <h4 className="panel-title">
                         <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                          Qui a développé le Bitcoin?</a>
+                          Qui a <a>développé</a> le Bitcoin ?</a>
                       </h4>
                     </div>
                     {/* Panel Heading Ends */}
@@ -172,7 +294,7 @@ class Faq extends Component {
                     <div className="panel-heading">
                       <h4 className="panel-title">
                         <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                          Qu'est-ce que le minage de Bitcoin</a>
+                          Qu'est-ce que le <a>minage</a> de Bitcoin ?</a>
                       </h4>
                     </div>
                     {/* Panel Heading Ends */}
@@ -190,7 +312,7 @@ class Faq extends Component {
                     <div className="panel-heading">
                       <h4 className="panel-title">
                         <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse5">
-                          Bitcoin peut-il être régulé ?</a>
+                          Bitcoin peut-il être <a>régulé</a> ?</a>
                       </h4>
                     </div>
                     {/* Panel Heading Ends */}
@@ -207,7 +329,7 @@ class Faq extends Component {
                     <div className="panel-heading">
                       <h4 className="panel-title">
                         <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse6">
-                          Bitcoin est-il anonyme ?</a>
+                          Bitcoin est-il <a>anonyme</a> ?</a>
                       </h4>
                     </div>
                     {/* Panel Heading Ends */}
@@ -224,7 +346,7 @@ class Faq extends Component {
                     <div className="panel-heading">
                       <h4 className="panel-title">
                         <a className="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse7">
-                          Comment vendre mes bitcoins</a>
+                          Comment <a>vendre</a> mes bitcoins</a>
                       </h4>
                     </div>
                     {/* Panel Heading Ends */}
