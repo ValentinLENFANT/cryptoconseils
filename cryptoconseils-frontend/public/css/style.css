@@ -673,7 +673,7 @@ ul.user li {
 }
 
 ul.user li a {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 ul.user li.sign-up {
@@ -1405,7 +1405,7 @@ ul.nav.nav-tabs li a:hover, ul.nav.nav-tabs li.active a:hover {
 }
 
 .img-block-left {
-  padding-left: 140px;
+  /*padding-left: 140px;*/
 }
 
 /* Features */
@@ -3999,7 +3999,7 @@ h4.panel-title a.collapsed:before {
 
 @media(min-width:1600px) {
   .img-block-left {
-    padding-left: 285px;
+    /*padding-left: 285px;*/
   }
 }
 
@@ -5030,7 +5030,7 @@ h4.panel-title a.collapsed:before {
 
 /* DEBUT CSS MODULE CONNEXION*/
 i.fa.fa-user {margin-right: 5px;}
-ul.user li {display: inline-block;width: 172px;padding-right: 0px;padding-left: 0px;}
+ul.user li {display: inline-block;padding-right: 0px;padding-left: 0px;}
 /*FIN CSS MODULE CONNEXION*/
 
 
