@@ -5125,6 +5125,11 @@ ul.button-edit{list-style-type: none;}
     .image-article-admin {width: 100%;height: auto;}
     h4.media-heading {font-size: 14px;margin-top: 15px;}
     ul.button-edit {margin-top: 6px;float: left;padding: 0px;margin-bottom: 0px;list-style-type: none;}
+    #decouvrirPackPremium {
+      margin-left:inherit !important;
+      margin-top:inherit !important;
+      list-style-type:inherit !important;
+  }
 }
 
 /* CSS TABLETTE */
