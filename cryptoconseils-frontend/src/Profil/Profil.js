@@ -5,6 +5,7 @@ import Menus from './Menus';
 import Activites from './Activites';
 import CallOfDay from '../Call/CallOfDay';
 import AirdropOfDay from '../Airdrop/AirdropOfDay';
+import Social from './Social'
 import InfosPerso from './InfosPerso';
 import Header from '../Header/Header';
 import Denied from '../Denied/Denied';
@@ -80,6 +81,12 @@ class Profil extends Component {
             </div>
             {/*Airdrop premiums Ends */}
 
+            {/*Social premium Starts */}
+            <div>
+              <Social premium={this.state.premium} />
+            </div>
+            {/*Social premium Ends */}
+            
             {/*InfosPerso Starts */}
             <div>
               <InfosPerso user={this.state.user}/>

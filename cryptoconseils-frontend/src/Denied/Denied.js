@@ -85,7 +85,7 @@ class Denied extends Component {
                   <h2><a href="/" className="btn btn-primary btn-connex-accueil"><i className="fa fa-home fa-lg"></i> Retour à l'accueil</a></h2>
                 </div>
               </div>
-        
+
             </div>
 
           </div>

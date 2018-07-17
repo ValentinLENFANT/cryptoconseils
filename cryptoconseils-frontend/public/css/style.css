@@ -5383,3 +5383,11 @@ p.fix-text-no-article {
   border-bottom: 5px solid #E78A1A;
   color: white;
 }
+
+.profil-social {
+  width: 400px;
+  height:400px;
+}
+.profil-social-denied{
+  color: white;
+}
