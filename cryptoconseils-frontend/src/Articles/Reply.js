@@ -72,7 +72,7 @@ class Reply extends Component {
                   className="form-control"
                   id="comment"
                   name="comment"
-                  placeholder="COMMENT"
+                  placeholder="VOTRE COMMENTAIRE"
                   onChange={this.handleChange}
                   value={this.state.comment}
                   required>
