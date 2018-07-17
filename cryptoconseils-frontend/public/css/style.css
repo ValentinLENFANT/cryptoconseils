@@ -4996,7 +4996,7 @@ h4.panel-title a.collapsed:before {
   }
 
   .pricing-footer a {
-    margin: 0 15px;
+    margin:0px;
   }
 
   .sidebar ul.nav.nav-tabs li a {
@@ -5129,7 +5129,24 @@ ul.button-edit{list-style-type: none;}
       margin-left:inherit !important;
       margin-top:inherit !important;
       list-style-type:inherit !important;
-  }
+    }
+    .pricing-header h2 {
+    font-size: 16px !important;
+    line-height: 24px !important;
+    }
+    .price span.value {
+      font-size: 24px;
+    }
+    .price i.fa.fa-euro {
+      font-size: 22px;
+    }
+    .price {
+      margin-top: 0px;
+    }
+    ul.pricing-wrapper {
+      border: 2px solid #ffffff91;
+      margin-bottom: 30px;
+    }
 }
 
 /* CSS TABLETTE */
