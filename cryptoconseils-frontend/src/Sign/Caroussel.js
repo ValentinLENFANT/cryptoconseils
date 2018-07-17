@@ -6,7 +6,7 @@ class Carousel extends Component {
       <div className="Carousel">
         {/*Logo Starts */}
         <a className="logo" href="/">
-          <img className="img-responsive" src="images/logo.png" alt="logo"/>
+          <img className="img-responsive" src="/images/logo.png" alt="logo"/>
         </a>
         {/*Logo Ends */}
         {/*Slider Starts */}

@@ -4,7 +4,7 @@ class BitcoinCalculator extends Component {
   render() {
     return (
       <div className="BitcoinCalculator Component">
-        <div className="bitcoin-calculator-section">
+        <section className="bitcoin-calculator-section">
           <div className="container">
             <div className="row">
               {/* Section Heading Starts */}
@@ -35,7 +35,7 @@ class BitcoinCalculator extends Component {
               {/* Bitcoin Calculator Form Ends */}
             </div>
           </div>
-        </div>
+        </section>
       </div>
     );
   }

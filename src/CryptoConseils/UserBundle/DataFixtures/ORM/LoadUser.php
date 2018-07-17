@@ -27,10 +27,13 @@ class LoadUser implements FixtureInterface, ContainerAwareInterface
             $user->setUsername($name);
             $user->setPlainPassword($name);
             $user->setRoles(array('ROLE_ADMIN'));
-            $user->setEmail($user->getUsername() . '@test.fr');
+            strtolower($user->setEmail($user->getUsername() . '@hotmail.fr'));
             $user->setEnabled(1);
             $user->setPremiumLevel(rand(1,5));
+            $user->setIsEmailValidated(1);
+            $user->setImageId(rand(1,7));
             $manager->persist($user);
+
         }
         $manager->flush();
     }

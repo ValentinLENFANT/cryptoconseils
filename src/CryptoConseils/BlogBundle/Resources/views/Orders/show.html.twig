@@ -1,0 +1,17 @@
+{# src/BlogBundle/Resources/views/Orders/show.html.twig #}
+<div align="center">
+    <img src="https://pbs.twimg.com/profile_images/925818595887734784/uRLle8dP_400x400.jpg"/>
+</div>
+
+
+
+<div align="center">
+    <p><b>Vous pouvez annuler à tout moment le paiement en <a href="http://www.cryptoconseils.fr/">cliquant ici.</a></b></p>
+    Total price : € {{ order.amount }}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <br>
+    <input type="submit" value="Pay € {{ order.amount }}"/>
+    {{ form_end(form) }}
+</div>

@@ -26,4 +26,67 @@ class ArticleRepository extends \Doctrine\ORM\EntityRepository
 
         return new Paginator($query, true);
     }
+
+    public function findByArticlePremium($premium)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->where('a.premium <= :premium')
+            ->setParameter('premium', $premium)
+            ->orderBy('a.date', 'DESC')
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByArticlePublishedAndPremium($published, $premium)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->where('a.published = :published')
+            ->setParameter('published', $published)
+            ->andWhere('a.premium <= :premium')
+            ->setParameter('premium', $premium)
+            ->orderBy('a.date', 'DESC')
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByArticleCategory($category, $premium)
+    {
+        $query = $this->createQueryBuilder('a')
+            ->leftJoin('a.categories', 'c')
+            ->where('c.id = :category AND a.premium <= :premium')
+            ->setParameter('category', $category)
+            ->setParameter('premium', $premium);
+
+
+        return $query
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByArticleNewest($premium, $number)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->where('a.premium <= :premium')
+            ->setParameter('premium', $premium)
+            ->orderBy('a.date', 'DESC')
+            ->setMaxResults($number);
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

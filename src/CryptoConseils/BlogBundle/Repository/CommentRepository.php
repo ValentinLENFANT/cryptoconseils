@@ -10,4 +10,33 @@ namespace CryptoConseils\BlogBundle\Repository;
  */
 class CommentRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByCommentPublished($published)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->where('a.published = :published')
+            ->setParameter('published', $published)
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findByIdAndCommentPublished($id, $published)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->where('a.published = :published')
+            ->setParameter('published', $published)
+            ->andWhere('a.id <= :id')
+            ->setParameter('id', $id)
+        ;
+
+        return $qb
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

@@ -4,15 +4,15 @@ class Features extends Component {
   render() {
     return(
       <div className="Features Component">
-        <div className="image-block">
+        <section className="image-block">
           <div className="container-fluid">
             <div className="row">
               {/* Features Starts */}
-              <div className="col-md-8 ts-padding img-block-left">
+              <div className="col-md-12 ts-padding img-block-left">
                 <div className="gap-20"></div>
                 <div className="row">
                   {/* Feature Starts */}
-                  <div className="col-sm-6 col-md-6 col-xs-12">
+                  <div className="col-sm-4 col-md-4 col-xs-12">
                     <div className="feature text-center">
                       <span className="feature-icon">
                         <img src="images/icons/orange/strong-security.png" alt="strong security"/>
@@ -24,7 +24,7 @@ class Features extends Component {
                   {/* Feature Ends */}
                   <div className="gap-20-mobile"></div>
                   {/* Feature Starts */}
-                  <div className="col-sm-6 col-md-6 col-xs-12">
+                  <div className="col-sm-4 col-md-4 col-xs-12">
                     <div className="feature text-center">
                       <span className="feature-icon">
                         <img src="images/icons/orange/world-coverage.png" alt="world coverage"/>
@@ -34,29 +34,15 @@ class Features extends Component {
                     </div>
                   </div>
                   {/* Feature Ends */}
-                </div>
-                <div className="gap-20"></div>
-                <div className="row">
+                  <div className="gap-20-mobile"></div>
                   {/* Feature Starts */}
-                  <div className="col-sm-6 col-md-6 col-xs-12">
+                  <div className="col-sm-4 col-md-4 col-xs-12">
                     <div className="feature text-center">
                       <span className="feature-icon">
                         <img src="images/icons/orange/payment-options.png" alt="payment options"/>
                       </span>
                       <h3 className="feature-title">Options de paiements</h3>
-                      <p>Visa, MasterCard, <br/>transfer bancaire, crypto-monnaies</p>
-                    </div>
-                  </div>
-                  {/* Feature Ends */}
-                  <div className="gap-20-mobile"></div>
-                  {/* Feature Starts */}
-                  <div className="col-sm-6 col-md-6 col-xs-12">
-                    <div className="feature text-center">
-                      <span className="feature-icon">
-                        <img src="images/icons/orange/mobile-app.png" alt="mobile app"/>
-                      </span>
-                      <h3 className="feature-title">App Mobile</h3>
-                      <p>Gérez vos trades avec notre application mobile<br/>Disponible sur Play Store & App Store</p>
+                      <p>Service de paiement en ligne mondial<br/> Paypal</p>
                     </div>
                   </div>
                   {/* Feature Ends */}
@@ -64,19 +50,31 @@ class Features extends Component {
                 <div className="gap-20"></div>
                 <div className="row">
                   {/* Feature Starts */}
-                  <div className="col-sm-6 col-md-6 col-xs-12">
+                  <div className="col-sm-4 col-md-4 col-xs-12">
+                    <div className="feature text-center">
+                      <span className="feature-icon">
+                        <img src="images/icons/orange/mobile-app.png" alt="mobile app"/>
+                      </span>
+                      <h3 className="feature-title">Application Mobile</h3>
+                      <p>Pour que vous restiez constamment informé<br/>des dernières actualités</p>
+                    </div>
+                  </div>
+                  {/* Feature Ends */}
+
+                  {/* Feature Starts */}
+                   <div className="col-sm-4 col-md-4 col-xs-12">
                     <div className="feature text-center">
                       <span className="feature-icon">
                         <img src="images/icons/orange/cost-efficiency.png" alt="cost efficiency"/>
                       </span>
                       <h3 className="feature-title">Abonnement Premium</h3>
-                      <p>Payez par mois ou par an<br/>un rapport qualité prix imbattable</p>
+                      <p>Payez un abonnement unique et profitez<br/>d'un rapport qualité prix imbattable</p>
                     </div>
                   </div>
                   {/* Feature Ends */}
-                  <div className="gap-20-mobile"></div>
+
                   {/* Feature Starts */}
-                  <div className="col-sm-6 col-md-6 col-xs-12">
+                  <div className="col-sm-4 col-md-4 col-xs-12">
                     <div className="feature text-center">
                       <span className="feature-icon">
                         <img src="images/icons/orange/high-liquidity.png" alt="high liquidity"/>
@@ -89,8 +87,15 @@ class Features extends Component {
                 </div>
               </div>
               {/* Features Ends */}
-              {/* Video Starts */}
-              <div className="col-md-4 ts-padding bg-image-1">
+            </div>
+            <div className="row">
+               {/* Video Starts */}
+               <div className="col-sm-12 col-md-12 col-xs-12">
+                <p className="fondateur">Crypto<a>Conseils</a> créateur de la cryptomonnaie <a href="http://ethereumx.io/">EthereumX</a></p>
+               </div>
+            </div>
+            <div className="row">
+               <div className="col-md-12 ts-padding bg-image-1">
                 <div>
                   <div className="text-center">
                     <a className="button-video mfp-youtube" href="https://www.youtube.com/watch?v=YoFCB0P3OZc"> </a>
@@ -100,7 +105,7 @@ class Features extends Component {
               {/* Video Ends */}
             </div>
           </div>
-        </div>
+        </section>
       </div>
     );
   }

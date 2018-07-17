@@ -14,6 +14,7 @@ use CryptoConseils\BlogBundle\Entity\Comment;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
+use \PDO;
 
 class CommentController extends FOSRestController
 {
@@ -37,7 +38,7 @@ class CommentController extends FOSRestController
 
     public function indexAction() // [GET] /comments
     {
-        $comments = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Comment')->findAll();
+        $comments = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Comment')->findByCommentPublished(1);
         $data = $this->get('jms_serializer')->serialize($comments, 'json');
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');
@@ -46,9 +47,10 @@ class CommentController extends FOSRestController
     }
 
 
-    public function showAction(Comment $id) // [GET] /comments/8
+    public function showAction(Comment $article_id) // [GET] /comments/8
     {
-        $data = $this->get('jms_serializer')->serialize($id, 'json');
+        $comments = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Comment')->findByIdAndCommentPublished(1, $article_id);
+        $data = $this->get('jms_serializer')->serialize($comments, 'json');
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');
 
@@ -60,9 +62,9 @@ class CommentController extends FOSRestController
     {
         if (null === $currentUserUsername = $this->getUser()) {
             return new JsonResponse(array('error' => 'Access denied! You need to login before comment'), 403);
-        }else{
+        } else {
             $currentUserUsername = $currentUserUsername->getUsername();
-
+            $userId = $this->getUser()->getId();
             $em = $this->getDoctrine()->getManager();
             $data = $request->getContent();
 
@@ -72,6 +74,8 @@ class CommentController extends FOSRestController
             $comment->setArticle($article);
             $comment->setAuthor($currentUserUsername);
             $comment->setDate(new \DateTime('now'));
+            $comment->setUserId($userId);
+            $comment->setPublished(true);
 
             // Analyse si les conditions sur les champs sont respectées //
             $errors = $this->get('validator')->validate($comment);
@@ -85,6 +89,29 @@ class CommentController extends FOSRestController
             $comment = $this->get('jms_serializer')->serialize($comment, 'json');
             return new JsonResponse(json_decode($comment), 200);
         }
+    }
+
+    public function editPublishedAction($id, Request $request) // [PUT] /comments/edit/enabled/{id}
+    {
+        $data = $request->getContent();
+        $published = json_decode($data)->published;
+        try {
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+        $req = $bdd->prepare('UPDATE comment SET published = :published WHERE id = :id');
+        $req->execute(array(
+            'published' => $published,
+            'id' => $id
+        ));
+
+        if ($published) {
+            return new JsonResponse('Le commentaire a bien été activé', 200);
+        } else {
+            return new JsonResponse('Le commentaire a bien été désactivé', 200);
+        }
+
     }
 
 
@@ -104,8 +131,8 @@ class CommentController extends FOSRestController
 
             if (null === $currentUserUsername = $this->getUser()) {
                 return new JsonResponse(array('error' => 'Access denied! You need to login'), 403);
-            }else{
-                if ($currentUserUsername->getUsername() === $commentUsername){
+            } else {
+                if ($currentUserUsername->getUsername() === $commentUsername) {
                     $data = json_decode($request->getContent(), true);
                     $form = $this->createForm(EditCommentType::class, $comment);
                     $form->submit($data);
@@ -128,11 +155,11 @@ class CommentController extends FOSRestController
                     $em->flush();
                     $comment = $this->get('jms_serializer')->serialize($comment, 'json');
                     return new JsonResponse(json_decode($comment), 200);
-                }else{
+                } else {
                     return new JsonResponse(array('error' => 'Access denied! This comment is not yours'), 403);
                 }
             }
-        }else{
+        } else {
             $data = json_decode($request->getContent(), true);
             $form = $this->createForm(EditCommentType::class, $comment);
             $form->submit($data);
@@ -164,7 +191,7 @@ class CommentController extends FOSRestController
         // If user is not admin
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return new JsonResponse("Access_denied, ADMIN authentication required", 403);
-        }else{
+        } else {
             $comment = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Comment')->find($id);
 
             if (null === $comment) {

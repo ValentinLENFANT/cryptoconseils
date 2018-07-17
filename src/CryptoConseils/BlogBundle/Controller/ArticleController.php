@@ -44,6 +44,33 @@ class ArticleController extends FOSRestController
 
     public function indexAction() // [GET] /articles
     {
+        if (null === $this->getUser()) {
+            $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticlePublishedAndPremium(1, 0);
+            $data = $this->get('jms_serializer')->serialize($articles, 'json');
+
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            if (null == $articles) {
+                return new JsonResponse(array('error' => 'No articles found for your premium level'), 404);
+            }
+
+            return $response;
+        }
+
+        $currentUserLevel = $this->getUser()->getPremiumLevel();
+        $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticlePublishedAndPremium(1, $currentUserLevel);
+
+        $data = $this->get('jms_serializer')->serialize($articles, 'json');
+
+        $response = new Response($data);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    public function allArticlesAction() // [GET] /articles
+    {
         $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findAll();
         $data = $this->get('jms_serializer')->serialize($articles, 'json');
 
@@ -56,18 +83,99 @@ class ArticleController extends FOSRestController
 
     public function showAction(Article $id) // [GET] /articles/8
     {
-        $user = new User();
-        $user = $this->getUser();
-        if ($user['premiumLevel'] >= $id->getPremium() || $id->getPremium() == 0) {
-            $data = $this->get('jms_serializer')->serialize($id, 'json');
+        if ($id->getPublished() == 1) {
+            if ($id->getPremium() > 0) //si l'article n'est pas de niveau 0 il faut obligatoirement être au moins connecté
+            {
+                if (null === $this->getUser()) { //On vérifie si l'utilisateur est connecté
+                    return new JsonResponse(array('error' => 'Access denied! You need to login'), 403);
+                }
+                $currentUserLevel = $this->getUser()->getPremiumLevel(); //On récupère le niveau de l'utilisateur
+
+                if ($currentUserLevel >= $id->getPremium() || $id->getPremium() == 0) {
+                    $data = $this->get('jms_serializer')->serialize($id, 'json');
+
+                    $response = new Response($data);
+                    $response->headers->set('Content-Type', 'application/json');
+
+                    return $response;
+                } else {
+                    return new JsonResponse(array(
+                      'error' => "Access denied ! Vous n'êtes pas à un niveau premium assez élevé",
+                      'userPremiumLevel' => $currentUserLevel,
+                      'articlePremiumLevel' => $id->getPremium()
+                    ), 403);
+                }
+            } else {
+                $data = $this->get('jms_serializer')->serialize($id, 'json');
+
+                $response = new Response($data);
+                $response->headers->set('Content-Type', 'application/json');
+
+                return $response;
+            }
+        } else {
+            return new JsonResponse(array('error' => "L'article auquel vous tenté d'accéder à été supprimé."), 404);
+        }
+    }
+
+
+    public function show_by_categoryAction($category) // [GET] /articles/Airdrop
+    {
+        if (null === $this->getUser()) {
+            $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticleCategory($category, 0);
+            $data = $this->get('jms_serializer')->serialize($articles, 'json');
 
             $response = new Response($data);
             $response->headers->set('Content-Type', 'application/json');
 
+            if (null == $articles) {
+                return new JsonResponse(array('error' => 'No articles found for your premium level'), 404);
+            }
+
             return $response;
         } else {
-            return new JsonResponse(array('error' => "Access denied ! Vous n'êtes pas à un niveau premium assez élevé"));
+
+            $currentUserLevel = $this->getUser()->getPremiumLevel();
+
+            $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticleCategory($category, $currentUserLevel);
+            $data = $this->get('jms_serializer')->serialize($articles, 'json');
+
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            if (null == $articles) {
+                return new JsonResponse(array('error' => 'No articles found for this category'), 404);
+            }
+
+            return $response;
         }
+    }
+
+    public function show_by_newestAction($number) // [GET] /articles/newest/3
+    {
+        if (null === $this->getUser()) {
+            $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticleNewest(0, $number);
+            $data = $this->get('jms_serializer')->serialize($articles, 'json');
+
+            $response = new Response($data);
+            $response->headers->set('Content-Type', 'application/json');
+
+            if (null == $articles) {
+                return new JsonResponse(array('error' => 'No articles found for your premium level'), 404);
+            }
+
+            return $response;
+        }
+
+        $currentUserLevel = $this->getUser()->getPremiumLevel();
+        $articles = $this->getDoctrine()->getRepository('CryptoConseilsBlogBundle:Article')->findByArticleNewest($currentUserLevel, $number);
+
+        $data = $this->get('jms_serializer')->serialize($articles, 'json');
+
+        $response = new Response($data);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 
 
@@ -89,6 +197,21 @@ class ArticleController extends FOSRestController
             } else {
                 $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($article->getImageId());
                 $article->setImage($image);
+            }
+
+            // If title is NULL
+            if (null === $article->getTitle()) {
+                return new JsonResponse(array('error' => 'title required'), 403);
+            }
+
+            // If content is NULL
+            if (null === $article->getContent()) {
+                return new JsonResponse(array('error' => 'content required'), 403);
+            }
+
+            // If premium is NULL
+            if (null === $article->getPremium()) {
+                return new JsonResponse(array('error' => 'Premium number required'), 403);
             }
 
             if (isset($categories['category_id'])) {
@@ -134,12 +257,61 @@ class ArticleController extends FOSRestController
                 return new JsonResponse(array('error' => 'Article not found'), 404);
             }
 
+
             $username = $article->getAuthor();
             $date_publication = $article->getDate();
             $article->setAuthor($username);
             $article->setDate($date_publication);
+            $content = $article->getContent();
+            $title = $article->getTitle();
+            $premium = $article->getpremium();
+            $published = $article->getpublished();
 
             $data = json_decode($request->getContent(), true);
+
+            // If json data is empty
+            if (empty($data)) {
+                return new JsonResponse(array('error' => 'No data sent to modify this article'), 403);
+            }
+
+            // If content is NULL
+            if (!isset($data['content'])) {
+                $article->setContent($content);
+            } else {
+                $article->setContent($data['content']);
+            }
+
+            // If title is NULL
+            if (!isset($data['title'])) {
+                $article->setTitle($title);
+            } else {
+                $article->setTitle($data['title']);
+            }
+
+            // If premium is NULL
+            if (!isset($data['premium'])) {
+                $article->setPremium($premium);
+            } else {
+                $article->setPremium($data['premium']);
+            }
+
+            // If image_id is NULL
+            if (!isset($data['image_id'])) {
+                $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($article->getImageId());
+                $article->setImage($image);
+            } else {
+                $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($data['image_id']);
+                $article->setImage($image);
+            }
+
+            // If image_id is NULL
+            if (!isset($data['published'])) {
+
+                $article->setpublished($published);
+            } else {
+
+                $article->setpublished($data['published']);
+            }
 
             if (isset($data['category_id'])) {
                 // On boucle sur les catégories du post pour les supprimer
@@ -158,7 +330,6 @@ class ArticleController extends FOSRestController
             $form = $this->createForm(EditArticleType::class, $article);
             $form->submit($data);
 
-
             // Analyse si les conditions sur les champs sont respectées //
             $data_errors = $request->getContent();
             $article_errors = $this->get('jms_serializer')->deserialize($data_errors, 'CryptoConseils\BlogBundle\Entity\Article', 'json');
@@ -167,7 +338,6 @@ class ArticleController extends FOSRestController
             if (count($errors)) {
                 return new Response($errors, 400);
             } // Fin d'analyse //
-
 
             $em->persist($article);
             $em->flush();
@@ -190,7 +360,8 @@ class ArticleController extends FOSRestController
             }
 
             $em = $this->getDoctrine()->getManager();
-            $em->remove($article);
+            $article->setPublished(0);
+            $em->persist($article);
             $em->flush();
 
             return new JsonResponse(array('success' => 'Article deleted'), 200);

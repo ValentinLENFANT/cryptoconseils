@@ -4,7 +4,7 @@ class Carousel extends Component {
   render() {
     return(
       <div className="Carousel Component">
-        <div id="main-slide" className="carousel slide carousel-fade" data-ride="carousel">
+        <section id="main-slide" className="carousel slide carousel-fade" data-ride="carousel">
           {/* Indicators Starts */}
           <ol className="carousel-indicators visible-lg visible-md">
             <li data-target="#main-slide" data-slide-to="0" className="active"></li>
@@ -21,7 +21,7 @@ class Carousel extends Component {
                   <div className="slider-text text-center">
                     <h3 className="slide-title"><span>Analyses</span> et <span>Conseils</span><br/> pour optimiser vos gains</h3>
                     <p>
-                      <a href="about.html" className="slider btn btn-primary">En savoir plus</a>
+                      <a href="/team" className="slider btn btn-primary">En savoir plus</a>
                     </p>
                   </div>
                 </div>
@@ -34,9 +34,9 @@ class Carousel extends Component {
                 <div className="col-md-12">
                   <div className="container">
                     <div className="slider-text text-center">
-                      <h3 className="slide-title">Suivez nos <span>Experts</span> Traders <br/> de classNamee <span>Mondiale</span> </h3>
+                      <h3 className="slide-title">Suivez nos <span>Experts</span> Traders <br/> de classe <span>Mondiale</span> </h3>
                       <p>
-                        <a href="pricing.html" className="slider btn btn-primary">Nos offres</a>
+                        <a href="/premium" className="slider btn btn-primary">Nos offres</a>
                       </p>
                     </div>
                   </div>
@@ -54,7 +54,7 @@ class Carousel extends Component {
             <span><i className="fa fa-angle-right"></i></span>
           </a>
           {/* Carousel Controlers Ends */}
-        </div>
+        </section>
       </div>
     );
   }

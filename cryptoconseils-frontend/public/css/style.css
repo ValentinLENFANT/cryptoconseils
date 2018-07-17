@@ -88,6 +88,7 @@ a:focus {
   border-radius: 0;
   outline: 0;
   transition: .1s;
+  white-space: pre-line;
 }
 
 .form-control:focus {
@@ -579,6 +580,7 @@ body.light .shop-checkout .table tbody > tr {
 
 ul.bitcoin-stats {
   padding-top: 28px;
+    text-align: left;
 }
 
 ul.bitcoin-stats li {
@@ -592,7 +594,7 @@ ul.bitcoin-stats li:last-child {
 
 ul.bitcoin-stats h6 {
   font-weight: 800;
-  color: #eee;
+  color: #FD961A;
   margin: 0;
   font-size: 13px;
   text-align: left;
@@ -671,7 +673,7 @@ ul.user li {
 }
 
 ul.user li a {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 ul.user li.sign-up {
@@ -740,7 +742,7 @@ ul.user li.sign-in a {
   background: #fff;
 }
 
-.nav>li>a:focus, 
+.nav>li>a:focus,
 .nav>li>a:hover {
   background: none;
 }
@@ -767,7 +769,7 @@ ul.navbar-nav > li {
   display: inline-block;
 }
 
-ul.navbar-nav > li:not(.search):hover, 
+ul.navbar-nav > li:not(.search):hover,
 ul.navbar-nav > li.active {
   color: #fff;
   position: relative;
@@ -800,13 +802,13 @@ ul.navbar-nav > li > a i {
   padding-left: 5px;
 }
 
-.nav .open>a, .nav .open>a:hover, 
+.nav .open>a, .nav .open>a:hover,
 .nav .open>a:focus {
   background: transparent;
   border: 0;
 }
 
-ul.navbar-nav > li:hover > a:after, 
+ul.navbar-nav > li:hover > a:after,
 ul.navbar-nav > li.active > a:after {
   position: absolute;
   content: '';
@@ -893,11 +895,12 @@ ul.nav.nav-tabs li a:hover, ul.nav.nav-tabs li.active a:hover {
 
 .site-search {
   text-align: center;
-  background: rgba(0,0,0,.7);
+  background: rgba(20, 20, 20,1);
   position: absolute;
   top: 49px;
   z-index: 100;
   width: 100%;
+  border-bottom: 5px solid #E78A1A;
 }
 
 .navbar-nav .fa-search {
@@ -921,13 +924,13 @@ ul.nav.nav-tabs li a:hover, ul.nav.nav-tabs li.active a:hover {
 
 .site-search .container {
   height: 0;
-  overflow: hidden;
+
   position: relative;
   -webkit-transition: height 0.3s;
   transition: height 0.3s;
 }
 
-.site-search .container.open {
+.site-search .container {
   height: 80px;
 }
 
@@ -1149,7 +1152,7 @@ ul.nav.nav-tabs li a:hover, ul.nav.nav-tabs li.active a:hover {
   padding: 15px;
 }
 
-#main-slide .carousel-control .fa-angle-left, 
+#main-slide .carousel-control .fa-angle-left,
 #main-slide .carousel-control .fa-angle-right {
   position: absolute;
   top: 50%;
@@ -1354,8 +1357,8 @@ ul.nav.nav-tabs li a:hover, ul.nav.nav-tabs li.active a:hover {
   margin-bottom: 3px;
 }
 
-.nav-tabs>li.active>a, 
-.nav-tabs>li.active>a:hover, 
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
 .nav-tabs>li.active>a:focus {
   background: none;
 }
@@ -1388,7 +1391,7 @@ ul.nav.nav-tabs li a:hover, ul.nav.nav-tabs li.active a:hover {
   background-image: url(../images/backgrounds/bg-video.jpg);
   background-size: cover;
   background-position: center center;
-  height: 625px;
+  height:300px;
 }
 
 .bg-image-1:after {
@@ -1402,7 +1405,7 @@ ul.nav.nav-tabs li a:hover, ul.nav.nav-tabs li.active a:hover {
 }
 
 .img-block-left {
-  padding-left: 140px;
+  /*padding-left: 140px;*/
 }
 
 /* Features */
@@ -2457,6 +2460,7 @@ body.blog.grid-no-sidebar article h4 {
 }
 
 body.blog p.excerpt, body.blog p.content-article {
+  white-space: pre-line;
   margin: 22px 0;
 }
 
@@ -2733,7 +2737,7 @@ body.blog .pagination li.active a {
   border: 1px solid #fff;
 }
 
-/*** Quote and Chart ***/ 
+/*** Quote and Chart ***/
 
 .image-block2 {
   background: #1d1d1d;
@@ -2989,6 +2993,9 @@ section.contact {
   background: #dd4b39;
 }
 
+.contact-page-info .social-contact ul li.linkedin a i {
+  background: #0073B0;
+}
 /*** Shopping Cart ***/
 
 section.shop-cart {
@@ -3260,7 +3267,7 @@ section.shop-checkout {
 }
 
 .latest-post a.btn {
-  margin: 15px 0;
+  margin: 30px 0;
 }
 
 .latest-post a img {
@@ -3992,7 +3999,7 @@ h4.panel-title a.collapsed:before {
 
 @media(min-width:1600px) {
   .img-block-left {
-    padding-left: 285px;
+    /*padding-left: 285px;*/
   }
 }
 
@@ -4062,7 +4069,7 @@ h4.panel-title a.collapsed:before {
 }
 
 @media (max-width: 992px) {
-	
+
   .bitcoin-calculator-section .container, .facts .container {
     width: 720px;
   }
@@ -4213,7 +4220,7 @@ h4.panel-title a.collapsed:before {
 }
 
 @media (max-width: 992px) and (min-width:768px) {
-	
+
   .main-logo {
     float: none;
     padding-bottom: 0;
@@ -4273,7 +4280,7 @@ h4.panel-title a.collapsed:before {
 }
 
 @media (max-width : 767px) {
-	
+
   ul.nav.nav-tabs li a, ul.nav.nav-tabs li.active a {
     padding: 0 20px;
   }
@@ -4361,7 +4368,7 @@ h4.panel-title a.collapsed:before {
     background: none;
   }
 
-  ul.navbar-nav > li:hover > a:after, 
+  ul.navbar-nav > li:hover > a:after,
 	ul.navbar-nav > li.active > a:after {
     background: none;
   }
@@ -4989,7 +4996,7 @@ h4.panel-title a.collapsed:before {
   }
 
   .pricing-footer a {
-    margin: 0 15px;
+    margin:0px;
   }
 
   .sidebar ul.nav.nav-tabs li a {
@@ -5002,7 +5009,7 @@ h4.panel-title a.collapsed:before {
 }
 
 @media (max-width : 480px) {
-	
+
   ul.bitcoin-stats {
     display: none;
   }
@@ -5019,4 +5026,390 @@ h4.panel-title a.collapsed:before {
   .countdown-amount {
     font-size: 28px;
   }
+}
+
+/* DEBUT CSS MODULE CONNEXION*/
+i.fa.fa-user {margin-right: 5px;}
+ul.user li {display: inline-block;padding-right: 0px;padding-left: 0px;}
+/*FIN CSS MODULE CONNEXION*/
+
+
+
+/*****************/
+/*DEBUT CSS BACKOFFICE*/
+/***************/
+
+/*DEBUT CSS MENU PROFIL*/
+section.menu-dashboard {padding-top: 5px;}
+/*FIN CSS MENU PROFIL*/
+
+/*DEBUT CSS DE LA PAGE PROFIL */
+.titre-dashboard{color: #fd961a;text-transform: uppercase;border: 1px solid #fd961a;width: auto;}
+.mes-commentaires{color: white;font-size: 17px;text-transform: uppercase;}
+.icone-commentaire{color:white;margin-right:10px;float: left;margin-top: 6px;}
+.list-group-commentaire{padding-left:0px;}
+.button-profil{margin-right:5px;}
+.list-comment{background: #212121;}
+.panel-default>.panel-heading {border-color:inherit;}
+.premium-image{width:100%;}
+.avatar-change{display:block;background:#3e3e3e;font-size:13px;text-align:left;padding-left:20px;}
+.submit-infos{margin-top: 20px;margin-bottom: 30px;}
+/*FIN CSS DE LA PAGE PROFIL */
+
+
+/*DEBUT CSS DE LA PAGE PROFIL PREMIUM */
+body { padding-top:30px; }
+.widget .panel-body { padding:0px; }
+.widget .list-group { margin-bottom: 0; }
+.widget .panel-title { display:inline }
+.widget .label-info { float: right; }
+.widget li.list-group-item {border-radius: 0;border: 0;border-top: 1px solid #ddd;}
+.widget li.list-group-item:hover { background-color: rgba(86,61,124,.1); }
+.widget .mic-info { color: #666666;font-size: 11px; }
+.widget .action { margin-top:5px; }
+.widget .comment-text { font-size: 12px; }
+.widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
+.titre-dashboard{color: #fd961a;text-transform: uppercase;border: 1px solid #fd961a;width: auto;}
+.section-profil {padding:25px 0;position: relative;}
+.coinmarketcap-currency-widget div {color: white !important;border: 0px !important;}
+.coinmarketcap-currency-widget a {color: white !important;}
+div#tradingview_20ffd-wrapper{width:100% !important;}
+div#tradingview_20ffd-wrapper div{width:100% !important;}
+.tradingview-widget-container div {width: 100% !important;}
+.tradingview-widget-container {width: 100% !important;}
+.coinmarketcap-currency-widget {margin-top: 20px;}
+.coinmarketcap-currency-widget div > div:nth-child(2) > a {display: none;}
+.button-call{margin-top:20px;}
+.prix-call{margin-top: 30px;font-size: 23px;color: white}
+p.desciption-call-premium {text-align: justify;}
+#airdrop-ticker{color:white;font-weight:900;text-align:left;margin-top: 10px;}
+.etape-airdrop{color:white;text-align:left;}
+.tradingview-widget-container iframe{height: 400px !important;}
+.tradingview-widget-container > article > div:nth-child(1) {height: 400px !important;}
+.call-premium-ticker{color:white;text-align:left;}
+.image-airdrop-premium{width:100%;}
+.texte-airdrop-premium{text-align:justify;}
+.recompense-airdrop{text-align:left;}
+.premium-logo{margin-bottom: 20px;margin-top:5px;}
+
+/*FIN CSS DE LA PAGE PROFIL PREMIUM */
+
+
+
+/*DEBUT CSS DE LA PAGE ADMIN */
+p.apercu-admin {font-size: 25px;color: white;padding-top: 12px;padding-bottom: 14px;text-transform: uppercase;background: #fd961a;font-weight: 900;margin-bottom: 30px;margin-top: 20px;border-radius: 3px;}
+textarea#analyse{padding-top: 10px;}
+textarea{resize:none}
+i.fa.fa-picture-o {position: relative;top: 1px;}
+textarea#source_description {padding-top: 10px;height: 400px;}
+.image-article-admin{width:100%;border-radius: 3px;margin-top:5px;}
+.container-article{background: #222222 !important;}
+#boutton{float:right;margin-top:15px;}
+h4.media-heading {color: white;font-size: 21px;}
+.boutton-supp-modif{float:right;}
+h3.panel-title {color: white;font-size: 17px;text-transform: uppercase;}
+span.fa.fa-comment.fa-lg  {color: white;font-size: 21px;margin-right:7px;}
+button.btn.btn-success.btn-xs {margin-right: 5px;}
+.control-label{float: left;}
+.button-edit{display: inline-flex;}
+.editer-edit-button{margin-right:30px;}
+.fa-minus-square{margin-right:5px;}
+ul.button-edit{list-style-type: none;}
+
+
+/*CSS SMARTPHONE */
+@media (max-width: 767px) and (min-width: 0){
+    h2{font-size: 35px !important;line-height: 37px !important;}
+    .btn-group.boutton-supp-modif.open {float: left;margin-right: 20px;}
+    .boutton-supp-modif {float: left !important;margin-right: 20px;}
+    .image-article-admin {width: 100%;height: auto;}
+    h4.media-heading {font-size: 14px;margin-top: 15px;}
+    ul.button-edit {margin-top: 6px;float: left;padding: 0px;margin-bottom: 0px;list-style-type: none;}
+    #decouvrirPackPremium {
+      margin-left:inherit !important;
+      margin-top:inherit !important;
+      list-style-type:inherit !important;
+    }
+    .pricing-header h2 {
+    font-size: 16px !important;
+    line-height: 24px !important;
+    }
+    .price span.value {
+      font-size: 24px;
+    }
+    .price i.fa.fa-euro {
+      font-size: 22px;
+    }
+    .price {
+      margin-top: 0px;
+    }
+    ul.pricing-wrapper {
+      border: 2px solid #ffffff91;
+      margin-bottom: 30px;
+    }
+}
+
+/* CSS TABLETTE */
+@media (min-width: 768px) and (max-width: 1024px) {
+ h3.titre-dashboard {font-size: 15px;margin-top: 50px;}
+
+}
+/*FIN CSS DE LA PAGE ADMIN */
+
+/* DEBUT CHATBOT */
+div#sntch_close {
+    background: transparent;
+    border: 2px solid;
+}
+/* FIN CSS CHATBOT */
+
+
+.res-search{
+  text-align: center;
+  background: rgba(20, 20, 20,1);
+  position: absolute;
+  top: 125px;
+  z-index: 200;
+  width: 100%;
+  border-bottom: 5px solid #E78A1A;
+
+}
+.res-search li{
+  padding: 5px;
+  list-style-type:none;
+}
+.uppercase {
+    text-transform: uppercase;
+}
+
+/* POUR ADMIN CHANGE PREMIUM LVL USER*/
+.btn-primary-true {
+  background-color: #337ab7;
+  color:white;
+  border-color: #2e6da4;
+  display: inline-block;
+  margin-bottom: 0; // For input.btn
+  font-weight: @btn-font-weight;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  border: 1px solid transparent;
+  white-space: nowrap;
+  .button-size(@padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base; @btn-border-radius-base);
+  .user-select(none);
+
+  &,
+  &:active,
+  &.active {
+    &:focus,
+    &.focus {
+      .tab-focus();
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &.focus {
+    color: @btn-default-color;
+    text-decoration: none;
+  }
+
+  &:active,
+  &.active {
+    outline: 0;
+    background-image: none;
+    .box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: @cursor-disabled;
+    .opacity(.65);
+    .box-shadow(none);
+  }
+
+  a& {
+    &.disabled,
+    fieldset[disabled] & {
+      pointer-events: none; // Future-proof disabling of clicks on `<a>` elements
+    }
+  }
+}
+.btn-primary2 {
+  .button-variant(@btn-primary-color; @btn-primary-bg; @btn-primary-border);
+}
+
+
+/*CSS POUR LES NEWS DANS LA HOMEPAGE*/
+.news-article-img{
+  width: 350px;
+  height: 170px;
+}
+.news-article{
+  width: 390px;
+}
+
+.new-article-content{
+  height: 150px;
+}
+
+
+/* POUR TABLEAU ADMIN USER*/
+.better-table{
+  font-size: 15px;
+  margin: auto;
+}
+.better-table tr:nth-child(even) {background-color: #222222;}
+
+.better-table th,td{
+  padding: 5px;
+  border: 1px solid white;
+}
+.better-table th {
+    text-align: center;
+    background-color: #E78A1A;
+    color: white;
+}
+.list-group-item{
+  background-color: #222222;
+}
+.list-group-moderation, .list-group-item h4{
+  color: white;
+}
+.confirm{
+  width: 100%;
+}
+.niveau{
+  color:white;
+  text-align: center;
+}
+.Inscrit-color{
+  background-color: #D9534F;
+
+}
+.Debutant-color{
+  background-color: #F0AD4E;
+
+}
+.Avancé-color{
+  background-color: #5BC0DE;
+
+}
+.Expert-color{
+  background-color: #337AB7;
+
+}
+.Lambo-color{
+  background-color: #5CB85C;
+}
+
+
+.latest-post .post-premium {
+  width: 100px;
+  height: 35px;
+  background: #1d1d1d;
+  position: absolute;
+  right: 25px;
+  top: 0;
+  text-align: center;
+  padding-top: 1px;
+}
+
+.latest-post .post-category {
+  width: 170px;
+  height: 35px;
+  background: #1d1d1d;
+  position: absolute;
+  right: 25px;
+  top: 130px;
+  text-align: center;
+  padding-top: 1px;
+}
+
+.latest-post .post-premium span {
+  display: block;
+  color: #fff;
+}
+
+#decouvrirPackPremium {
+  margin-left: 197px;
+  margin-top: 25px;
+  list-style-type: none;
+}
+ul li {
+  list-style-type: none;
+}
+
+.Cgu h2 {
+  color: #E78A1A;
+}
+.Cgu h1 {
+  color: white;
+}
+.white-space-pre {
+    white-space: pre-wrap;
+}
+
+.Denied h1 {
+  color: white;
+}
+
+a.lwc-chat-button.bubble{margin-bottom:30px;}
+
+/* margin for airdrop and calls*/
+
+.call, .airdrop{
+  margin-bottom: 40px;
+}
+
+.read-more {
+  right: 0;
+  margin: auto;
+}
+
+
+p.fondateur {
+  color: white;
+  font-size: 25px;
+}
+
+.btn-connex{width:100%;}
+
+a.btn.btn-primary.btn-connex-accueil {
+  background: inherit;
+  border: 1px solid white;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+p.fix-text-no-article {
+  color: white;
+  text-transform: uppercase;
+  border: 1px solid white;
+  padding-top: 7px;
+  padding-bottom: 9px;
+  text-align: center;
+}
+
+.search-user input{
+  width: 30%;
+  height: 50px;
+  background: none;
+  margin-bottom: 30px;
+  text-align: center;
+  border: none;
+  font-size: 18px;
+  border-bottom: 5px solid #E78A1A;
+  color: white;
+}
+
+.profil-social {
+  width: 400px;
+  height:400px;
+}
+.profil-social-denied{
+  color: white;
 }

@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 
 class BeginTrade extends Component {
   render() {
-    if(this.props.isLogged === false){
+    if(localStorage.getItem('access_token')){
+      return null
+    } else {
       return (
         <div className="BeginTrade Component">
-          <div className="call-action-all">
+          <section className="call-action-all">
             <div className="call-action-all-overlay">
               <div className="container">
                 <div className="row">
@@ -27,11 +29,9 @@ class BeginTrade extends Component {
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         </div>
       );
-    }else {
-      return null;
     }
   }
 }
