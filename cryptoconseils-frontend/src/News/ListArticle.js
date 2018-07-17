@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import MiniPreLoader from '../PreLoader/MiniPreLoader.js'
 
 class ListArticle extends Component {
 
@@ -48,6 +49,7 @@ class ListArticle extends Component {
       </p>
     )}
   }
+
   readMore() {
     axios.get(process.env.REACT_APP_API_ADDRESS+'/articles/all/')
     .then(response => {
@@ -56,6 +58,7 @@ class ListArticle extends Component {
       console.log(error);
     });
   }
+
   orderByCategorie(data,idCategorie){
     // initialisation du tableau
     var res= []
@@ -99,45 +102,49 @@ class ListArticle extends Component {
   }
 
   renderArticles() {
-    return this.state.articles.map(article => {
-      return(
-        <div className="col-sm-4 col-md-4 col-xs-12 news-article" key={article.id}>
-          <div className="latest-post">
-            {/* Featured Image Starts */}
-            <a href={"/articles/" + article.id} className="">
-              <img
-                className="img-responsive news-article-img "
-                src={"../images/articles/"+article.image.file_name}
-                alt={article.image.alt}
-                />
-            </a>
-            {/* Featured Image Ends */}
-            {/* Article Content Starts */}
-            <div className="post-body new-article-content">
-              <h4 className="post-title">
-                <a href={"/articles/" + article.id}>{article.title}</a>
-              </h4>
-              <div className="post-text white-space-pre">
-                <p>
-                  {article.content.split(" ").splice(0,20).join(" ")+" ..."}
-                </p>
+    if (this.state.articles.length > 1) {
+      return this.state.articles.map(article => {
+        return(
+          <div className="col-sm-4 col-md-4 col-xs-12 news-article" key={article.id}>
+            <div className="latest-post">
+              {/* Featured Image Starts */}
+              <a href={"/articles/" + article.id} className="">
+                <img
+                  className="img-responsive news-article-img "
+                  src={"../images/articles/"+article.image.file_name}
+                  alt={article.image.alt}
+                  />
+              </a>
+              {/* Featured Image Ends */}
+              {/* Article Content Starts */}
+              <div className="post-body new-article-content">
+                <h4 className="post-title">
+                  <a href={"/articles/" + article.id}>{article.title}</a>
+                </h4>
+                <div className="post-text white-space-pre">
+                  <p>
+                    {article.content.split(" ").splice(0,20).join(" ")+" ..."}
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="post-date">
-              <span>{this.convertDate(article.date).getDate()}</span>
-              <span>
-                {this.convertDate(article.date).toLocaleString('fr', { month: "short" })}
-              </span>
-            </div>
+              <div className="post-date">
+                <span>{this.convertDate(article.date).getDate()}</span>
+                <span>
+                  {this.convertDate(article.date).toLocaleString('fr', { month: "short" })}
+                </span>
+              </div>
 
-            {this.renderPremiumLogo(article.premium)}
-            {this.renderCategoryLogo(article)}
-            <a href={"/articles/" + article.id} className="btn btn-primary">Lire plus</a>
-            {/* Article Content Ends */}
+              {this.renderPremiumLogo(article.premium)}
+              {this.renderCategoryLogo(article)}
+              <a href={"/articles/" + article.id} className="btn btn-primary">Lire plus</a>
+              {/* Article Content Ends */}
+            </div>
           </div>
-        </div>
-      );
-    })
+        );
+      })
+    } else {
+      return <MiniPreLoader/>
+    }
   }
 
   render() {

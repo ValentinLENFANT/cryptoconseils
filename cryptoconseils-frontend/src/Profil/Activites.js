@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import Confirm from 'react-confirm-bootstrap';
 import Dialog from 'react-bootstrap-dialog'
+import MiniPreLoader from '../PreLoader/MiniPreLoader.js'
 
 class Activites extends Component {
 
@@ -98,52 +99,57 @@ class Activites extends Component {
 
   renderComments(){
     this.getComments();
-    return this.state.comments.map(item => {
-      return(
-        <li className="list-group-item list-comment" key={item.id}>
-          <div className="row">
-            <div className="col-xs-2 col-md-1">
-              <img src="/images/articles/default-user.jpg" className="img-circle img-responsive" alt="avatar"/>
-            </div>
-            <div className="col-xs-10 col-md-11">
-              <div>
-                <a href={"/articles/"+item.article_id}>{item.title}</a>
-                <div className="mic-info">
-                  {this.convertDate(item.date)}
-                </div>
+    if(this.state.comments) {
+      return this.state.comments.map(item => {
+        return(
+          <li className="list-group-item list-comment" key={item.id}>
+            <div className="row">
+              <div className="col-xs-2 col-md-1">
+                <img src="/images/articles/default-user.jpg" className="img-circle img-responsive" alt="avatar"/>
               </div>
-              <div className="comment-text white-space-pre">
-                {item.content}
-              </div>
-              <div className="action">
-                <button
-                  onClick={this.editComment.bind(this,item)}
-                  type="button"
-                  className="btn btn-info button-profil"
-                  title="Edit">
-                  <span className="fa fa-pencil"></span>
-                </button>
-                <Confirm
-                  onConfirm={this.deleteComment.bind(this, item)}
-                  confirmText="Oui supprimer"
-                  title="Suppresion de commentaire"
-                  body={"Voulez-vous vraiment supprimer votre commentaire:"+item.content.split(" ").splice(0,20).join(" ")+" ... ?"}>
-                  <button
-                    type="button"
-                    className="btn btn-danger button-profil"
-                    title="Delete">
-                    <span className="fa fa-trash"></span>
-                  </button>
-                </Confirm>
+              <div className="col-xs-10 col-md-11">
                 <div>
-                  <Dialog ref={(el) => { this.dialog = el }} />
+                  <a href={"/articles/"+item.article_id}>{item.title}</a>
+                  <div className="mic-info">
+                    {this.convertDate(item.date)}
+                  </div>
+                </div>
+                <div className="comment-text white-space-pre">
+                  {item.content}
+                </div>
+                <div className="action">
+                  <button
+                    onClick={this.editComment.bind(this,item)}
+                    type="button"
+                    className="btn btn-info button-profil"
+                    title="Edit">
+                    <span className="fa fa-pencil"></span>
+                  </button>
+                  <Confirm
+                    onConfirm={this.deleteComment.bind(this, item)}
+                    confirmText="Oui supprimer"
+                    title="Suppresion de commentaire"
+                    body={"Voulez-vous vraiment supprimer votre commentaire:"+item.content.split(" ").splice(0,20).join(" ")+" ... ?"}>
+                    <button
+                      type="button"
+                      className="btn btn-danger button-profil"
+                      title="Delete">
+                      <span className="fa fa-trash"></span>
+                    </button>
+                  </Confirm>
+                  <div>
+                    <Dialog ref={(el) => { this.dialog = el }} />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </li>
-      );
-    })
+          </li>
+        );
+      })
+    } else {
+      return <MiniPreLoader/>
+    }
+
   }
   render() {
     return (

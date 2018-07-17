@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import MiniPreLoader from '../PreLoader/MiniPreLoader.js'
 import axios from 'axios'
 
 class AirdropOfDay extends Component {
@@ -178,7 +179,9 @@ class AirdropOfDay extends Component {
           </div>
         </div>
       )
-    } else return null
+    } else return (
+      <MiniPreLoader/>
+    )
   }
 
   render() {
