@@ -86,10 +86,12 @@ class SignIn extends Component {
     event.preventDefault();
     // si première connexion
     if(this.props.match.params.token) {
+      console.log(this.props.match.params.token);
       axios.post(process.env.REACT_APP_API_ADDRESS+'/users/email/activate/',{
         "uniqueTokenForEmail": this.props.match.params.token
       }).then(response => {
         if(this.state.isVerified) {
+          console.log("ca marche et Captcha valide ");
           // auto connexion
           axios.post(process.env.REACT_APP_API_ADDRESS+'/oauth/v2/token', {
             grant_type: 'password',
@@ -98,6 +100,7 @@ class SignIn extends Component {
             client_id: process.env.REACT_APP_CLIENT_ID,
             client_secret: process.env.REACT_APP_CLIENT_SECRET,
           }).then(response => {
+            console.log("connexion marche");
             localStorage.setItem('access_token', response.data.access_token);
             localStorage.setItem('username', this.state.username);
             this.setState({
@@ -105,12 +108,16 @@ class SignIn extends Component {
             });
           }).catch(error => {
             this.setState({statusMsg: 'Username et/ou Mdp invalides'})
+            console.log("invalide");
             console.log(error.response);
           });
         } else {
+          console.log("capchat invalide");
           this.setState({statusMsg: 'Captcha invalide'})
         }
       }).catch(error => {
+        console.log("token invalide");
+        this.setState({statusMsg: 'Token invalide'})
         console.log(error.reponse);
       });
     }
@@ -170,9 +177,12 @@ class SignIn extends Component {
         this.setState({success: true});
         localStorage.setItem('username', this.state.username);
       }).catch(error => {
-        this.setState({
-          statusMsg: error.response.data.error
-        })
+        if(error.response){
+          this.setState({
+            statusMsg: "Erreur lors de l'inscription"
+          })
+        }
+
       });
     }
   }

@@ -243,10 +243,21 @@ class UserController extends FOSRestController
             die('Erreur : ' . $e->getMessage());
         }
         $req = $bdd->prepare('UPDATE users SET isEmailValidated = 1 WHERE uniqueTokenForEmail = :uniqueToken');
+
         $req->execute(array(
             'uniqueToken' => json_decode($data)->uniqueTokenForEmail
         ));
-        return new JsonResponse("L'email a bien été activé", 200);
+        $req = $bdd->prepare('SELECT isEmailValidated FROM users WHERE uniqueTokenForEmail = :uniqueToken');
+        $req->execute(array(
+            'uniqueToken' => json_decode($data)->uniqueTokenForEmail
+        ));
+        
+        if(!$req->fetch()){
+          return new JsonResponse(array('error'=>'Token invalide'),403);
+        } else {
+          return new JsonResponse("L'email a bien été activé", 200);
+
+        }
     }
 
     public function sendEmailForForgottenPasswordAction(Request $request) //[POST] /users/email/forgottenPassword/
