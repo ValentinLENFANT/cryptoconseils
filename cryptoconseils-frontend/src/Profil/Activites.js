@@ -14,6 +14,9 @@ class Activites extends Component {
     }
   }
 
+  componentDidMount(){
+    this.getComments();
+  }
   getComments(){
     // check si access token
     var authorization = {
@@ -98,7 +101,6 @@ class Activites extends Component {
   }
 
   renderComments(){
-    this.getComments();
     if(this.state.comments) {
       return this.state.comments.map(item => {
         return(
