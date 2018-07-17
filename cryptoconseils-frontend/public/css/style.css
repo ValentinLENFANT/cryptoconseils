@@ -1405,7 +1405,7 @@ ul.nav.nav-tabs li a:hover, ul.nav.nav-tabs li.active a:hover {
 }
 
 .img-block-left {
-  padding-left: 140px;
+  /*padding-left: 140px;*/
 }
 
 /* Features */
@@ -3999,7 +3999,7 @@ h4.panel-title a.collapsed:before {
 
 @media(min-width:1600px) {
   .img-block-left {
-    padding-left: 285px;
+    /*padding-left: 285px;*/
   }
 }
 
