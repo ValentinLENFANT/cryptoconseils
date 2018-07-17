@@ -135,7 +135,7 @@ class CallAdmin extends Component {
               <div className="btn btn-info btn-lg">ACHAT</div>
             </div>
             <div className="col-xs-8 col-sm-8 col-md-8 prix-call">
-              <div>{this.state.achat+"€"}</div>
+              <div>{this.state.achat+" BTC"}</div>
             </div>
           </div>
           <div className="row">
@@ -143,7 +143,7 @@ class CallAdmin extends Component {
               <div className="btn btn-warning btn-lg">VENTE</div>
             </div>
             <div className="col-xs-8 col-sm-8 col-md-8 prix-call">
-              <div>{this.state.vente+"€"}</div>
+              <div>{this.state.vente+" BTC"}</div>
             </div>
           </div>
           <div className="row">

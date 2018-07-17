@@ -35,12 +35,11 @@ class CallOfDay extends Component {
         this.setState({isPremium: false})
       });
     }else {
-      authorization = null;
+      var authorization = null;
       this.setState({isPremium: false});
     }
-
     // get calls
-    axios.get(process.env.REACT_APP_API_ADDRESS + '/call/all/')
+    axios.get(process.env.REACT_APP_API_ADDRESS + '/call/all/', authorization)
     .then(response => {
       this.setState({allCalls: response.data})
     }).catch(error => {
@@ -75,10 +74,12 @@ class CallOfDay extends Component {
   }
   renderCalls() {
     // on récupère le dernier call
+
     var listCalls = this.sortArray(this.state.allCalls);
     if(this.props.profile){
       listCalls = listCalls.slice(0,1)
     }
+    console.log(listCalls);
     return listCalls.map(calls => {
       return(
         <div className="row call" key={calls.id}>
