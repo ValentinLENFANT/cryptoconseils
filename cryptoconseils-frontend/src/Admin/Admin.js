@@ -13,7 +13,7 @@ class Admin extends Component {
   constructor(){
     super();
     this.state = {
-      noAccess: false,
+      noAccess: null,
       listCategories: [],
       username: ''
     }
@@ -28,6 +28,7 @@ class Admin extends Component {
       .then(response => {
         // si le user est bien un admin
         if(response.data.roles[0] === "ROLE_ADMIN") {
+          this.setState({noAccess: false});
           // on récupère les catégories
           axios.get(process.env.REACT_APP_API_ADDRESS+'/categories/')
           .then(categories => {
@@ -76,9 +77,9 @@ class Admin extends Component {
         </div>
       );
     } else if(this.state.noAccess === true){
-      return (<Denied/>);
+      return (<div><Denied/></div>);
     } else {
-      return <PreLoader/>
+      return(<div> <PreLoader/></div>);
     }
   }
 }
