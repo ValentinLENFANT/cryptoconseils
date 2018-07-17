@@ -77,15 +77,12 @@ class UserModeration extends Component {
         res = [...res, data[x]]
       }
     }
-    console.log(res);
-    this.setState({
-      results: res
-    })
+    this.setState({results: res})
   }
 
   onChange(event) {
     // Apercu temps réel quand on tape
-    console.log(event.target.value);
+    //console.log(event.target.value);
 
     // Update de la valeur
     this.setState({
