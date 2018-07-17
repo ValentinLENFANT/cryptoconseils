@@ -60,7 +60,7 @@ class Features extends Component {
                     </div>
                   </div>
                   {/* Feature Ends */}
-                  
+
                   {/* Feature Starts */}
                    <div className="col-sm-4 col-md-4 col-xs-12">
                     <div className="feature text-center">
@@ -72,7 +72,7 @@ class Features extends Component {
                     </div>
                   </div>
                   {/* Feature Ends */}
-                  
+
                   {/* Feature Starts */}
                   <div className="col-sm-4 col-md-4 col-xs-12">
                     <div className="feature text-center">
@@ -91,7 +91,7 @@ class Features extends Component {
             <div className="row">
                {/* Video Starts */}
                <div className="col-sm-12 col-md-12 col-xs-12">
-                <p className="fondateur">Crypto<a>Conseils</a> créateur de la cryptomonnaie <a href="http://ethereumx.io/" target="_blank">EthereumX</a></p>
+                <p className="fondateur">Crypto<a>Conseils</a> créateur de la cryptomonnaie <a href="http://ethereumx.io/">EthereumX</a></p>
                </div>
             </div>
             <div className="row">
