@@ -93,7 +93,9 @@ class UserController extends FOSRestController
     public function showUserCommentsByUsernameAction($username) // [GET] /users/comments/username/{username}
     {
         try {
-            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').':'.$this->container->getParameter('database_port').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -122,7 +124,8 @@ class UserController extends FOSRestController
         $user = $this->getUser();
         $userId = $user->getId();
         try {
-            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').':'.$this->container->getParameter('database_port').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -157,7 +160,8 @@ class UserController extends FOSRestController
         $data = $request->getContent();
 
         try {
-            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').':'.$this->container->getParameter('database_port').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -216,7 +220,7 @@ class UserController extends FOSRestController
         $data = $request->getContent();
         $enabled = json_decode($data)->enabled;
         try {
-            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ':'.$this->container->getParameter('database_port').';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -238,7 +242,8 @@ class UserController extends FOSRestController
     {
         $data = $request->getContent();
         try {
-            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').':'.$this->container->getParameter('database_port').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -267,7 +272,8 @@ class UserController extends FOSRestController
         $uniqueTokenForForgottenPassword = md5(sha1(date("Y-m-d H:i:s")));
 
         try {
-            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').':'.$this->container->getParameter('database_port').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -302,7 +308,8 @@ class UserController extends FOSRestController
         $email = json_decode($data)->email;
 
         try {
-            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host='.$this->container->getParameter('database_host').':'.$this->container->getParameter('database_port').';dbname='.$this->container->getParameter('database_name').';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -328,7 +335,7 @@ class UserController extends FOSRestController
     public function editRolesAction($username) //[POST] /users/changeRoles/{username}
     {
         try {
-            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ':'.$this->container->getParameter('database_port').';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
@@ -545,7 +552,7 @@ class UserController extends FOSRestController
     public function isAccountEnabledAction($username) // [GET] /users/isEnabled/{email}
     {
         try {
-            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ':'.$this->container->getParameter('database_port').';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }

@@ -101,11 +101,12 @@ class AirdropController extends FOSRestController
 
     public function allAirdropsAction() // [GET] airdrop/all
     {
-        try {
-            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
-        } catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
-        }
+      try {
+          $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') .':'.$this->container->getParameter('database_port'). ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+      } catch (Exception $e) {
+          die('Erreur : ' . $e->getMessage());
+      }
+
       $user = $this->getUser();
         if (!isset($user) || $user->getPremiumLevel() < 2) {
             $reponse = $bdd->query('SELECT * FROM airdrop WHERE isAirdropFree = 1 ORDER BY endDate ASC');
@@ -223,7 +224,7 @@ class AirdropController extends FOSRestController
     public function airdropAction(Request $request, $id) // [GET] /airdrop/{id}
     {
         try {
-            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ':'.$this->container->getParameter('database_port').';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }

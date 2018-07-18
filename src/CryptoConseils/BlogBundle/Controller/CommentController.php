@@ -96,7 +96,7 @@ class CommentController extends FOSRestController
         $data = $request->getContent();
         $published = json_decode($data)->published;
         try {
-            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') . ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
+            $bdd = new PDO('mysql:host=' . $this->container->getParameter('database_host') .':'.$this->container->getParameter('database_port'). ';dbname=' . $this->container->getParameter('database_name') . ';charset=utf8', $this->container->getParameter('database_user'), $this->container->getParameter('database_password'));
         } catch (Exception $e) {
             die('Erreur : ' . $e->getMessage());
         }
