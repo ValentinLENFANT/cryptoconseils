@@ -2,14 +2,17 @@
 
 cryptoconseils_blog_home:
     path:    /articles/
+    schemes: [https]
     defaults:
         _controller: CryptoConseilsBlogBundle:Article:index
         page: 1
+        schemes: [https]
     requirements:
         page: \d*
 
 cryptoconseils_blog_show:
     path:    /articles/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Article:show }
     methods:    [GET]
     requirements:
@@ -19,12 +22,14 @@ cryptoconseils_blog_show:
 
 cryptoconseils_blog_show_by_category:
     path:    /articles/category/{category}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Article:show_by_category }
     methods:    [GET]
 
 
 cryptoconseils_blog_show_by_newest:
     path:    /articles/newest/{number}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Article:show_by_newest }
     methods:    [GET]
 
@@ -32,6 +37,7 @@ cryptoconseils_blog_show_by_newest:
 
 cryptoconseils_blog_edit:
     path:    /articles/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Article:edit }
     methods:    [PUT]
     requirements:
@@ -40,6 +46,7 @@ cryptoconseils_blog_edit:
 
 cryptoconseils_blog_delete:
     path:    /articles/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Article:delete }
     methods:    [DELETE]
     requirements:
@@ -48,6 +55,7 @@ cryptoconseils_blog_delete:
 
 cryptoconseils_blog_new:
     path:    /articles/new/
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Article:new }
     methods:    [POST]
 
@@ -57,12 +65,14 @@ cryptoconseils_blog_new:
 
 cryptoconseils_blog_categories:
     path:    /categories/
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Category:index }
     methods:    [GET]
 
 
 cryptoconseils_blog_category_show:
     path:    /categories/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Category:show }
     methods:    [GET]
     requirements:
@@ -71,6 +81,7 @@ cryptoconseils_blog_category_show:
 
 cryptoconseils_blog_category_new:
     path:    /categories/new/
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Category:new }
     methods:    [POST]
 
@@ -78,6 +89,7 @@ cryptoconseils_blog_category_new:
 
 cryptoconseils_blog_category_edit:
     path:    /categories/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Category:edit }
     methods:    [PUT]
     requirements:
@@ -86,6 +98,7 @@ cryptoconseils_blog_category_edit:
 
 cryptoconseils_blog_category_delete:
     path:    /categories/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Category:delete }
     methods:    [DELETE]
     requirements:
@@ -97,12 +110,14 @@ cryptoconseils_blog_category_delete:
 
 cryptoconseils_blog_comments:
     path:    /comments/
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Comment:index }
     methods:    [GET]
 
 
 cryptoconseils_blog_comment_show:
     path:    /comments/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Comment:show }
     methods:    [GET]
     requirements:
@@ -111,12 +126,14 @@ cryptoconseils_blog_comment_show:
 
 cryptoconseils_blog_comment_new:
     path:    /comments/new/
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Comment:new }
     methods:    [POST]
 
 
 cryptoconseils_blog_comment_edit:
     path:    /comments/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Comment:edit }
     methods:    [PUT]
     requirements:
@@ -125,6 +142,7 @@ cryptoconseils_blog_comment_edit:
 
 cryptoconseils_blog_comment_delete:
     path:    /comments/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Comment:delete }
     methods:    [DELETE]
     requirements:
@@ -135,12 +153,14 @@ cryptoconseils_blog_comment_delete:
 
 cryptoconseils_blog_images:
     path:    /images/
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Image:index }
     methods:    [GET]
 
 
 cryptoconseils_blog_image_show:
     path:    /images/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Image:show }
     methods:    [GET]
     requirements:
@@ -149,12 +169,14 @@ cryptoconseils_blog_image_show:
 
 cryptoconseils_blog_image_new:
     path:    /images/new/
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Image:new }
     methods:    [POST]
 
 
 cryptoconseils_blog_image_edit:
     path:    /images/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Image:edit }
     methods:    [PUT]
     requirements:
@@ -162,6 +184,7 @@ cryptoconseils_blog_image_edit:
 
 cryptoconseils_blog_image_delete:
     path:    /images/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Image:delete }
     methods:    [DELETE]
     requirements:
@@ -169,70 +192,85 @@ cryptoconseils_blog_image_delete:
 
 cryptoconseils_blog_orders_new:
     path:   /orders/new/{amount}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Orders:new }
 
 cryptoconseils_blog_orders_show:
     path:   /orders/show/{order}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Orders:show }
 
 cryptoconseils_blog_orders_paymentcreate:
     path:   /orders/payment/create/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Orders:paymentCreate }
 
 cryptoconseils_blog_orders_paymentcomplete:
     path:   /orders/payment/complete/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Orders:paymentComplete }
 
 cryptoconseils_blog_orders_paymentcancel:
     path:   /orders/payment/cancel/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Orders:paymentCancel }
 
 cryptoconseils_blog_call_new:
     path:   /call/new/
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Calls:new }
     methods:    [POST]
 
 cryptoconseils_blog_call_all:
     path:   /call/all/
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Calls:allCalls }
     methods:    [GET]
 
 cryptoconseils_blog_call:
     path:   /call/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Calls:call }
     methods:    [GET]
 
 cryptoconseils_blog_delete_call:
     path:   /call/delete/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Calls:delete }
     methods:    [DELETE]
 
 cryptoconseils_blog_new_contact:
     path:   /contact/new/
+    schemes: [https]
     defaults:   { _controller: CryptoConseilsBlogBundle:Contact:new }
     methods:    [POST]
 
 cryptoconseils_blog_edit_published_comment:
     path:   /comments/edit/enabled/{id}
+    schemes: [https]
     defaults:   { _controller: CryptoConseilsBlogBundle:Comment:editPublished }
     methods:    [PUT]
 
 cryptoconseils_blog_airdrop_new:
     path:   /airdrop/new/
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Airdrop:new }
     methods:    [POST]
 
 cryptoconseils_blog_airdrop_all:
     path:   /airdrop/all/
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Airdrop:allAirdrops }
     methods:    [GET]
 
 cryptoconseils_blog_airdrop:
     path:   /airdrop/{id}
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Airdrop:airdrop }
     methods:    [GET]
 
 cryptoconseils_blog_get_all_call:
     path:   /articles/all/
+    schemes: [https]
     defaults: { _controller: CryptoConseilsBlogBundle:Article:allArticles }
     methods:    [GET]
