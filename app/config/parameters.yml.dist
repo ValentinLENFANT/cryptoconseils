@@ -1,10 +1,5 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_host: xxxx
-    database_port: xxxx
-    database_name: xxxx
-    database_user: xxxx
-    database_password: xxxx
     mailer_transport: xxxx
     mailer_host: xxxx
     mailer_user: xxxx
