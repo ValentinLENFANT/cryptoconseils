@@ -79,6 +79,7 @@
                 "mailer_user": "MAILER_USER",
                 "mailer_password": "MAILER_PASSWORD",
                 "secret": "SECRET"
+            }
         },
         "branch-alias": null
     }
