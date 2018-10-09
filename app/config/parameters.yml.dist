@@ -1,7 +1,1 @@
 # This file is auto-generated during the composer install
-parameters:
-    mailer_transport: xxxx
-    mailer_host: xxxx
-    mailer_user: xxxx
-    mailer_password: xxxx
-    secret: xxxx

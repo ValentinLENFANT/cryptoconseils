@@ -55,7 +55,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
         "post-install-cmd": [
-            "@symfony-scripts"
+            "@symfony-scripts",
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
         ],
         "post-update-cmd": [
             "@symfony-scripts"
@@ -71,6 +72,15 @@
         "symfony-web-dir": "web",
         "symfony-tests-dir": "tests",
         "symfony-assets-install": "relative",
+        "incenteev-parameters": {
+            "env-map": {
+                "mailer_host": "SYMFONY_MAILER_HOST",
+                "mailer_password": "SYMFONY_MAILER_PASSWORD",
+                "mailer_transport": "SYMFONY_MAILER_TRANSPORT",
+                "mailer_user": "SYMFONY_MAILER_USER",
+                "secret": "SYMFONY_SECRET"
+            }
+        },
         "branch-alias": null
     }
 }
