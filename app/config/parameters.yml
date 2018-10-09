@@ -1,5 +1,10 @@
 # This file is auto-generated during the composer install
 parameters:
+  database_host: cryptoconsei-3186.mysql.dbs.scalingo.com
+  database_port: 30712
+  database_name: cryptoconseils
+  database_user: vlenfant
+  database_password: V.L256327
   mailer_transport: smtp
   mailer_host: smtp.gmail.com
   mailer_user: cryptoconseilsfr@gmail.com
