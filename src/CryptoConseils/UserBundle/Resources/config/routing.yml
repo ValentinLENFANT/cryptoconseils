@@ -1,5 +1,5 @@
 cryptoconseils_users_index:
-    path:    /api/users/
+    path:    users/
     defaults:
         _controller: CryptoConseilsUserBundle:User:index
         page: 1
@@ -8,7 +8,7 @@ cryptoconseils_users_index:
 
 
 cryptoconseils_users_show:
-    path:    /api/users/{username}
+    path:    users/{username}
     defaults: { _controller: CryptoConseilsUserBundle:User:show }
     methods:    [GET]
     requirements:
@@ -16,7 +16,7 @@ cryptoconseils_users_show:
 
 
 cryptoconseils_users_edit:
-    path:    /api/users/{username}
+    path:    users/{username}
     defaults: { _controller: CryptoConseilsUserBundle:User:edit }
     methods:    [PUT]
     requirements:
@@ -24,7 +24,7 @@ cryptoconseils_users_edit:
 
 
 cryptoconseils_users_delete:
-    path:    /api/users/{username}
+    path:    users/{username}
     defaults: { _controller: CryptoConseilsUserBundle:User:delete }
     methods:    [DELETE]
     requirements:
@@ -32,51 +32,51 @@ cryptoconseils_users_delete:
 
 
 cryptoconseils_users_new:
-    path:    /api/users/new/
+    path:    users/new/
     defaults: { _controller: CryptoConseilsUserBundle:User:new }
     methods:    [POST]
 
 cryptoconseils_users_commentsByUsername:
-    path:   /api/users/comments/username/{username}
+    path:   users/comments/username/{username}
     defaults: { _controller: CryptoConseilsUserBundle:User:showUserCommentsByUsername }
     methods:    [GET]
 
 cryptoconseils_users_commentsById:
-    path:   /api/users/comments/id/{id}
+    path:   users/comments/id/{id}
     defaults: { _controller: CryptoConseilsUserBundle:User:showUserCommentsById }
     methods:    [GET]
 
 cryptoconseils_users_activateEmail:
-    path:   /api/users/email/activate/
+    path:   users/email/activate/
     defaults: { _controller: CryptoConseilsUserBundle:User:validateEmail }
     methods:    [POST]
 
 cryptoconseils_users_sendEmailForForgottenPassword:
-    path:   /api/users/email/forgottenPassword/
+    path:   users/email/forgottenPassword/
     defaults: { _controller: CryptoConseilsUserBundle:User:sendEmailForForgottenPassword }
     methods:    [POST]
 
 cryptoconseils_users_sendEmailToConfirmPasswordHaschanged:
-    path:   /api/users/email/passwordSuccesfullyChanged/
+    path:   users/email/passwordSuccesfullyChanged/
     defaults: { _controller: CryptoConseilsUserBundle:User:resetPassword }
     methods:    [POST]
 
 cryptoconseils_users_currentConnectedUser:
-    path:   /api/users/current/
+    path:   users/current/
     defaults: { _controller: CryptoConseilsUserBundle:User:getCurrentConnectedUser }
     methods:    [GET]
 
 cryptoconseils_users_edit_enabled_user:
-    path:   /api/users/edit/enabled/{id}
+    path:   users/edit/enabled/{id}
     defaults:   { _controller: CryptoConseilsUserBundle:User:editEnabled }
     methods:    [PUT]
 
 cryptoconseils_users_isUserEnabled:
-    path:   /api/users/isEnabled/{username}
+    path:   users/isEnabled/{username}
     defaults:   { _controller: CryptoConseilsUserBundle:User:isAccountEnabled }
     methods:    [GET]
 
 cryptoconseils_users_roles:
-    path:   /api/users/changeRoles/{username}
+    path:   users/changeRoles/{username}
     defaults:   { _controller: CryptoConseilsUserBundle:User:editRoles }
     methods:    [POST]

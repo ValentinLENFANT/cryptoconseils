@@ -1,7 +1,7 @@
 ######### Articles REST routes #########
 
 cryptoconseils_blog_home:
-    path:    /api/articles/
+    path:    articles/
     defaults:
         _controller: CryptoConseilsBlogBundle:Article:index
         page: 1
@@ -9,7 +9,7 @@ cryptoconseils_blog_home:
         page: \d*
 
 cryptoconseils_blog_show:
-    path:    /api/articles/{id}
+    path:    articles/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Article:show }
     methods:    [GET]
     requirements:
@@ -18,20 +18,20 @@ cryptoconseils_blog_show:
 
 
 cryptoconseils_blog_show_by_category:
-    path:    /api/articles/category/{category}
+    path:    articles/category/{category}
     defaults: { _controller: CryptoConseilsBlogBundle:Article:show_by_category }
     methods:    [GET]
 
 
 cryptoconseils_blog_show_by_newest:
-    path:    /api/articles/newest/{number}
+    path:    articles/newest/{number}
     defaults: { _controller: CryptoConseilsBlogBundle:Article:show_by_newest }
     methods:    [GET]
 
 
 
 cryptoconseils_blog_edit:
-    path:    /api/articles/{id}
+    path:    articles/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Article:edit }
     methods:    [PUT]
     requirements:
@@ -39,7 +39,7 @@ cryptoconseils_blog_edit:
 
 
 cryptoconseils_blog_delete:
-    path:    /api/articles/{id}
+    path:    articles/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Article:delete }
     methods:    [DELETE]
     requirements:
@@ -47,7 +47,7 @@ cryptoconseils_blog_delete:
 
 
 cryptoconseils_blog_new:
-    path:    /api/articles/new/
+    path:    articles/new/
     defaults: { _controller: CryptoConseilsBlogBundle:Article:new }
     methods:    [POST]
 
@@ -56,13 +56,13 @@ cryptoconseils_blog_new:
 ######### Categories REST routes #########
 
 cryptoconseils_blog_categories:
-    path:    /api/categories/
+    path:    categories/
     defaults: { _controller: CryptoConseilsBlogBundle:Category:index }
     methods:    [GET]
 
 
 cryptoconseils_blog_category_show:
-    path:    /api/categories/{id}
+    path:    categories/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Category:show }
     methods:    [GET]
     requirements:
@@ -70,14 +70,14 @@ cryptoconseils_blog_category_show:
 
 
 cryptoconseils_blog_category_new:
-    path:    /api/categories/new/
+    path:    categories/new/
     defaults: { _controller: CryptoConseilsBlogBundle:Category:new }
     methods:    [POST]
 
 
 
 cryptoconseils_blog_category_edit:
-    path:    /api/categories/{id}
+    path:    categories/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Category:edit }
     methods:    [PUT]
     requirements:
@@ -85,7 +85,7 @@ cryptoconseils_blog_category_edit:
 
 
 cryptoconseils_blog_category_delete:
-    path:    /api/categories/{id}
+    path:    categories/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Category:delete }
     methods:    [DELETE]
     requirements:
@@ -96,13 +96,13 @@ cryptoconseils_blog_category_delete:
 ######### Comments REST routes #########
 
 cryptoconseils_blog_comments:
-    path:    /api/comments/
+    path:    comments/
     defaults: { _controller: CryptoConseilsBlogBundle:Comment:index }
     methods:    [GET]
 
 
 cryptoconseils_blog_comment_show:
-    path:    /api/comments/{id}
+    path:    comments/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Comment:show }
     methods:    [GET]
     requirements:
@@ -110,13 +110,13 @@ cryptoconseils_blog_comment_show:
 
 
 cryptoconseils_blog_comment_new:
-    path:    /api/comments/new/
+    path:    comments/new/
     defaults: { _controller: CryptoConseilsBlogBundle:Comment:new }
     methods:    [POST]
 
 
 cryptoconseils_blog_comment_edit:
-    path:    /api/comments/{id}
+    path:    comments/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Comment:edit }
     methods:    [PUT]
     requirements:
@@ -124,7 +124,7 @@ cryptoconseils_blog_comment_edit:
 
 
 cryptoconseils_blog_comment_delete:
-    path:    /api/comments/{id}
+    path:    comments/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Comment:delete }
     methods:    [DELETE]
     requirements:
@@ -134,13 +134,13 @@ cryptoconseils_blog_comment_delete:
 ######### Images REST routes #########
 
 cryptoconseils_blog_images:
-    path:    /api/images/
+    path:    images/
     defaults: { _controller: CryptoConseilsBlogBundle:Image:index }
     methods:    [GET]
 
 
 cryptoconseils_blog_image_show:
-    path:    /api/images/{id}
+    path:    images/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Image:show }
     methods:    [GET]
     requirements:
@@ -148,91 +148,91 @@ cryptoconseils_blog_image_show:
 
 
 cryptoconseils_blog_image_new:
-    path:    /api/images/new/
+    path:    images/new/
     defaults: { _controller: CryptoConseilsBlogBundle:Image:new }
     methods:    [POST]
 
 
 cryptoconseils_blog_image_edit:
-    path:    /api/images/{id}
+    path:    images/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Image:edit }
     methods:    [PUT]
     requirements:
         id: \d{1,}
 
 cryptoconseils_blog_image_delete:
-    path:    /api/images/{id}
+    path:    images/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Image:delete }
     methods:    [DELETE]
     requirements:
         id: \d{1,}
 
 cryptoconseils_blog_orders_new:
-    path:   /api/orders/new/{amount}
+    path:   orders/new/{amount}
     defaults: { _controller: CryptoConseilsBlogBundle:Orders:new }
 
 cryptoconseils_blog_orders_show:
-    path:   /api/orders/show/{order}
+    path:   orders/show/{order}
     defaults: { _controller: CryptoConseilsBlogBundle:Orders:show }
 
 cryptoconseils_blog_orders_paymentcreate:
-    path:   /api/orders/payment/create/{id}
+    path:   orders/payment/create/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Orders:paymentCreate }
 
 cryptoconseils_blog_orders_paymentcomplete:
-    path:   /api/orders/payment/complete/{id}
+    path:   orders/payment/complete/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Orders:paymentComplete }
 
 cryptoconseils_blog_orders_paymentcancel:
-    path:   /api/orders/payment/cancel/{id}
+    path:   orders/payment/cancel/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Orders:paymentCancel }
 
 cryptoconseils_blog_call_new:
-    path:   /api/call/new/
+    path:   call/new/
     defaults: { _controller: CryptoConseilsBlogBundle:Calls:new }
     methods:    [POST]
 
 cryptoconseils_blog_call_all:
-    path:   /api/call/all/
+    path:   call/all/
     defaults: { _controller: CryptoConseilsBlogBundle:Calls:allCalls }
     methods:    [GET]
 
 cryptoconseils_blog_call:
-    path:   /api/call/{id}
+    path:   call/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Calls:call }
     methods:    [GET]
 
 cryptoconseils_blog_delete_call:
-    path:   /api/call/delete/{id}
+    path:   call/delete/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Calls:delete }
     methods:    [DELETE]
 
 cryptoconseils_blog_new_contact:
-    path:   /api/contact/new/
+    path:   contact/new/
     defaults:   { _controller: CryptoConseilsBlogBundle:Contact:new }
     methods:    [POST]
 
 cryptoconseils_blog_edit_published_comment:
-    path:   /api/comments/edit/enabled/{id}
+    path:   comments/edit/enabled/{id}
     defaults:   { _controller: CryptoConseilsBlogBundle:Comment:editPublished }
     methods:    [PUT]
 
 cryptoconseils_blog_airdrop_new:
-    path:   /api/airdrop/new/
+    path:   airdrop/new/
     defaults: { _controller: CryptoConseilsBlogBundle:Airdrop:new }
     methods:    [POST]
 
 cryptoconseils_blog_airdrop_all:
-    path:   /api/airdrop/all/
+    path:   airdrop/all/
     defaults: { _controller: CryptoConseilsBlogBundle:Airdrop:allAirdrops }
     methods:    [GET]
 
 cryptoconseils_blog_airdrop:
-    path:   /api/airdrop/{id}
+    path:   airdrop/{id}
     defaults: { _controller: CryptoConseilsBlogBundle:Airdrop:airdrop }
     methods:    [GET]
 
 cryptoconseils_blog_get_all_call:
-    path:   /api/articles/all/
+    path:   articles/all/
     defaults: { _controller: CryptoConseilsBlogBundle:Article:allArticles }
     methods:    [GET]
