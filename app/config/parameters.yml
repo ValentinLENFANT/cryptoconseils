@@ -1,6 +1,6 @@
 # This file is auto-generated during the composer install
 parameters:
-  database_host: 51.68.226.2
+  database_host: 51.75.123.209
   database_port: 3306
   database_name: cryptoconseils
   database_user: vlenfant
