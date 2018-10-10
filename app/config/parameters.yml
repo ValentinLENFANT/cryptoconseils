@@ -1,7 +1,7 @@
 # This file is auto-generated during the composer install
 parameters:
-  database_host: cryptoconsei-3186.mysql.dbs.scalingo.com
-  database_port: 30712
+  database_host: 51.68.226.2
+  database_port: 3306
   database_name: cryptoconseils
   database_user: vlenfant
   database_password: V.L256327
