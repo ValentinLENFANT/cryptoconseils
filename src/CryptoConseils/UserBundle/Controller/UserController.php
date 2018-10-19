@@ -201,7 +201,7 @@ class UserController extends FOSRestController
             ->setContentType("text/html; charset=UTF-8")
             ->setBody(
                 $this->renderView(
-                    'CryptoConseilsUserBundle:Emails:registration.html.twig',
+                    'CryptoConseilsUserBundle:emails:registration.html.twig',
                     array('name' => $user->getUsername(),
                         'uniqueTokenForEmail' => $user->getUniqueTokenForEmail())
                 )
@@ -284,7 +284,7 @@ class UserController extends FOSRestController
             ->setContentType("text/html; charset=UTF-8")
             ->setBody(
                 $this->renderView(
-                    'CryptoConseilsUserBundle:Emails:forgotPassword.html.twig',
+                    'CryptoConseilsUserBundle:emails:forgotPassword.html.twig',
                     array('uniqueTokenForForgottenPassword' => $uniqueTokenForForgottenPassword,
                         'email' => $email)
                 )
