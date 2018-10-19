@@ -319,7 +319,7 @@ class UserController extends FOSRestController
             ->setContentType("text/html; charset=UTF-8")
             ->setBody(
                 $this->renderView(
-                    'CryptoConseilsUserBundle:Emails:passwordSuccesfullyChanged.html.twig')
+                    'CryptoConseilsUserBundle:emails:passwordSuccesfullyChanged.html.twig')
             );
         $this->get('mailer')->send($message);
         return new JsonResponse("Mot de passe changé avec succès", 200);
