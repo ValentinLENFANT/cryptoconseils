@@ -74,10 +74,7 @@ class CallOfDay extends Component {
   }
   renderCalls() {
     // on récupère le dernier call
-      if(this.state.allCalls && this.state.allCalls.length > 0)
-      {
-          var listCalls = this.sortArray(this.state.allCalls);
-      }
+    var listCalls = this.sortArray(this.state.allCalls);
     if(this.props.profile){
       listCalls = listCalls.slice(0,1)
     }
