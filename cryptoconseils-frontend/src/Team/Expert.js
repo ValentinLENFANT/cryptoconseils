@@ -17,7 +17,7 @@ class Expert extends Component {
             {/* Team Members Starts */}
             <div className="row team-content team-members">
               {/* Team Member Starts */}
-              <div className="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+              <div className="">
                 <div className="team-member">
                   {/* Team Member Picture Starts */}
                   <img src="images/team/member2.jpg" className="img-responsive" alt="team member"/>
