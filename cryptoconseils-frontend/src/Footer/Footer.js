@@ -118,7 +118,7 @@ class Footer extends Component {
             <div className="row">
               <div className="col-xs-12">
                 {/*Copyright Text Starts */}
-                <p className="text-center">Copyright © 2018 CryptoConseils | <a href="https://www.esgi.fr/ecole-informatique.html">ESGI</a></p>
+                <p className="text-center">Copyright © 2018 CryptoConseils</p>
                 {/*Copyright Text Ends */}
               </div>
             </div>

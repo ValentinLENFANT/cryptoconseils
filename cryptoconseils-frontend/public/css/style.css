@@ -2308,6 +2308,7 @@ ul.nav.nav-tabs li a:hover, ul.nav.nav-tabs li.active a:hover {
 .team-member {
   position: relative;
   display: inline-block;
+  width: 25%;
 }
 
 .team-member-caption {
