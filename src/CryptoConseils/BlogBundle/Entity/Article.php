@@ -43,21 +43,21 @@ class Article
      */
     private $title;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="CryptoConseils\BlogBundle\Entity\Image", cascade={"persist", "remove"})
-     * @Assert\Valid()
-     */
-    private $image;
+//    /**
+//     * @ORM\ManyToOne(targetEntity="CryptoConseils\BlogBundle\Entity\Image", cascade={"persist", "remove"})
+//     * @Assert\Valid()
+//     */
+//    private $image;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="image_id", type="integer")
+     * @ORM\Column(name="imageLink", type="text")
      *
      *
      * @Expose
      */
-    private $image_id;
+    private $imageLink;
 
     /**
      * @ORM\ManyToMany(targetEntity="CryptoConseils\BlogBundle\Entity\Category", cascade={"persist"})
@@ -164,15 +164,15 @@ class Article
     }
 
     /**
-     * Set image_id.
+     * Set imageLink.
      *
-     * @param int $image_id
+     * @param int $imageLink
      *
      * @return Article
      */
-    public function setImageId($image_id)
+    public function setImageLink($imageLink)
     {
-        $this->image_id = $image_id;
+        $this->imageLink = $imageLink;
         return $this;
     }
 
@@ -181,9 +181,9 @@ class Article
      *
      * @return int
      */
-    public function getImageId()
+    public function getImageLink()
     {
-        return $this->image_id;
+        return $this->imageLink;
     }
 
     /**
@@ -292,29 +292,29 @@ class Article
         return $this->published;
     }
 
-    /**
-     * Set image.
-     *
-     * @param \CryptoConseils\BlogBundle\Entity\Image|null $image
-     *
-     * @return Article
-     */
-    public function setImage(\CryptoConseils\BlogBundle\Entity\Image $image = null)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image.
-     *
-     * @return \CryptoConseils\BlogBundle\Entity\Image|null
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
+//    /**
+//     * Set image.
+//     *
+//     * @param \CryptoConseils\BlogBundle\Entity\Image|null $image
+//     *
+//     * @return Article
+//     */
+//    public function setImage(\CryptoConseils\BlogBundle\Entity\Image $image = null)
+//    {
+//        $this->image = $image;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get image.
+//     *
+//     * @return \CryptoConseils\BlogBundle\Entity\Image|null
+//     */
+//    public function getImage()
+//    {
+//        return $this->image;
+//    }
 
     /**
      * Add category.

@@ -70,15 +70,15 @@ class ArticleAdmin extends Component {
     }
   }
 
-  sendImage(event) {
-    let data = new FormData();
-    data.append('image', event.target.files[0]);
-    axios.post(process.env.REACT_APP_API_ADDRESS+'/images/new/',data)
-    .then(response => {
-      console.log(response.data.id);
-      this.setState({source_image: response.data.id})
-   });
-  }
+  // sendImage(event) {
+  //   let data = new FormData();
+  //   data.append('image', event.target.files[0]);
+  //   axios.post(process.env.REACT_APP_API_ADDRESS+'/images/new/',data)
+  //   .then(response => {
+  //     console.log(response.data.id);
+  //     this.setState({source_image: response.data.id})
+  //  });
+  // }
 
   addNewCategory(){
     if(this.state.newCategory.length <= 0){
@@ -144,7 +144,7 @@ class ArticleAdmin extends Component {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
       axios.post(process.env.REACT_APP_API_ADDRESS+'/articles/new/',{
-        "image_id": this.state.source_image,
+        "imageLink": this.state.source_image,
         "title": this.state.article_title,
         "author": this.state.article_author,
         "content": this.state.source_description,
@@ -245,29 +245,25 @@ class ArticleAdmin extends Component {
                   </div>
                 </div>
 
-                {/* <!-- Image Couverture --> */}
-                <div className="row">
-                  <div className="col-xs-12 col-sm-12 col-md-12">
-                    <div className="form-group">
-                      <div className="row">
-                        <div className="col-xs-12 col-sm-12 col-md-12">
-                          <label className="control-label" htmlFor="source_image">Image couverture (720x477)</label>
-                        </div>
+                  {/* <!-- Image Couverture --> */}
+                  <div className="row">
+                      <div className="col-xs-12 col-sm-12 col-md-12">
+                          <div className="form-group">
+                              <label className="control-label" htmlFor="source_image">Lien vers l'image</label>
+                              <div>
+                                  <input
+                                      id="source_image"
+                                      name="source_image"
+                                      type="text"
+                                      placeholder="Lien vers l'image"
+                                      className="form-control input-md"
+                                      value={this.state.source_image}
+                                      onChange={this.handleChange}
+                                  />
+                              </div>
+                          </div>
                       </div>
-                      <div className="row">
-                        <div className="col-xs-12 col-sm-12 col-md-12">
-                          <input
-                            id="source_image"
-                            name="source_image"
-                            className="input-file"
-                            type="file"
-                            onChange={this.sendImage.bind(this)}
-                            />
-                        </div>
-                      </div>
-                    </div>
                   </div>
-                </div>
               </div>
 
               <div className="col-xs-12 col-sm-12 col-md-6">

@@ -70,7 +70,7 @@ class Articles extends Component {
                   <div>
                     {/* Figure Starts */}
                     <div className="blog-figure">
-                      <img className="img-responsive" src={"/images/articles/"+this.state.image.file_name} alt=""/>
+                      <img className="img-responsive" src={this.state.article.image} alt=""/>
                     </div>
                     {/* Figure Ends */}
                     {/* Content Starts */}

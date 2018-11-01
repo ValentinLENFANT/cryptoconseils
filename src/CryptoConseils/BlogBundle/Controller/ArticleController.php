@@ -192,12 +192,13 @@ class ArticleController extends FOSRestController
             $article = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Article', 'json');
 
             // If image_id is NULL
-            if (null === $article->getImageId()) {
-                return new JsonResponse(array('error' => 'image_id required'), 403);
-            } else {
-                $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($article->getImageId());
-                $article->setImage($image);
+            if (null === $article->getImageLink()) {
+                return new JsonResponse(array('error' => 'image link required'), 403);
             }
+//            else {
+//                $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($article->getImageId());
+//                $article->setImage($image);
+//            }
 
             // If title is NULL
             if (null === $article->getTitle()) {
@@ -296,13 +297,13 @@ class ArticleController extends FOSRestController
             }
 
             // If image_id is NULL
-            if (!isset($data['image_id'])) {
-                $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($article->getImageId());
-                $article->setImage($image);
-            } else {
-                $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($data['image_id']);
-                $article->setImage($image);
-            }
+//            if (!isset($data['image_id'])) {
+//                $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($article->getImageId());
+//                $article->setImage($image);
+//            } else {
+//                $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($data['image_id']);
+//                $article->setImage($image);
+//            }
 
             // If image_id is NULL
             if (!isset($data['published'])) {
