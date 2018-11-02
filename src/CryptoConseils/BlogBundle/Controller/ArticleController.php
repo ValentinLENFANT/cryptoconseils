@@ -191,10 +191,10 @@ class ArticleController extends FOSRestController
             $categories = json_decode($data, true);
             $article = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Article', 'json');
 
-            // If image_id is NULL
-            if (null === $article->getImageLink()) {
-                return new JsonResponse(array('error' => 'image link required'), 403);
-            }
+            // If imageLink is NULL
+//            if (null === $article->getImageLink()) {
+//                return new JsonResponse(array('error' => 'image link required'), 403);
+//            }
 //            else {
 //                $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($article->getImageId());
 //                $article->setImage($image);

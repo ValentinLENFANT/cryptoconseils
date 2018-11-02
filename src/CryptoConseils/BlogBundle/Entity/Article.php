@@ -50,12 +50,10 @@ class Article
 //    private $image;
 
     /**
-     * @var int
+     * @var string
      *
      * @ORM\Column(name="imageLink", type="text")
      *
-     *
-     * @Expose
      */
     private $imageLink;
 
