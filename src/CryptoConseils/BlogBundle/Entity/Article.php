@@ -52,7 +52,7 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="imageLink", type="text")
+     * @ORM\Column(name="imageLink", type="varchar(1020)")
      *
      */
     private $imageLink;
@@ -164,7 +164,7 @@ class Article
     /**
      * Set imageLink.
      *
-     * @param int $imageLink
+     * @param varchar $imageLink
      *
      * @return Article
      */
@@ -175,9 +175,9 @@ class Article
     }
 
     /**
-     * Get article_id.
+     * Get imageLinn.
      *
-     * @return int
+     * @return string
      */
     public function getImageLink()
     {

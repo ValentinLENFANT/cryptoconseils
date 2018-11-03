@@ -182,6 +182,8 @@ class ArticleController extends FOSRestController
     public function newAction(Request $request) // [POST] /articles/new  (ROLE_ADMIN ONLY)
     {
         // If user is not admin
+        var_dump($request);
+        die;
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
         } else {
@@ -192,9 +194,9 @@ class ArticleController extends FOSRestController
             $article = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Article', 'json');
 
             // If imageLink is NULL
-//            if (null === $article->getImageLink()) {
-//                return new JsonResponse(array('error' => 'image link required'), 403);
-//            }
+            if (null === $article->getImageLink()) {
+                return new JsonResponse(array('error' => 'Image link required'), 403);
+            }
 //            else {
 //                $image = $em->getRepository("CryptoConseilsBlogBundle:Image")->find($article->getImageId());
 //                $article->setImage($image);
