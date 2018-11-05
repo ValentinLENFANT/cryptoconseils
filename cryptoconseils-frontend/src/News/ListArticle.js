@@ -110,7 +110,7 @@ class ListArticle extends Component {
               {/* Featured Image Starts */}
               <a href={"/articles/" + article.id} className="">
                 <img
-                  className="img-responsive news-article-img "
+                  className="img-responsive news-article-img"
                   src={article.image_link}
                   alt={"Image de l'article"}
                   />

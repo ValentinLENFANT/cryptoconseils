@@ -190,7 +190,6 @@ class ArticleController extends FOSRestController
             $data = $request->getContent();
             $categories = json_decode($data, true);
             $article = $this->get('jms_serializer')->deserialize($data, 'CryptoConseils\BlogBundle\Entity\Article', 'json');
-            var_dump($article);
 
             // If imageLink is NULL
             if (null === $article->getImageLink()) {
@@ -236,8 +235,6 @@ class ArticleController extends FOSRestController
                 return new Response($errors, 400);
             } // Fin d'analyse //
 
-
-            var_dump($article);
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
