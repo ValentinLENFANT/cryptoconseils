@@ -52,7 +52,7 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="imageLink", type="varchar(1020)")
+     * @ORM\Column(name="imageLink", type="string", length=1020)
      *
      */
     private $imageLink;
