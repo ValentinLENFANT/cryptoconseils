@@ -175,7 +175,7 @@ class Article
     }
 
     /**
-     * Get imageLinn.
+     * Get imageLink.
      *
      * @return string
      */

@@ -182,8 +182,6 @@ class ArticleController extends FOSRestController
     public function newAction(Request $request) // [POST] /articles/new  (ROLE_ADMIN ONLY)
     {
         // If user is not admin
-        var_dump($request);
-        die;
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return new JsonResponse(array('error' => 'Access denied! Authentication with ADMIN roles required'), 403);
         } else {
