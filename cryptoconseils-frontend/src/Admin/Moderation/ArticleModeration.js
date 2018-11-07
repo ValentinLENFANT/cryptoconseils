@@ -296,7 +296,7 @@ class ArticleModeration extends Component {
                     <div className="row">
                       <div className="col-xs-12 col-sm-12 col-md-3">
                         <a href={"/articles/"+article.id}>
-                          <img className="image-article-admin" src={"/images/articles/"+article.image.file_name} alt="cover"/>
+                          <img className="image-article-admin" src={article.image_link} alt="cover"/>
                         </a>
                       </div>
                       <div className="col-xs-12 col-sm-12 col-md-9 text-justify white-space-pre">

@@ -144,7 +144,7 @@ class ArticleAdmin extends Component {
         headers: {'Authorization': "Bearer " + localStorage.getItem('access_token')}
       };
       axios.post(process.env.REACT_APP_API_ADDRESS+'/articles/new/',{
-        "imageLink": this.state.source_image,
+        "image_link": this.state.source_image,
         "title": this.state.article_title,
         "author": this.state.article_author,
         "content": this.state.source_description,

@@ -52,7 +52,7 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="imageLink", type="string", length=1020)
+     * @ORM\Column(name="imageLink", type="text")
      *
      */
     private $imageLink;
@@ -69,10 +69,6 @@ class Article
      * @ORM\OneToMany(targetEntity="CryptoConseils\BlogBundle\Entity\Comment", mappedBy="article")
      */
     private $comments;
-
-
-
-
 
     /**
      * @var string
