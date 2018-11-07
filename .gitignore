@@ -16,3 +16,4 @@
 composer.lock
 .DS_Store
 .idea/
+app/config/*
