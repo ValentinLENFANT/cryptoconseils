@@ -1,5 +1,4 @@
 <?php
-// src/CryptoConseils/BlogBundle/Entity/Image
 
 namespace CryptoConseils\BlogBundle\Entity;
 

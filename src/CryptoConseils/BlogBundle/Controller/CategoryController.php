@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: KFMJ2601
- * Date: 12/03/2018
- * Time: 16:05
- */
 
 namespace CryptoConseils\BlogBundle\Controller;
 

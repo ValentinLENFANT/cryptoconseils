@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Valentin LENFANT
- * Date: 12/07/2018
- * Time: 11:03
- */
 
 namespace CryptoConseils\BlogBundle\Controller;
 

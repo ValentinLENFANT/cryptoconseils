@@ -36,6 +36,24 @@ class User extends BaseUser
     private $isEmailValidated;
 
     /**
+     * @var string
+     * @ORM\Column(name="imageLink", type="text", nullable=false)
+     */
+    private $imageLink;
+
+    /**
+     * @var string
+     * @ORM\Column(name="uniqueTokenForEmail", type="string", nullable=true)
+     */
+    private $uniqueTokenForEmail;
+
+    /**
+     * @var @var string
+     * @ORM\Column(name="uniqueTokenForForgottenPassword", type="string", nullable=true)
+     */
+    private $uniqueTokenForForgottenPassword;
+
+    /**
      * @return string
      */
     public function getUniqueTokenForEmail()
@@ -50,18 +68,6 @@ class User extends BaseUser
     {
         $this->uniqueTokenForEmail = $uniqueTokenForEmail;
     }
-
-    /**
-     * @var string
-     * @ORM\Column(name="uniqueTokenForEmail", type="string", nullable=true)
-     */
-    private $uniqueTokenForEmail;
-
-    /**
-     * @var @var string
-     * @ORM\Column(name="uniqueTokenForForgottenPassword", type="string", nullable=true)
-     */
-    private $uniqueTokenForForgottenPassword;
 
     /**
      * @return bool
@@ -95,7 +101,6 @@ class User extends BaseUser
         $this->premiumLevel = $premiumLevel;
     }
 
-
     /**
      * Get id
      *
@@ -106,27 +111,20 @@ class User extends BaseUser
         return $this->id;
     }
 
-
-    /**
-     * @var string
-     * @ORM\Column(name="imageId", type="string", nullable=true)
-     */
-    private $imageId;
-
     /**
      * @return int
      */
-    public function getImageId()
+    public function getImageLink()
     {
-        return $this->imageId;
+        return $this->imageLink;
     }
 
     /**
      * @param int $imageId
      */
-    public function setImageId($imageId)
+    public function setImageLink($imageLink)
     {
-        $this->imageId = $imageId;
+        $this->imageLink = $imageLink;
     }
 
 }
