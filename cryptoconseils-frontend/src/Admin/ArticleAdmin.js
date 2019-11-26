@@ -94,6 +94,7 @@ class ArticleAdmin extends Component {
         this.props.listCategories.push(res.data)
         this.setState({categoryPublished: true, statusCategoryMsg: "Categorie ajouté", "newCategory": ''})
       }).catch(err => {
+        console.log('Test');
         console.log(err);
       })
     }
